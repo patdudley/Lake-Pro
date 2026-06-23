@@ -1,9 +1,7 @@
-import { windFrameForSpot } from "../map/windFrameSource.js";
 import { lakeSpots } from "../spots/index.js";
 
 let lakeMap = null;
 let currentSpot = null;
-let activeMapMode = "boating";
 let windFrames = [];
 let windFrameIndex = 0;
 let windTimer = null;
@@ -121,20 +119,6 @@ function renderSpotSwitcher(activeSpot) {
   });
 }
 
-function renderMapModeControls() {
-  const controls = document.querySelector(".map-mode-bar");
-  if (!controls) return;
-  controls.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-map-mode]");
-    if (!button) return;
-    activeMapMode = button.dataset.mapMode;
-    controls.querySelectorAll("button").forEach((control) => {
-      control.classList.toggle("is-active", control === button);
-    });
-    setMapMode(activeMapMode);
-  });
-}
-
 function renderSpot(spot) {
   currentSpot = spot;
   document.getElementById("spotName").textContent = spot.name;
@@ -205,34 +189,6 @@ function flowBearing(frame) {
   const fromDirection = Number(frame?.wind_direction_deg);
   if (!Number.isFinite(fromDirection)) return 0;
   return (fromDirection + 180) % 360;
-}
-
-function endpointFromBearing(spot, bearing, speed) {
-  const radians = bearing * Math.PI / 180;
-  const distance = 0.012 + Math.min(0.035, (Number(speed) || 0) * 0.0022);
-  const latitudeScale = Math.max(0.2, Math.cos(spot.latitude * Math.PI / 180));
-  return [
-    spot.longitude + Math.sin(radians) * distance / latitudeScale,
-    spot.latitude + Math.cos(radians) * distance,
-  ];
-}
-
-function windVectorFeature(spot, frame) {
-  const bearing = flowBearing(frame);
-  return {
-    type: "Feature",
-    properties: {
-      speed: frame?.wind_speed_mph || 0,
-      bearing,
-    },
-    geometry: {
-      type: "LineString",
-      coordinates: [
-        [spot.longitude, spot.latitude],
-        endpointFromBearing(spot, bearing, frame?.wind_speed_mph),
-      ],
-    },
-  };
 }
 
 function formatFrameTime(time) {
@@ -542,8 +498,8 @@ function drawLakeSurfaceOverlay(timestamp = performance.now()) {
   const context = lakeSurfaceContext;
   context.clearRect(0, 0, lakeSurfaceCanvas.width, lakeSurfaceCanvas.height);
 
-  if (activeMapMode !== "boating" || !lakeSurfaceRings.length) {
-    lakeSurfaceCanvas.hidden = activeMapMode !== "boating";
+  if (!lakeSurfaceRings.length) {
+    lakeSurfaceCanvas.hidden = true;
     lastParticleFrame = timestamp;
     return;
   }
@@ -597,10 +553,6 @@ function renderWindFrame(index = windFrameIndex) {
       windMarker.setLngLat([currentSpot.longitude, currentSpot.latitude]);
       const arrow = windMarker.getElement().querySelector(".wind-map-arrow");
       if (arrow) arrow.style.transform = `rotate(${bearing}deg)`;
-    }
-    const source = lakeMap.getSource("wind-vector");
-    if (source) {
-      source.setData(windVectorFeature(currentSpot, frame));
     }
     drawLakeSurfaceOverlay(performance.now());
   }
@@ -672,30 +624,12 @@ async function loadWindTimelapse(spot) {
   renderTimelapseControls();
 }
 
-function boundsPolygon(bounds) {
-  const [west, south, east, north] = bounds;
-  return {
-    type: "Feature",
-    properties: {},
-    geometry: {
-      type: "Polygon",
-      coordinates: [[
-        [west, south],
-        [east, south],
-        [east, north],
-        [west, north],
-        [west, south],
-      ]],
-    },
-  };
-}
-
 function updateMapForSpot(spot) {
-  const windFrame = windFrameForSpot(spot);
   updateMapNote(spot);
   loadLakeShoreline(spot);
+  setPayetteBoatingLayerVisibility(spot.slug === "payette-lake");
 
-  if (!lakeMap || !windFrame) return;
+  if (!lakeMap) return;
 
   lakeMap.flyTo({
     center: [spot.longitude, spot.latitude],
@@ -703,30 +637,19 @@ function updateMapForSpot(spot) {
     essential: true,
   });
 
-  const source = lakeMap.getSource("wind-frame-extent");
-  if (source) source.setData(boundsPolygon(windFrame.bounds));
-  setMapMode(activeMapMode);
+  renderWindFrame(windFrameIndex);
 }
 
 function updateMapNote(spot) {
   const note = document.getElementById("windLayerNote");
   const sources = document.getElementById("mapSources");
-  if (activeMapMode === "wind") {
-    const windFrame = windFrameForSpot(spot);
-    note.textContent = windFrame
-      ? `${windFrame.pipeline} slot active for ${spot.name}: ${windFrame.note}`
-      : "Cropped-wind frame pipeline slot: no wind frame configured.";
-    if (sources) sources.textContent = "Wind time-lapse uses generated National Weather Service hourly wind frames.";
-    return;
-  }
-
   if (spot.slug === "payette-lake") {
-    note.textContent = "Boating Areas mode: Valley County's 300 ft no-wake zone is grey. The water just beyond that zone is highlighted as a preferred Payette band, especially when wind or boat traffic makes the middle choppier. Verified danger restrictions are still pending.";
+    note.textContent = "Boating areas: Valley County's 300 ft no-wake zone is grey. The water just beyond that zone is highlighted as a preferred Payette band, especially when wind or boat traffic makes the middle choppier. Verified danger restrictions are still pending.";
     if (sources) {
       sources.innerHTML = 'Sources: <a href="https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/info/iteminfo" target="_blank" rel="noopener">McCall GIS bathymetry</a> and <a href="https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer" target="_blank" rel="noopener">Valley County waterways ordinance</a>.';
     }
   } else {
-    note.textContent = "Boating Areas mode: lake surface is colored from the selected wind hour. Low wind stays mostly blue; breezier hours turn the exposed middle pink while edges stay blue. Tahoe depth and verified danger layers still need sources.";
+    note.textContent = "Boating areas: lake surface is colored from the selected wind hour. Low wind stays mostly blue; breezier hours turn the exposed middle pink while edges stay blue. Tahoe depth and verified danger layers still need sources.";
     if (sources) sources.textContent = "Tahoe boating-area source layers are pending. Wind time-lapse uses generated National Weather Service hourly wind frames.";
   }
 }
@@ -740,15 +663,10 @@ function setLayerVisibility(ids, visible) {
   });
 }
 
-function setMapMode(mode) {
-  if (!lakeMap || !currentSpot) return;
-  const isBoating = mode === "boating";
-  if (lakeSurfaceCanvas) lakeSurfaceCanvas.hidden = !isBoating;
-  setLayerVisibility(["bathymetry-contours", "payette-no-wake-fill", "payette-no-wake-line", "payette-setback-line"], isBoating && currentSpot.slug === "payette-lake");
-  setLayerVisibility(["wind-frame-extent-fill", "wind-frame-extent-line", "wind-vector-line"], !isBoating);
+function setPayetteBoatingLayerVisibility(visible) {
+  setLayerVisibility(["bathymetry-contours", "payette-no-wake-fill", "payette-no-wake-line", "payette-setback-line"], visible);
   const legend = document.getElementById("mapLegend");
-  if (legend) legend.hidden = !isBoating;
-  updateMapNote(currentSpot);
+  if (legend) legend.hidden = false;
 }
 
 async function addPayetteBoatingLayers() {
@@ -847,55 +765,16 @@ function initMap(activeSpot) {
   window.setTimeout(resizeMapToPanel, 1000);
   window.addEventListener("resize", resizeMapToPanel);
   lakeMap.once("load", () => {
-    const windFrame = windFrameForSpot(activeSpot);
-    lakeMap.addSource("wind-frame-extent", {
-      type: "geojson",
-      data: boundsPolygon(windFrame.bounds),
-    });
-    lakeMap.addLayer({
-      id: "wind-frame-extent-fill",
-      type: "fill",
-      source: "wind-frame-extent",
-      paint: {
-        "fill-color": "#2563eb",
-        "fill-opacity": 0.08,
-      },
-    });
-    lakeMap.addLayer({
-      id: "wind-frame-extent-line",
-      type: "line",
-      source: "wind-frame-extent",
-      paint: {
-        "line-color": "#2563eb",
-        "line-width": 2,
-        "line-dasharray": [2, 2],
-      },
-    });
-    lakeMap.addSource("wind-vector", {
-      type: "geojson",
-      data: windVectorFeature(activeSpot, windFrames[windFrameIndex] || {}),
-    });
-    lakeMap.addLayer({
-      id: "wind-vector-line",
-      type: "line",
-      source: "wind-vector",
-      paint: {
-        "line-color": "#f20bc6",
-        "line-width": 4,
-        "line-opacity": 0.82,
-      },
-    });
     status.textContent = "Map ready";
     addPayetteBoatingLayers().finally(() => {
       resizeMapToPanel();
-      setMapMode(activeMapMode);
+      setPayetteBoatingLayerVisibility(currentSpot?.slug === "payette-lake");
       renderWindFrame(windFrameIndex);
     });
   });
 }
 
 const activeSpot = selectedSpot();
-renderMapModeControls();
 renderSpotSwitcher(activeSpot);
 renderSpot(activeSpot);
 initMap(activeSpot);
