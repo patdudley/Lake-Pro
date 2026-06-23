@@ -5,7 +5,6 @@ let currentSpot = null;
 let windFrames = [];
 let windFrameIndex = 0;
 let windTimer = null;
-let windMarker = null;
 let lakeSurfaceCanvas = null;
 let lakeSurfaceContext = null;
 let lakeSurfaceRings = [];
@@ -238,18 +237,6 @@ function frameDateKey(time) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
-}
-
-function ensureWindMarker() {
-  if (!lakeMap || windMarker) return;
-  const element = document.createElement("div");
-  element.className = "wind-map-arrow-marker";
-  const arrow = document.createElement("div");
-  arrow.className = "wind-map-arrow";
-  element.append(arrow);
-  windMarker = new window.maplibregl.Marker({ element, anchor: "center" })
-    .setLngLat([currentSpot.longitude, currentSpot.latitude])
-    .addTo(lakeMap);
 }
 
 function extractLakeRings(geojson) {
@@ -600,18 +587,11 @@ function renderWindFrame(index = windFrameIndex) {
     return;
   }
 
-  const bearing = flowBearing(frame);
   if (label) {
     label.textContent = `${formatFrameTime(frame.time)} · ${Math.round(frame.wind_speed_mph || 0)} mph ${frame.wind_direction_label || ""}`.trim();
   }
 
   if (lakeMap) {
-    ensureWindMarker();
-    if (windMarker) {
-      windMarker.setLngLat([currentSpot.longitude, currentSpot.latitude]);
-      const arrow = windMarker.getElement().querySelector(".wind-map-arrow");
-      if (arrow) arrow.style.transform = `rotate(${bearing}deg)`;
-    }
     drawLakeSurfaceOverlay(performance.now());
   }
 }

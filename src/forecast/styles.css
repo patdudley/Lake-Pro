@@ -134,43 +134,6 @@ body {
   white-space: nowrap;
 }
 
-.wind-map-arrow-marker {
-  width: 42px;
-  height: 42px;
-}
-
-.wind-map-arrow {
-  position: relative;
-  width: 42px;
-  height: 42px;
-  border: 2px solid rgba(255, 255, 255, 0.94);
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--magenta), var(--blue), var(--cyan));
-  box-shadow: 0 10px 24px rgba(7, 25, 82, 0.18);
-  transition: transform 220ms ease;
-}
-
-.wind-map-arrow::before {
-  position: absolute;
-  inset: 8px 17px 8px 17px;
-  border-radius: 999px;
-  background: #ffffff;
-  content: "";
-}
-
-.wind-map-arrow::after {
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-right: 7px solid transparent;
-  border-bottom: 13px solid #ffffff;
-  border-left: 7px solid transparent;
-  content: "";
-  transform: translateX(-50%);
-}
-
 .lake-surface-overlay {
   position: absolute;
   inset: 0;
