@@ -130,21 +130,36 @@ function renderSpot(spot) {
   loadLakeShoreline(spot);
 }
 
-function renderWindChart(hourly = {}) {
+function windIntensity(speed) {
+  const value = Number(speed) || 0;
+  if (value <= 5) return 0;
+  return Math.max(0, Math.min(1, (value - 5) / 7));
+}
+
+function renderWindChart(days = []) {
   const chart = document.querySelector(".wind-placeholder");
   if (!chart) return;
-  const times = hourly.time || [];
-  const speeds = hourly.wind_speed_10m || [];
-  const points = times.slice(0, 24).map((time, index) => ({ time, speed: speeds[index] || 0 }));
+  const points = days.slice(0, 10).map((day, index) => ({
+    label: day.label || dayLabel(day.date, index),
+    speed: Number(day.wind_speed_max_mph ?? 0),
+    gust: Number(day.wind_gust_max_mph ?? 0),
+    direction: day.wind_direction_label || "",
+  }));
   if (!points.length) {
     chart.innerHTML = "<span>Wind pending</span>";
     return;
   }
-  const max = Math.max(12, ...points.map((point) => point.speed));
-  chart.innerHTML = `<div class="wind-bars">${points.map((point) => {
-    const height = Math.max(8, Math.round((point.speed / max) * 150));
-    const hour = point.time.slice(11, 13);
-    return `<i style="height:${height}px"><span>${Math.round(point.speed)}</span><em>${hour}</em></i>`;
+  chart.innerHTML = `<div class="wind-days">${points.map((point, index) => {
+    const intensity = windIntensity(point.speed).toFixed(2);
+    const calmLabel = point.speed <= 5 ? "Low wind" : point.speed < 10 ? "Light chop" : point.speed < 15 ? "Choppy" : "Rough";
+    return `
+      <article class="wind-day" style="--wind-intensity:${intensity}">
+        <span>${index === 0 ? "Today" : point.label}</span>
+        <strong>${Math.round(point.speed)} mph</strong>
+        <em>${point.direction || "Variable"}</em>
+        <small>${calmLabel}</small>
+      </article>
+    `;
   }).join("")}</div>`;
 }
 
@@ -159,7 +174,7 @@ function renderLiveSpotData(bundle) {
   const fill = document.getElementById("scoreFill");
   if (fill && latest.score != null) fill.style.width = `${Math.max(6, Math.min(100, latest.score))}%`;
   renderForecastStrip(bundle.ten_day || []);
-  renderWindChart(bundle.hourly || {});
+  renderWindChart(bundle.ten_day || []);
 }
 
 async function loadLiveSpotData(spot) {

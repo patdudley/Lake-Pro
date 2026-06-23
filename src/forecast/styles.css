@@ -478,55 +478,81 @@ h2 {
 
 .wind-placeholder {
   display: grid;
-  min-height: 210px;
+  min-height: 180px;
   margin-top: 16px;
-  align-items: end;
-  border: 1px dashed var(--line);
+  align-items: stretch;
+  border: 1px solid var(--line);
   border-radius: 8px;
-  background:
-    repeating-linear-gradient(90deg, transparent 0 42px, rgba(6, 22, 82, 0.055) 42px 44px),
-    linear-gradient(180deg, rgba(11, 88, 255, 0.08), rgba(242, 11, 198, 0.08));
+  background: #f8fbff;
   color: var(--muted);
   font-weight: 900;
   text-align: center;
+  overflow: hidden;
 }
 
-.wind-bars {
+.wind-days {
   display: grid;
-  grid-template-columns: repeat(24, minmax(12px, 1fr));
-  align-items: end;
-  gap: 6px;
+  grid-template-columns: repeat(10, minmax(92px, 1fr));
+  gap: 8px;
   width: 100%;
-  min-height: 190px;
-  padding: 16px;
+  padding: 12px;
 }
 
-.wind-bars i {
+.wind-day {
   position: relative;
-  display: block;
-  min-height: 8px;
-  border-radius: 6px 6px 2px 2px;
-  background: var(--grad);
+  display: grid;
+  min-height: 142px;
+  align-content: end;
+  border: 1px solid rgba(11, 88, 255, 0.12);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 72% 22%, rgba(242, 11, 198, calc(var(--wind-intensity) * 0.98)), transparent 54%),
+    linear-gradient(145deg, rgba(242, 11, 198, calc(var(--wind-intensity) * 0.82)), rgba(11, 88, 255, calc(0.82 - var(--wind-intensity) * 0.28)) 46%, rgba(17, 188, 233, 0.92)),
+    linear-gradient(180deg, rgba(17, 188, 233, 0.9), rgba(11, 88, 255, 0.9));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34);
+  color: #ffffff;
+  padding: 14px 10px;
+  text-align: left;
+  overflow: hidden;
 }
 
-.wind-bars span,
-.wind-bars em {
+.wind-day::before {
+  content: "";
   position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  color: var(--text);
-  font-size: 0.62rem;
+  inset: 0;
+  background:
+    repeating-linear-gradient(110deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 16px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 54%);
+  opacity: 0.58;
+}
+
+.wind-day span,
+.wind-day strong,
+.wind-day em,
+.wind-day small {
+  position: relative;
+  z-index: 1;
+}
+
+.wind-day span {
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.wind-day strong {
+  margin-top: 8px;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.wind-day em,
+.wind-day small {
+  margin-top: 5px;
+  font-size: 0.76rem;
   font-style: normal;
   font-weight: 850;
-}
-
-.wind-bars span {
-  top: -18px;
-}
-
-.wind-bars em {
-  bottom: -18px;
-  color: var(--muted);
+  opacity: 0.92;
 }
 
 .rating-grid {
