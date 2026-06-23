@@ -92,7 +92,7 @@ body {
 .timelapse-control {
   display: grid;
   grid-template-columns: auto auto minmax(220px, 1fr) auto minmax(160px, auto);
-  margin-top: 18px;
+  margin-top: 0;
   align-items: center;
 }
 
