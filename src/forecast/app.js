@@ -156,14 +156,8 @@ function renderLiveSpotData(bundle) {
   document.getElementById("conditionSummary").textContent = latest.chop_proxy_ft != null
     ? `${latest.chop_proxy_ft} ft chop proxy`
     : "Rating pending";
-  document.getElementById("windSpeed").textContent = latest.wind_speed_max_mph != null
-    ? `${Math.round(latest.wind_speed_max_mph)} mph ${latest.wind_direction_label || ""}`.trim()
-    : "Pending";
-  document.getElementById("bestWindow").textContent = latest.best_window || "Pending";
   const fill = document.getElementById("scoreFill");
   if (fill && latest.score != null) fill.style.width = `${Math.max(6, Math.min(100, latest.score))}%`;
-  const report = document.querySelector(".daily-report p");
-  if (report) report.textContent = latest.report || latest.summary || "Lake Pro data is pending.";
   renderForecastStrip(bundle.ten_day || []);
   renderWindChart(bundle.hourly || {});
 }
@@ -178,8 +172,6 @@ async function loadLiveSpotData(spot) {
     grade.textContent = "--";
     grade.dataset.grade = "";
     document.getElementById("conditionSummary").textContent = "Rating pending";
-    document.getElementById("windSpeed").textContent = "Stubbed";
-    document.getElementById("bestWindow").textContent = "Stubbed";
     renderForecastStrip();
     renderWindChart();
   }

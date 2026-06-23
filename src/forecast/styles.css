@@ -38,7 +38,6 @@ body {
 .top-nav,
 .section-heading,
 .verdict-location,
-.verdict-meta,
 .spot-switcher,
 .timelapse-control {
   display: flex;
@@ -220,8 +219,7 @@ h2 {
   font-size: 1.2rem;
 }
 
-.section-heading p,
-.daily-report p {
+.section-heading p {
   margin-bottom: 0;
   color: var(--muted);
 }
@@ -303,7 +301,6 @@ h2 {
 }
 
 .verdict-main span,
-.verdict-meta span,
 .forecast-day span {
   display: block;
   color: var(--text);
@@ -331,27 +328,6 @@ h2 {
   width: 22%;
   height: 100%;
   background: var(--grad);
-}
-
-.verdict-meta {
-  justify-content: flex-start;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 18px;
-}
-
-.verdict-meta div {
-  min-width: 210px;
-}
-
-.verdict-meta strong {
-  display: block;
-  margin-top: 5px;
-  font-size: 1.25rem;
-}
-
-.daily-report h2 {
-  margin-bottom: 6px;
-  color: var(--text);
 }
 
 .forecast-strip {
@@ -616,14 +592,9 @@ h2 {
     font-size: 4.6rem;
   }
 
-  .verdict-meta,
   .rating-grid {
     grid-template-columns: 1fr 1fr;
     display: grid;
-  }
-
-  .verdict-meta div {
-    min-width: 0;
   }
 
   .forecast-strip {
