@@ -8,63 +8,21 @@ let windFrames = [];
 let windFrameIndex = 0;
 let windTimer = null;
 let windMarker = null;
+let lakeSurfaceCanvas = null;
+let lakeSurfaceContext = null;
+let lakeSurfaceRings = [];
+let lakeSurfaceParticles = [];
+let lakeSurfaceAnimation = null;
+let lastParticleFrame = 0;
+let loadedShorelineSlug = "";
 
 const mapLayerUrls = {
   payetteBathymetry: "data/live/map_layers/payette_bathymetry_contours.geojson",
   payetteNoWake: "data/live/map_layers/payette_no_wake_zone.geojson",
   payetteSetback: "data/live/map_layers/payette_shoreline_setback.geojson",
-};
-
-const lakeSurfaceShapes = {
-  "lake-tahoe": {
-    lake: [
-      [-120.147, 39.241],
-      [-120.074, 39.224],
-      [-119.994, 39.181],
-      [-119.945, 39.103],
-      [-119.948, 39.017],
-      [-119.988, 38.940],
-      [-120.039, 38.884],
-      [-120.102, 38.934],
-      [-120.144, 39.016],
-      [-120.164, 39.125],
-      [-120.147, 39.241],
-    ],
-    exposed: [
-      [-120.095, 39.182],
-      [-120.035, 39.153],
-      [-119.994, 39.087],
-      [-120.004, 39.005],
-      [-120.052, 38.953],
-      [-120.101, 39.011],
-      [-120.123, 39.102],
-      [-120.095, 39.182],
-    ],
-  },
-  "payette-lake": {
-    lake: [
-      [-116.125, 44.920],
-      [-116.119, 44.914],
-      [-116.108, 44.911],
-      [-116.099, 44.912],
-      [-116.059, 44.929],
-      [-116.052, 44.956],
-      [-116.064, 44.993],
-      [-116.071, 44.992],
-      [-116.088, 44.972],
-      [-116.120, 44.932],
-      [-116.125, 44.920],
-    ],
-    exposed: [
-      [-116.112, 44.928],
-      [-116.102, 44.923],
-      [-116.074, 44.939],
-      [-116.061, 44.957],
-      [-116.068, 44.981],
-      [-116.083, 44.967],
-      [-116.102, 44.944],
-      [-116.112, 44.928],
-    ],
+  shorelines: {
+    "lake-tahoe": "data/live/map_layers/lake-tahoe_shoreline.geojson",
+    "payette-lake": "data/live/map_layers/payette-lake_shoreline.geojson",
   },
 };
 
@@ -178,6 +136,7 @@ function renderSpot(spot) {
   if (cameraCard) cameraCard.hidden = spot.slug !== "payette-lake";
   loadLiveSpotData(spot);
   loadWindTimelapse(spot);
+  loadLakeShoreline(spot);
 }
 
 function renderWindChart(hourly = {}) {
@@ -265,40 +224,6 @@ function windVectorFeature(spot, frame) {
   };
 }
 
-function polygonFeature(coordinates, properties = {}) {
-  return {
-    type: "Feature",
-    properties,
-    geometry: {
-      type: "Polygon",
-      coordinates: [coordinates],
-    },
-  };
-}
-
-function lakeSurfaceData(spot, frame) {
-  const shapes = lakeSurfaceShapes[spot.slug];
-  if (!shapes) return { type: "FeatureCollection", features: [] };
-  const speed = Number(frame?.wind_speed_mph || 0);
-  const features = [
-    polygonFeature(shapes.lake, {
-      zone: "recommended",
-      color: "#12bcea",
-      opacity: speed < 8 ? 0.92 : 0.88,
-    }),
-  ];
-  if (speed >= 8) {
-    features.push(
-      polygonFeature(shapes.exposed, {
-        zone: "exposed",
-        color: "#f20bc6",
-        opacity: Math.min(0.9, 0.46 + speed * 0.03),
-      })
-    );
-  }
-  return { type: "FeatureCollection", features };
-}
-
 function formatFrameTime(time) {
   if (!time) return "Wind timeline pending";
   const date = new Date(time);
@@ -320,6 +245,252 @@ function ensureWindMarker() {
   windMarker = new window.maplibregl.Marker({ element, anchor: "center" })
     .setLngLat([currentSpot.longitude, currentSpot.latitude])
     .addTo(lakeMap);
+}
+
+function extractLakeRings(geojson) {
+  const rings = [];
+  for (const feature of geojson?.features || []) {
+    const geometry = feature.geometry || {};
+    if (geometry.type === "Polygon") {
+      rings.push(...geometry.coordinates.map((polygon) => polygon));
+    }
+    if (geometry.type === "MultiPolygon") {
+      rings.push(...geometry.coordinates);
+    }
+  }
+  return rings;
+}
+
+async function loadLakeShoreline(spot) {
+  const url = mapLayerUrls.shorelines[spot.slug];
+  if (loadedShorelineSlug === spot.slug && lakeSurfaceRings.length) {
+    drawLakeSurfaceOverlay(performance.now());
+    return;
+  }
+  if (!url) {
+    lakeSurfaceRings = [];
+    lakeSurfaceParticles = [];
+    loadedShorelineSlug = "";
+    return;
+  }
+  try {
+    const shoreline = await fetchGeoJson(url);
+    if (currentSpot?.slug !== spot.slug) return;
+    lakeSurfaceRings = extractLakeRings(shoreline);
+    lakeSurfaceParticles = [];
+    loadedShorelineSlug = spot.slug;
+    drawLakeSurfaceOverlay(performance.now());
+  } catch (error) {
+    console.warn("[LakePro] Shoreline mask unavailable", error);
+    lakeSurfaceRings = [];
+    lakeSurfaceParticles = [];
+    loadedShorelineSlug = "";
+  }
+}
+
+function ensureLakeSurfaceCanvas() {
+  if (!lakeMap || lakeSurfaceCanvas) return;
+  lakeSurfaceCanvas = document.createElement("canvas");
+  lakeSurfaceCanvas.className = "lake-surface-overlay";
+  lakeSurfaceContext = lakeSurfaceCanvas.getContext("2d");
+  lakeMap.getCanvasContainer().append(lakeSurfaceCanvas);
+  startLakeSurfaceAnimation();
+}
+
+function resizeLakeSurfaceCanvas() {
+  if (!lakeMap || !lakeSurfaceCanvas) return 1;
+  const mapCanvas = lakeMap.getCanvas();
+  const dpr = window.devicePixelRatio || 1;
+  const width = Math.max(1, Math.round(mapCanvas.clientWidth * dpr));
+  const height = Math.max(1, Math.round(mapCanvas.clientHeight * dpr));
+  if (lakeSurfaceCanvas.width !== width || lakeSurfaceCanvas.height !== height) {
+    lakeSurfaceCanvas.width = width;
+    lakeSurfaceCanvas.height = height;
+    lakeSurfaceParticles = [];
+  }
+  lakeSurfaceCanvas.style.width = `${mapCanvas.clientWidth}px`;
+  lakeSurfaceCanvas.style.height = `${mapCanvas.clientHeight}px`;
+  return dpr;
+}
+
+function projectedLakePolygons(dpr) {
+  if (!lakeMap) return [];
+  return lakeSurfaceRings.map((polygon) => polygon.map((ring) => ring.map(([lng, lat]) => {
+    const point = lakeMap.project([lng, lat]);
+    return [point.x * dpr, point.y * dpr];
+  })));
+}
+
+function tracePolygonPath(context, polygons) {
+  context.beginPath();
+  for (const polygon of polygons) {
+    for (const ring of polygon) {
+      ring.forEach(([x, y], index) => {
+        if (index === 0) context.moveTo(x, y);
+        else context.lineTo(x, y);
+      });
+      context.closePath();
+    }
+  }
+}
+
+function polygonBounds(polygons) {
+  const bounds = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
+  for (const polygon of polygons) {
+    for (const ring of polygon) {
+      for (const [x, y] of ring) {
+        bounds.minX = Math.min(bounds.minX, x);
+        bounds.minY = Math.min(bounds.minY, y);
+        bounds.maxX = Math.max(bounds.maxX, x);
+        bounds.maxY = Math.max(bounds.maxY, y);
+      }
+    }
+  }
+  return bounds;
+}
+
+function pointInRing(point, ring) {
+  let inside = false;
+  for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
+    const [xi, yi] = ring[index];
+    const [xj, yj] = ring[previous];
+    const intersects = ((yi > point.y) !== (yj > point.y))
+      && (point.x < (xj - xi) * (point.y - yi) / ((yj - yi) || 1e-9) + xi);
+    if (intersects) inside = !inside;
+  }
+  return inside;
+}
+
+function pointInLake(point, polygons) {
+  return polygons.some((polygon) => {
+    if (!pointInRing(point, polygon[0])) return false;
+    return !polygon.slice(1).some((hole) => pointInRing(point, hole));
+  });
+}
+
+function randomLakePoint(bounds, polygons) {
+  for (let attempt = 0; attempt < 250; attempt += 1) {
+    const point = {
+      x: bounds.minX + Math.random() * (bounds.maxX - bounds.minX),
+      y: bounds.minY + Math.random() * (bounds.maxY - bounds.minY),
+      phase: Math.random() * Math.PI * 2,
+    };
+    if (pointInLake(point, polygons)) return point;
+  }
+  return {
+    x: (bounds.minX + bounds.maxX) / 2,
+    y: (bounds.minY + bounds.maxY) / 2,
+    phase: Math.random() * Math.PI * 2,
+  };
+}
+
+function drawLakeGradient(context, polygons, bounds, speed) {
+  const width = bounds.maxX - bounds.minX;
+  const height = bounds.maxY - bounds.minY;
+  const centerX = bounds.minX + width * 0.52;
+  const centerY = bounds.minY + height * 0.52;
+  const radius = Math.max(width, height) * 0.58;
+
+  context.save();
+  tracePolygonPath(context, polygons);
+  context.clip("evenodd");
+
+  const base = context.createLinearGradient(bounds.minX, bounds.minY, bounds.maxX, bounds.maxY);
+  base.addColorStop(0, "rgba(17, 188, 233, 0.92)");
+  base.addColorStop(0.45, "rgba(23, 156, 238, 0.9)");
+  base.addColorStop(1, "rgba(13, 99, 255, 0.84)");
+  context.fillStyle = base;
+  context.fillRect(bounds.minX, bounds.minY, width, height);
+
+  const exposure = Math.max(0, Math.min(0.92, (speed - 4) / 12));
+  if (exposure > 0.02) {
+    const rough = context.createRadialGradient(centerX, centerY, radius * 0.08, centerX, centerY, radius);
+    rough.addColorStop(0, `rgba(242, 11, 198, ${0.82 * exposure})`);
+    rough.addColorStop(0.46, `rgba(242, 11, 198, ${0.58 * exposure})`);
+    rough.addColorStop(0.78, `rgba(11, 88, 255, ${0.16 * exposure})`);
+    rough.addColorStop(1, "rgba(17, 188, 233, 0)");
+    context.fillStyle = rough;
+    context.fillRect(bounds.minX, bounds.minY, width, height);
+  }
+
+  context.lineWidth = 1.4 * (window.devicePixelRatio || 1);
+  context.strokeStyle = "rgba(255, 255, 255, 0.82)";
+  tracePolygonPath(context, polygons);
+  context.stroke();
+  context.restore();
+}
+
+function drawLakeParticles(context, polygons, bounds, frame, dpr, timestamp) {
+  const speed = Number(frame?.wind_speed_mph || 0);
+  const bearing = flowBearing(frame);
+  const radians = bearing * Math.PI / 180;
+  const elapsed = Math.min(0.05, Math.max(0.01, (timestamp - lastParticleFrame) / 1000 || 0.016));
+  const particleCount = Math.max(42, Math.min(180, Math.round((bounds.maxX - bounds.minX) * (bounds.maxY - bounds.minY) / 9000)));
+  const pixelsPerSecond = (12 + speed * 3.2) * dpr;
+  const dx = Math.sin(radians) * pixelsPerSecond * elapsed;
+  const dy = -Math.cos(radians) * pixelsPerSecond * elapsed;
+  const tail = (8 + speed * 1.1) * dpr;
+
+  while (lakeSurfaceParticles.length < particleCount) {
+    lakeSurfaceParticles.push(randomLakePoint(bounds, polygons));
+  }
+  if (lakeSurfaceParticles.length > particleCount) {
+    lakeSurfaceParticles.length = particleCount;
+  }
+
+  context.save();
+  tracePolygonPath(context, polygons);
+  context.clip("evenodd");
+  context.lineCap = "round";
+  context.lineWidth = Math.max(1, 1.4 * dpr);
+
+  for (const particle of lakeSurfaceParticles) {
+    particle.x += dx;
+    particle.y += dy;
+    particle.phase += elapsed * Math.max(1, speed * 0.18);
+    if (!pointInLake(particle, polygons)) {
+      Object.assign(particle, randomLakePoint(bounds, polygons));
+    }
+    const shimmer = 0.42 + Math.sin(particle.phase) * 0.18;
+    context.strokeStyle = `rgba(255, 255, 255, ${Math.max(0.24, shimmer)})`;
+    context.beginPath();
+    context.moveTo(particle.x - Math.sin(radians) * tail, particle.y + Math.cos(radians) * tail);
+    context.lineTo(particle.x, particle.y);
+    context.stroke();
+  }
+  context.restore();
+}
+
+function drawLakeSurfaceOverlay(timestamp = performance.now()) {
+  if (!lakeSurfaceCanvas || !lakeSurfaceContext || !lakeMap) return;
+  const dpr = resizeLakeSurfaceCanvas();
+  const context = lakeSurfaceContext;
+  context.clearRect(0, 0, lakeSurfaceCanvas.width, lakeSurfaceCanvas.height);
+
+  if (activeMapMode !== "boating" || !lakeSurfaceRings.length) {
+    lakeSurfaceCanvas.hidden = activeMapMode !== "boating";
+    lastParticleFrame = timestamp;
+    return;
+  }
+  lakeSurfaceCanvas.hidden = false;
+  const polygons = projectedLakePolygons(dpr);
+  const bounds = polygonBounds(polygons);
+  if (!Number.isFinite(bounds.minX) || bounds.maxX <= bounds.minX || bounds.maxY <= bounds.minY) return;
+
+  const frame = windFrames[windFrameIndex] || {};
+  const speed = Number(frame.wind_speed_mph || 0);
+  drawLakeGradient(context, polygons, bounds, speed);
+  drawLakeParticles(context, polygons, bounds, frame, dpr, timestamp);
+  lastParticleFrame = timestamp;
+}
+
+function startLakeSurfaceAnimation() {
+  if (lakeSurfaceAnimation) return;
+  const tick = (timestamp) => {
+    drawLakeSurfaceOverlay(timestamp);
+    lakeSurfaceAnimation = window.requestAnimationFrame(tick);
+  };
+  lakeSurfaceAnimation = window.requestAnimationFrame(tick);
 }
 
 function renderWindFrame(index = windFrameIndex) {
@@ -353,10 +524,7 @@ function renderWindFrame(index = windFrameIndex) {
     if (source) {
       source.setData(windVectorFeature(currentSpot, frame));
     }
-    const surfaceSource = lakeMap.getSource("lake-surface-zones");
-    if (surfaceSource) {
-      surfaceSource.setData(lakeSurfaceData(currentSpot, frame));
-    }
+    drawLakeSurfaceOverlay(performance.now());
   }
 }
 
@@ -432,6 +600,7 @@ function boundsPolygon(bounds) {
 function updateMapForSpot(spot) {
   const windFrame = windFrameForSpot(spot);
   updateMapNote(spot);
+  loadLakeShoreline(spot);
 
   if (!lakeMap || !windFrame) return;
 
@@ -481,7 +650,7 @@ function setLayerVisibility(ids, visible) {
 function setMapMode(mode) {
   if (!lakeMap || !currentSpot) return;
   const isBoating = mode === "boating";
-  setLayerVisibility(["lake-surface-fill", "lake-surface-line"], isBoating);
+  if (lakeSurfaceCanvas) lakeSurfaceCanvas.hidden = !isBoating;
   setLayerVisibility(["bathymetry-contours", "payette-no-wake-fill", "payette-no-wake-line", "payette-setback-line"], isBoating && currentSpot.slug === "payette-lake");
   setLayerVisibility(["wind-frame-extent-fill", "wind-frame-extent-line", "wind-vector-line"], !isBoating);
   const legend = document.getElementById("mapLegend");
@@ -579,6 +748,7 @@ function initMap(activeSpot) {
   });
 
   lakeMap.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), "top-right");
+  ensureLakeSurfaceCanvas();
   requestAnimationFrame(resizeMapToPanel);
   window.setTimeout(resizeMapToPanel, 250);
   window.setTimeout(resizeMapToPanel, 1000);
@@ -608,29 +778,6 @@ function initMap(activeSpot) {
         "line-dasharray": [2, 2],
       },
     });
-    lakeMap.addSource("lake-surface-zones", {
-      type: "geojson",
-      data: lakeSurfaceData(activeSpot, windFrames[windFrameIndex] || {}),
-    });
-    lakeMap.addLayer({
-      id: "lake-surface-fill",
-      type: "fill",
-      source: "lake-surface-zones",
-      paint: {
-        "fill-color": ["get", "color"],
-        "fill-opacity": ["get", "opacity"],
-      },
-    }, "wind-frame-extent-fill");
-    lakeMap.addLayer({
-      id: "lake-surface-line",
-      type: "line",
-      source: "lake-surface-zones",
-      paint: {
-        "line-color": "#ffffff",
-        "line-width": 1.2,
-        "line-opacity": 0.8,
-      },
-    }, "wind-frame-extent-fill");
     lakeMap.addSource("wind-vector", {
       type: "geojson",
       data: windVectorFeature(activeSpot, windFrames[windFrameIndex] || {}),
