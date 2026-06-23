@@ -366,8 +366,9 @@ function lakeGradientCenters(bounds, spot) {
   const defaultCenter = { x: bounds.minX + width * 0.5, y: bounds.minY + height * 0.5 };
   if (spot?.slug === "payette-lake") {
     return [
-      { x: bounds.minX + width * 0.44, y: bounds.minY + height * 0.56, radius: Math.max(width, height) * 0.44 },
-      { x: bounds.minX + width * 0.62, y: bounds.minY + height * 0.34, radius: Math.max(width, height) * 0.34 },
+      { x: bounds.minX + width * 0.36, y: bounds.minY + height * 0.68, radius: Math.max(width, height) * 0.36 },
+      { x: bounds.minX + width * 0.33, y: bounds.minY + height * 0.82, radius: Math.max(width, height) * 0.22 },
+      { x: bounds.minX + width * 0.63, y: bounds.minY + height * 0.34, radius: Math.max(width, height) * 0.32 },
     ];
   }
   if (spot?.slug === "lake-tahoe") {
@@ -376,6 +377,17 @@ function lakeGradientCenters(bounds, spot) {
     ];
   }
   return [{ ...defaultCenter, radius: Math.max(width, height) * 0.44 }];
+}
+
+function lakeProtectionCenters(bounds, spot) {
+  if (spot?.slug !== "payette-lake") return [];
+  const width = bounds.maxX - bounds.minX;
+  const height = bounds.maxY - bounds.minY;
+  return [
+    { x: bounds.minX + width * 0.52, y: bounds.minY + height * 0.47, radius: Math.max(width, height) * 0.16, strength: 0.82 },
+    { x: bounds.minX + width * 0.72, y: bounds.minY + height * 0.62, radius: Math.max(width, height) * 0.23, strength: 0.68 },
+    { x: bounds.minX + width * 0.58, y: bounds.minY + height * 0.55, radius: Math.max(width, height) * 0.13, strength: 0.64 },
+  ];
 }
 
 function pointInRing(point, ring) {
@@ -422,6 +434,7 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   const radians = bearing * Math.PI / 180;
   const fetchOffset = Math.min(0.18, speed * 0.012);
   const centers = lakeGradientCenters(bounds, spot);
+  const protectedCenters = lakeProtectionCenters(bounds, spot);
 
   context.save();
   tracePolygonPath(context, polygons);
@@ -440,11 +453,21 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
       const exposedY = center.y - Math.cos(radians) * height * fetchOffset;
       const rough = context.createRadialGradient(exposedX, exposedY, center.radius * 0.08, exposedX, exposedY, center.radius);
       rough.addColorStop(0, `rgba(242, 11, 198, ${0.98 * exposure})`);
-      rough.addColorStop(0.36, `rgba(218, 35, 224, ${0.82 * exposure})`);
-      rough.addColorStop(0.6, `rgba(83, 78, 235, ${0.48 * exposure})`);
-      rough.addColorStop(0.84, `rgba(18, 202, 234, ${0.12 * exposure})`);
+      rough.addColorStop(0.4, `rgba(218, 35, 224, ${0.88 * exposure})`);
+      rough.addColorStop(0.66, `rgba(83, 78, 235, ${0.48 * exposure})`);
+      rough.addColorStop(0.9, `rgba(18, 202, 234, ${0.08 * exposure})`);
       rough.addColorStop(1, "rgba(18, 202, 234, 0)");
       context.fillStyle = rough;
+      context.fillRect(bounds.minX, bounds.minY, width, height);
+    }
+
+    for (const center of protectedCenters) {
+      const calm = context.createRadialGradient(center.x, center.y, center.radius * 0.08, center.x, center.y, center.radius);
+      calm.addColorStop(0, `rgba(18, 202, 234, ${center.strength})`);
+      calm.addColorStop(0.42, `rgba(18, 202, 234, ${center.strength * 0.72})`);
+      calm.addColorStop(0.72, `rgba(25, 151, 242, ${center.strength * 0.32})`);
+      calm.addColorStop(1, "rgba(25, 151, 242, 0)");
+      context.fillStyle = calm;
       context.fillRect(bounds.minX, bounds.minY, width, height);
     }
   }
@@ -457,10 +480,11 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
     bounds.minY + height * 0.5,
     Math.max(width, height) * 0.76
   );
+  const payette = spot?.slug === "payette-lake";
   shoreGlow.addColorStop(0, "rgba(18, 202, 234, 0)");
-  shoreGlow.addColorStop(0.54, `rgba(18, 202, 234, ${0.16 + exposure * 0.18})`);
-  shoreGlow.addColorStop(0.78, `rgba(18, 202, 234, ${0.46 + exposure * 0.3})`);
-  shoreGlow.addColorStop(1, `rgba(18, 202, 234, ${0.72 + exposure * 0.18})`);
+  shoreGlow.addColorStop(0.6, `rgba(18, 202, 234, ${payette ? 0.03 + exposure * 0.04 : 0.08 + exposure * 0.08})`);
+  shoreGlow.addColorStop(0.84, `rgba(18, 202, 234, ${payette ? 0.12 + exposure * 0.08 : 0.26 + exposure * 0.12})`);
+  shoreGlow.addColorStop(1, `rgba(18, 202, 234, ${payette ? 0.24 + exposure * 0.08 : 0.44 + exposure * 0.12})`);
   context.fillStyle = shoreGlow;
   context.fillRect(bounds.minX, bounds.minY, width, height);
 
