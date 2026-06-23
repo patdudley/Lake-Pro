@@ -432,7 +432,7 @@ function updateMapNote(spot) {
   }
 
   if (spot.slug === "payette-lake") {
-    note.textContent = "Boating Areas mode: lake surface is colored from the selected wind hour. Low wind stays mostly blue; breezier hours turn the exposed middle pink while edges stay blue. Verified danger restrictions are still pending.";
+    note.textContent = "Boating Areas mode: Valley County's 300 ft no-wake zone is grey. The water just beyond that zone is highlighted as a preferred Payette band, especially when wind or boat traffic makes the middle choppier. Verified danger restrictions are still pending.";
     if (sources) {
       sources.innerHTML = 'Sources: <a href="https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/info/iteminfo" target="_blank" rel="noopener">McCall GIS bathymetry</a> and <a href="https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer" target="_blank" rel="noopener">Valley County waterways ordinance</a>.';
     }
@@ -480,8 +480,8 @@ async function addPayetteBoatingLayers() {
       type: "fill",
       source: "payette-no-wake",
       paint: {
-        "fill-color": "#f20bc6",
-        "fill-opacity": 0.34,
+        "fill-color": "#8c95a3",
+        "fill-opacity": 0.56,
       },
     });
     lakeMap.addLayer({
@@ -489,8 +489,8 @@ async function addPayetteBoatingLayers() {
       type: "line",
       source: "payette-no-wake",
       paint: {
-        "line-color": "#f20bc6",
-        "line-width": 3,
+        "line-color": "#64748b",
+        "line-width": 2.4,
       },
     });
     lakeMap.addLayer({
@@ -498,9 +498,9 @@ async function addPayetteBoatingLayers() {
       type: "line",
       source: "payette-setback",
       paint: {
-        "line-color": "#ef233c",
-        "line-width": 3,
-        "line-dasharray": [2, 2],
+        "line-color": "#12bcea",
+        "line-width": 4,
+        "line-opacity": 0.95,
       },
     });
     lakeMap.addLayer({

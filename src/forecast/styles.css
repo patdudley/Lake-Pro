@@ -327,6 +327,10 @@ h2 {
   background: var(--magenta);
 }
 
+.legend-grey {
+  background: #8c95a3;
+}
+
 .legend-red {
   background: #ef233c;
 }
