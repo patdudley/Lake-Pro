@@ -1,9 +1,10 @@
-# Lake Pro Asset Slots
+# Lake Pro Assets
 
-Replace these neutral placeholders with approved assets later:
+Current files:
 
-- `logo.png` - final Lake Pro logo, preferably transparent PNG.
-- `hero-image.jpg` - approved hero or product/context image for the landing shell.
-- `favicon.png` - final browser favicon.
+- `logo.png` - LakePro logo supplied by Pat.
+- `boat-mark.png` - LakePro boat mark supplied by Pat.
+- `favicon.png` - temporary favicon using the supplied boat mark.
+- `hero-image.jpg` - unused placeholder from the foundation phase.
 
-These files are placeholders only. They are not final branding.
+The site currently uses the map-first Dive Pro-style layout, so `hero-image.jpg` is not shown.

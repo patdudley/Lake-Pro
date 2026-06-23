@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lake Pro</title>
-    <meta name="description" content="Lake Pro foundation shell for wake-sports conditions. Placeholder copy and assets only.">
+    <meta name="description" content="Lake Pro wake-sports conditions foundation.">
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
     <link rel="stylesheet" href="src/forecast/styles.css">
@@ -13,103 +13,98 @@
     <main class="shell">
       <nav class="top-nav" aria-label="Site navigation">
         <a class="brand-link" href="./">
-          <img src="assets/logo.png" alt="Lake Pro placeholder logo">
-          <span>Lake Pro</span>
+          <img src="assets/logo.png" alt="Lake Pro">
         </a>
         <div class="spot-switcher">
-          <label for="spotSelect">Lake spot</label>
+          <label for="spotSelect">Lake</label>
           <select id="spotSelect" aria-label="Lake spot"></select>
         </div>
       </nav>
 
-      <section class="hero-shell" aria-labelledby="pageTitle">
-        <div class="hero-copy">
-          <p class="eyebrow">Placeholder Lake Pro forecast shell</p>
-          <h1 id="pageTitle">Lake and wake conditions foundation</h1>
-          <p class="lede">Placeholder copy: lake conditions, wind exposure, and ride-window language will be finalized after brand and model review.</p>
-        </div>
-
-        <section class="verdict-card" aria-label="Current condition verdict">
-          <div class="verdict-location">
-            <span class="pin" aria-hidden="true"></span>
-            <strong id="spotName">Lake spot placeholder</strong>
-            <span id="spotLocation"></span>
-          </div>
-          <div class="verdict-main">
-            <strong id="conditionGrade">--</strong>
-            <div>
-              <span>Conditions placeholder</span>
-              <b id="conditionSummary">Awaiting model input</b>
-            </div>
-          </div>
-          <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
-          <div class="verdict-meta">
-            <div>
-              <span>Wind speed</span>
-              <strong id="windSpeed">Stubbed</strong>
-            </div>
-            <div>
-              <span>Best window</span>
-              <strong id="bestWindow">Stubbed</strong>
-            </div>
-          </div>
-        </section>
-      </section>
-
-      <section class="map-card" aria-labelledby="mapTitle">
+      <section class="map-panel" aria-labelledby="mapTitle">
         <div class="section-heading">
           <div>
-            <h2 id="mapTitle">Regional map</h2>
-            <p>MapLibre shell preserved; lake region and wind-frame data are placeholders for Lake Pro.</p>
+            <p class="eyebrow">Lake Forecast + Boating Conditions Report</p>
+            <h1 id="mapTitle">Lake conditions map</h1>
           </div>
           <span id="mapStatus">Map loading</span>
         </div>
         <div id="map" class="map"></div>
-        <p class="stub-note" id="windLayerNote">Cropped-wind frame pipeline slot: no wind frame generated yet.</p>
+        <p class="stub-note" id="windLayerNote">Stubbed wind-frame layer. No live lake data yet.</p>
+      </section>
+
+      <section class="report-card" aria-label="Current lake report">
+        <div class="verdict-location">
+          <span class="pin" aria-hidden="true"></span>
+          <div>
+            <strong id="spotName">Lake spot</strong>
+            <span id="spotLocation">Location</span>
+          </div>
+        </div>
+
+        <div class="verdict-main">
+          <strong id="conditionGrade">--</strong>
+          <div>
+            <span>Boating Conditions</span>
+            <b id="conditionSummary">Model not connected</b>
+          </div>
+        </div>
+        <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
+
+        <div class="verdict-meta">
+          <div>
+            <span>Wind Speed</span>
+            <strong id="windSpeed">Stubbed</strong>
+          </div>
+          <div>
+            <span>Best Window</span>
+            <strong id="bestWindow">Stubbed</strong>
+          </div>
+        </div>
+
+        <div class="daily-report">
+          <h2>Daily Lake Report</h2>
+          <p>No real forecast data is connected yet. This is the Lake Pro report slot for wind shadow, chop, and glassy-water guidance.</p>
+        </div>
       </section>
 
       <section class="ten-day-card" aria-labelledby="forecastTitle">
         <div class="section-heading">
           <div>
             <h2 id="forecastTitle">10 Day Forecast</h2>
-            <p>Forecast layout preserved with placeholder states only.</p>
+            <p>Lake conditions outlook</p>
           </div>
         </div>
         <div class="forecast-strip" id="forecastStrip" aria-label="10 day forecast placeholders"></div>
       </section>
 
-      <section class="chart-grid">
-        <article>
-          <h2>Wave Height</h2>
-          <div class="empty-panel">Stubbed until the lake model is defined.</div>
-        </article>
-        <article>
-          <h2>Wind Speed</h2>
-          <div class="empty-panel">Stubbed until the wind data source is chosen.</div>
-        </article>
-      </section>
-
-      <section class="split">
-        <article>
-          <h2>Model Inputs</h2>
-          <div class="feature-rows">
-            <div><span>Latitude</span><strong id="spotLatitude">To be provided</strong></div>
-            <div><span>Longitude</span><strong id="spotLongitude">To be provided</strong></div>
-            <div><span>Shoreline orientation</span><strong id="shorelineStatus">To be provided</strong></div>
-            <div><span>Wind source</span><strong>To be decided</strong></div>
+      <section class="wind-card" aria-labelledby="windTitle">
+        <div class="section-heading">
+          <div>
+            <h2 id="windTitle">Wind Speed</h2>
+            <p>Sustained wind placeholder</p>
           </div>
-        </article>
-        <article>
-          <h2>Removed Dive/Ocean Modules</h2>
-          <ul>
-            <li>Dive visibility model removed.</li>
-            <li>Fish Radar removed.</li>
-            <li>Swell, tide, ocean cam, and dive-grade panels removed.</li>
-          </ul>
-        </article>
+        </div>
+        <div class="wind-placeholder" aria-label="Wind chart placeholder">
+          <span>Wind data source not connected</span>
+        </div>
       </section>
 
-      <footer class="site-footer">Lake Pro foundation only. No real conditions, forecast, or model output is shown.</footer>
+      <section class="rating-card" aria-labelledby="ratingTitle">
+        <h2 id="ratingTitle">Rating System</h2>
+        <div class="rating-grid">
+          <div><strong>A</strong><span>Excellent</span></div>
+          <div><strong>B</strong><span>Good</span></div>
+          <div><strong>C</strong><span>Fair</span></div>
+          <div><strong>D</strong><span>Poor</span></div>
+        </div>
+      </section>
+
+      <section class="model-slots" aria-label="Model slots">
+        <div><span>Latitude</span><strong id="spotLatitude">--</strong></div>
+        <div><span>Longitude</span><strong id="spotLongitude">--</strong></div>
+        <div><span>Shoreline orientation</span><strong id="shorelineStatus">Stubbed</strong></div>
+      </section>
     </main>
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
     <script type="module" src="src/forecast/app.js"></script>

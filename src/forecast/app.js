@@ -85,12 +85,18 @@ function updateMapForSpot(spot) {
 
   lakeMap.flyTo({
     center: [spot.longitude, spot.latitude],
-    zoom: spot.slug === "lake-tahoe" ? 9.1 : 10.9,
+    zoom: spot.slug === "lake-tahoe" ? 8.35 : 10.25,
     essential: true,
   });
 
   const source = lakeMap.getSource("wind-frame-extent");
   if (source) source.setData(boundsPolygon(windFrame.bounds));
+}
+
+function resizeMapToPanel() {
+  if (!lakeMap || !currentSpot) return;
+  lakeMap.resize();
+  updateMapForSpot(currentSpot);
 }
 
 function initMap(activeSpot) {
@@ -107,19 +113,23 @@ function initMap(activeSpot) {
       sources: {
         osm: {
           type: "raster",
-          tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+          tiles: ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"],
           tileSize: 256,
-          attribution: "OpenStreetMap contributors",
+          attribution: "OpenStreetMap contributors, CARTO",
         },
       },
       layers: [{ id: "osm", type: "raster", source: "osm" }],
     },
     center: [activeSpot.longitude, activeSpot.latitude],
-    zoom: activeSpot.slug === "lake-tahoe" ? 9.1 : 10.9,
+    zoom: activeSpot.slug === "lake-tahoe" ? 8.35 : 10.25,
     attributionControl: true,
   });
 
   lakeMap.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), "top-right");
+  requestAnimationFrame(resizeMapToPanel);
+  window.setTimeout(resizeMapToPanel, 250);
+  window.setTimeout(resizeMapToPanel, 1000);
+  window.addEventListener("resize", resizeMapToPanel);
   lakeMap.once("load", () => {
     const windFrame = windFrameForSpot(activeSpot);
     lakeMap.addSource("wind-frame-extent", {
@@ -146,7 +156,7 @@ function initMap(activeSpot) {
       },
     });
     status.textContent = "Map ready";
-    updateMapForSpot(currentSpot);
+    resizeMapToPanel();
   });
 }
 
