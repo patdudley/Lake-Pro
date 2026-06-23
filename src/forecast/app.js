@@ -136,31 +136,52 @@ function windIntensity(speed) {
   return Math.max(0, Math.min(1, (value - 5) / 7));
 }
 
-function renderWindChart(days = []) {
+function hourLabel(time) {
+  const date = new Date(time);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleTimeString("en-US", { hour: "numeric" }).replace(" ", "").toLowerCase();
+}
+
+function renderWindChart(hourly = {}) {
   const chart = document.querySelector(".wind-placeholder");
   if (!chart) return;
-  const points = days.slice(0, 10).map((day, index) => ({
-    label: day.label || dayLabel(day.date, index),
-    speed: Number(day.wind_speed_max_mph ?? 0),
-    gust: Number(day.wind_gust_max_mph ?? 0),
-    direction: day.wind_direction_label || "",
-  }));
+  const times = hourly.time || [];
+  const speeds = hourly.wind_speed_10m || [];
+  const firstDay = frameDateKey(times[0]);
+  const points = times
+    .map((time, index) => ({ time, speed: Number(speeds[index] ?? 0) }))
+    .filter((point) => frameDateKey(point.time) === firstDay)
+    .slice(0, 24);
   if (!points.length) {
     chart.innerHTML = "<span>Wind pending</span>";
     return;
   }
-  chart.innerHTML = `<div class="wind-days">${points.map((point, index) => {
-    const intensity = windIntensity(point.speed).toFixed(2);
-    const calmLabel = point.speed <= 5 ? "Low wind" : point.speed < 10 ? "Light chop" : point.speed < 15 ? "Choppy" : "Rough";
-    return `
-      <article class="wind-day" style="--wind-intensity:${intensity}">
-        <span>${index === 0 ? "Today" : point.label}</span>
-        <strong>${Math.round(point.speed)} mph</strong>
-        <em>${point.direction || "Variable"}</em>
-        <small>${calmLabel}</small>
-      </article>
-    `;
-  }).join("")}</div>`;
+  const maxWind = Math.max(8, ...points.map((point) => point.speed));
+  const peak = Math.max(...points.map((point) => point.speed));
+  const peakIndex = points.findIndex((point) => point.speed === peak);
+  chart.innerHTML = `
+    <div class="wind-chart">
+      <div class="wind-chart-summary">
+        <strong>${new Date(points[0].time).toLocaleDateString("en-US", { weekday: "long" })}</strong>
+        <span>Peak ${Math.round(peak)} mph</span>
+      </div>
+      <div class="wind-bars" style="--max-wind:${maxWind}; grid-template-columns:repeat(${points.length}, minmax(18px, 1fr))">
+        ${points.map((point, index) => {
+          const height = Math.max(10, Math.round((point.speed / maxWind) * 100));
+          const intensity = windIntensity(point.speed).toFixed(2);
+          const showValue = index === 0 || index === peakIndex || index === points.length - 1;
+          const showTime = index === 0 || index === points.length - 1 || index % 2 === 0;
+          return `
+            <div class="wind-bar-column" title="${hourLabel(point.time)} ${Math.round(point.speed)} mph" style="--wind-intensity:${intensity}; --bar-height:${height}%">
+              <span>${showValue ? `${Math.round(point.speed)}` : ""}</span>
+              <i aria-hidden="true"></i>
+              <em>${showTime ? hourLabel(point.time) : ""}</em>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
 }
 
 function renderLiveSpotData(bundle) {
@@ -174,7 +195,7 @@ function renderLiveSpotData(bundle) {
   const fill = document.getElementById("scoreFill");
   if (fill && latest.score != null) fill.style.width = `${Math.max(6, Math.min(100, latest.score))}%`;
   renderForecastStrip(bundle.ten_day || []);
-  renderWindChart(bundle.ten_day || []);
+  renderWindChart(bundle.hourly || {});
 }
 
 async function loadLiveSpotData(spot) {

@@ -486,7 +486,7 @@ h2 {
 
 .wind-placeholder {
   display: grid;
-  min-height: 170px;
+  min-height: 210px;
   margin-top: 16px;
   align-items: stretch;
   border: 1px solid var(--line);
@@ -498,75 +498,92 @@ h2 {
   overflow: hidden;
 }
 
-.wind-days {
+.wind-chart {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(112px, 1fr);
-  grid-template-columns: none;
-  gap: 8px;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
   width: 100%;
-  padding: 12px;
+  padding: 14px;
+}
+
+.wind-chart-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text);
+  text-align: left;
+}
+
+.wind-chart-summary strong {
+  font-size: 0.9rem;
+  font-weight: 950;
+}
+
+.wind-chart-summary span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.wind-bars {
+  display: grid;
+  gap: 7px;
+  width: 100%;
+  min-height: 142px;
+  align-items: end;
+  border: 1px solid rgba(7, 25, 82, 0.08);
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 48px, rgba(7, 25, 82, 0.04) 48px 49px),
+    linear-gradient(180deg, rgba(11, 88, 255, 0.04), rgba(242, 11, 198, 0.05));
+  padding: 18px 12px 24px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
   scrollbar-width: thin;
 }
 
-.wind-day {
+.wind-bar-column {
   position: relative;
   display: grid;
-  min-height: 136px;
-  align-content: end;
-  border: 1px solid rgba(11, 88, 255, 0.12);
-  border-radius: 8px;
-  background:
-    radial-gradient(circle at 72% 22%, rgba(242, 11, 198, calc(var(--wind-intensity) * 0.98)), transparent 54%),
-    linear-gradient(145deg, rgba(242, 11, 198, calc(var(--wind-intensity) * 0.82)), rgba(11, 88, 255, calc(0.82 - var(--wind-intensity) * 0.28)) 46%, rgba(17, 188, 233, 0.92)),
-    linear-gradient(180deg, rgba(17, 188, 233, 0.9), rgba(11, 88, 255, 0.9));
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34);
-  color: #ffffff;
-  padding: 14px 11px;
-  text-align: left;
-  overflow: hidden;
+  min-width: 28px;
+  height: 126px;
+  align-items: end;
   scroll-snap-align: start;
 }
 
-.wind-day::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+.wind-bar-column i {
+  display: block;
+  width: 100%;
+  height: var(--bar-height);
+  min-height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 7px 7px 3px 3px;
   background:
-    repeating-linear-gradient(110deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 16px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 54%);
-  opacity: 0.58;
+    linear-gradient(180deg, rgba(242, 11, 198, calc(var(--wind-intensity) * 0.88)), rgba(11, 88, 255, calc(0.82 - var(--wind-intensity) * 0.24)) 58%, rgba(17, 188, 233, 0.94)),
+    linear-gradient(180deg, rgba(17, 188, 233, 0.9), rgba(11, 88, 255, 0.9));
+  box-shadow: 0 6px 14px rgba(7, 25, 82, 0.08);
 }
 
-.wind-day span,
-.wind-day strong,
-.wind-day em,
-.wind-day small {
-  position: relative;
-  z-index: 1;
-}
-
-.wind-day span {
-  font-size: 0.72rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.wind-day strong {
-  margin-top: 8px;
-  font-size: 1.32rem;
-  line-height: 1;
-}
-
-.wind-day em,
-.wind-day small {
-  margin-top: 5px;
-  font-size: 0.76rem;
+.wind-bar-column span,
+.wind-bar-column em {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text);
+  font-size: 0.66rem;
   font-style: normal;
-  font-weight: 850;
-  opacity: 0.92;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.wind-bar-column span {
+  top: -15px;
+}
+
+.wind-bar-column em {
+  bottom: -20px;
+  color: var(--muted);
 }
 
 .rating-grid {
@@ -715,8 +732,14 @@ h2 {
     grid-auto-columns: 104px;
   }
 
-  .wind-days {
-    grid-auto-columns: 108px;
+  .wind-placeholder {
+    min-height: 210px;
+  }
+
+  .wind-bars {
+    gap: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 }
 
