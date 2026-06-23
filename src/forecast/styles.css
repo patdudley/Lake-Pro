@@ -55,7 +55,8 @@ body::after {
 .verdict-meta,
 .spot-switcher,
 .map-mode-bar,
-.map-legend {
+.map-legend,
+.timelapse-control {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -120,6 +121,76 @@ body::after {
   border-color: rgba(11, 88, 255, 0.28);
   background: linear-gradient(90deg, rgba(242, 11, 198, 0.11), rgba(11, 88, 255, 0.11), rgba(17, 188, 233, 0.11));
   color: var(--text);
+}
+
+.timelapse-control {
+  margin-top: 10px;
+}
+
+.timelapse-control button {
+  flex: 0 0 auto;
+  min-height: 38px;
+  border: 1px solid rgba(11, 88, 255, 0.28);
+  border-radius: 8px;
+  background: var(--pale-blue);
+  color: var(--blue);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 950;
+  padding: 0 14px;
+  text-transform: uppercase;
+}
+
+.timelapse-control input {
+  flex: 1 1 auto;
+  accent-color: var(--magenta);
+}
+
+.timelapse-control strong {
+  flex: 0 0 auto;
+  min-width: 210px;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-align: right;
+}
+
+.wind-map-arrow-marker {
+  width: 42px;
+  height: 42px;
+}
+
+.wind-map-arrow {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.94);
+  border-radius: 999px;
+  background: var(--grad);
+  box-shadow: 0 12px 28px rgba(7, 25, 82, 0.2);
+  transition: transform 220ms ease;
+}
+
+.wind-map-arrow::before {
+  position: absolute;
+  inset: 8px 17px 8px 17px;
+  border-radius: 999px;
+  background: #ffffff;
+  content: "";
+}
+
+.wind-map-arrow::after {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-right: 7px solid transparent;
+  border-bottom: 13px solid #ffffff;
+  border-left: 7px solid transparent;
+  content: "";
+  transform: translateX(-50%);
 }
 
 .map-panel,
@@ -230,6 +301,10 @@ h2 {
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 850;
+}
+
+.map-legend[hidden] {
+  display: none;
 }
 
 .map-legend span {
@@ -511,9 +586,15 @@ h2 {
   }
 
   .map-mode-bar,
-  .map-legend {
+  .map-legend,
+  .timelapse-control {
     flex-wrap: wrap;
     justify-content: flex-start;
+  }
+
+  .timelapse-control strong {
+    min-width: 0;
+    text-align: left;
   }
 
   .map {
