@@ -3,6 +3,13 @@ import { lakeSpots } from "../spots/index.js";
 
 let lakeMap = null;
 let currentSpot = null;
+let activeMapMode = "boating";
+
+const mapLayerUrls = {
+  payetteBathymetry: "https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/1/query?where=1%3D1&outFields=Contour&returnGeometry=true&outSR=4326&f=geojson",
+  payetteNoWake: "https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer/1/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+  payetteSetback: "https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+};
 
 const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   label: index === 0 ? "Today" : new Date(Date.now() + index * 86400000).toLocaleDateString("en-US", { weekday: "short" }),
@@ -22,6 +29,12 @@ function renderForecastStrip() {
     `;
     return card;
   }));
+}
+
+async function fetchGeoJson(url) {
+  const response = await fetch(url, { cache: "force-cache" });
+  if (!response.ok) throw new Error(`${url} unavailable`);
+  return response.json();
 }
 
 function selectedSpot() {
@@ -45,6 +58,20 @@ function renderSpotSwitcher(activeSpot) {
     const nextSpot = lakeSpots.find((spot) => spot.slug === select.value) || lakeSpots[0];
     renderSpot(nextSpot);
     updateMapForSpot(nextSpot);
+  });
+}
+
+function renderMapModeControls() {
+  const controls = document.querySelector(".map-mode-bar");
+  if (!controls) return;
+  controls.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-map-mode]");
+    if (!button) return;
+    activeMapMode = button.dataset.mapMode;
+    controls.querySelectorAll("button").forEach((control) => {
+      control.classList.toggle("is-active", control === button);
+    });
+    setMapMode(activeMapMode);
   });
 }
 
@@ -76,20 +103,111 @@ function boundsPolygon(bounds) {
 
 function updateMapForSpot(spot) {
   const windFrame = windFrameForSpot(spot);
-  document.getElementById("windLayerNote").textContent = windFrame
-    ? `${windFrame.pipeline} slot active for ${spot.name}: ${windFrame.note}`
-    : "Cropped-wind frame pipeline slot: no wind frame configured.";
+  updateMapNote(spot);
 
   if (!lakeMap || !windFrame) return;
 
   lakeMap.flyTo({
     center: [spot.longitude, spot.latitude],
-    zoom: spot.slug === "lake-tahoe" ? 8.35 : 10.25,
+    zoom: spot.slug === "lake-tahoe" ? 8.35 : 11.15,
     essential: true,
   });
 
   const source = lakeMap.getSource("wind-frame-extent");
   if (source) source.setData(boundsPolygon(windFrame.bounds));
+  setMapMode(activeMapMode);
+}
+
+function updateMapNote(spot) {
+  const note = document.getElementById("windLayerNote");
+  if (activeMapMode === "wind") {
+    const windFrame = windFrameForSpot(spot);
+    note.textContent = windFrame
+      ? `${windFrame.pipeline} slot active for ${spot.name}: ${windFrame.note}`
+      : "Cropped-wind frame pipeline slot: no wind frame configured.";
+    return;
+  }
+
+  if (spot.slug === "payette-lake") {
+    note.textContent = "Boating Areas mode: Payette depth contours and official no-wake/setback layers are shown. Blue/pink boating scores, wind protection, crowding downgrades, and verified danger restrictions are pending.";
+  } else {
+    note.textContent = "Boating Areas mode is scaffolded. Tahoe depth, wind-protection, crowding, and danger layers still need verified sources.";
+  }
+}
+
+function setLayerVisibility(ids, visible) {
+  if (!lakeMap) return;
+  ids.forEach((id) => {
+    if (lakeMap.getLayer(id)) {
+      lakeMap.setLayoutProperty(id, "visibility", visible ? "visible" : "none");
+    }
+  });
+}
+
+function setMapMode(mode) {
+  if (!lakeMap || !currentSpot) return;
+  const isBoating = mode === "boating";
+  setLayerVisibility(["bathymetry-contours", "payette-no-wake-fill", "payette-no-wake-line", "payette-setback-line"], isBoating && currentSpot.slug === "payette-lake");
+  setLayerVisibility(["wind-frame-extent-fill", "wind-frame-extent-line"], !isBoating);
+  const legend = document.getElementById("mapLegend");
+  if (legend) legend.hidden = !isBoating;
+  updateMapNote(currentSpot);
+}
+
+async function addPayetteBoatingLayers() {
+  if (!lakeMap) return;
+  try {
+    const [bathymetry, noWake, setback] = await Promise.all([
+      fetchGeoJson(mapLayerUrls.payetteBathymetry),
+      fetchGeoJson(mapLayerUrls.payetteNoWake),
+      fetchGeoJson(mapLayerUrls.payetteSetback),
+    ]);
+
+    lakeMap.addSource("payette-bathymetry", { type: "geojson", data: bathymetry });
+    lakeMap.addSource("payette-no-wake", { type: "geojson", data: noWake });
+    lakeMap.addSource("payette-setback", { type: "geojson", data: setback });
+
+    lakeMap.addLayer({
+      id: "payette-no-wake-fill",
+      type: "fill",
+      source: "payette-no-wake",
+      paint: {
+        "fill-color": "#f20bc6",
+        "fill-opacity": 0.34,
+      },
+    });
+    lakeMap.addLayer({
+      id: "payette-no-wake-line",
+      type: "line",
+      source: "payette-no-wake",
+      paint: {
+        "line-color": "#f20bc6",
+        "line-width": 3,
+      },
+    });
+    lakeMap.addLayer({
+      id: "payette-setback-line",
+      type: "line",
+      source: "payette-setback",
+      paint: {
+        "line-color": "#ef233c",
+        "line-width": 3,
+        "line-dasharray": [2, 2],
+      },
+    });
+    lakeMap.addLayer({
+      id: "bathymetry-contours",
+      type: "line",
+      source: "payette-bathymetry",
+      paint: {
+        "line-color": "#11bce9",
+        "line-width": 2.6,
+        "line-opacity": 0.9,
+      },
+    });
+  } catch (error) {
+    console.warn("[LakePro] Payette boating layers unavailable", error);
+  }
 }
 
 function resizeMapToPanel() {
@@ -109,6 +227,7 @@ function initMap(activeSpot) {
     container: "map",
     style: {
       version: 8,
+      glyphs: "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
       sources: {
         osm: {
           type: "raster",
@@ -120,7 +239,7 @@ function initMap(activeSpot) {
       layers: [{ id: "osm", type: "raster", source: "osm" }],
     },
     center: [activeSpot.longitude, activeSpot.latitude],
-    zoom: activeSpot.slug === "lake-tahoe" ? 8.35 : 10.25,
+    zoom: activeSpot.slug === "lake-tahoe" ? 8.35 : 11.15,
     attributionControl: true,
   });
 
@@ -155,11 +274,15 @@ function initMap(activeSpot) {
       },
     });
     status.textContent = "Map ready";
-    resizeMapToPanel();
+    addPayetteBoatingLayers().finally(() => {
+      resizeMapToPanel();
+      setMapMode(activeMapMode);
+    });
   });
 }
 
 const activeSpot = selectedSpot();
+renderMapModeControls();
 renderSpotSwitcher(activeSpot);
 renderSpot(activeSpot);
 renderForecastStrip();

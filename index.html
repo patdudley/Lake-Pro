@@ -29,8 +29,18 @@
           </div>
           <span id="mapStatus">Map loading</span>
         </div>
+        <div class="map-mode-bar" aria-label="Map mode">
+          <button class="is-active" type="button" data-map-mode="boating">Boating Areas</button>
+          <button type="button" data-map-mode="wind">Wind</button>
+        </div>
         <div id="map" class="map"></div>
+        <div class="map-legend" id="mapLegend" aria-label="Map legend">
+          <span><i class="legend-blue"></i>Depth contours</span>
+          <span><i class="legend-pink"></i>Official no-wake</span>
+          <span><i class="legend-red"></i>Danger restrictions pending</span>
+        </div>
         <p class="stub-note" id="windLayerNote">Stubbed wind-frame layer. No live lake data yet.</p>
+        <p class="map-sources">Sources: <a href="https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/info/iteminfo" target="_blank" rel="noopener">McCall GIS bathymetry</a> and <a href="https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer" target="_blank" rel="noopener">Valley County waterways ordinance</a>.</p>
       </section>
 
       <section class="report-card" aria-label="Current lake report">
