@@ -1,1 +1,2 @@
 Phase 1 done: confirmed standalone Lake Pro repo remote (git@github.com:patdudley/Lake-Pro.git), baseline contains README.md only; app code is not seeded yet, so preview is not available until a shell exists.
+Phase 2 blocked: Dive Pro / Quiver source code is not present in this repo, so there is no dive visibility model, Fish Radar, MapLibre map shell, cropped-wind pipeline, verdict-card UI, or 10-day layout to strip/preserve; preview is not available until the seed code is added.
