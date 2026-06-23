@@ -137,6 +137,59 @@ def chop_proxy_ft(wind_mph: float | None, gust_mph: float | None) -> float | Non
     return round(max(0.0, (wind_mph - 4.0) * 0.055 + max(0.0, gust - wind_mph) * 0.025), 1)
 
 
+def window_label(hour: int | None) -> str:
+    if hour is None:
+        return "Pending"
+    if hour < 10:
+        return "Early morning"
+    if hour < 14:
+        return "Late morning"
+    if hour < 17:
+        return "Afternoon"
+    return "Evening"
+
+
+def best_boating_window_for_day(hourly: dict, day_str: str) -> dict:
+    times = hourly.get("time", [])
+    winds = hourly.get("wind_speed_10m", [])
+    gusts = hourly.get("wind_gusts_10m", [])
+    candidates = []
+
+    for start in range(0, max(0, len(times) - 2)):
+        chunk_times = times[start : start + 3]
+        if len(chunk_times) < 3 or any(timestamp[:10] != day_str for timestamp in chunk_times):
+            continue
+        hour = int(chunk_times[0][11:13])
+        if hour < 6 or hour > 18:
+            continue
+
+        wind_chunk = [float(value) for value in winds[start : start + 3] if value is not None]
+        gust_chunk = [float(value) for value in gusts[start : start + 3] if value is not None]
+        if len(wind_chunk) < 3:
+            continue
+        avg_wind = sum(wind_chunk) / len(wind_chunk)
+        avg_gust = sum(gust_chunk) / len(gust_chunk) if gust_chunk else avg_wind
+        candidates.append(
+            {
+                "start_hour": hour,
+                "avg_wind_mph": round(avg_wind, 1),
+                "avg_gust_mph": round(avg_gust, 1),
+                "score_value": avg_wind + max(0.0, avg_gust - 12.0) * 0.35,
+            }
+        )
+
+    if not candidates:
+        return {"label": "Pending", "avg_wind_mph": None, "avg_gust_mph": None}
+
+    best = min(candidates, key=lambda item: item["score_value"])
+    return {
+        "label": window_label(best["start_hour"]),
+        "avg_wind_mph": best["avg_wind_mph"],
+        "avg_gust_mph": best["avg_gust_mph"],
+        "start_hour": best["start_hour"],
+    }
+
+
 def best_window(hourly: dict) -> str:
     times = hourly.get("time", [])
     winds = hourly.get("wind_speed_10m", [])
@@ -170,6 +223,9 @@ def build_forecast(spot: Spot) -> dict:
         "precipitation_probability",
     ]
     daily_fields = [
+        "weather_code",
+        "temperature_2m_max",
+        "temperature_2m_min",
         "wind_speed_10m_max",
         "wind_gusts_10m_max",
         "wind_direction_10m_dominant",
@@ -199,15 +255,23 @@ def build_forecast(spot: Spot) -> dict:
         gust = daily.get("wind_gusts_10m_max", [None])[index]
         direction = daily.get("wind_direction_10m_dominant", [None])[index]
         precip = daily.get("precipitation_probability_max", [None])[index]
+        weather_code = daily.get("weather_code", [None])[index]
+        temp_max = daily.get("temperature_2m_max", [None])[index]
+        temp_min = daily.get("temperature_2m_min", [None])[index]
         chop = chop_proxy_ft(wind, gust)
+        window = best_boating_window_for_day(hourly, day_str)
 
-        score = 86
-        if wind is not None:
-            score -= max(0, int(round((float(wind) - 7) * 3.2)))
-        if gust is not None:
-            score -= max(0, int(round((float(gust) - 13) * 1.8)))
+        score = 92
+        if window["avg_wind_mph"] is not None:
+            score -= max(0, int(round((float(window["avg_wind_mph"]) - 8) * 5.0)))
+        elif wind is not None:
+            score -= max(0, int(round((float(wind) - 8) * 4.0)))
+        if window["avg_gust_mph"] is not None:
+            score -= max(0, int(round((float(window["avg_gust_mph"]) - 14) * 2.0)))
+        elif gust is not None:
+            score -= max(0, int(round((float(gust) - 14) * 1.5)))
         if precip is not None:
-            score -= max(0, int(round((float(precip) - 30) * 0.2)))
+            score -= max(0, int(round((float(precip) - 45) * 0.2)))
         score -= crowding_penalty(day)
         score = max(0, min(100, score))
 
@@ -221,9 +285,15 @@ def build_forecast(spot: Spot) -> dict:
                 "wind_direction_deg": direction,
                 "wind_direction_label": wind_direction_label(direction),
                 "precipitation_probability_max": precip,
+                "weather_code": weather_code,
+                "temperature_2m_max": temp_max,
+                "temperature_2m_min": temp_min,
                 "chop_proxy_ft": chop,
+                "best_window": window["label"],
+                "best_window_wind_mph": window["avg_wind_mph"],
+                "best_window_gust_mph": window["avg_gust_mph"],
                 "crowding_penalty": crowding_penalty(day),
-                "summary": "Placeholder rating from wind + crowding until Lake Pro model is approved.",
+                "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
             }
         )
 
@@ -237,7 +307,7 @@ def build_forecast(spot: Spot) -> dict:
         },
         "latest": {
             **latest,
-            "best_window": best_window(hourly),
+            "best_window": latest.get("best_window") or best_window(hourly),
             "report": "Live wind forecast is connected. Wind-shadow, depth scoring, danger restrictions, and final chop model are pending.",
         },
         "ten_day": days,

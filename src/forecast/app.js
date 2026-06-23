@@ -85,6 +85,31 @@ function dayLabel(date, index) {
   return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { weekday: "short" });
 }
 
+function weatherIconClass(code) {
+  if (code == null) return "weather-cloud";
+  const value = Number(code);
+  if (value === 0) return "weather-sun";
+  if (value === 1 || value === 2) return "weather-partly";
+  if (value === 3 || value === 45 || value === 48) return "weather-cloud";
+  if ((value >= 51 && value <= 67) || (value >= 80 && value <= 82)) return "weather-rain";
+  if (value >= 71 && value <= 77) return "weather-snow";
+  if (value >= 95) return "weather-storm";
+  return "weather-cloud";
+}
+
+function forecastDetail(day) {
+  if (day.best_window_wind_mph != null) {
+    return `${day.best_window_wind_mph} mph best window`;
+  }
+  if (day.chop_proxy_ft != null) return `${day.chop_proxy_ft} ft chop proxy`;
+  return day.summary || "Stubbed";
+}
+
+function temperatureRange(day) {
+  if (day.temperature_2m_max == null || day.temperature_2m_min == null) return "";
+  return `<span class="forecast-temps">${Math.round(day.temperature_2m_max)}&deg; <small>${Math.round(day.temperature_2m_min)}&deg;</small></span>`;
+}
+
 function renderForecastStrip(days = placeholderForecast) {
   const strip = document.getElementById("forecastStrip");
   strip.replaceChildren(...days.map((day, index) => {
@@ -92,8 +117,10 @@ function renderForecastStrip(days = placeholderForecast) {
     card.className = "forecast-day";
     card.innerHTML = `
       <span>${day.label || dayLabel(day.date, index)}</span>
+      <i class="weather-icon ${weatherIconClass(day.weather_code)}" aria-hidden="true"></i>
+      ${temperatureRange(day)}
       <strong>${day.grade || "--"}</strong>
-      <em>${day.chop_proxy_ft != null ? `${day.chop_proxy_ft} ft chop proxy` : (day.summary || "Stubbed")}</em>
+      <em>${forecastDetail(day)}</em>
     `;
     return card;
   }));

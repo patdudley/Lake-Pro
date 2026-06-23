@@ -466,6 +466,97 @@ h2 {
   text-align: center;
 }
 
+.weather-icon {
+  position: relative;
+  display: block;
+  width: 56px;
+  height: 42px;
+  margin: 8px auto 6px;
+}
+
+.weather-icon::before,
+.weather-icon::after {
+  position: absolute;
+  content: "";
+}
+
+.weather-sun::before {
+  inset: 5px 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 38% 34%, #ffd965 0 18%, #ffb020 38%, #f97316 100%);
+  box-shadow: 0 0 16px rgba(249, 115, 22, 0.2);
+}
+
+.weather-cloud::before,
+.weather-partly::after,
+.weather-rain::before,
+.weather-snow::before,
+.weather-storm::before {
+  right: 5px;
+  bottom: 8px;
+  width: 38px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #f4f6f8, #c9ced6);
+  box-shadow:
+    -15px 4px 0 -2px #d8dce2,
+    -5px -8px 0 0 #d2d6dc,
+    8px -9px 0 0 #c2c7cf;
+}
+
+.weather-partly::before {
+  top: 5px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 38% 34%, #ffd965 0 18%, #ffb020 38%, #f97316 100%);
+}
+
+.weather-rain::after,
+.weather-snow::after,
+.weather-storm::after {
+  right: 14px;
+  bottom: -1px;
+  width: 8px;
+  height: 12px;
+  border-radius: 999px 999px 999px 2px;
+  background: var(--blue);
+  box-shadow: -14px -2px 0 -1px var(--blue), 11px -4px 0 -1px var(--blue);
+  transform: rotate(35deg);
+}
+
+.weather-snow::after {
+  border-radius: 999px;
+  background: #9bdcff;
+  box-shadow: -14px -2px 0 -1px #9bdcff, 11px -4px 0 -1px #9bdcff;
+  transform: none;
+}
+
+.weather-storm::after {
+  right: 18px;
+  bottom: 0;
+  width: 12px;
+  height: 18px;
+  border-radius: 1px;
+  background: linear-gradient(135deg, transparent 0 28%, #f20bc6 29% 62%, transparent 63%);
+  box-shadow: none;
+  transform: none;
+}
+
+.forecast-temps {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+  font-size: 0.94rem;
+  font-weight: 900;
+}
+
+.forecast-temps small {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
 .forecast-day strong {
   display: block;
   background: linear-gradient(180deg, var(--blue), #0877ff);
