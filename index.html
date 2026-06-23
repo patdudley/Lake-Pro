@@ -16,7 +16,10 @@
           <img src="assets/logo.png" alt="Lake Pro placeholder logo">
           <span>Lake Pro</span>
         </a>
-        <span class="build-pill">Foundation stub</span>
+        <div class="spot-switcher">
+          <label for="spotSelect">Lake spot</label>
+          <select id="spotSelect" aria-label="Lake spot"></select>
+        </div>
       </nav>
 
       <section class="hero-shell" aria-labelledby="pageTitle">
@@ -30,6 +33,7 @@
           <div class="verdict-location">
             <span class="pin" aria-hidden="true"></span>
             <strong id="spotName">Lake spot placeholder</strong>
+            <span id="spotLocation"></span>
           </div>
           <div class="verdict-main">
             <strong id="conditionGrade">--</strong>
@@ -89,7 +93,9 @@
         <article>
           <h2>Model Inputs</h2>
           <div class="feature-rows">
-            <div><span>Shoreline orientation</span><strong>To be provided</strong></div>
+            <div><span>Latitude</span><strong id="spotLatitude">To be provided</strong></div>
+            <div><span>Longitude</span><strong id="spotLongitude">To be provided</strong></div>
+            <div><span>Shoreline orientation</span><strong id="shorelineStatus">To be provided</strong></div>
             <div><span>Wind source</span><strong>To be decided</strong></div>
           </div>
         </article>

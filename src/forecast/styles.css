@@ -70,6 +70,24 @@ body {
   padding: 8px 10px;
 }
 
+.spot-switcher label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.spot-switcher select {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  padding: 0 12px;
+}
+
 .hero-shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
@@ -132,6 +150,12 @@ h2 {
   height: 14px;
   border-radius: 999px;
   background: var(--accent);
+}
+
+#spotLocation {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 750;
 }
 
 .verdict-main {
