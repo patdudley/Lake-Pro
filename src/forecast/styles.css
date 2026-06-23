@@ -255,17 +255,6 @@ h2 {
   object-fit: cover;
 }
 
-#mapStatus {
-  flex: 0 0 auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #f8fafc;
-  color: var(--text);
-  font-size: 0.78rem;
-  font-weight: 850;
-  padding: 8px 10px;
-}
-
 .map {
   height: min(58vh, 560px);
   min-height: 380px;

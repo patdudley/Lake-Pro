@@ -732,9 +732,8 @@ function resizeMapToPanel() {
 }
 
 function initMap(activeSpot) {
-  const status = document.getElementById("mapStatus");
   if (!window.maplibregl) {
-    status.textContent = "Map library unavailable";
+    console.warn("[LakePro] Map library unavailable");
     return;
   }
 
@@ -765,7 +764,6 @@ function initMap(activeSpot) {
   window.setTimeout(resizeMapToPanel, 1000);
   window.addEventListener("resize", resizeMapToPanel);
   lakeMap.once("load", () => {
-    status.textContent = "Map ready";
     addPayetteBoatingLayers().finally(() => {
       resizeMapToPanel();
       setPayetteBoatingLayerVisibility(currentSpot?.slug === "payette-lake");
