@@ -15,6 +15,59 @@ const mapLayerUrls = {
   payetteSetback: "data/live/map_layers/payette_shoreline_setback.geojson",
 };
 
+const lakeSurfaceShapes = {
+  "lake-tahoe": {
+    lake: [
+      [-120.147, 39.241],
+      [-120.074, 39.224],
+      [-119.994, 39.181],
+      [-119.945, 39.103],
+      [-119.948, 39.017],
+      [-119.988, 38.940],
+      [-120.039, 38.884],
+      [-120.102, 38.934],
+      [-120.144, 39.016],
+      [-120.164, 39.125],
+      [-120.147, 39.241],
+    ],
+    exposed: [
+      [-120.095, 39.182],
+      [-120.035, 39.153],
+      [-119.994, 39.087],
+      [-120.004, 39.005],
+      [-120.052, 38.953],
+      [-120.101, 39.011],
+      [-120.123, 39.102],
+      [-120.095, 39.182],
+    ],
+  },
+  "payette-lake": {
+    lake: [
+      [-116.125, 44.920],
+      [-116.119, 44.914],
+      [-116.108, 44.911],
+      [-116.099, 44.912],
+      [-116.059, 44.929],
+      [-116.052, 44.956],
+      [-116.064, 44.993],
+      [-116.071, 44.992],
+      [-116.088, 44.972],
+      [-116.120, 44.932],
+      [-116.125, 44.920],
+    ],
+    exposed: [
+      [-116.112, 44.928],
+      [-116.102, 44.923],
+      [-116.074, 44.939],
+      [-116.061, 44.957],
+      [-116.068, 44.981],
+      [-116.083, 44.967],
+      [-116.102, 44.944],
+      [-116.112, 44.928],
+    ],
+  },
+};
+
 const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   label: index === 0 ? "Today" : new Date(Date.now() + index * 86400000).toLocaleDateString("en-US", { weekday: "short" }),
   grade: "--",
@@ -185,6 +238,40 @@ function windVectorFeature(spot, frame) {
   };
 }
 
+function polygonFeature(coordinates, properties = {}) {
+  return {
+    type: "Feature",
+    properties,
+    geometry: {
+      type: "Polygon",
+      coordinates: [coordinates],
+    },
+  };
+}
+
+function lakeSurfaceData(spot, frame) {
+  const shapes = lakeSurfaceShapes[spot.slug];
+  if (!shapes) return { type: "FeatureCollection", features: [] };
+  const speed = Number(frame?.wind_speed_mph || 0);
+  const features = [
+    polygonFeature(shapes.lake, {
+      zone: "recommended",
+      color: "#12bcea",
+      opacity: speed < 8 ? 0.92 : 0.88,
+    }),
+  ];
+  if (speed >= 8) {
+    features.push(
+      polygonFeature(shapes.exposed, {
+        zone: "exposed",
+        color: "#f20bc6",
+        opacity: Math.min(0.9, 0.46 + speed * 0.03),
+      })
+    );
+  }
+  return { type: "FeatureCollection", features };
+}
+
 function formatFrameTime(time) {
   if (!time) return "Wind timeline pending";
   const date = new Date(time);
@@ -238,6 +325,10 @@ function renderWindFrame(index = windFrameIndex) {
     const source = lakeMap.getSource("wind-vector");
     if (source) {
       source.setData(windVectorFeature(currentSpot, frame));
+    }
+    const surfaceSource = lakeMap.getSource("lake-surface-zones");
+    if (surfaceSource) {
+      surfaceSource.setData(lakeSurfaceData(currentSpot, frame));
     }
   }
 }
@@ -341,12 +432,12 @@ function updateMapNote(spot) {
   }
 
   if (spot.slug === "payette-lake") {
-    note.textContent = "Boating Areas mode: Payette depth contours and official no-wake/setback layers are shown. Blue/pink boating scores, wind protection, crowding downgrades, and verified danger restrictions are pending.";
+    note.textContent = "Boating Areas mode: lake surface is colored from the selected wind hour. Low wind stays mostly blue; breezier hours turn the exposed middle pink while edges stay blue. Verified danger restrictions are still pending.";
     if (sources) {
       sources.innerHTML = 'Sources: <a href="https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/info/iteminfo" target="_blank" rel="noopener">McCall GIS bathymetry</a> and <a href="https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer" target="_blank" rel="noopener">Valley County waterways ordinance</a>.';
     }
   } else {
-    note.textContent = "Boating Areas mode is scaffolded. Tahoe depth, wind-protection, crowding, and danger layers still need verified sources.";
+    note.textContent = "Boating Areas mode: lake surface is colored from the selected wind hour. Low wind stays mostly blue; breezier hours turn the exposed middle pink while edges stay blue. Tahoe depth and verified danger layers still need sources.";
     if (sources) sources.textContent = "Tahoe boating-area source layers are pending. Wind time-lapse uses generated Open-Meteo hourly wind frames.";
   }
 }
@@ -363,6 +454,7 @@ function setLayerVisibility(ids, visible) {
 function setMapMode(mode) {
   if (!lakeMap || !currentSpot) return;
   const isBoating = mode === "boating";
+  setLayerVisibility(["lake-surface-fill", "lake-surface-line"], isBoating);
   setLayerVisibility(["bathymetry-contours", "payette-no-wake-fill", "payette-no-wake-line", "payette-setback-line"], isBoating && currentSpot.slug === "payette-lake");
   setLayerVisibility(["wind-frame-extent-fill", "wind-frame-extent-line", "wind-vector-line"], !isBoating);
   const legend = document.getElementById("mapLegend");
@@ -489,6 +581,29 @@ function initMap(activeSpot) {
         "line-dasharray": [2, 2],
       },
     });
+    lakeMap.addSource("lake-surface-zones", {
+      type: "geojson",
+      data: lakeSurfaceData(activeSpot, windFrames[windFrameIndex] || {}),
+    });
+    lakeMap.addLayer({
+      id: "lake-surface-fill",
+      type: "fill",
+      source: "lake-surface-zones",
+      paint: {
+        "fill-color": ["get", "color"],
+        "fill-opacity": ["get", "opacity"],
+      },
+    }, "wind-frame-extent-fill");
+    lakeMap.addLayer({
+      id: "lake-surface-line",
+      type: "line",
+      source: "lake-surface-zones",
+      paint: {
+        "line-color": "#ffffff",
+        "line-width": 1.2,
+        "line-opacity": 0.8,
+      },
+    }, "wind-frame-extent-fill");
     lakeMap.addSource("wind-vector", {
       type: "geojson",
       data: windVectorFeature(activeSpot, windFrames[windFrameIndex] || {}),
