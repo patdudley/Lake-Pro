@@ -329,9 +329,9 @@ function lakeGradientCenters(bounds, spot) {
   const defaultCenter = { x: bounds.minX + width * 0.5, y: bounds.minY + height * 0.5 };
   if (spot?.slug === "payette-lake") {
     return [
-      { x: bounds.minX + width * 0.36, y: bounds.minY + height * 0.68, radius: Math.max(width, height) * 0.36 },
-      { x: bounds.minX + width * 0.33, y: bounds.minY + height * 0.82, radius: Math.max(width, height) * 0.22 },
-      { x: bounds.minX + width * 0.63, y: bounds.minY + height * 0.34, radius: Math.max(width, height) * 0.32 },
+      { x: bounds.minX + width * 0.36, y: bounds.minY + height * 0.68, radius: Math.max(width, height) * 0.44 },
+      { x: bounds.minX + width * 0.33, y: bounds.minY + height * 0.82, radius: Math.max(width, height) * 0.3 },
+      { x: bounds.minX + width * 0.63, y: bounds.minY + height * 0.34, radius: Math.max(width, height) * 0.4 },
     ];
   }
   if (spot?.slug === "lake-tahoe") {
@@ -347,9 +347,9 @@ function lakeProtectionCenters(bounds, spot) {
   const width = bounds.maxX - bounds.minX;
   const height = bounds.maxY - bounds.minY;
   return [
-    { x: bounds.minX + width * 0.52, y: bounds.minY + height * 0.47, radius: Math.max(width, height) * 0.16, strength: 0.82 },
-    { x: bounds.minX + width * 0.72, y: bounds.minY + height * 0.62, radius: Math.max(width, height) * 0.23, strength: 0.68 },
-    { x: bounds.minX + width * 0.58, y: bounds.minY + height * 0.55, radius: Math.max(width, height) * 0.13, strength: 0.64 },
+    { x: bounds.minX + width * 0.52, y: bounds.minY + height * 0.47, radius: Math.max(width, height) * 0.24, strength: 0.3 },
+    { x: bounds.minX + width * 0.72, y: bounds.minY + height * 0.62, radius: Math.max(width, height) * 0.3, strength: 0.26 },
+    { x: bounds.minX + width * 0.58, y: bounds.minY + height * 0.55, radius: Math.max(width, height) * 0.21, strength: 0.23 },
   ];
 }
 
@@ -404,21 +404,33 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   context.clip("evenodd");
 
   const base = context.createLinearGradient(bounds.minX, bounds.minY, bounds.maxX, bounds.maxY);
-  base.addColorStop(0, "rgba(18, 202, 234, 0.96)");
-  base.addColorStop(0.5, "rgba(23, 149, 242, 0.94)");
-  base.addColorStop(1, "rgba(12, 89, 228, 0.9)");
+  base.addColorStop(0, "rgba(24, 157, 232, 0.96)");
+  base.addColorStop(0.52, "rgba(28, 116, 235, 0.94)");
+  base.addColorStop(1, "rgba(25, 90, 220, 0.9)");
   context.fillStyle = base;
   context.fillRect(bounds.minX, bounds.minY, width, height);
 
   if (exposure > 0.03) {
+    const windWash = context.createLinearGradient(
+      bounds.minX - Math.sin(radians) * width * 0.2,
+      bounds.minY + Math.cos(radians) * height * 0.2,
+      bounds.maxX + Math.sin(radians) * width * 0.2,
+      bounds.maxY - Math.cos(radians) * height * 0.2
+    );
+    windWash.addColorStop(0, `rgba(67, 87, 225, ${0.12 * exposure})`);
+    windWash.addColorStop(0.46, `rgba(116, 74, 225, ${0.28 * exposure})`);
+    windWash.addColorStop(1, `rgba(202, 42, 214, ${0.3 * exposure})`);
+    context.fillStyle = windWash;
+    context.fillRect(bounds.minX, bounds.minY, width, height);
+
     for (const center of centers) {
       const exposedX = center.x + Math.sin(radians) * width * fetchOffset;
       const exposedY = center.y - Math.cos(radians) * height * fetchOffset;
       const rough = context.createRadialGradient(exposedX, exposedY, center.radius * 0.08, exposedX, exposedY, center.radius);
-      rough.addColorStop(0, `rgba(242, 11, 198, ${0.98 * exposure})`);
-      rough.addColorStop(0.4, `rgba(218, 35, 224, ${0.88 * exposure})`);
-      rough.addColorStop(0.66, `rgba(83, 78, 235, ${0.48 * exposure})`);
-      rough.addColorStop(0.9, `rgba(18, 202, 234, ${0.08 * exposure})`);
+      rough.addColorStop(0, `rgba(242, 11, 198, ${0.62 * exposure})`);
+      rough.addColorStop(0.34, `rgba(211, 45, 220, ${0.52 * exposure})`);
+      rough.addColorStop(0.68, `rgba(88, 89, 231, ${0.32 * exposure})`);
+      rough.addColorStop(0.92, `rgba(26, 127, 238, ${0.08 * exposure})`);
       rough.addColorStop(1, "rgba(18, 202, 234, 0)");
       context.fillStyle = rough;
       context.fillRect(bounds.minX, bounds.minY, width, height);
@@ -426,10 +438,11 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
 
     for (const center of protectedCenters) {
       const calm = context.createRadialGradient(center.x, center.y, center.radius * 0.08, center.x, center.y, center.radius);
-      calm.addColorStop(0, `rgba(18, 202, 234, ${center.strength})`);
-      calm.addColorStop(0.42, `rgba(18, 202, 234, ${center.strength * 0.72})`);
-      calm.addColorStop(0.72, `rgba(25, 151, 242, ${center.strength * 0.32})`);
-      calm.addColorStop(1, "rgba(25, 151, 242, 0)");
+      const calmStrength = center.strength * (1 - exposure * 0.55);
+      calm.addColorStop(0, `rgba(31, 129, 232, ${calmStrength})`);
+      calm.addColorStop(0.5, `rgba(39, 106, 224, ${calmStrength * 0.5})`);
+      calm.addColorStop(0.84, `rgba(72, 93, 218, ${calmStrength * 0.18})`);
+      calm.addColorStop(1, "rgba(44, 105, 225, 0)");
       context.fillStyle = calm;
       context.fillRect(bounds.minX, bounds.minY, width, height);
     }
@@ -445,9 +458,9 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   );
   const payette = spot?.slug === "payette-lake";
   shoreGlow.addColorStop(0, "rgba(18, 202, 234, 0)");
-  shoreGlow.addColorStop(0.6, `rgba(18, 202, 234, ${payette ? 0.03 + exposure * 0.04 : 0.08 + exposure * 0.08})`);
-  shoreGlow.addColorStop(0.84, `rgba(18, 202, 234, ${payette ? 0.12 + exposure * 0.08 : 0.26 + exposure * 0.12})`);
-  shoreGlow.addColorStop(1, `rgba(18, 202, 234, ${payette ? 0.24 + exposure * 0.08 : 0.44 + exposure * 0.12})`);
+  shoreGlow.addColorStop(0.6, `rgba(31, 128, 232, ${payette ? 0.025 + exposure * 0.015 : 0.08 + exposure * 0.05})`);
+  shoreGlow.addColorStop(0.84, `rgba(29, 145, 232, ${payette ? 0.07 + exposure * 0.025 : 0.22 + exposure * 0.08})`);
+  shoreGlow.addColorStop(1, `rgba(31, 155, 232, ${payette ? 0.11 + exposure * 0.03 : 0.36 + exposure * 0.09})`);
   context.fillStyle = shoreGlow;
   context.fillRect(bounds.minX, bounds.minY, width, height);
 
