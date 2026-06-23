@@ -1,0 +1,39 @@
+{
+  "failures": [],
+  "generated_at": "2026-06-23T05:08:15.523127+00:00",
+  "map_layers": {
+    "bathymetry_contours": {
+      "features": 45,
+      "status": "ok",
+      "url": "https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/1/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson"
+    },
+    "no_wake_zone": {
+      "features": 2,
+      "status": "ok",
+      "url": "https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer/1/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson"
+    },
+    "shoreline_setback": {
+      "features": 3,
+      "status": "ok",
+      "url": "https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson"
+    }
+  },
+  "spots": [
+    {
+      "best_window": "Early morning",
+      "grade": "D",
+      "name": "Lake Tahoe",
+      "score": 49,
+      "slug": "lake-tahoe",
+      "wind_speed_max_mph": 14.1
+    },
+    {
+      "best_window": "Afternoon",
+      "grade": "B",
+      "name": "Payette Lake",
+      "score": 72,
+      "slug": "payette-lake",
+      "wind_speed_max_mph": 9.0
+    }
+  ]
+}

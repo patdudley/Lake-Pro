@@ -6,9 +6,9 @@ let currentSpot = null;
 let activeMapMode = "boating";
 
 const mapLayerUrls = {
-  payetteBathymetry: "https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/1/query?where=1%3D1&outFields=Contour&returnGeometry=true&outSR=4326&f=geojson",
-  payetteNoWake: "https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer/1/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
-  payetteSetback: "https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+  payetteBathymetry: "data/live/map_layers/payette_bathymetry_contours.geojson",
+  payetteNoWake: "data/live/map_layers/payette_no_wake_zone.geojson",
+  payetteSetback: "data/live/map_layers/payette_shoreline_setback.geojson",
 };
 
 const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
@@ -17,15 +17,26 @@ const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   summary: "Stubbed",
 }));
 
-function renderForecastStrip() {
+async function fetchJson(path) {
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) throw new Error(`${path} unavailable`);
+  return response.json();
+}
+
+function dayLabel(date, index) {
+  if (index === 0) return "Today";
+  return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { weekday: "short" });
+}
+
+function renderForecastStrip(days = placeholderForecast) {
   const strip = document.getElementById("forecastStrip");
-  strip.replaceChildren(...placeholderForecast.map((day) => {
+  strip.replaceChildren(...days.map((day, index) => {
     const card = document.createElement("article");
     card.className = "forecast-day";
     card.innerHTML = `
-      <span>${day.label}</span>
-      <strong>${day.grade}</strong>
-      <em>${day.summary}</em>
+      <span>${day.label || dayLabel(day.date, index)}</span>
+      <strong>${day.grade || "--"}</strong>
+      <em>${day.chop_proxy_ft != null ? `${day.chop_proxy_ft} ft chop proxy` : (day.summary || "Stubbed")}</em>
     `;
     return card;
   }));
@@ -81,6 +92,58 @@ function renderSpot(spot) {
   document.getElementById("spotLocation").textContent = spot.location;
   const cameraCard = document.getElementById("cameraCard");
   if (cameraCard) cameraCard.hidden = spot.slug !== "payette-lake";
+  loadLiveSpotData(spot);
+}
+
+function renderWindChart(hourly = {}) {
+  const chart = document.querySelector(".wind-placeholder");
+  if (!chart) return;
+  const times = hourly.time || [];
+  const speeds = hourly.wind_speed_10m || [];
+  const points = times.slice(0, 24).map((time, index) => ({ time, speed: speeds[index] || 0 }));
+  if (!points.length) {
+    chart.innerHTML = "<span>Wind pending</span>";
+    return;
+  }
+  const max = Math.max(12, ...points.map((point) => point.speed));
+  chart.innerHTML = `<div class="wind-bars">${points.map((point) => {
+    const height = Math.max(8, Math.round((point.speed / max) * 150));
+    const hour = point.time.slice(11, 13);
+    return `<i style="height:${height}px"><span>${Math.round(point.speed)}</span><em>${hour}</em></i>`;
+  }).join("")}</div>`;
+}
+
+function renderLiveSpotData(bundle) {
+  const latest = bundle.latest || {};
+  document.getElementById("conditionGrade").textContent = latest.grade || "--";
+  document.getElementById("conditionSummary").textContent = latest.chop_proxy_ft != null
+    ? `${latest.chop_proxy_ft} ft chop proxy`
+    : "Rating pending";
+  document.getElementById("windSpeed").textContent = latest.wind_speed_max_mph != null
+    ? `${Math.round(latest.wind_speed_max_mph)} mph ${latest.wind_direction_label || ""}`.trim()
+    : "Pending";
+  document.getElementById("bestWindow").textContent = latest.best_window || "Pending";
+  const fill = document.getElementById("scoreFill");
+  if (fill && latest.score != null) fill.style.width = `${Math.max(6, Math.min(100, latest.score))}%`;
+  const report = document.querySelector(".daily-report p");
+  if (report) report.textContent = latest.report || latest.summary || "Lake Pro data is pending.";
+  renderForecastStrip(bundle.ten_day || []);
+  renderWindChart(bundle.hourly || {});
+}
+
+async function loadLiveSpotData(spot) {
+  try {
+    const bundle = await fetchJson(`data/live/spots/${spot.slug}.json`);
+    renderLiveSpotData(bundle);
+  } catch (error) {
+    console.warn("[LakePro] Live spot data unavailable", error);
+    document.getElementById("conditionGrade").textContent = "--";
+    document.getElementById("conditionSummary").textContent = "Rating pending";
+    document.getElementById("windSpeed").textContent = "Stubbed";
+    document.getElementById("bestWindow").textContent = "Stubbed";
+    renderForecastStrip();
+    renderWindChart();
+  }
 }
 
 function boundsPolygon(bounds) {
@@ -285,5 +348,4 @@ const activeSpot = selectedSpot();
 renderMapModeControls();
 renderSpotSwitcher(activeSpot);
 renderSpot(activeSpot);
-renderForecastStrip();
 initMap(activeSpot);

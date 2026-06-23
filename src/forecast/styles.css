@@ -408,7 +408,7 @@ h2 {
   display: grid;
   min-height: 210px;
   margin-top: 16px;
-  place-items: center;
+  align-items: end;
   border: 1px dashed var(--line);
   border-radius: 8px;
   background:
@@ -417,6 +417,44 @@ h2 {
   color: var(--muted);
   font-weight: 900;
   text-align: center;
+}
+
+.wind-bars {
+  display: grid;
+  grid-template-columns: repeat(24, minmax(12px, 1fr));
+  align-items: end;
+  gap: 6px;
+  width: 100%;
+  min-height: 190px;
+  padding: 16px;
+}
+
+.wind-bars i {
+  position: relative;
+  display: block;
+  min-height: 8px;
+  border-radius: 6px 6px 2px 2px;
+  background: var(--grad);
+}
+
+.wind-bars span,
+.wind-bars em {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  color: var(--text);
+  font-size: 0.62rem;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.wind-bars span {
+  top: -18px;
+}
+
+.wind-bars em {
+  bottom: -18px;
+  color: var(--muted);
 }
 
 .rating-grid {
