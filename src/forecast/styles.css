@@ -91,9 +91,13 @@ body {
 
 .timelapse-control {
   display: grid;
-  grid-template-columns: auto auto minmax(220px, 1fr) auto minmax(160px, auto);
+  grid-template-columns: auto minmax(220px, 1fr) auto minmax(160px, auto);
   margin-top: 0;
   align-items: center;
+}
+
+.timelapse-control.has-back {
+  grid-template-columns: auto auto minmax(220px, 1fr) auto minmax(160px, auto);
 }
 
 .timelapse-control button {
@@ -637,8 +641,12 @@ h2 {
   }
 
   .timelapse-control {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+  }
+
+  .timelapse-control.has-back {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .timelapse-control input,
@@ -652,6 +660,11 @@ h2 {
   }
 
   #windForwardButton {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .timelapse-control.has-back #windForwardButton {
     grid-column: 3;
     grid-row: 1;
   }

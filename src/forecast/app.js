@@ -209,6 +209,16 @@ function formatFrameTime(time) {
   });
 }
 
+function frameDateKey(time) {
+  if (!time) return "";
+  const date = new Date(time);
+  if (Number.isNaN(date.getTime())) return "";
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function ensureWindMarker() {
   if (!lakeMap || windMarker) return;
   const element = document.createElement("div");
@@ -554,7 +564,14 @@ function renderWindFrame(index = windFrameIndex) {
     slider.max = String(Math.max(0, windFrames.length - 1));
     slider.value = String(windFrameIndex);
   }
-  if (backButton) backButton.disabled = windFrameIndex <= 0 || windFrames.length < 2;
+  if (backButton) {
+    const currentDay = frameDateKey(windFrames[0]?.time);
+    const selectedDay = frameDateKey(frame?.time);
+    const isFutureDay = Boolean(currentDay && selectedDay && selectedDay !== currentDay);
+    backButton.closest(".timelapse-control")?.classList.toggle("has-back", isFutureDay);
+    backButton.hidden = !isFutureDay;
+    backButton.disabled = !isFutureDay || windFrames.length < 2;
+  }
   if (forwardButton) forwardButton.disabled = windFrameIndex >= windFrames.length - 1 || windFrames.length < 2;
 
   if (!frame || !currentSpot) {
