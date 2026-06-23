@@ -665,8 +665,6 @@ function setLayerVisibility(ids, visible) {
 
 function setPayetteBoatingLayerVisibility(visible) {
   setLayerVisibility(["bathymetry-contours", "payette-no-wake-fill", "payette-no-wake-line", "payette-setback-line"], visible);
-  const legend = document.getElementById("mapLegend");
-  if (legend) legend.hidden = false;
 }
 
 async function addPayetteBoatingLayers() {

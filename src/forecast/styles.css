@@ -40,7 +40,6 @@ body {
 .verdict-location,
 .verdict-meta,
 .spot-switcher,
-.map-legend,
 .timelapse-control {
   display: flex;
   align-items: center;
@@ -262,46 +261,6 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
-}
-
-.map-legend {
-  justify-content: flex-start;
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 850;
-}
-
-.map-legend[hidden] {
-  display: none;
-}
-
-.map-legend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.map-legend i {
-  width: 18px;
-  height: 8px;
-  border-radius: 999px;
-}
-
-.legend-blue {
-  background: var(--cyan);
-}
-
-.legend-pink {
-  background: var(--magenta);
-}
-
-.legend-grey {
-  background: #8c95a3;
-}
-
-.legend-red {
-  background: #ef233c;
 }
 
 .stub-note {
@@ -654,7 +613,6 @@ h2 {
     flex-direction: column;
   }
 
-  .map-legend,
   .timelapse-control {
     flex-wrap: wrap;
     justify-content: flex-start;
