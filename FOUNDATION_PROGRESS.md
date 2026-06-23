@@ -1,0 +1,1 @@
+Phase 1 done: confirmed standalone Lake Pro repo remote (git@github.com:patdudley/Lake-Pro.git), baseline contains README.md only; app code is not seeded yet, so preview is not available until a shell exists.
