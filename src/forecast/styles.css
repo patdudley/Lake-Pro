@@ -40,10 +40,23 @@ body {
 }
 
 .brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--text);
   font-size: 1.2rem;
   font-weight: 900;
   text-decoration: none;
+}
+
+.brand-link img {
+  width: 112px;
+  max-height: 36px;
+  object-fit: contain;
+}
+
+.brand-link span {
+  line-height: 1;
 }
 
 .build-pill,
