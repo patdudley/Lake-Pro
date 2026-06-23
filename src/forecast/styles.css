@@ -95,6 +95,7 @@ body::after {
 
 .map-panel,
 .report-card,
+.camera-card,
 .ten-day-card,
 .wind-card,
 .rating-card {
@@ -106,6 +107,7 @@ body::after {
 
 .map-panel,
 .report-card,
+.camera-card,
 .ten-day-card,
 .wind-card,
 .rating-card {
@@ -144,6 +146,31 @@ h2 {
 .daily-report p {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.camera-card[hidden] {
+  display: none;
+}
+
+.camera-card .section-heading a {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 8px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.camera-card img {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 #mapStatus {

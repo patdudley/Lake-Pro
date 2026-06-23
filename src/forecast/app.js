@@ -52,6 +52,8 @@ function renderSpot(spot) {
   currentSpot = spot;
   document.getElementById("spotName").textContent = spot.name;
   document.getElementById("spotLocation").textContent = spot.location;
+  const cameraCard = document.getElementById("cameraCard");
+  if (cameraCard) cameraCard.hidden = spot.slug !== "payette-lake";
 }
 
 function boundsPolygon(bounds) {
