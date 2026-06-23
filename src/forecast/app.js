@@ -43,15 +43,17 @@ function dayLabel(date, index) {
   return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { weekday: "short" });
 }
 
-function weatherIconClass(code) {
-  if (code == null) return "weather-cloud";
-  const value = Number(code);
-  if (value === 0) return "weather-sun";
-  if (value === 1 || value === 2) return "weather-partly";
+function weatherIconClass(day = {}) {
+  const value = Number(day.weather_code);
+  const precip = Number(day.precipitation_probability_max ?? 0);
+  const high = Number(day.temperature_2m_max ?? 0);
+
+  if ((value >= 95) || precip >= 75) return "weather-storm";
+  if ((value >= 71 && value <= 77) || value === 85 || value === 86) return "weather-snow";
+  if ((value >= 51 && value <= 67) || (value >= 80 && value <= 82) || precip >= 45) return "weather-rain";
+  if (value === 0 || (precip <= 10 && high >= 70)) return "weather-sun";
+  if (value === 1 || value === 2 || (value === 3 && precip < 25)) return "weather-partly";
   if (value === 3 || value === 45 || value === 48) return "weather-cloud";
-  if ((value >= 51 && value <= 67) || (value >= 80 && value <= 82)) return "weather-rain";
-  if (value >= 71 && value <= 77) return "weather-snow";
-  if (value >= 95) return "weather-storm";
   return "weather-cloud";
 }
 
@@ -75,7 +77,7 @@ function renderForecastStrip(days = placeholderForecast) {
     card.className = "forecast-day";
     card.innerHTML = `
       <span>${day.label || dayLabel(day.date, index)}</span>
-      <i class="weather-icon ${weatherIconClass(day.weather_code)}" aria-hidden="true"></i>
+      <i class="weather-icon ${weatherIconClass(day)}" aria-hidden="true"></i>
       ${temperatureRange(day)}
       <strong>${day.grade || "--"}</strong>
       <em>${forecastDetail(day)}</em>
