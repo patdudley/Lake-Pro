@@ -70,16 +70,21 @@ function temperatureRange(day) {
   return `<span class="forecast-temps">${Math.round(day.temperature_2m_max)}&deg; <small>${Math.round(day.temperature_2m_min)}&deg;</small></span>`;
 }
 
+function gradeValue(grade) {
+  return ["A", "B", "C", "D", "E", "F"].includes(grade) ? grade : "";
+}
+
 function renderForecastStrip(days = placeholderForecast) {
   const strip = document.getElementById("forecastStrip");
   strip.replaceChildren(...days.map((day, index) => {
     const card = document.createElement("article");
     card.className = "forecast-day";
+    const grade = gradeValue(day.grade);
     card.innerHTML = `
       <span>${day.label || dayLabel(day.date, index)}</span>
       <i class="weather-icon ${weatherIconClass(day)}" aria-hidden="true"></i>
       ${temperatureRange(day)}
-      <strong>${day.grade || "--"}</strong>
+      <strong class="grade-letter" data-grade="${grade}">${day.grade || "--"}</strong>
       <em>${forecastDetail(day)}</em>
     `;
     return card;
@@ -161,7 +166,9 @@ function renderWindChart(hourly = {}) {
 
 function renderLiveSpotData(bundle) {
   const latest = bundle.latest || {};
-  document.getElementById("conditionGrade").textContent = latest.grade || "--";
+  const grade = document.getElementById("conditionGrade");
+  grade.textContent = latest.grade || "--";
+  grade.dataset.grade = gradeValue(latest.grade);
   document.getElementById("conditionSummary").textContent = latest.chop_proxy_ft != null
     ? `${latest.chop_proxy_ft} ft chop proxy`
     : "Rating pending";
@@ -183,7 +190,9 @@ async function loadLiveSpotData(spot) {
     renderLiveSpotData(bundle);
   } catch (error) {
     console.warn("[LakePro] Live spot data unavailable", error);
-    document.getElementById("conditionGrade").textContent = "--";
+    const grade = document.getElementById("conditionGrade");
+    grade.textContent = "--";
+    grade.dataset.grade = "";
     document.getElementById("conditionSummary").textContent = "Rating pending";
     document.getElementById("windSpeed").textContent = "Stubbed";
     document.getElementById("bestWindow").textContent = "Stubbed";

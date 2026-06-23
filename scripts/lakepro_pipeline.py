@@ -116,13 +116,31 @@ def crowding_penalty(day: date) -> int:
 
 
 def grade_from_score(score: int) -> str:
-    if score >= 82:
+    if score >= 85:
         return "A"
-    if score >= 68:
+    if score >= 72:
         return "B"
-    if score >= 50:
+    if score >= 60:
         return "C"
-    return "D"
+    if score >= 48:
+        return "D"
+    if score >= 35:
+        return "E"
+    return "F"
+
+
+def top_score_for_grade(grade: str) -> int:
+    if grade == "A":
+        return 100
+    if grade == "B":
+        return 84
+    if grade == "C":
+        return 71
+    if grade == "D":
+        return 59
+    if grade == "E":
+        return 47
+    return 34
 
 
 def chop_proxy_ft(wind_mph: float | None, gust_mph: float | None) -> float | None:
@@ -293,14 +311,14 @@ def build_forecast(spot: Spot) -> dict:
         grade_caps = []
 
         if temp_max is not None and float(temp_max) < 70:
-            score = cap_score(score, 81)
+            score = cap_score(score, top_score_for_grade("B"))
             grade_caps.append("temperature_high_below_70")
 
         rainy_day = (precip is not None and float(precip) >= 55) or is_rainy_weather_code(weather_code)
         window_stays_dry = window["max_precip_probability"] is not None and float(window["max_precip_probability"]) <= 25
         warms_up = temp_max is not None and float(temp_max) >= 70
         if rainy_day and not (window_stays_dry and warms_up):
-            score = cap_score(score, 81)
+            score = cap_score(score, top_score_for_grade("B"))
             grade_caps.append("rainy_day_best_case_b")
 
         days.append(

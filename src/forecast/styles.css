@@ -388,10 +388,6 @@ h2 {
 }
 
 .verdict-main > strong {
-  background: linear-gradient(180deg, var(--blue), #0a2a8c);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
   font-size: 5.8rem;
   line-height: 0.9;
 }
@@ -556,14 +552,39 @@ h2 {
   font-size: 0.88rem;
 }
 
+.grade-letter,
 .forecast-day strong {
   display: block;
-  background: linear-gradient(180deg, var(--blue), #0877ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--grade-color, var(--blue));
+}
+
+.forecast-day strong {
   font-size: 2.6rem;
   line-height: 1.1;
+}
+
+.grade-letter[data-grade="A"] {
+  --grade-color: #11bce9;
+}
+
+.grade-letter[data-grade="B"] {
+  --grade-color: #0b8cff;
+}
+
+.grade-letter[data-grade="C"] {
+  --grade-color: #0b58ff;
+}
+
+.grade-letter[data-grade="D"] {
+  --grade-color: #7448f0;
+}
+
+.grade-letter[data-grade="E"] {
+  --grade-color: #b72ee4;
+}
+
+.grade-letter[data-grade="F"] {
+  --grade-color: #f20bc6;
 }
 
 .forecast-day em {
@@ -628,7 +649,7 @@ h2 {
 
 .rating-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
   margin-top: 12px;
 }
@@ -643,20 +664,8 @@ h2 {
 
 .rating-grid strong {
   display: block;
-  background: linear-gradient(180deg, var(--blue), #0877ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
   font-size: 2rem;
   line-height: 1;
-}
-
-.rating-grid div:nth-child(3) strong,
-.rating-grid div:nth-child(4) strong {
-  background: linear-gradient(180deg, var(--magenta), #be0bd8);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .rating-grid span {
