@@ -56,96 +56,96 @@
     },
     {
       "time": "2026-06-23T09:00",
-      "wind_direction_deg": 326,
-      "wind_direction_label": "NW",
-      "wind_speed_mph": 1.6
+      "wind_direction_deg": 357,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 3.8
     },
     {
       "time": "2026-06-23T10:00",
-      "wind_direction_deg": 63,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 2.5
+      "wind_direction_deg": 43,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 5.5
     },
     {
       "time": "2026-06-23T11:00",
-      "wind_direction_deg": 36,
-      "wind_direction_label": "NE",
-      "wind_speed_mph": 3.0
+      "wind_direction_deg": 360,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 3.8
     },
     {
       "time": "2026-06-23T12:00",
-      "wind_direction_deg": 52,
+      "wind_direction_deg": 36,
       "wind_direction_label": "NE",
-      "wind_speed_mph": 7.3
+      "wind_speed_mph": 5.0
     },
     {
       "time": "2026-06-23T13:00",
-      "wind_direction_deg": 358,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 6.5
+      "wind_direction_deg": 25,
+      "wind_direction_label": "NNE",
+      "wind_speed_mph": 9.1
     },
     {
       "time": "2026-06-23T14:00",
-      "wind_direction_deg": 320,
+      "wind_direction_deg": 312,
       "wind_direction_label": "NW",
-      "wind_speed_mph": 9.7
+      "wind_speed_mph": 10.0
     },
     {
       "time": "2026-06-23T15:00",
-      "wind_direction_deg": 273,
+      "wind_direction_deg": 272,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 14.5
+    },
+    {
+      "time": "2026-06-23T16:00",
+      "wind_direction_deg": 265,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 16.6
+    },
+    {
+      "time": "2026-06-23T17:00",
+      "wind_direction_deg": 270,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 16.1
+    },
+    {
+      "time": "2026-06-23T18:00",
+      "wind_direction_deg": 274,
       "wind_direction_label": "W",
       "wind_speed_mph": 14.1
     },
     {
-      "time": "2026-06-23T16:00",
-      "wind_direction_deg": 260,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 17.0
-    },
-    {
-      "time": "2026-06-23T17:00",
-      "wind_direction_deg": 265,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 15.7
-    },
-    {
-      "time": "2026-06-23T18:00",
-      "wind_direction_deg": 268,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 13.9
-    },
-    {
       "time": "2026-06-23T19:00",
-      "wind_direction_deg": 274,
+      "wind_direction_deg": 278,
       "wind_direction_label": "W",
-      "wind_speed_mph": 10.8
+      "wind_speed_mph": 10.9
     },
     {
       "time": "2026-06-23T20:00",
-      "wind_direction_deg": 278,
+      "wind_direction_deg": 281,
       "wind_direction_label": "W",
-      "wind_speed_mph": 7.7
+      "wind_speed_mph": 6.8
     },
     {
       "time": "2026-06-23T21:00",
-      "wind_direction_deg": 297,
-      "wind_direction_label": "WNW",
-      "wind_speed_mph": 3.5
+      "wind_direction_deg": 305,
+      "wind_direction_label": "NW",
+      "wind_speed_mph": 2.7
     },
     {
       "time": "2026-06-23T22:00",
-      "wind_direction_deg": 321,
-      "wind_direction_label": "NW",
-      "wind_speed_mph": 6.4
+      "wind_direction_deg": 45,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.5
     },
     {
       "time": "2026-06-23T23:00",
-      "wind_direction_deg": 60,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 6.7
+      "wind_direction_deg": 50,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 5.9
     }
   ],
-  "generated_at": "2026-06-23T17:01:30.977765+00:00",
+  "generated_at": "2026-06-23T18:56:35.489652+00:00",
   "note": "Regional wind-frame scaffold uses live Open-Meteo point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-tahoe",
   "status": "live_weather_stub_grid"

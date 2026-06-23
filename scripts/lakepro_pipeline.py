@@ -153,6 +153,7 @@ def best_boating_window_for_day(hourly: dict, day_str: str) -> dict:
     times = hourly.get("time", [])
     winds = hourly.get("wind_speed_10m", [])
     gusts = hourly.get("wind_gusts_10m", [])
+    precipitation = hourly.get("precipitation_probability", [])
     candidates = []
 
     for start in range(0, max(0, len(times) - 2)):
@@ -165,29 +166,44 @@ def best_boating_window_for_day(hourly: dict, day_str: str) -> dict:
 
         wind_chunk = [float(value) for value in winds[start : start + 3] if value is not None]
         gust_chunk = [float(value) for value in gusts[start : start + 3] if value is not None]
+        precip_chunk = [float(value) for value in precipitation[start : start + 3] if value is not None]
         if len(wind_chunk) < 3:
             continue
         avg_wind = sum(wind_chunk) / len(wind_chunk)
         avg_gust = sum(gust_chunk) / len(gust_chunk) if gust_chunk else avg_wind
+        max_precip = max(precip_chunk) if precip_chunk else None
         candidates.append(
             {
                 "start_hour": hour,
                 "avg_wind_mph": round(avg_wind, 1),
                 "avg_gust_mph": round(avg_gust, 1),
-                "score_value": avg_wind + max(0.0, avg_gust - 12.0) * 0.35,
+                "max_precip_probability": max_precip,
+                "score_value": avg_wind + max(0.0, avg_gust - 12.0) * 0.35 + max(0.0, (max_precip or 0) - 35) * 0.04,
             }
         )
 
     if not candidates:
-        return {"label": "Pending", "avg_wind_mph": None, "avg_gust_mph": None}
+        return {"label": "Pending", "avg_wind_mph": None, "avg_gust_mph": None, "max_precip_probability": None}
 
     best = min(candidates, key=lambda item: item["score_value"])
     return {
         "label": window_label(best["start_hour"]),
         "avg_wind_mph": best["avg_wind_mph"],
         "avg_gust_mph": best["avg_gust_mph"],
+        "max_precip_probability": best["max_precip_probability"],
         "start_hour": best["start_hour"],
     }
+
+
+def is_rainy_weather_code(code: int | float | None) -> bool:
+    if code is None:
+        return False
+    value = int(code)
+    return 51 <= value <= 67 or 80 <= value <= 82 or value >= 95
+
+
+def cap_score(score: int, cap: int) -> int:
+    return min(score, cap)
 
 
 def best_window(hourly: dict) -> str:
@@ -274,6 +290,18 @@ def build_forecast(spot: Spot) -> dict:
             score -= max(0, int(round((float(precip) - 45) * 0.2)))
         score -= crowding_penalty(day)
         score = max(0, min(100, score))
+        grade_caps = []
+
+        if temp_max is not None and float(temp_max) < 70:
+            score = cap_score(score, 81)
+            grade_caps.append("temperature_high_below_70")
+
+        rainy_day = (precip is not None and float(precip) >= 55) or is_rainy_weather_code(weather_code)
+        window_stays_dry = window["max_precip_probability"] is not None and float(window["max_precip_probability"]) <= 25
+        warms_up = temp_max is not None and float(temp_max) >= 70
+        if rainy_day and not (window_stays_dry and warms_up):
+            score = cap_score(score, 81)
+            grade_caps.append("rainy_day_best_case_b")
 
         days.append(
             {
@@ -292,6 +320,8 @@ def build_forecast(spot: Spot) -> dict:
                 "best_window": window["label"],
                 "best_window_wind_mph": window["avg_wind_mph"],
                 "best_window_gust_mph": window["avg_gust_mph"],
+                "best_window_precipitation_probability_max": window["max_precip_probability"],
+                "grade_caps": grade_caps,
                 "crowding_penalty": crowding_penalty(day),
                 "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
             }
@@ -354,16 +384,26 @@ def refresh_map_layers() -> dict:
     }
     for name, base in PAYETTE_LAYER_URLS.items():
         url = build_url(base, common_params)
+        output_path = MAP_LAYERS_DIR / f"payette_{name}.geojson"
         try:
             payload = fetch_json(url)
             if name == "bathymetry_contours":
                 payload = slim_geojson(payload, {"Contour"})
             else:
                 payload = slim_geojson(payload, {"Label", "Notes"})
-            write_json(MAP_LAYERS_DIR / f"payette_{name}.geojson", payload)
+            write_json(output_path, payload)
             results[name] = {"status": "ok", "features": len(payload.get("features", [])), "url": url}
         except Exception as exc:
-            results[name] = {"status": "failed", "error": str(exc), "url": url}
+            if output_path.exists():
+                cached = json.loads(output_path.read_text())
+                results[name] = {
+                    "status": "cached",
+                    "features": len(cached.get("features", [])),
+                    "error": str(exc),
+                    "url": url,
+                }
+            else:
+                results[name] = {"status": "failed", "error": str(exc), "url": url}
     return results
 
 
