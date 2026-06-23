@@ -193,14 +193,6 @@ body {
   padding: 22px;
 }
 
-.eyebrow {
-  margin: 0 0 6px;
-  color: var(--blue);
-  font-size: 0.78rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
 h1,
 h2,
 p {
