@@ -351,6 +351,24 @@ function polygonBounds(polygons) {
   return bounds;
 }
 
+function lakeGradientCenters(bounds, spot) {
+  const width = bounds.maxX - bounds.minX;
+  const height = bounds.maxY - bounds.minY;
+  const defaultCenter = { x: bounds.minX + width * 0.5, y: bounds.minY + height * 0.5 };
+  if (spot?.slug === "payette-lake") {
+    return [
+      { x: bounds.minX + width * 0.44, y: bounds.minY + height * 0.56, radius: Math.max(width, height) * 0.44 },
+      { x: bounds.minX + width * 0.62, y: bounds.minY + height * 0.34, radius: Math.max(width, height) * 0.34 },
+    ];
+  }
+  if (spot?.slug === "lake-tahoe") {
+    return [
+      { x: bounds.minX + width * 0.52, y: bounds.minY + height * 0.5, radius: Math.max(width, height) * 0.43 },
+    ];
+  }
+  return [{ ...defaultCenter, radius: Math.max(width, height) * 0.44 }];
+}
+
 function pointInRing(point, ring) {
   let inside = false;
   for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
@@ -386,34 +404,56 @@ function randomLakePoint(bounds, polygons) {
   };
 }
 
-function drawLakeGradient(context, polygons, bounds, speed) {
+function drawLakeGradient(context, polygons, bounds, frame, spot) {
   const width = bounds.maxX - bounds.minX;
   const height = bounds.maxY - bounds.minY;
-  const centerX = bounds.minX + width * 0.52;
-  const centerY = bounds.minY + height * 0.52;
-  const radius = Math.max(width, height) * 0.58;
+  const speed = Number(frame?.wind_speed_mph || 0);
+  const exposure = Math.max(0, Math.min(1, (speed - 2.5) / 7.5));
+  const bearing = flowBearing(frame);
+  const radians = bearing * Math.PI / 180;
+  const fetchOffset = Math.min(0.18, speed * 0.012);
+  const centers = lakeGradientCenters(bounds, spot);
 
   context.save();
   tracePolygonPath(context, polygons);
   context.clip("evenodd");
 
   const base = context.createLinearGradient(bounds.minX, bounds.minY, bounds.maxX, bounds.maxY);
-  base.addColorStop(0, "rgba(17, 188, 233, 0.92)");
-  base.addColorStop(0.45, "rgba(23, 156, 238, 0.9)");
-  base.addColorStop(1, "rgba(13, 99, 255, 0.84)");
+  base.addColorStop(0, "rgba(18, 202, 234, 0.96)");
+  base.addColorStop(0.5, "rgba(23, 149, 242, 0.94)");
+  base.addColorStop(1, "rgba(12, 89, 228, 0.9)");
   context.fillStyle = base;
   context.fillRect(bounds.minX, bounds.minY, width, height);
 
-  const exposure = Math.max(0, Math.min(0.92, (speed - 4) / 12));
-  if (exposure > 0.02) {
-    const rough = context.createRadialGradient(centerX, centerY, radius * 0.08, centerX, centerY, radius);
-    rough.addColorStop(0, `rgba(242, 11, 198, ${0.82 * exposure})`);
-    rough.addColorStop(0.46, `rgba(242, 11, 198, ${0.58 * exposure})`);
-    rough.addColorStop(0.78, `rgba(11, 88, 255, ${0.16 * exposure})`);
-    rough.addColorStop(1, "rgba(17, 188, 233, 0)");
-    context.fillStyle = rough;
-    context.fillRect(bounds.minX, bounds.minY, width, height);
+  if (exposure > 0.03) {
+    for (const center of centers) {
+      const exposedX = center.x + Math.sin(radians) * width * fetchOffset;
+      const exposedY = center.y - Math.cos(radians) * height * fetchOffset;
+      const rough = context.createRadialGradient(exposedX, exposedY, center.radius * 0.08, exposedX, exposedY, center.radius);
+      rough.addColorStop(0, `rgba(242, 11, 198, ${0.98 * exposure})`);
+      rough.addColorStop(0.36, `rgba(218, 35, 224, ${0.82 * exposure})`);
+      rough.addColorStop(0.6, `rgba(83, 78, 235, ${0.48 * exposure})`);
+      rough.addColorStop(0.84, `rgba(18, 202, 234, ${0.12 * exposure})`);
+      rough.addColorStop(1, "rgba(18, 202, 234, 0)");
+      context.fillStyle = rough;
+      context.fillRect(bounds.minX, bounds.minY, width, height);
+    }
   }
+
+  const shoreGlow = context.createRadialGradient(
+    bounds.minX + width * 0.5,
+    bounds.minY + height * 0.5,
+    Math.max(width, height) * 0.24,
+    bounds.minX + width * 0.5,
+    bounds.minY + height * 0.5,
+    Math.max(width, height) * 0.76
+  );
+  shoreGlow.addColorStop(0, "rgba(18, 202, 234, 0)");
+  shoreGlow.addColorStop(0.54, `rgba(18, 202, 234, ${0.16 + exposure * 0.18})`);
+  shoreGlow.addColorStop(0.78, `rgba(18, 202, 234, ${0.46 + exposure * 0.3})`);
+  shoreGlow.addColorStop(1, `rgba(18, 202, 234, ${0.72 + exposure * 0.18})`);
+  context.fillStyle = shoreGlow;
+  context.fillRect(bounds.minX, bounds.minY, width, height);
 
   context.lineWidth = 1.4 * (window.devicePixelRatio || 1);
   context.strokeStyle = "rgba(255, 255, 255, 0.82)";
@@ -480,8 +520,7 @@ function drawLakeSurfaceOverlay(timestamp = performance.now()) {
   if (!Number.isFinite(bounds.minX) || bounds.maxX <= bounds.minX || bounds.maxY <= bounds.minY) return;
 
   const frame = windFrames[windFrameIndex] || {};
-  const speed = Number(frame.wind_speed_mph || 0);
-  drawLakeGradient(context, polygons, bounds, speed);
+  drawLakeGradient(context, polygons, bounds, frame, currentSpot);
   drawLakeParticles(context, polygons, bounds, frame, dpr, timestamp);
   lastParticleFrame = timestamp;
 }
