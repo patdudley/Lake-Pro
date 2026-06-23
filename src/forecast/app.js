@@ -71,7 +71,7 @@ function temperatureRange(day) {
 }
 
 function gradeValue(grade) {
-  return ["A", "B", "C", "D", "E", "F"].includes(grade) ? grade : "";
+  return ["A", "B", "C", "D", "F"].includes(grade) ? grade : "";
 }
 
 function renderForecastStrip(days = placeholderForecast) {
@@ -692,7 +692,7 @@ function updateMapNote(spot) {
     note.textContent = windFrame
       ? `${windFrame.pipeline} slot active for ${spot.name}: ${windFrame.note}`
       : "Cropped-wind frame pipeline slot: no wind frame configured.";
-    if (sources) sources.textContent = "Wind time-lapse uses generated Open-Meteo hourly wind frames.";
+    if (sources) sources.textContent = "Wind time-lapse uses generated National Weather Service hourly wind frames.";
     return;
   }
 
@@ -703,7 +703,7 @@ function updateMapNote(spot) {
     }
   } else {
     note.textContent = "Boating Areas mode: lake surface is colored from the selected wind hour. Low wind stays mostly blue; breezier hours turn the exposed middle pink while edges stay blue. Tahoe depth and verified danger layers still need sources.";
-    if (sources) sources.textContent = "Tahoe boating-area source layers are pending. Wind time-lapse uses generated Open-Meteo hourly wind frames.";
+    if (sources) sources.textContent = "Tahoe boating-area source layers are pending. Wind time-lapse uses generated National Weather Service hourly wind frames.";
   }
 }
 

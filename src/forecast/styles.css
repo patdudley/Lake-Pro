@@ -586,10 +586,6 @@ h2 {
   --grade-color: #7448f0;
 }
 
-.grade-letter[data-grade="E"] {
-  --grade-color: #b72ee4;
-}
-
 .grade-letter[data-grade="F"] {
   --grade-color: #f20bc6;
 }
@@ -656,7 +652,7 @@ h2 {
 
 .rating-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
   margin-top: 12px;
 }

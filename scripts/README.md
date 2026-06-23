@@ -27,7 +27,7 @@ launchctl start com.lakepro.refresh-data
 
 Notes:
 
-- Weather data comes from Open-Meteo.
+- Weather data comes from the National Weather Service API.
 - Payette depth/no-wake layers come from McCall GIS and Valley County GIS.
 - Chop height is currently a wind-based proxy, not a measured value.
 - Wind-shadow scoring, danger restrictions, and final boating-area grading still need approved model rules and verified hazard polygons.

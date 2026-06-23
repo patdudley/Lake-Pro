@@ -2,7 +2,7 @@
 """Build Lake Pro live data artifacts.
 
 This pipeline intentionally separates fetched facts from model placeholders:
-- Weather/wind data comes from Open-Meteo forecast API.
+- Weather/wind data comes from the National Weather Service API.
 - Payette ordinance and bathymetry layers are cached from public ArcGIS services.
 - Boating ratings are simple placeholders until the wind-shadow/depth/crowding
   model is reviewed and approved.
@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -101,6 +102,63 @@ def wind_direction_label(degrees: float | None) -> str:
     return labels[round(float(degrees) / 22.5) % 16]
 
 
+def wind_direction_degrees(label: str | None) -> int | None:
+    if not label:
+        return None
+    labels = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+    value = label.strip().upper()
+    if value not in labels:
+        return None
+    return labels.index(value) * 22
+
+
+def parse_wind_mph(value: str | None) -> float | None:
+    if not value:
+        return None
+    numbers = [float(item) for item in re.findall(r"\d+(?:\.\d+)?", value)]
+    return max(numbers) if numbers else None
+
+
+def precip_value(period: dict) -> float:
+    value = (period.get("probabilityOfPrecipitation") or {}).get("value")
+    return float(value or 0)
+
+
+def nws_weather_code(short_forecast: str, precip: float) -> int:
+    text = (short_forecast or "").lower()
+    if "thunder" in text:
+        return 95
+    if "snow" in text:
+        return 75
+    if "rain" in text or "shower" in text:
+        return 80
+    if precip >= 55:
+        return 80
+    if "sunny" in text and "partly" not in text and "mostly" not in text:
+        return 0
+    if "partly" in text or "mostly sunny" in text:
+        return 2
+    if "cloud" in text or "overcast" in text:
+        return 3
+    return 1
+
+
+def fetch_nws_forecast(spot: Spot) -> dict:
+    points_url = f"https://api.weather.gov/points/{spot.latitude},{spot.longitude}"
+    points = fetch_json(points_url)
+    forecast_url = points["properties"]["forecast"]
+    hourly_url = points["properties"]["forecastHourly"]
+    forecast = fetch_json(forecast_url)
+    hourly = fetch_json(hourly_url)
+    return {
+        "points_url": points_url,
+        "forecast_url": forecast_url,
+        "hourly_url": hourly_url,
+        "forecast": forecast,
+        "hourly": hourly,
+    }
+
+
 def crowding_penalty(day: date) -> int:
     summer = day.month in {6, 7, 8}
     weekend = day.weekday() >= 5
@@ -124,8 +182,6 @@ def grade_from_score(score: int) -> str:
         return "C"
     if score >= 48:
         return "D"
-    if score >= 35:
-        return "E"
     return "F"
 
 
@@ -138,9 +194,7 @@ def top_score_for_grade(grade: str) -> int:
         return 71
     if grade == "D":
         return 59
-    if grade == "E":
-        return 47
-    return 34
+    return 47
 
 
 def chop_proxy_ft(wind_mph: float | None, gust_mph: float | None) -> float | None:
@@ -249,49 +303,54 @@ def best_window(hourly: dict) -> str:
 
 
 def build_forecast(spot: Spot) -> dict:
-    hourly_fields = [
-        "wind_speed_10m",
-        "wind_direction_10m",
-        "wind_gusts_10m",
-        "temperature_2m",
-        "precipitation_probability",
-    ]
-    daily_fields = [
-        "weather_code",
-        "temperature_2m_max",
-        "temperature_2m_min",
-        "wind_speed_10m_max",
-        "wind_gusts_10m_max",
-        "wind_direction_10m_dominant",
-        "precipitation_probability_max",
-    ]
-    url = build_url(
-        "https://api.open-meteo.com/v1/forecast",
-        {
-            "latitude": spot.latitude,
-            "longitude": spot.longitude,
-            "hourly": ",".join(hourly_fields),
-            "daily": ",".join(daily_fields),
-            "wind_speed_unit": "mph",
-            "temperature_unit": "fahrenheit",
-            "timezone": TIMEZONE,
-            "forecast_days": 10,
-        },
-    )
-    raw = fetch_json(url)
-    daily = raw.get("daily", {})
-    hourly = raw.get("hourly", {})
+    nws = fetch_nws_forecast(spot)
+    hourly_periods = nws["hourly"].get("properties", {}).get("periods", [])
+    hourly = {
+        "time": [],
+        "wind_speed_10m": [],
+        "wind_direction_10m": [],
+        "wind_gusts_10m": [],
+        "temperature_2m": [],
+        "precipitation_probability": [],
+        "short_forecast": [],
+    }
+    grouped: dict[str, list[dict]] = {}
+
+    for period in hourly_periods:
+        timestamp = period.get("startTime")
+        if not timestamp:
+            continue
+        wind = parse_wind_mph(period.get("windSpeed")) or 0
+        direction = wind_direction_degrees(period.get("windDirection"))
+        precip = precip_value(period)
+        hourly["time"].append(timestamp)
+        hourly["wind_speed_10m"].append(wind)
+        hourly["wind_direction_10m"].append(direction)
+        hourly["wind_gusts_10m"].append(wind)
+        hourly["temperature_2m"].append(period.get("temperature"))
+        hourly["precipitation_probability"].append(precip)
+        hourly["short_forecast"].append(period.get("shortForecast"))
+        grouped.setdefault(timestamp[:10], []).append(period)
+
     days = []
 
-    for index, day_str in enumerate(daily.get("time", [])):
+    for day_str, periods in list(grouped.items())[:10]:
         day = date.fromisoformat(day_str)
-        wind = daily.get("wind_speed_10m_max", [None])[index]
-        gust = daily.get("wind_gusts_10m_max", [None])[index]
-        direction = daily.get("wind_direction_10m_dominant", [None])[index]
-        precip = daily.get("precipitation_probability_max", [None])[index]
-        weather_code = daily.get("weather_code", [None])[index]
-        temp_max = daily.get("temperature_2m_max", [None])[index]
-        temp_min = daily.get("temperature_2m_min", [None])[index]
+        winds = [parse_wind_mph(period.get("windSpeed")) for period in periods]
+        winds = [wind for wind in winds if wind is not None]
+        temps = [period.get("temperature") for period in periods if period.get("temperature") is not None]
+        precip_values = [precip_value(period) for period in periods]
+        wind = max(winds) if winds else None
+        gust = wind
+        dominant = max((period.get("windDirection") for period in periods), key=lambda value: sum(1 for item in periods if item.get("windDirection") == value))
+        direction = wind_direction_degrees(dominant)
+        precip = max(precip_values) if precip_values else None
+        temp_max = max(temps) if temps else None
+        temp_min = min(temps) if temps else None
+        most_relevant_period = max(periods, key=lambda period: precip_value(period))
+        if precip is not None and precip < 35:
+            most_relevant_period = max(periods, key=lambda period: period.get("temperature") or -999)
+        weather_code = nws_weather_code(most_relevant_period.get("shortForecast", ""), precip or 0)
         chop = chop_proxy_ft(wind, gust)
         window = best_boating_window_for_day(hourly, day_str)
 
@@ -350,8 +409,10 @@ def build_forecast(spot: Spot) -> dict:
         "spot": spot.__dict__,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": {
-            "weather": "Open-Meteo Forecast API",
-            "url": url,
+            "weather": "National Weather Service API",
+            "url": nws["forecast_url"],
+            "hourly_url": nws["hourly_url"],
+            "points_url": nws["points_url"],
         },
         "latest": {
             **latest,
@@ -381,7 +442,7 @@ def build_wind_frame(spot: Spot, forecast: dict) -> dict:
         "status": "live_weather_stub_grid",
         "frame_hours": 1,
         "forecast_days": 7,
-        "note": "7-day hourly regional wind-frame scaffold uses live Open-Meteo point forecast. Spatial cropped grid still pending.",
+        "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
         "frames": [
             {
                 "time": timestamp,
