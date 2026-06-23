@@ -625,7 +625,6 @@ async function loadWindTimelapse(spot) {
 }
 
 function updateMapForSpot(spot) {
-  updateMapNote(spot);
   loadLakeShoreline(spot);
   setPayetteBoatingLayerVisibility(spot.slug === "payette-lake");
 
@@ -638,20 +637,6 @@ function updateMapForSpot(spot) {
   });
 
   renderWindFrame(windFrameIndex);
-}
-
-function updateMapNote(spot) {
-  const note = document.getElementById("windLayerNote");
-  const sources = document.getElementById("mapSources");
-  if (spot.slug === "payette-lake") {
-    note.textContent = "Boating areas: Valley County's 300 ft no-wake zone is grey. The water just beyond that zone is highlighted as a preferred Payette band, especially when wind or boat traffic makes the middle choppier. Verified danger restrictions are still pending.";
-    if (sources) {
-      sources.innerHTML = 'Sources: <a href="https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/info/iteminfo" target="_blank" rel="noopener">McCall GIS bathymetry</a> and <a href="https://services6.arcgis.com/ikurHvtarxfN6u3u/arcgis/rest/services/WATERWAYS_ORDINANCE/FeatureServer" target="_blank" rel="noopener">Valley County waterways ordinance</a>.';
-    }
-  } else {
-    note.textContent = "Boating areas: lake surface is colored from the selected wind hour. Low wind stays mostly blue; breezier hours turn the exposed middle pink while edges stay blue. Tahoe depth and verified danger layers still need sources.";
-    if (sources) sources.textContent = "Tahoe boating-area source layers are pending. Wind time-lapse uses generated National Weather Service hourly wind frames.";
-  }
 }
 
 function setLayerVisibility(ids, visible) {
