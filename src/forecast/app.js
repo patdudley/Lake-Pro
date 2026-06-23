@@ -52,9 +52,6 @@ function renderSpot(spot) {
   currentSpot = spot;
   document.getElementById("spotName").textContent = spot.name;
   document.getElementById("spotLocation").textContent = spot.location;
-  document.getElementById("spotLatitude").textContent = spot.latitude.toFixed(4);
-  document.getElementById("spotLongitude").textContent = spot.longitude.toFixed(4);
-  document.getElementById("shorelineStatus").textContent = spot.shorelineOrientation.status;
 }
 
 function boundsPolygon(bounds) {

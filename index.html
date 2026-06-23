@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lake Pro</title>
-    <meta name="description" content="Lake Pro wake-sports conditions foundation.">
+    <meta name="description" content="Lake Pro wake-sports conditions.">
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
     <link rel="stylesheet" href="src/forecast/styles.css">
@@ -46,7 +46,7 @@
           <strong id="conditionGrade">--</strong>
           <div>
             <span>Boating Conditions</span>
-            <b id="conditionSummary">Model not connected</b>
+            <b id="conditionSummary">Rating pending</b>
           </div>
         </div>
         <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
@@ -64,7 +64,7 @@
 
         <div class="daily-report">
           <h2>Daily Lake Report</h2>
-          <p>No real forecast data is connected yet. This is the Lake Pro report slot for wind shadow, chop, and glassy-water guidance.</p>
+          <p>Report slot for wind, chop, and best-window guidance once Lake Pro data is connected.</p>
         </div>
       </section>
 
@@ -82,11 +82,11 @@
         <div class="section-heading">
           <div>
             <h2 id="windTitle">Wind Speed</h2>
-            <p>Sustained wind placeholder</p>
+            <p>Sustained wind</p>
           </div>
         </div>
         <div class="wind-placeholder" aria-label="Wind chart placeholder">
-          <span>Wind data source not connected</span>
+          <span>Wind pending</span>
         </div>
       </section>
 
@@ -98,12 +98,6 @@
           <div><strong>C</strong><span>Fair</span></div>
           <div><strong>D</strong><span>Poor</span></div>
         </div>
-      </section>
-
-      <section class="model-slots" aria-label="Model slots">
-        <div><span>Latitude</span><strong id="spotLatitude">--</strong></div>
-        <div><span>Longitude</span><strong id="spotLongitude">--</strong></div>
-        <div><span>Shoreline orientation</span><strong id="shorelineStatus">Stubbed</strong></div>
       </section>
     </main>
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
