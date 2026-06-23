@@ -116,6 +116,7 @@ body {
 }
 
 .timelapse-control {
+  flex-wrap: wrap;
   margin-top: 10px;
 }
 
@@ -134,8 +135,14 @@ body {
   text-transform: uppercase;
 }
 
+.timelapse-control button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
 .timelapse-control input {
   flex: 1 1 auto;
+  min-width: 240px;
   accent-color: var(--magenta);
 }
 

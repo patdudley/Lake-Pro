@@ -417,7 +417,7 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   const width = bounds.maxX - bounds.minX;
   const height = bounds.maxY - bounds.minY;
   const speed = Number(frame?.wind_speed_mph || 0);
-  const exposure = Math.max(0, Math.min(1, (speed - 2.5) / 7.5));
+  const exposure = Math.max(0, Math.min(1, (speed - 5.5) / 6));
   const bearing = flowBearing(frame);
   const radians = bearing * Math.PI / 180;
   const fetchOffset = Math.min(0.18, speed * 0.012);
@@ -548,10 +548,14 @@ function renderWindFrame(index = windFrameIndex) {
   const frame = windFrames[windFrameIndex];
   const slider = document.getElementById("windFrameSlider");
   const label = document.getElementById("windFrameLabel");
+  const backButton = document.getElementById("windBackButton");
+  const forwardButton = document.getElementById("windForwardButton");
   if (slider) {
     slider.max = String(Math.max(0, windFrames.length - 1));
     slider.value = String(windFrameIndex);
   }
+  if (backButton) backButton.disabled = windFrameIndex <= 0 || windFrames.length < 2;
+  if (forwardButton) forwardButton.disabled = windFrameIndex >= windFrames.length - 1 || windFrames.length < 2;
 
   if (!frame || !currentSpot) {
     if (label) label.textContent = "Wind timeline pending";
@@ -599,6 +603,9 @@ function startWindTimelapse() {
 function renderTimelapseControls() {
   const slider = document.getElementById("windFrameSlider");
   const button = document.getElementById("windPlayButton");
+  const backButton = document.getElementById("windBackButton");
+  const forwardButton = document.getElementById("windForwardButton");
+  const dayStep = 24;
   if (slider) {
     slider.max = String(Math.max(0, windFrames.length - 1));
     slider.value = String(windFrameIndex);
@@ -611,6 +618,18 @@ function renderTimelapseControls() {
     button.onclick = () => {
       if (windTimer) stopWindTimelapse();
       else startWindTimelapse();
+    };
+  }
+  if (backButton) {
+    backButton.onclick = () => {
+      stopWindTimelapse();
+      renderWindFrame(windFrameIndex - dayStep);
+    };
+  }
+  if (forwardButton) {
+    forwardButton.onclick = () => {
+      stopWindTimelapse();
+      renderWindFrame(windFrameIndex + dayStep);
     };
   }
   renderWindFrame(0);

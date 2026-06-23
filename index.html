@@ -34,8 +34,10 @@
           <button type="button" data-map-mode="wind">Wind</button>
         </div>
         <div class="timelapse-control" aria-label="Wind timelapse">
+          <button id="windBackButton" type="button" aria-label="Previous wind forecast day">Back</button>
           <button id="windPlayButton" type="button">Play</button>
           <input id="windFrameSlider" type="range" min="0" max="0" value="0" step="1" aria-label="Wind forecast time">
+          <button id="windForwardButton" type="button" aria-label="Next wind forecast day">Forward</button>
           <strong id="windFrameLabel">Wind timeline pending</strong>
         </div>
         <div id="map" class="map"></div>

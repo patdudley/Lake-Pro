@@ -371,14 +371,17 @@ def build_forecast(spot: Spot) -> dict:
 
 def build_wind_frame(spot: Spot, forecast: dict) -> dict:
     hourly = forecast.get("hourly", {})
-    times = hourly.get("time", [])[:24]
-    speeds = hourly.get("wind_speed_10m", [])[:24]
-    directions = hourly.get("wind_direction_10m", [])[:24]
+    frame_count = 24 * 7
+    times = hourly.get("time", [])[:frame_count]
+    speeds = hourly.get("wind_speed_10m", [])[:frame_count]
+    directions = hourly.get("wind_direction_10m", [])[:frame_count]
     return {
         "spot_slug": spot.slug,
         "generated_at": forecast.get("generated_at"),
         "status": "live_weather_stub_grid",
-        "note": "Regional wind-frame scaffold uses live Open-Meteo point forecast. Spatial cropped grid still pending.",
+        "frame_hours": 1,
+        "forecast_days": 7,
+        "note": "7-day hourly regional wind-frame scaffold uses live Open-Meteo point forecast. Spatial cropped grid still pending.",
         "frames": [
             {
                 "time": timestamp,
