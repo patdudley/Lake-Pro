@@ -159,6 +159,31 @@ def fetch_nws_forecast(spot: Spot) -> dict:
     }
 
 
+def fetch_open_meteo_daily(spot: Spot) -> dict:
+    params = {
+        "latitude": spot.latitude,
+        "longitude": spot.longitude,
+        "daily": ",".join(
+            [
+                "weather_code",
+                "temperature_2m_max",
+                "temperature_2m_min",
+                "precipitation_probability_max",
+                "wind_speed_10m_max",
+                "wind_direction_10m_dominant",
+            ]
+        ),
+        "temperature_unit": "fahrenheit",
+        "wind_speed_unit": "mph",
+        "timezone": TIMEZONE,
+        "forecast_days": 10,
+    }
+    url = build_url("https://api.open-meteo.com/v1/forecast", params)
+    payload = fetch_json(url)
+    payload["url"] = url
+    return payload
+
+
 def crowding_penalty(day: date) -> int:
     summer = day.month in {6, 7, 8}
     weekend = day.weekday() >= 5
@@ -293,6 +318,40 @@ def cap_score(score: int, cap: int) -> int:
     return min(score, cap)
 
 
+def apply_grade_caps(
+    score: int,
+    day: date,
+    temp_max: float | int | None,
+    precip: float | int | None,
+    weather_code: int | float | None,
+    wind_for_grade: float | None,
+    window_stays_dry: bool = False,
+) -> tuple[int, int, list[str]]:
+    grade_caps = []
+
+    if temp_max is not None and float(temp_max) < 70:
+        score = cap_score(score, top_score_for_grade("B"))
+        grade_caps.append("temperature_high_below_70")
+
+    rainy_day = (precip is not None and float(precip) >= 55) or is_rainy_weather_code(weather_code)
+    warms_up = temp_max is not None and float(temp_max) >= 70
+    cold_rainy_day = rainy_day and temp_max is not None and float(temp_max) < 65
+    if cold_rainy_day:
+        score = cap_score(score, top_score_for_grade("C"))
+        grade_caps.append("rainy_cold_day_best_case_c")
+    elif rainy_day and not (window_stays_dry and warms_up):
+        score = cap_score(score, top_score_for_grade("B"))
+        grade_caps.append("rainy_day_best_case_b")
+
+    score_before_wind_cap = score
+    grade_cap_for_wind = wind_grade_cap(wind_for_grade)
+    if grade_cap_for_wind != "A":
+        score = cap_score(score, top_score_for_grade(grade_cap_for_wind))
+        grade_caps.append(f"wind_best_case_{grade_cap_for_wind.lower()}")
+
+    return score, score_before_wind_cap, grade_caps
+
+
 def best_window(hourly: dict) -> str:
     times = hourly.get("time", [])
     winds = hourly.get("wind_speed_10m", [])
@@ -382,28 +441,16 @@ def build_forecast(spot: Spot) -> dict:
             score -= max(0, int(round((float(precip) - 45) * 0.2)))
         score -= crowding_penalty(day)
         score = max(0, min(100, score))
-        grade_caps = []
-
-        if temp_max is not None and float(temp_max) < 70:
-            score = cap_score(score, top_score_for_grade("B"))
-            grade_caps.append("temperature_high_below_70")
-
-        rainy_day = (precip is not None and float(precip) >= 55) or is_rainy_weather_code(weather_code)
         window_stays_dry = window["max_precip_probability"] is not None and float(window["max_precip_probability"]) <= 25
-        warms_up = temp_max is not None and float(temp_max) >= 70
-        cold_rainy_day = rainy_day and temp_max is not None and float(temp_max) < 65
-        if cold_rainy_day:
-            score = cap_score(score, top_score_for_grade("C"))
-            grade_caps.append("rainy_cold_day_best_case_c")
-        elif rainy_day and not (window_stays_dry and warms_up):
-            score = cap_score(score, top_score_for_grade("B"))
-            grade_caps.append("rainy_day_best_case_b")
-
-        score_before_wind_cap = score
-        grade_cap_for_wind = wind_grade_cap(window["avg_wind_mph"] if window["avg_wind_mph"] is not None else wind)
-        if grade_cap_for_wind != "A":
-            score = cap_score(score, top_score_for_grade(grade_cap_for_wind))
-            grade_caps.append(f"wind_best_case_{grade_cap_for_wind.lower()}")
+        score, score_before_wind_cap, grade_caps = apply_grade_caps(
+            score,
+            day,
+            temp_max,
+            precip,
+            weather_code,
+            window["avg_wind_mph"] if window["avg_wind_mph"] is not None else wind,
+            window_stays_dry,
+        )
 
         days.append(
             {
@@ -431,6 +478,72 @@ def build_forecast(spot: Spot) -> dict:
             }
         )
 
+    daily_source = None
+    if len(days) < 10:
+        daily_source = fetch_open_meteo_daily(spot)
+        existing_dates = {day["date"] for day in days}
+        daily = daily_source.get("daily", {})
+        daily_rows = zip(
+            daily.get("time", []),
+            daily.get("weather_code", []),
+            daily.get("temperature_2m_max", []),
+            daily.get("temperature_2m_min", []),
+            daily.get("precipitation_probability_max", []),
+            daily.get("wind_speed_10m_max", []),
+            daily.get("wind_direction_10m_dominant", []),
+        )
+        for day_str, weather_code, temp_max, temp_min, precip, wind, direction in daily_rows:
+            if day_str in existing_dates:
+                continue
+            day = date.fromisoformat(day_str)
+            wind = round(float(wind), 1) if wind is not None else None
+            direction = int(round(float(direction))) if direction is not None else None
+            precip = round(float(precip), 1) if precip is not None else None
+            temp_max = round(float(temp_max)) if temp_max is not None else None
+            temp_min = round(float(temp_min)) if temp_min is not None else None
+            chop = chop_proxy_ft(wind, wind)
+
+            score = 92
+            if wind is not None:
+                score -= max(0, int(round((float(wind) - 8) * 4.0)))
+            if precip is not None:
+                score -= max(0, int(round((float(precip) - 45) * 0.2)))
+            score -= crowding_penalty(day)
+            score = max(0, min(100, score))
+            score, score_before_wind_cap, grade_caps = apply_grade_caps(score, day, temp_max, precip, weather_code, wind)
+
+            days.append(
+                {
+                    "date": day_str,
+                    "grade": grade_from_score(score),
+                    "score": score,
+                    "score_before_wind_cap": score_before_wind_cap,
+                    "grade_before_wind_cap": grade_from_score(score_before_wind_cap),
+                    "wind_speed_max_mph": wind,
+                    "wind_gust_max_mph": wind,
+                    "wind_direction_deg": direction,
+                    "wind_direction_label": wind_direction_label(direction),
+                    "precipitation_probability_max": precip,
+                    "weather_code": weather_code,
+                    "temperature_2m_max": temp_max,
+                    "temperature_2m_min": temp_min,
+                    "chop_proxy_ft": chop,
+                    "best_window": "Daily outlook",
+                    "best_window_wind_mph": wind,
+                    "best_window_gust_mph": wind,
+                    "best_window_precipitation_probability_max": precip,
+                    "grade_caps": grade_caps,
+                    "crowding_penalty": crowding_penalty(day),
+                    "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
+                }
+            )
+            existing_dates.add(day_str)
+            if len(days) >= 10:
+                break
+
+    days.sort(key=lambda item: item["date"])
+    days = days[:10]
+
     latest = days[0] if days else {}
     return {
         "spot": spot.__dict__,
@@ -440,6 +553,7 @@ def build_forecast(spot: Spot) -> dict:
             "url": nws["forecast_url"],
             "hourly_url": nws["hourly_url"],
             "points_url": nws["points_url"],
+            "daily_fill_url": daily_source.get("url") if daily_source else None,
         },
         "latest": {
             **latest,

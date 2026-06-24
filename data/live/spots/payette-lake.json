@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T18:00:47.252297+00:00",
+  "generated_at": "2026-06-24T18:15:24.557605+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -1141,6 +1141,7 @@
     "wind_shadow": "pending"
   },
   "source": {
+    "daily_fill_url": "https://api.open-meteo.com/v1/forecast?latitude=44.9406&longitude=-116.091&daily=weather_code%2Ctemperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_probability_max%2Cwind_speed_10m_max%2Cwind_direction_10m_dominant&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FLos_Angeles&forecast_days=10",
     "hourly_url": "https://api.weather.gov/gridpoints/BOI/147,146/forecast/hourly",
     "points_url": "https://api.weather.gov/points/44.9406,-116.091",
     "url": "https://api.weather.gov/gridpoints/BOI/147,146/forecast",
@@ -1331,6 +1332,85 @@
       "wind_direction_label": "SW",
       "wind_gust_max_mph": 10.0,
       "wind_speed_max_mph": 10.0
+    },
+    {
+      "best_window": "Daily outlook",
+      "best_window_gust_mph": 9.9,
+      "best_window_precipitation_probability_max": 5.0,
+      "best_window_wind_mph": 9.9,
+      "chop_proxy_ft": 0.3,
+      "crowding_penalty": 0,
+      "date": "2026-07-01",
+      "grade": "C",
+      "grade_before_wind_cap": "B",
+      "grade_caps": [
+        "temperature_high_below_70",
+        "wind_best_case_c"
+      ],
+      "precipitation_probability_max": 5.0,
+      "score": 71,
+      "score_before_wind_cap": 84,
+      "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
+      "temperature_2m_max": 68,
+      "temperature_2m_min": 41,
+      "weather_code": 3,
+      "wind_direction_deg": 206,
+      "wind_direction_label": "SSW",
+      "wind_gust_max_mph": 9.9,
+      "wind_speed_max_mph": 9.9
+    },
+    {
+      "best_window": "Daily outlook",
+      "best_window_gust_mph": 7.9,
+      "best_window_precipitation_probability_max": 2.0,
+      "best_window_wind_mph": 7.9,
+      "chop_proxy_ft": 0.2,
+      "crowding_penalty": 0,
+      "date": "2026-07-02",
+      "grade": "B",
+      "grade_before_wind_cap": "B",
+      "grade_caps": [
+        "temperature_high_below_70",
+        "wind_best_case_b"
+      ],
+      "precipitation_probability_max": 2.0,
+      "score": 84,
+      "score_before_wind_cap": 84,
+      "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
+      "temperature_2m_max": 65,
+      "temperature_2m_min": 40,
+      "weather_code": 3,
+      "wind_direction_deg": 226,
+      "wind_direction_label": "SW",
+      "wind_gust_max_mph": 7.9,
+      "wind_speed_max_mph": 7.9
+    },
+    {
+      "best_window": "Daily outlook",
+      "best_window_gust_mph": 6.1,
+      "best_window_precipitation_probability_max": 3.0,
+      "best_window_wind_mph": 6.1,
+      "chop_proxy_ft": 0.1,
+      "crowding_penalty": 0,
+      "date": "2026-07-03",
+      "grade": "C",
+      "grade_before_wind_cap": "C",
+      "grade_caps": [
+        "temperature_high_below_70",
+        "rainy_cold_day_best_case_c",
+        "wind_best_case_b"
+      ],
+      "precipitation_probability_max": 3.0,
+      "score": 71,
+      "score_before_wind_cap": 71,
+      "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
+      "temperature_2m_max": 56,
+      "temperature_2m_min": 42,
+      "weather_code": 53,
+      "wind_direction_deg": 139,
+      "wind_direction_label": "SE",
+      "wind_gust_max_mph": 6.1,
+      "wind_speed_max_mph": 6.1
     }
   ]
 }
