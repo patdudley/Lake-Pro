@@ -747,8 +747,8 @@ function updateMapForSpot(spot) {
 function fitMapPadding() {
   const narrow = window.matchMedia("(max-width: 820px)").matches;
   return narrow
-    ? { top: 34, right: 24, bottom: 86, left: 118 }
-    : { top: 44, right: 44, bottom: 126, left: 172 };
+    ? { top: 34, right: 30, bottom: 96, left: 30 }
+    : { top: 44, right: 56, bottom: 126, left: 56 };
 }
 
 function fitMapToSpot(spot, duration = 650) {

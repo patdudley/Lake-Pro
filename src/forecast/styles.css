@@ -491,6 +491,10 @@ h2 {
   line-height: 1.1;
 }
 
+.map-report-bubble .score-track {
+  display: none;
+}
+
 .report-card {
   display: grid;
   gap: 16px;
@@ -818,8 +822,8 @@ h2 {
   .map-report-bubble {
     left: 12px;
     bottom: 12px;
-    width: min(112px, calc(100% - 24px));
-    padding: 7px;
+    width: min(86px, calc(100% - 24px));
+    padding: 6px;
     gap: 0;
   }
 
@@ -950,8 +954,8 @@ h2 {
   }
 
   .map-report-bubble {
-    width: min(112px, calc(100% - 24px));
-    padding: 7px;
+    width: min(86px, calc(100% - 24px));
+    padding: 6px;
   }
 
   .map-report-bubble .verdict-main {
@@ -967,7 +971,7 @@ h2 {
   .map-report-bubble .surface-chop-metric {
     justify-content: center;
     min-width: 0;
-    padding: 5px 6px;
+    padding: 5px 4px;
     border: 0;
     border-radius: 7px;
     background: rgba(255, 255, 255, 0.5);
@@ -983,8 +987,8 @@ h2 {
   }
 
   .map-report-bubble .condition-grade-metric strong {
-    margin-top: 2px;
-    font-size: 1.95rem;
+    margin-top: 1px;
+    font-size: 1.8rem;
     text-align: center;
   }
 
@@ -995,9 +999,13 @@ h2 {
   }
 
   .map-report-bubble .verdict-main span {
-    font-size: 0.52rem;
+    font-size: 0.5rem;
     line-height: 1;
     text-align: center;
+  }
+
+  .map-report-bubble .badge-label-full {
+    display: none;
   }
 
   .score-track {
