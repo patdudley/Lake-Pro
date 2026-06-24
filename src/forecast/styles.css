@@ -141,6 +141,86 @@ body {
   pointer-events: none;
 }
 
+.wind-probe {
+  position: relative;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 118px;
+  min-height: 48px;
+  border: 3px solid #ffffff;
+  border-radius: 999px;
+  background: #172340;
+  box-shadow: 0 12px 28px rgba(7, 25, 82, 0.22);
+  color: #ffffff;
+  cursor: grab;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  padding: 0 16px 0 18px;
+  text-transform: uppercase;
+}
+
+.maplibregl-marker {
+  z-index: 5;
+}
+
+.wind-probe:active {
+  cursor: grabbing;
+}
+
+.wind-probe i {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  border-right: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+  background: var(--cyan);
+  content: "";
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.wind-probe-value,
+.wind-probe-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.wind-probe-arrow {
+  width: 23px;
+  height: 23px;
+  transition: transform 180ms ease;
+}
+
+.wind-probe-arrow::before,
+.wind-probe-arrow::after {
+  position: absolute;
+  content: "";
+}
+
+.wind-probe-arrow::before {
+  top: 9px;
+  right: 0;
+  width: 22px;
+  height: 5px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.wind-probe-arrow::after {
+  top: 4px;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 5px solid #ffffff;
+  border-right: 5px solid #ffffff;
+  transform: rotate(45deg);
+}
+
 .map-panel,
 .report-card,
 .camera-card,

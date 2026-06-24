@@ -5,6 +5,8 @@ let currentSpot = null;
 let windFrames = [];
 let windFrameIndex = 0;
 let windTimer = null;
+let windProbeMarker = null;
+let windProbeElement = null;
 let lakeSurfaceCanvas = null;
 let lakeSurfaceContext = null;
 let lakeSurfaceRings = [];
@@ -237,6 +239,51 @@ function frameDateKey(time) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+function createWindProbeElement() {
+  const probe = document.createElement("button");
+  probe.className = "wind-probe";
+  probe.type = "button";
+  probe.setAttribute("aria-label", "Wind probe. Drag to inspect wind at a lake spot.");
+  probe.innerHTML = `
+    <span class="wind-probe-value">-- mph</span>
+    <span class="wind-probe-arrow" aria-hidden="true"></span>
+    <i aria-hidden="true"></i>
+  `;
+  return probe;
+}
+
+function updateWindProbe(frame = windFrames[windFrameIndex]) {
+  if (!windProbeElement) return;
+  const value = windProbeElement.querySelector(".wind-probe-value");
+  const arrow = windProbeElement.querySelector(".wind-probe-arrow");
+  const speed = Math.round(Number(frame?.wind_speed_mph || 0));
+  const label = frame?.wind_direction_label || "";
+  if (value) value.textContent = `${speed} mph`;
+  if (arrow) arrow.style.transform = `rotate(${flowBearing(frame)}deg)`;
+  windProbeElement.setAttribute("aria-label", `Wind probe showing ${speed} mph ${label}. Drag to inspect another lake spot.`);
+}
+
+function ensureWindProbeMarker() {
+  if (!lakeMap || windProbeMarker || !currentSpot) return;
+  windProbeElement = createWindProbeElement();
+  windProbeMarker = new window.maplibregl.Marker({
+    element: windProbeElement,
+    anchor: "bottom",
+    draggable: true,
+  })
+    .setLngLat([currentSpot.longitude, currentSpot.latitude])
+    .addTo(lakeMap);
+  updateWindProbe();
+}
+
+function resetWindProbeForSpot(spot) {
+  ensureWindProbeMarker();
+  if (windProbeMarker && spot) {
+    windProbeMarker.setLngLat([spot.longitude, spot.latitude]);
+    updateWindProbe();
+  }
 }
 
 function extractLakeRings(geojson) {
@@ -592,6 +639,8 @@ function renderWindFrame(index = windFrameIndex) {
   }
 
   if (lakeMap) {
+    ensureWindProbeMarker();
+    updateWindProbe(frame);
     drawLakeSurfaceOverlay(performance.now());
   }
 }
@@ -674,6 +723,7 @@ function updateMapForSpot(spot) {
     essential: true,
   });
 
+  resetWindProbeForSpot(spot);
   renderWindFrame(windFrameIndex);
 }
 
@@ -784,10 +834,15 @@ function initMap(activeSpot) {
   window.setTimeout(resizeMapToPanel, 250);
   window.setTimeout(resizeMapToPanel, 1000);
   window.addEventListener("resize", resizeMapToPanel);
+  lakeMap.on("click", (event) => {
+    ensureWindProbeMarker();
+    if (windProbeMarker) windProbeMarker.setLngLat(event.lngLat);
+  });
   lakeMap.once("load", () => {
     addPayetteBoatingLayers().finally(() => {
       resizeMapToPanel();
       setPayetteBoatingLayerVisibility(currentSpot?.slug === "payette-lake");
+      resetWindProbeForSpot(currentSpot);
       renderWindFrame(windFrameIndex);
     });
   });
