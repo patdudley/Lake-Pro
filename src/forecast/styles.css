@@ -423,7 +423,7 @@ h2 {
   left: 36px;
   bottom: 36px;
   z-index: 12;
-  width: min(390px, calc(100% - 72px));
+  width: min(190px, calc(100% - 72px));
   margin-top: 0;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88)),
@@ -442,20 +442,27 @@ h2 {
 }
 
 .map-report-bubble .verdict-main {
-  grid-template-columns: 116px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
   width: 100%;
 }
 
 .map-report-bubble .condition-grade-metric strong {
-  font-size: clamp(3.8rem, 6vw, 4.8rem);
+  margin-top: 4px;
+  font-size: 3.1rem;
 }
 
 .map-report-bubble .surface-chop-metric b {
-  font-size: clamp(1.65rem, 2.2vw, 2rem);
+  margin-top: 4px;
+  font-size: 1.25rem;
   overflow-wrap: normal;
   white-space: normal;
   word-break: keep-all;
+}
+
+.map-report-bubble .condition-grade-metric,
+.map-report-bubble .surface-chop-metric {
+  padding: 10px;
 }
 
 .report-card {
@@ -771,9 +778,27 @@ h2 {
   .map-report-bubble {
     left: 16px;
     bottom: 16px;
-    width: min(300px, calc(100% - 32px));
+    width: min(178px, calc(100% - 32px));
     padding: 12px;
     gap: 10px;
+  }
+
+  .map-report-bubble .verdict-main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .map-report-bubble .condition-grade-metric,
+  .map-report-bubble .surface-chop-metric {
+    padding: 9px;
+  }
+
+  .map-report-bubble .condition-grade-metric strong {
+    font-size: 3rem;
+  }
+
+  .map-report-bubble .surface-chop-metric b {
+    font-size: 1.15rem;
   }
 
   .timelapse-control.has-back {
