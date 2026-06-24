@@ -571,7 +571,6 @@ h2 {
     padding: 12px;
   }
 
-  .top-nav,
   .section-heading,
   .spot-switcher {
     align-items: flex-start;
@@ -579,19 +578,22 @@ h2 {
   }
 
   .top-nav {
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
   }
 
   .brand-link img {
-    width: min(172px, 64vw);
+    width: clamp(132px, 40vw, 172px);
   }
 
   .spot-switcher {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
   }
 
   .spot-switcher select {
     width: 100%;
+    min-width: 0;
   }
 
   .map-panel,
