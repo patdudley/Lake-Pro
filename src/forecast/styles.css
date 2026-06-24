@@ -90,8 +90,13 @@ body {
 }
 
 .timelapse-control {
+  position: absolute;
+  top: 36px;
+  left: 36px;
+  z-index: 12;
   display: grid;
   grid-template-columns: 42px minmax(220px, 1fr) auto minmax(0, 1fr) auto;
+  width: min(520px, calc(100% - 72px));
   margin-top: 0;
   align-items: center;
   gap: 8px 10px;
@@ -409,10 +414,13 @@ h2 {
 .map {
   height: clamp(360px, 52vh, 540px);
   min-height: 0;
-  margin-top: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
+}
+
+.map-panel {
+  position: relative;
 }
 
 .report-card {
@@ -720,7 +728,10 @@ h2 {
   }
 
   .timelapse-control {
+    top: 16px;
+    left: 16px;
     grid-template-columns: 76px minmax(0, 1fr) 76px;
+    width: min(340px, calc(100% - 32px));
     gap: 8px;
     border-radius: 8px;
   }

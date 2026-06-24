@@ -197,6 +197,21 @@ def top_score_for_grade(grade: str) -> int:
     return 47
 
 
+def wind_grade_cap(speed: float | None) -> str:
+    if speed is None:
+        return "A"
+    value = float(speed)
+    if value >= 16:
+        return "F"
+    if value >= 12:
+        return "D"
+    if value >= 8:
+        return "C"
+    if value >= 5:
+        return "B"
+    return "A"
+
+
 def chop_proxy_ft(wind_mph: float | None, gust_mph: float | None) -> float | None:
     """Placeholder chop estimate.
 
@@ -384,11 +399,19 @@ def build_forecast(spot: Spot) -> dict:
             score = cap_score(score, top_score_for_grade("B"))
             grade_caps.append("rainy_day_best_case_b")
 
+        score_before_wind_cap = score
+        grade_cap_for_wind = wind_grade_cap(window["avg_wind_mph"] if window["avg_wind_mph"] is not None else wind)
+        if grade_cap_for_wind != "A":
+            score = cap_score(score, top_score_for_grade(grade_cap_for_wind))
+            grade_caps.append(f"wind_best_case_{grade_cap_for_wind.lower()}")
+
         days.append(
             {
                 "date": day_str,
                 "grade": grade_from_score(score),
                 "score": score,
+                "score_before_wind_cap": score_before_wind_cap,
+                "grade_before_wind_cap": grade_from_score(score_before_wind_cap),
                 "wind_speed_max_mph": wind,
                 "wind_gust_max_mph": gust,
                 "wind_direction_deg": direction,

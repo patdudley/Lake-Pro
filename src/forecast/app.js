@@ -14,6 +14,7 @@ let lakeSurfaceParticles = [];
 let lakeSurfaceAnimation = null;
 let lastParticleFrame = 0;
 let loadedShorelineSlug = "";
+let currentLiveLatest = null;
 
 const mapLayerUrls = {
   payetteBathymetry: "data/live/map_layers/payette_bathymetry_contours.geojson",
@@ -73,6 +74,67 @@ function gradeValue(grade) {
   return ["A", "B", "C", "D", "F"].includes(grade) ? grade : "";
 }
 
+function gradeFromScore(score) {
+  if (score >= 85) return "A";
+  if (score >= 72) return "B";
+  if (score >= 60) return "C";
+  if (score >= 48) return "D";
+  return "F";
+}
+
+function topScoreForGrade(grade) {
+  if (grade === "A") return 100;
+  if (grade === "B") return 84;
+  if (grade === "C") return 71;
+  if (grade === "D") return 59;
+  return 47;
+}
+
+function windGradeCap(speed) {
+  const wind = Number(speed);
+  if (!Number.isFinite(wind)) return "A";
+  if (wind >= 16) return "F";
+  if (wind >= 12) return "D";
+  if (wind >= 8) return "C";
+  if (wind >= 5) return "B";
+  return "A";
+}
+
+function chopProxyFt(windSpeed, gustSpeed = windSpeed) {
+  const wind = Number(windSpeed);
+  if (!Number.isFinite(wind)) return null;
+  const gust = Number.isFinite(Number(gustSpeed)) ? Number(gustSpeed) : wind;
+  return Math.round(Math.max(0, (wind - 4) * 0.055 + Math.max(0, gust - wind) * 0.025) * 10) / 10;
+}
+
+function windAdjustedLatest(latest = {}, frame = windFrames[windFrameIndex]) {
+  const speed = Number(frame?.wind_speed_mph ?? latest.best_window_wind_mph ?? latest.wind_speed_max_mph);
+  const scoreBeforeWindCap = latest.score_before_wind_cap ?? latest.score;
+  const baseScore = Number.isFinite(Number(scoreBeforeWindCap)) ? Number(scoreBeforeWindCap) : null;
+  const cap = windGradeCap(speed);
+  const score = baseScore == null ? null : Math.min(baseScore, topScoreForGrade(cap));
+  const grade = score == null ? latest.grade || "--" : gradeFromScore(score);
+  return {
+    ...latest,
+    grade,
+    score,
+    chop_proxy_ft: Number.isFinite(speed) ? chopProxyFt(speed) : latest.chop_proxy_ft,
+  };
+}
+
+function renderCondition(latest = currentLiveLatest, frame = windFrames[windFrameIndex]) {
+  if (!latest) return;
+  const adjusted = windAdjustedLatest(latest, frame);
+  const grade = document.getElementById("conditionGrade");
+  grade.textContent = adjusted.grade || "--";
+  grade.dataset.grade = gradeValue(adjusted.grade);
+  document.getElementById("conditionSummary").textContent = adjusted.chop_proxy_ft != null
+    ? `${adjusted.chop_proxy_ft} ft chop`
+    : "Rating pending";
+  const fill = document.getElementById("scoreFill");
+  if (fill && adjusted.score != null) fill.style.width = `${Math.max(6, Math.min(100, adjusted.score))}%`;
+}
+
 function renderForecastStrip(days = placeholderForecast) {
   const strip = document.getElementById("forecastStrip");
   strip.replaceChildren(...days.map((day, index) => {
@@ -122,6 +184,7 @@ function renderSpotSwitcher(activeSpot) {
 
 function renderSpot(spot) {
   currentSpot = spot;
+  currentLiveLatest = null;
   document.getElementById("spotName").textContent = spot.name;
   document.getElementById("spotLocation").textContent = spot.location;
   const cameraCard = document.getElementById("cameraCard");
@@ -133,14 +196,8 @@ function renderSpot(spot) {
 
 function renderLiveSpotData(bundle) {
   const latest = bundle.latest || {};
-  const grade = document.getElementById("conditionGrade");
-  grade.textContent = latest.grade || "--";
-  grade.dataset.grade = gradeValue(latest.grade);
-  document.getElementById("conditionSummary").textContent = latest.chop_proxy_ft != null
-    ? `${latest.chop_proxy_ft} ft chop`
-    : "Rating pending";
-  const fill = document.getElementById("scoreFill");
-  if (fill && latest.score != null) fill.style.width = `${Math.max(6, Math.min(100, latest.score))}%`;
+  currentLiveLatest = latest;
+  renderCondition(latest);
   renderForecastStrip(bundle.ten_day || []);
 }
 
@@ -154,6 +211,7 @@ async function loadLiveSpotData(spot) {
     grade.textContent = "--";
     grade.dataset.grade = "";
     document.getElementById("conditionSummary").textContent = "Rating pending";
+    currentLiveLatest = null;
     renderForecastStrip();
   }
 }
@@ -581,6 +639,7 @@ function renderWindFrame(index = windFrameIndex) {
   if (label) {
     label.textContent = `${formatFrameTime(frame.time)} · ${Math.round(frame.wind_speed_mph || 0)} mph ${frame.wind_direction_label || ""}`.trim();
   }
+  renderCondition(currentLiveLatest, frame);
 
   if (lakeMap) {
     ensureWindProbeMarker();
