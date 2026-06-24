@@ -133,9 +133,12 @@ function renderCondition(latest = currentLiveLatest, frame = windFrames[windFram
   const grade = document.getElementById("conditionGrade");
   grade.textContent = adjusted.grade || "--";
   grade.dataset.grade = gradeValue(adjusted.grade);
-  document.getElementById("conditionSummary").textContent = adjusted.chop_proxy_ft != null
-    ? `${adjusted.chop_proxy_ft} ft chop`
-    : "Rating pending";
+  const summary = document.getElementById("conditionSummary");
+  if (summary) {
+    summary.textContent = adjusted.chop_proxy_ft != null
+      ? `${adjusted.chop_proxy_ft} ft chop`
+      : "Rating pending";
+  }
   const fill = document.getElementById("scoreFill");
   if (fill && adjusted.score != null) fill.style.width = `${Math.max(6, Math.min(100, adjusted.score))}%`;
 }
@@ -215,7 +218,8 @@ async function loadLiveSpotData(spot) {
     const grade = document.getElementById("conditionGrade");
     grade.textContent = "--";
     grade.dataset.grade = "";
-    document.getElementById("conditionSummary").textContent = "Rating pending";
+    const summary = document.getElementById("conditionSummary");
+    if (summary) summary.textContent = "Rating pending";
     currentLiveLatest = null;
     renderForecastStrip();
   }

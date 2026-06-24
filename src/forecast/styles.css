@@ -423,7 +423,7 @@ h2 {
   left: 36px;
   bottom: 36px;
   z-index: 12;
-  width: min(172px, calc(100% - 72px));
+  width: min(132px, calc(100% - 72px));
   margin-top: 0;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88)),
@@ -817,9 +817,9 @@ h2 {
   .map-report-bubble {
     left: 12px;
     bottom: 12px;
-    width: min(148px, calc(100% - 24px));
-    padding: 8px;
-    gap: 6px;
+    width: min(112px, calc(100% - 24px));
+    padding: 7px;
+    gap: 0;
   }
 
   .map-report-bubble .verdict-main {
@@ -949,13 +949,13 @@ h2 {
   }
 
   .map-report-bubble {
-    width: min(336px, calc(100% - 24px));
-    padding: 7px 8px;
+    width: min(112px, calc(100% - 24px));
+    padding: 7px;
   }
 
   .map-report-bubble .verdict-main {
-    grid-template-columns: 0.48fr 1fr;
-    gap: 7px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
     padding: 0;
     border: 0;
     background: transparent;
@@ -983,7 +983,7 @@ h2 {
 
   .map-report-bubble .condition-grade-metric strong {
     margin-top: 2px;
-    font-size: 2rem;
+    font-size: 1.95rem;
     text-align: center;
   }
 
