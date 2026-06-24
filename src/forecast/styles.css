@@ -583,6 +583,20 @@ h2 {
   scrollbar-width: thin;
 }
 
+@media (min-width: 1040px) {
+  .forecast-strip {
+    grid-auto-flow: initial;
+    grid-auto-columns: initial;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+
+  .forecast-day {
+    min-width: 0;
+    padding: 12px 8px;
+  }
+}
+
 .forecast-day {
   border: 1px solid var(--line);
   border-radius: 8px;

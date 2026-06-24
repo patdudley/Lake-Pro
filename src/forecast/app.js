@@ -39,8 +39,12 @@ async function fetchJson(path) {
 }
 
 function dayLabel(date, index) {
-  if (index === 0) return "Today";
-  return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { weekday: "short" });
+  const value = new Date(`${date}T12:00:00`);
+  if (Number.isNaN(value.getTime())) return index === 0 ? "Today" : "";
+  const dayNumber = value.toLocaleDateString("en-US", { day: "numeric" });
+  if (index === 0) return `Today ${dayNumber}`;
+  const weekday = value.toLocaleDateString("en-US", { weekday: "short" });
+  return `${weekday} ${dayNumber}`;
 }
 
 function weatherIconClass(day = {}) {
