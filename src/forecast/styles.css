@@ -91,45 +91,132 @@ body {
 
 .timelapse-control {
   display: grid;
-  grid-template-columns: auto minmax(220px, 1fr) auto minmax(160px, auto);
+  grid-template-columns: 42px minmax(220px, 1fr) auto minmax(170px, auto);
   margin-top: 0;
   align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(8, 18, 40, 0.16);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(52, 59, 72, 0.94), rgba(35, 40, 50, 0.94));
+  box-shadow: 0 14px 30px rgba(6, 22, 82, 0.14);
+  padding: 8px;
 }
 
 .timelapse-control.has-back {
-  grid-template-columns: auto auto minmax(220px, 1fr) auto minmax(160px, auto);
+  grid-template-columns: auto 42px minmax(220px, 1fr) auto minmax(170px, auto);
 }
 
 .timelapse-control button {
-  min-height: 36px;
-  border: 1px solid rgba(11, 88, 255, 0.28);
-  border-radius: 8px;
-  background: var(--pale-blue);
-  color: var(--blue);
+  min-height: 34px;
+  border: 0;
   cursor: pointer;
   font: inherit;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 950;
-  padding: 0 14px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.timeline-play-button {
+  position: relative;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  place-items: center;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff, #f3f7fb);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+  color: #f04b2f;
+  padding: 0;
+}
+
+.timeline-play-button span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.timeline-play-button::before {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 14px solid currentColor;
+  content: "";
+}
+
+.timeline-play-button.is-playing::before,
+.timeline-play-button.is-playing::after {
+  width: 5px;
+  height: 16px;
+  border: 0;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.timeline-play-button.is-playing::before {
+  margin-left: 0;
+  transform: translateX(-4px);
+}
+
+.timeline-play-button.is-playing::after {
+  transform: translateX(4px);
+}
+
+.timeline-day-button {
+  position: relative;
+  min-width: 88px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.88);
+  padding: 0 13px;
   text-transform: uppercase;
+}
+
+.timeline-day-button::before {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  border-radius: 0 0 999px 999px;
+  background: #f4a000;
+  content: "";
+}
+
+.timeline-day-button:hover,
+.timeline-day-button:focus-visible {
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .timelapse-control button:disabled {
   cursor: not-allowed;
-  opacity: 0.48;
+  opacity: 0.44;
 }
 
 .timelapse-control input {
   width: 100%;
   min-width: 0;
-  accent-color: var(--magenta);
+  height: 24px;
+  accent-color: #f4a000;
 }
 
 .timelapse-control strong {
   min-width: 0;
-  color: var(--text);
-  font-size: 0.82rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.78rem;
   font-weight: 900;
+  padding: 8px 12px;
   text-align: right;
   white-space: nowrap;
 }
@@ -609,31 +696,48 @@ h2 {
   }
 
   .timelapse-control {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    gap: 8px;
+    border-radius: 18px;
   }
 
   .timelapse-control.has-back {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: auto 42px minmax(0, 1fr) auto;
   }
 
-  .timelapse-control input,
+  .timelapse-control input {
+    grid-column: 1 / -1;
+  }
+
   .timelapse-control strong {
     grid-column: 1 / -1;
   }
 
   .timelapse-control button {
-    width: 100%;
     padding: 0 8px;
   }
 
+  .timeline-play-button {
+    width: 42px;
+    padding: 0;
+  }
+
+  .timeline-day-button {
+    min-width: 74px;
+    padding: 0 10px;
+  }
+
   #windForwardButton {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
   }
 
+  .timelapse-control.has-back #windPlayButton {
+    grid-column: 2;
+  }
+
   .timelapse-control.has-back #windForwardButton {
-    grid-column: 3;
+    grid-column: 4;
     grid-row: 1;
   }
 

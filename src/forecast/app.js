@@ -595,13 +595,21 @@ function stopWindTimelapse() {
     windTimer = null;
   }
   const button = document.getElementById("windPlayButton");
-  if (button) button.textContent = "Play";
+  if (button) {
+    button.classList.remove("is-playing");
+    button.setAttribute("aria-label", "Play wind timeline");
+    button.setAttribute("aria-pressed", "false");
+  }
 }
 
 function startWindTimelapse() {
   if (windTimer || windFrames.length < 2) return;
   const button = document.getElementById("windPlayButton");
-  if (button) button.textContent = "Pause";
+  if (button) {
+    button.classList.add("is-playing");
+    button.setAttribute("aria-label", "Pause wind timeline");
+    button.setAttribute("aria-pressed", "true");
+  }
   windTimer = window.setInterval(() => {
     renderWindFrame((windFrameIndex + 1) % windFrames.length);
   }, 850);

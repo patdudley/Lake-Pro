@@ -22,10 +22,10 @@
 
       <section class="map-panel" aria-label="Lake conditions map">
         <div class="timelapse-control" aria-label="Wind timelapse">
-          <button id="windBackButton" type="button" aria-label="Previous wind forecast day">Back</button>
-          <button id="windPlayButton" type="button">Play</button>
+          <button id="windBackButton" class="timeline-day-button" type="button" aria-label="Previous wind forecast day">Prev day</button>
+          <button id="windPlayButton" class="timeline-play-button" type="button" aria-label="Play wind timeline"><span>Play</span></button>
           <input id="windFrameSlider" type="range" min="0" max="0" value="0" step="1" aria-label="Wind forecast time">
-          <button id="windForwardButton" type="button" aria-label="Next wind forecast day">Forward</button>
+          <button id="windForwardButton" class="timeline-day-button" type="button" aria-label="Next wind forecast day">Next day</button>
           <strong id="windFrameLabel">Wind timeline pending</strong>
         </div>
         <div id="map" class="map"></div>
