@@ -60,7 +60,7 @@ function forecastDetail(day) {
   if (day.best_window_wind_mph != null) {
     return `${day.best_window_wind_mph} mph best window`;
   }
-  if (day.chop_proxy_ft != null) return `${day.chop_proxy_ft} ft chop proxy`;
+  if (day.chop_proxy_ft != null) return `${day.chop_proxy_ft} ft chop`;
   return day.summary || "Stubbed";
 }
 
@@ -157,29 +157,36 @@ function renderWindChart(hourly = {}) {
     chart.innerHTML = "<span>Wind pending</span>";
     return;
   }
-  const maxWind = Math.max(8, ...points.map((point) => point.speed));
   const peak = Math.max(...points.map((point) => point.speed));
-  const peakIndex = points.findIndex((point) => point.speed === peak);
+  const maxWind = Math.max(8, Math.ceil(peak / 2) * 2);
+  const axisLabels = [maxWind, maxWind * 0.75, maxWind * 0.5, maxWind * 0.25, 0].map((value) => Math.round(value));
+  const tickIndexes = new Set([0, points.length - 1]);
+  points.forEach((_, index) => {
+    const date = new Date(points[index].time);
+    if (!Number.isNaN(date.getTime()) && date.getHours() % 4 === 0) tickIndexes.add(index);
+  });
   chart.innerHTML = `
     <div class="wind-chart">
-      <div class="wind-chart-summary">
-        <strong>${new Date(points[0].time).toLocaleDateString("en-US", { weekday: "long" })}</strong>
-        <span>Peak ${Math.round(peak)} mph</span>
-      </div>
-      <div class="wind-bars" style="--max-wind:${maxWind}; grid-template-columns:repeat(${points.length}, minmax(18px, 1fr))">
-        ${points.map((point, index) => {
-          const height = Math.max(10, Math.round((point.speed / maxWind) * 100));
-          const intensity = windIntensity(point.speed).toFixed(2);
-          const showValue = index === 0 || index === peakIndex || index === points.length - 1;
-          const showTime = index === 0 || index === points.length - 1 || index % 2 === 0;
-          return `
-            <div class="wind-bar-column" title="${hourLabel(point.time)} ${Math.round(point.speed)} mph" style="--wind-intensity:${intensity}; --bar-height:${height}%">
-              <span>${showValue ? `${Math.round(point.speed)}` : ""}</span>
-              <i aria-hidden="true"></i>
-              <em>${showTime ? hourLabel(point.time) : ""}</em>
-            </div>
-          `;
-        }).join("")}
+      <div class="wind-chart-frame">
+        <div class="wind-y-axis" aria-hidden="true">
+          ${axisLabels.map((value) => `<span>${value} mph</span>`).join("")}
+        </div>
+        <div class="wind-plot">
+          <div class="wind-bars" style="grid-template-columns:repeat(${points.length}, minmax(18px, 1fr))">
+            ${points.map((point, index) => {
+              const height = Math.max(8, Math.round((point.speed / maxWind) * 100));
+              const intensity = windIntensity(point.speed).toFixed(2);
+              return `
+                <div class="wind-bar-column" title="${hourLabel(point.time)} ${Math.round(point.speed)} mph" style="--wind-intensity:${intensity}; --bar-height:${height}%">
+                  <i aria-hidden="true"></i>
+                </div>
+              `;
+            }).join("")}
+          </div>
+          <div class="wind-x-axis" aria-hidden="true" style="grid-template-columns:repeat(${points.length}, minmax(18px, 1fr))">
+            ${points.map((point, index) => `<span>${tickIndexes.has(index) ? hourLabel(point.time) : ""}</span>`).join("")}
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -191,7 +198,7 @@ function renderLiveSpotData(bundle) {
   grade.textContent = latest.grade || "--";
   grade.dataset.grade = gradeValue(latest.grade);
   document.getElementById("conditionSummary").textContent = latest.chop_proxy_ft != null
-    ? `${latest.chop_proxy_ft} ft chop proxy`
+    ? `${latest.chop_proxy_ft} ft chop`
     : "Rating pending";
   const fill = document.getElementById("scoreFill");
   if (fill && latest.score != null) fill.style.width = `${Math.max(6, Math.min(100, latest.score))}%`;
