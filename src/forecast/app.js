@@ -131,67 +131,6 @@ function renderSpot(spot) {
   loadLakeShoreline(spot);
 }
 
-function windIntensity(speed) {
-  const value = Number(speed) || 0;
-  if (value <= 5) return 0;
-  return Math.max(0, Math.min(1, (value - 5) / 7));
-}
-
-function hourLabel(time) {
-  const date = new Date(time);
-  if (Number.isNaN(date.getTime())) return "";
-  return date.toLocaleTimeString("en-US", { hour: "numeric" }).replace(" ", "").toLowerCase();
-}
-
-function renderWindChart(hourly = {}) {
-  const chart = document.querySelector(".wind-placeholder");
-  if (!chart) return;
-  const times = hourly.time || [];
-  const speeds = hourly.wind_speed_10m || [];
-  const firstDay = frameDateKey(times[0]);
-  const points = times
-    .map((time, index) => ({ time, speed: Number(speeds[index] ?? 0) }))
-    .filter((point) => frameDateKey(point.time) === firstDay)
-    .slice(0, 24);
-  if (!points.length) {
-    chart.innerHTML = "<span>Wind pending</span>";
-    return;
-  }
-  const peak = Math.max(...points.map((point) => point.speed));
-  const maxWind = Math.max(8, Math.ceil(peak / 2) * 2);
-  const axisLabels = [maxWind, maxWind * 0.75, maxWind * 0.5, maxWind * 0.25, 0].map((value) => Math.round(value));
-  const tickIndexes = new Set([0, points.length - 1]);
-  points.forEach((_, index) => {
-    const date = new Date(points[index].time);
-    if (!Number.isNaN(date.getTime()) && date.getHours() % 4 === 0) tickIndexes.add(index);
-  });
-  chart.innerHTML = `
-    <div class="wind-chart">
-      <div class="wind-chart-frame">
-        <div class="wind-y-axis" aria-hidden="true">
-          ${axisLabels.map((value) => `<span>${value} mph</span>`).join("")}
-        </div>
-        <div class="wind-plot">
-          <div class="wind-bars" style="grid-template-columns:repeat(${points.length}, minmax(18px, 1fr))">
-            ${points.map((point, index) => {
-              const height = Math.max(8, Math.round((point.speed / maxWind) * 100));
-              const intensity = windIntensity(point.speed).toFixed(2);
-              return `
-                <div class="wind-bar-column" title="${hourLabel(point.time)} ${Math.round(point.speed)} mph" style="--wind-intensity:${intensity}; --bar-height:${height}%">
-                  <i aria-hidden="true"></i>
-                </div>
-              `;
-            }).join("")}
-          </div>
-          <div class="wind-x-axis" aria-hidden="true" style="grid-template-columns:repeat(${points.length}, minmax(18px, 1fr))">
-            ${points.map((point, index) => `<span>${tickIndexes.has(index) ? hourLabel(point.time) : ""}</span>`).join("")}
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
 function renderLiveSpotData(bundle) {
   const latest = bundle.latest || {};
   const grade = document.getElementById("conditionGrade");
@@ -203,7 +142,6 @@ function renderLiveSpotData(bundle) {
   const fill = document.getElementById("scoreFill");
   if (fill && latest.score != null) fill.style.width = `${Math.max(6, Math.min(100, latest.score))}%`;
   renderForecastStrip(bundle.ten_day || []);
-  renderWindChart(bundle.hourly || {});
 }
 
 async function loadLiveSpotData(spot) {
@@ -217,7 +155,6 @@ async function loadLiveSpotData(spot) {
     grade.dataset.grade = "";
     document.getElementById("conditionSummary").textContent = "Rating pending";
     renderForecastStrip();
-    renderWindChart();
   }
 }
 
