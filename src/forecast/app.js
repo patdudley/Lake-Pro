@@ -268,7 +268,7 @@ function updateWindProbe(frame = windFrames[windFrameIndex]) {
   const speed = Math.round(Number(frame?.wind_speed_mph || 0));
   const label = frame?.wind_direction_label || "";
   if (value) value.textContent = `${speed} mph`;
-  if (arrow) arrow.style.transform = `rotate(${flowBearing(frame)}deg)`;
+  if (arrow) arrow.style.transform = `rotate(${flowBearing(frame) - 90}deg)`;
   windProbeElement.setAttribute("aria-label", `Wind probe showing ${speed} mph ${label}. Drag to inspect another lake spot.`);
 }
 

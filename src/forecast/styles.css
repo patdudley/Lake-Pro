@@ -150,20 +150,20 @@ body {
   z-index: 9;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-width: 118px;
-  min-height: 48px;
-  border: 3px solid #ffffff;
+  gap: 7px;
+  min-width: 88px;
+  min-height: 36px;
+  border: 2px solid #ffffff;
   border-radius: 999px;
   background: #172340;
-  box-shadow: 0 12px 28px rgba(7, 25, 82, 0.22);
+  box-shadow: 0 10px 22px rgba(7, 25, 82, 0.2);
   color: #ffffff;
   cursor: grab;
   font: inherit;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 950;
   letter-spacing: 0;
-  padding: 0 16px 0 18px;
+  padding: 0 11px 0 12px;
   text-transform: uppercase;
 }
 
@@ -177,12 +177,12 @@ body {
 
 .wind-probe i {
   position: absolute;
-  bottom: -14px;
+  bottom: -10px;
   left: 50%;
-  width: 22px;
-  height: 22px;
-  border-right: 3px solid #ffffff;
-  border-bottom: 3px solid #ffffff;
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
   background: var(--cyan);
   content: "";
   transform: translateX(-50%) rotate(45deg);
@@ -195,8 +195,8 @@ body {
 }
 
 .wind-probe-arrow {
-  width: 23px;
-  height: 23px;
+  width: 18px;
+  height: 18px;
   transition: transform 180ms ease;
 }
 
@@ -207,21 +207,21 @@ body {
 }
 
 .wind-probe-arrow::before {
-  top: 9px;
+  top: 7px;
   right: 0;
-  width: 22px;
-  height: 5px;
+  width: 17px;
+  height: 4px;
   border-radius: 999px;
   background: #ffffff;
 }
 
 .wind-probe-arrow::after {
-  top: 4px;
+  top: 3px;
   right: 0;
-  width: 12px;
-  height: 12px;
-  border-top: 5px solid #ffffff;
-  border-right: 5px solid #ffffff;
+  width: 9px;
+  height: 9px;
+  border-top: 4px solid #ffffff;
+  border-right: 4px solid #ffffff;
   transform: rotate(45deg);
 }
 
