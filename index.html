@@ -29,28 +29,27 @@
           <strong id="windFrameLabel">Wind timeline pending</strong>
         </div>
         <div id="map" class="map"></div>
-      </section>
+        <div class="report-card map-report-bubble" aria-label="Current lake report">
+          <div class="verdict-location">
+            <span class="pin" aria-hidden="true"></span>
+            <div>
+              <strong id="spotName">Lake spot</strong>
+              <span id="spotLocation">Location</span>
+            </div>
+          </div>
 
-      <section class="report-card" aria-label="Current lake report">
-        <div class="verdict-location">
-          <span class="pin" aria-hidden="true"></span>
-          <div>
-            <strong id="spotName">Lake spot</strong>
-            <span id="spotLocation">Location</span>
+          <div class="verdict-main">
+            <div class="condition-grade-metric">
+              <span>Boating Conditions</span>
+              <strong id="conditionGrade" class="grade-letter">--</strong>
+            </div>
+            <div class="surface-chop-metric">
+              <span>Surface Chop</span>
+              <b id="conditionSummary">Rating pending</b>
+            </div>
           </div>
+          <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
         </div>
-
-        <div class="verdict-main">
-          <div class="condition-grade-metric">
-            <span>Boating Conditions</span>
-            <strong id="conditionGrade" class="grade-letter">--</strong>
-          </div>
-          <div class="surface-chop-metric">
-            <span>Surface Chop</span>
-            <b id="conditionSummary">Rating pending</b>
-          </div>
-        </div>
-        <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
       </section>
 
       <section class="camera-card" id="cameraCard" aria-labelledby="cameraTitle">

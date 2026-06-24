@@ -90,14 +90,9 @@ body {
 }
 
 .timelapse-control {
-  position: absolute;
-  top: 36px;
-  left: 36px;
-  z-index: 12;
   display: grid;
   grid-template-columns: 42px minmax(220px, 1fr) auto minmax(0, 1fr) auto;
-  width: min(520px, calc(100% - 72px));
-  margin-top: 0;
+  margin-bottom: 16px;
   align-items: center;
   gap: 8px 10px;
   border: 1px solid rgba(17, 188, 233, 0.24);
@@ -423,6 +418,46 @@ h2 {
   position: relative;
 }
 
+.map-report-bubble {
+  position: absolute;
+  left: 36px;
+  bottom: 36px;
+  z-index: 12;
+  width: min(390px, calc(100% - 72px));
+  margin-top: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88)),
+    linear-gradient(135deg, rgba(17, 188, 233, 0.12), rgba(242, 11, 198, 0.09));
+  backdrop-filter: blur(14px);
+  justify-items: stretch;
+}
+
+.report-card.map-report-bubble {
+  grid-template-columns: none;
+  align-items: stretch;
+}
+
+.map-report-bubble .verdict-location {
+  display: none;
+}
+
+.map-report-bubble .verdict-main {
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+
+.map-report-bubble .condition-grade-metric strong {
+  font-size: clamp(3.8rem, 6vw, 4.8rem);
+}
+
+.map-report-bubble .surface-chop-metric b {
+  font-size: clamp(1.65rem, 2.2vw, 2rem);
+  overflow-wrap: normal;
+  white-space: normal;
+  word-break: keep-all;
+}
+
 .report-card {
   display: grid;
   gap: 16px;
@@ -728,12 +763,17 @@ h2 {
   }
 
   .timelapse-control {
-    top: 16px;
-    left: 16px;
     grid-template-columns: 76px minmax(0, 1fr) 76px;
-    width: min(340px, calc(100% - 32px));
     gap: 8px;
     border-radius: 8px;
+  }
+
+  .map-report-bubble {
+    left: 16px;
+    bottom: 16px;
+    width: min(300px, calc(100% - 32px));
+    padding: 12px;
+    gap: 10px;
   }
 
   .timelapse-control.has-back {
