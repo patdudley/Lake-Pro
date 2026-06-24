@@ -423,13 +423,14 @@ h2 {
   left: 36px;
   bottom: 36px;
   z-index: 12;
-  width: min(190px, calc(100% - 72px));
+  width: min(172px, calc(100% - 72px));
   margin-top: 0;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88)),
     linear-gradient(135deg, rgba(17, 188, 233, 0.12), rgba(242, 11, 198, 0.09));
   backdrop-filter: blur(14px);
   justify-items: stretch;
+  padding: 13px;
 }
 
 .report-card.map-report-bubble {
@@ -443,18 +444,24 @@ h2 {
 
 .map-report-bubble .verdict-main {
   grid-template-columns: minmax(0, 1fr);
-  gap: 8px;
+  gap: 0;
   width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
 }
 
 .map-report-bubble .condition-grade-metric strong {
-  margin-top: 4px;
-  font-size: 3.1rem;
+  margin-top: 2px;
+  font-size: 3.4rem;
+  letter-spacing: 0;
+  text-align: left;
 }
 
 .map-report-bubble .surface-chop-metric b {
   margin-top: 4px;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.12;
   overflow-wrap: normal;
   white-space: normal;
   word-break: keep-all;
@@ -462,7 +469,25 @@ h2 {
 
 .map-report-bubble .condition-grade-metric,
 .map-report-bubble .surface-chop-metric {
-  padding: 10px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.map-report-bubble .condition-grade-metric {
+  padding-bottom: 9px;
+}
+
+.map-report-bubble .surface-chop-metric {
+  border-top: 1px solid rgba(7, 25, 82, 0.1);
+  padding-top: 9px;
+}
+
+.map-report-bubble .verdict-main span {
+  color: #137d8d;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
 }
 
 .report-card {
@@ -778,27 +803,32 @@ h2 {
   .map-report-bubble {
     left: 16px;
     bottom: 16px;
-    width: min(178px, calc(100% - 32px));
-    padding: 12px;
-    gap: 10px;
+    width: min(148px, calc(100% - 32px));
+    padding: 11px;
+    gap: 8px;
   }
 
   .map-report-bubble .verdict-main {
     grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
+    gap: 0;
   }
 
   .map-report-bubble .condition-grade-metric,
   .map-report-bubble .surface-chop-metric {
-    padding: 9px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .map-report-bubble .condition-grade-metric strong {
-    font-size: 3rem;
+    font-size: 2.75rem;
   }
 
   .map-report-bubble .surface-chop-metric b {
-    font-size: 1.15rem;
+    font-size: 0.98rem;
+  }
+
+  .map-report-bubble .verdict-main span {
+    font-size: 0.6rem;
   }
 
   .timelapse-control.has-back {
