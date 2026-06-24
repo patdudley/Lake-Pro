@@ -27,6 +27,13 @@ const mapLayerUrls = {
   },
 };
 
+const mapViewBounds = {
+  "lake-tahoe": [-120.1639382, 38.9281733, -119.9260578, 39.2490133],
+  "payette-lake": [-116.1257363, 44.9109906, -116.0513211, 44.9947051],
+};
+
+const defaultSpotSlug = "payette-lake";
+
 const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   label: index === 0 ? "Today" : new Date(Date.now() + index * 86400000).toLocaleDateString("en-US", { weekday: "short" }),
   grade: "--",
@@ -169,7 +176,9 @@ async function fetchGeoJson(url) {
 
 function selectedSpot() {
   const params = new URLSearchParams(window.location.search);
-  return lakeSpots.find((spot) => spot.slug === params.get("spot")) || lakeSpots[0];
+  return lakeSpots.find((spot) => spot.slug === params.get("spot"))
+    || lakeSpots.find((spot) => spot.slug === defaultSpotSlug)
+    || lakeSpots[0];
 }
 
 function renderSpotSwitcher(activeSpot) {
@@ -185,7 +194,9 @@ function renderSpotSwitcher(activeSpot) {
     const url = new URL(window.location.href);
     url.searchParams.set("spot", select.value);
     window.history.replaceState({}, "", url);
-    const nextSpot = lakeSpots.find((spot) => spot.slug === select.value) || lakeSpots[0];
+    const nextSpot = lakeSpots.find((spot) => spot.slug === select.value)
+      || lakeSpots.find((spot) => spot.slug === defaultSpotSlug)
+      || lakeSpots[0];
     renderSpot(nextSpot);
     updateMapForSpot(nextSpot);
   });
@@ -747,14 +758,15 @@ function updateMapForSpot(spot) {
 function fitMapPadding() {
   const narrow = window.matchMedia("(max-width: 820px)").matches;
   return narrow
-    ? { top: 34, right: 30, bottom: 96, left: 30 }
-    : { top: 44, right: 56, bottom: 126, left: 56 };
+    ? { top: 24, right: 24, bottom: 82, left: 24 }
+    : { top: 34, right: 42, bottom: 96, left: 42 };
 }
 
 function fitMapToSpot(spot, duration = 650) {
   if (!lakeMap || !spot) return;
   const source = windFrameForSpot(spot);
-  if (!source?.bounds) {
+  const bounds = mapViewBounds[spot.slug] || source?.bounds;
+  if (!bounds) {
     lakeMap.easeTo({
       center: [spot.longitude, spot.latitude],
       zoom: spot.slug === "lake-tahoe" ? 8.35 : 11.15,
@@ -764,7 +776,7 @@ function fitMapToSpot(spot, duration = 650) {
     return;
   }
 
-  const [west, south, east, north] = source.bounds;
+  const [west, south, east, north] = bounds;
   lakeMap.fitBounds([[west, south], [east, north]], {
     padding: fitMapPadding(),
     duration,
