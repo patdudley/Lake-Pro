@@ -376,7 +376,11 @@ def build_forecast(spot: Spot) -> dict:
         rainy_day = (precip is not None and float(precip) >= 55) or is_rainy_weather_code(weather_code)
         window_stays_dry = window["max_precip_probability"] is not None and float(window["max_precip_probability"]) <= 25
         warms_up = temp_max is not None and float(temp_max) >= 70
-        if rainy_day and not (window_stays_dry and warms_up):
+        cold_rainy_day = rainy_day and temp_max is not None and float(temp_max) < 65
+        if cold_rainy_day:
+            score = cap_score(score, top_score_for_grade("C"))
+            grade_caps.append("rainy_cold_day_best_case_c")
+        elif rainy_day and not (window_stays_dry and warms_up):
             score = cap_score(score, top_score_for_grade("B"))
             grade_caps.append("rainy_day_best_case_b")
 
