@@ -455,7 +455,7 @@ h2 {
   margin-top: 2px;
   font-size: 3.4rem;
   letter-spacing: 0;
-  text-align: left;
+  text-align: center;
 }
 
 .map-report-bubble .surface-chop-metric b {
@@ -476,6 +476,7 @@ h2 {
 
 .map-report-bubble .condition-grade-metric {
   padding-bottom: 9px;
+  text-align: center;
 }
 
 .map-report-bubble .surface-chop-metric {

@@ -1,4 +1,5 @@
 import { lakeSpots } from "../spots/index.js";
+import { windFrameForSpot } from "../map/windFrameSource.js";
 
 let lakeMap = null;
 let currentSpot = null;
@@ -737,14 +738,38 @@ function updateMapForSpot(spot) {
 
   if (!lakeMap) return;
 
-  lakeMap.flyTo({
-    center: [spot.longitude, spot.latitude],
-    zoom: spot.slug === "lake-tahoe" ? 8.35 : 11.15,
-    essential: true,
-  });
+  fitMapToSpot(spot);
 
   resetWindProbeForSpot(spot);
   renderWindFrame(windFrameIndex);
+}
+
+function fitMapPadding() {
+  const narrow = window.matchMedia("(max-width: 820px)").matches;
+  return narrow
+    ? { top: 34, right: 24, bottom: 86, left: 118 }
+    : { top: 44, right: 44, bottom: 126, left: 172 };
+}
+
+function fitMapToSpot(spot, duration = 650) {
+  if (!lakeMap || !spot) return;
+  const source = windFrameForSpot(spot);
+  if (!source?.bounds) {
+    lakeMap.easeTo({
+      center: [spot.longitude, spot.latitude],
+      zoom: spot.slug === "lake-tahoe" ? 8.35 : 11.15,
+      duration,
+      essential: true,
+    });
+    return;
+  }
+
+  const [west, south, east, north] = source.bounds;
+  lakeMap.fitBounds([[west, south], [east, north]], {
+    padding: fitMapPadding(),
+    duration,
+    essential: true,
+  });
 }
 
 function setLayerVisibility(ids, visible) {
@@ -819,7 +844,8 @@ async function addPayetteBoatingLayers() {
 function resizeMapToPanel() {
   if (!lakeMap || !currentSpot) return;
   lakeMap.resize();
-  updateMapForSpot(currentSpot);
+  fitMapToSpot(currentSpot, 0);
+  renderWindFrame(windFrameIndex);
 }
 
 function initMap(activeSpot) {
@@ -845,9 +871,10 @@ function initMap(activeSpot) {
     },
     center: [activeSpot.longitude, activeSpot.latitude],
     zoom: activeSpot.slug === "lake-tahoe" ? 8.35 : 11.15,
-    attributionControl: true,
+    attributionControl: false,
   });
 
+  lakeMap.addControl(new window.maplibregl.AttributionControl({ compact: true }), "top-left");
   lakeMap.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), "top-right");
   ensureLakeSurfaceCanvas();
   requestAnimationFrame(resizeMapToPanel);
