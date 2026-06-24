@@ -188,6 +188,9 @@ body {
   width: 5px;
   height: 16px;
   border: 0;
+  border-left: 0;
+  border-top: 0;
+  border-bottom: 0;
   border-radius: 999px;
   background: currentColor;
   content: "";
@@ -211,17 +214,6 @@ body {
   color: var(--blue);
   padding: 0 13px;
   text-transform: uppercase;
-}
-
-.timeline-day-button::before {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  right: 10px;
-  height: 2px;
-  border-radius: 0 0 999px 999px;
-  background: var(--grad);
-  content: "";
 }
 
 .timeline-day-button:hover,
@@ -249,7 +241,7 @@ body {
   font-size: 0.78rem;
   font-weight: 900;
   padding: 8px 12px;
-  text-align: right;
+  text-align: center;
   white-space: nowrap;
 }
 
