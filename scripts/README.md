@@ -15,14 +15,16 @@ Outputs:
 - `data/live/map_layers/payette_*.geojson`
 - `assets/mile-high-marina-camera.png` when Node + Playwright are available
 
-Install hourly macOS schedule:
+Install macOS schedule. This refreshes weather data and the Mile High Marina
+camera screenshot hourly from 7:00 AM through 10:00 PM local time:
 
 ```sh
 chmod +x scripts/run_lakepro_pipeline.sh
+mkdir -p ~/Library/LaunchAgents
 cp scripts/com.lakepro.refresh-data.plist ~/Library/LaunchAgents/
-launchctl unload ~/Library/LaunchAgents/com.lakepro.refresh-data.plist 2>/dev/null || true
-launchctl load ~/Library/LaunchAgents/com.lakepro.refresh-data.plist
-launchctl start com.lakepro.refresh-data
+launchctl bootout "gui/$(id -u)" ~/Library/LaunchAgents/com.lakepro.refresh-data.plist 2>/dev/null || true
+launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/com.lakepro.refresh-data.plist
+launchctl kickstart -k "gui/$(id -u)/com.lakepro.refresh-data"
 ```
 
 Notes:
@@ -32,3 +34,4 @@ Notes:
 - Chop height is currently a wind-based proxy, not a measured value.
 - Wind-shadow scoring, danger restrictions, and final boating-area grading still need approved model rules and verified hazard polygons.
 - The camera refresh script uses Playwright and Google Chrome. If Node/Playwright is unavailable, the scheduled data run still succeeds and leaves the last camera screenshot in place.
+- If macOS blocks the LaunchAgent with `Operation not permitted`, move the repo out of `Documents` or grant Full Disk Access to the shell used by launchd. The script itself can still be run manually from Terminal.

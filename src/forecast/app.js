@@ -727,7 +727,7 @@ function renderTimelapseControls() {
       renderWindFrame(windFrameIndex + dayStep);
     };
   }
-  renderWindFrame(0);
+  renderWindFrame(currentWindFrameIndex());
 }
 
 async function loadWindTimelapse(spot) {
@@ -741,6 +741,17 @@ async function loadWindTimelapse(spot) {
     console.warn("[LakePro] Wind timelapse unavailable", error);
   }
   renderTimelapseControls();
+}
+
+function currentWindFrameIndex(now = new Date()) {
+  if (!windFrames.length) return 0;
+  const nowMs = now.getTime();
+  if (!Number.isFinite(nowMs)) return 0;
+  const firstFutureIndex = windFrames.findIndex((frame) => {
+    const timeMs = new Date(frame.time).getTime();
+    return Number.isFinite(timeMs) && timeMs >= nowMs;
+  });
+  return firstFutureIndex >= 0 ? firstFutureIndex : windFrames.length - 1;
 }
 
 function updateMapForSpot(spot) {
