@@ -1,0 +1,63 @@
+name: Refresh live Lake Pro data
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check refresh window
+        id: window
+        shell: bash
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          now = datetime.now(ZoneInfo("America/Los_Angeles"))
+          should_run = 7 <= now.hour <= 22
+          print(f"should_run={'true' if should_run else 'false'}")
+          print(f"local_time={now.isoformat()}")
+          PY
+
+      - name: Check out repo
+        if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright
+        if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Refresh data and camera
+        if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          python3 scripts/lakepro_pipeline.py
+          node scripts/capture_mile_high_camera.js
+
+      - name: Commit refreshed artifacts
+        if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/mile-high-marina-camera.png data/live
+          if git diff --cached --quiet; then
+            echo "No live data changes to commit."
+          else
+            git commit -m "Refresh live Lake Pro data"
+            git push
+          fi
