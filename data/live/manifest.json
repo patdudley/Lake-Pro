@@ -1,10 +1,11 @@
 {
   "failures": [],
-  "generated_at": "2026-06-25T00:51:56.855207+00:00",
+  "generated_at": "2026-06-25T16:30:43.419633+00:00",
   "map_layers": {
     "bathymetry_contours": {
+      "error": "The read operation timed out",
       "features": 45,
-      "status": "ok",
+      "status": "cached",
       "url": "https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/1/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson"
     },
     "no_wake_zone": {
@@ -20,20 +21,20 @@
   },
   "spots": [
     {
-      "best_window": "Evening",
-      "grade": "C",
+      "best_window": "Early morning",
+      "grade": "A",
       "name": "Lake Tahoe",
-      "score": 71,
+      "score": 92,
       "slug": "lake-tahoe",
-      "wind_speed_max_mph": 10.0
+      "wind_speed_max_mph": 15.0
     },
     {
-      "best_window": "Evening",
-      "grade": "B",
+      "best_window": "Late morning",
+      "grade": "A",
       "name": "Payette Lake",
-      "score": 84,
+      "score": 92,
       "slug": "payette-lake",
-      "wind_speed_max_mph": 13.0
+      "wind_speed_max_mph": 12.0
     }
   ]
 }
