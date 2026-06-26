@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-06-25T23:23:22.575193+00:00",
+  "generated_at": "2026-06-26T04:10:39.433741+00:00",
   "map_layers": {
     "bathymetry_contours": {
       "features": 45,
@@ -20,20 +20,20 @@
   },
   "spots": [
     {
-      "best_window": "Afternoon",
-      "grade": "C",
+      "best_window": "Pending",
+      "grade": "D",
       "name": "Lake Tahoe",
-      "score": 71,
+      "score": 59,
       "slug": "lake-tahoe",
       "wind_speed_max_mph": 15.0
     },
     {
-      "best_window": "Evening",
+      "best_window": "Pending",
       "grade": "C",
       "name": "Payette Lake",
       "score": 71,
       "slug": "payette-lake",
-      "wind_speed_max_mph": 10.0
+      "wind_speed_max_mph": 8.0
     }
   ]
 }
