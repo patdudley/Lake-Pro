@@ -29,6 +29,8 @@ WIND_FRAMES_DIR = DATA_DIR / "wind_frames"
 
 TIMEZONE = "America/Los_Angeles"
 USER_AGENT = "LakePro/0.1 foundation data pipeline"
+DAYLIGHT_WAKE_START_HOUR = 7
+DAYLIGHT_WAKE_END_HOUR = 19
 
 
 @dataclass(frozen=True)
@@ -173,6 +175,16 @@ def fetch_open_meteo_daily(spot: Spot) -> dict:
                 "wind_direction_10m_dominant",
             ]
         ),
+        "hourly": ",".join(
+            [
+                "temperature_2m",
+                "precipitation_probability",
+                "wind_speed_10m",
+                "wind_gusts_10m",
+                "wind_direction_10m",
+                "weather_code",
+            ]
+        ),
         "temperature_unit": "fahrenheit",
         "wind_speed_unit": "mph",
         "timezone": TIMEZONE,
@@ -261,49 +273,131 @@ def window_label(hour: int | None) -> str:
     return "Evening"
 
 
-def best_boating_window_for_day(hourly: dict, day_str: str) -> dict:
+def is_daylight_wake_hour(hour: int) -> bool:
+    return DAYLIGHT_WAKE_START_HOUR <= hour <= DAYLIGHT_WAKE_END_HOUR
+
+
+def score_boating_window(
+    *,
+    day: date,
+    avg_wind: float | None,
+    avg_gust: float | None,
+    max_precip: float | None,
+    day_temp_max: float | int | None,
+    weather_code: int | float | None,
+) -> tuple[int, int, list[str]]:
+    score = 94
+    if avg_wind is not None:
+        score -= max(0, int(round((float(avg_wind) - 4.5) * 4.7)))
+    if avg_gust is not None:
+        score -= max(0, int(round((float(avg_gust) - 10) * 1.8)))
+    if max_precip is not None:
+        score -= max(0, int(round((float(max_precip) - 30) * 0.25)))
+    score -= crowding_penalty(day)
+    score = max(0, min(100, score))
+    window_stays_dry = max_precip is not None and float(max_precip) <= 25
+    return apply_grade_caps(
+        score,
+        day,
+        day_temp_max,
+        max_precip,
+        weather_code,
+        avg_wind,
+        window_stays_dry,
+    )
+
+
+def best_boating_window_for_day(hourly: dict, day_str: str, day_temp_max: float | int | None = None) -> dict:
     times = hourly.get("time", [])
     winds = hourly.get("wind_speed_10m", [])
     gusts = hourly.get("wind_gusts_10m", [])
     precipitation = hourly.get("precipitation_probability", [])
+    temperatures = hourly.get("temperature_2m", [])
+    weather_codes = hourly.get("weather_code", [])
+    short_forecasts = hourly.get("short_forecast", [])
     candidates = []
+    day = date.fromisoformat(day_str)
 
-    for start in range(0, max(0, len(times) - 2)):
-        chunk_times = times[start : start + 3]
-        if len(chunk_times) < 3 or any(timestamp[:10] != day_str for timestamp in chunk_times):
-            continue
-        hour = int(chunk_times[0][11:13])
-        if hour < 6 or hour > 18:
-            continue
+    for minimum_hours in (3, 1):
+        for start in range(0, len(times)):
+            chunk_indices = []
+            for index in range(start, min(len(times), start + 3)):
+                if times[index][:10] != day_str:
+                    break
+                chunk_indices.append(index)
+            chunk_times = [times[index] for index in chunk_indices]
+            if len(chunk_times) < minimum_hours:
+                continue
+            hours = [int(timestamp[11:13]) for timestamp in chunk_times]
+            if not all(is_daylight_wake_hour(hour) for hour in hours):
+                continue
 
-        wind_chunk = [float(value) for value in winds[start : start + 3] if value is not None]
-        gust_chunk = [float(value) for value in gusts[start : start + 3] if value is not None]
-        precip_chunk = [float(value) for value in precipitation[start : start + 3] if value is not None]
-        if len(wind_chunk) < 3:
-            continue
-        avg_wind = sum(wind_chunk) / len(wind_chunk)
-        avg_gust = sum(gust_chunk) / len(gust_chunk) if gust_chunk else avg_wind
-        max_precip = max(precip_chunk) if precip_chunk else None
-        candidates.append(
-            {
-                "start_hour": hour,
-                "avg_wind_mph": round(avg_wind, 1),
-                "avg_gust_mph": round(avg_gust, 1),
-                "max_precip_probability": max_precip,
-                "score_value": avg_wind + max(0.0, avg_gust - 12.0) * 0.35 + max(0.0, (max_precip or 0) - 35) * 0.04,
-            }
-        )
+            wind_chunk = [float(winds[index]) for index in chunk_indices if index < len(winds) and winds[index] is not None]
+            gust_chunk = [float(gusts[index]) for index in chunk_indices if index < len(gusts) and gusts[index] is not None]
+            precip_chunk = [float(precipitation[index]) for index in chunk_indices if index < len(precipitation) and precipitation[index] is not None]
+            temp_chunk = [float(temperatures[index]) for index in chunk_indices if index < len(temperatures) and temperatures[index] is not None]
+            if len(wind_chunk) < minimum_hours:
+                continue
+            avg_wind = sum(wind_chunk) / len(wind_chunk)
+            avg_gust = sum(gust_chunk) / len(gust_chunk) if gust_chunk else avg_wind
+            max_precip = max(precip_chunk) if precip_chunk else None
+            window_temp_max = max(temp_chunk) if temp_chunk else day_temp_max
+            window_weather_code = None
+            for index in chunk_indices:
+                precip_value_for_hour = precipitation[index] if index < len(precipitation) else None
+                if max_precip is not None and precip_value_for_hour == max_precip:
+                    if index < len(weather_codes):
+                        window_weather_code = weather_codes[index]
+                    elif index < len(short_forecasts):
+                        window_weather_code = nws_weather_code(short_forecasts[index], max_precip)
+                    break
+            score, score_before_wind_cap, grade_caps = score_boating_window(
+                day=day,
+                avg_wind=avg_wind,
+                avg_gust=avg_gust,
+                max_precip=max_precip,
+                day_temp_max=day_temp_max if day_temp_max is not None else window_temp_max,
+                weather_code=window_weather_code,
+            )
+            candidates.append(
+                {
+                    "start_hour": hours[0],
+                    "avg_wind_mph": round(avg_wind, 1),
+                    "avg_gust_mph": round(avg_gust, 1),
+                    "max_precip_probability": max_precip,
+                    "temperature_2m_max": round(window_temp_max) if window_temp_max is not None else None,
+                    "weather_code": window_weather_code,
+                    "score": score,
+                    "score_before_wind_cap": score_before_wind_cap,
+                    "grade_caps": grade_caps,
+                }
+            )
+        if candidates:
+            break
 
     if not candidates:
-        return {"label": "Pending", "avg_wind_mph": None, "avg_gust_mph": None, "max_precip_probability": None}
+        return {
+            "label": "Pending",
+            "avg_wind_mph": None,
+            "avg_gust_mph": None,
+            "max_precip_probability": None,
+            "score": None,
+            "score_before_wind_cap": None,
+            "grade_caps": [],
+        }
 
-    best = min(candidates, key=lambda item: item["score_value"])
+    best = max(candidates, key=lambda item: (item["score"], -float(item["avg_wind_mph"] or 99), -item["start_hour"]))
     return {
         "label": window_label(best["start_hour"]),
         "avg_wind_mph": best["avg_wind_mph"],
         "avg_gust_mph": best["avg_gust_mph"],
         "max_precip_probability": best["max_precip_probability"],
         "start_hour": best["start_hour"],
+        "score": best["score"],
+        "score_before_wind_cap": best["score_before_wind_cap"],
+        "grade_caps": best["grade_caps"],
+        "weather_code": best["weather_code"],
+        "temperature_2m_max": best["temperature_2m_max"],
     }
 
 
@@ -387,6 +481,7 @@ def build_forecast(spot: Spot) -> dict:
         "temperature_2m": [],
         "precipitation_probability": [],
         "short_forecast": [],
+        "weather_code": [],
     }
     grouped: dict[str, list[dict]] = {}
 
@@ -404,6 +499,7 @@ def build_forecast(spot: Spot) -> dict:
         hourly["temperature_2m"].append(period.get("temperature"))
         hourly["precipitation_probability"].append(precip)
         hourly["short_forecast"].append(period.get("shortForecast"))
+        hourly["weather_code"].append(nws_weather_code(period.get("shortForecast", ""), precip))
         grouped.setdefault(timestamp[:10], []).append(period)
 
     days = []
@@ -426,32 +522,32 @@ def build_forecast(spot: Spot) -> dict:
             most_relevant_period = max(periods, key=lambda period: period.get("temperature") or -999)
         weather_code = nws_weather_code(most_relevant_period.get("shortForecast", ""), precip or 0)
         chop = chop_proxy_ft(wind, gust)
-        window = best_boating_window_for_day(hourly, day_str)
+        window = best_boating_window_for_day(hourly, day_str, temp_max)
 
-        score = 92
-        if window["avg_wind_mph"] is not None:
-            score -= max(0, int(round((float(window["avg_wind_mph"]) - 8) * 5.0)))
-        elif wind is not None:
-            score -= max(0, int(round((float(wind) - 8) * 4.0)))
-        if window["avg_gust_mph"] is not None:
-            score -= max(0, int(round((float(window["avg_gust_mph"]) - 14) * 2.0)))
-        elif gust is not None:
-            score -= max(0, int(round((float(gust) - 14) * 1.5)))
-        if precip is not None:
-            score -= max(0, int(round((float(precip) - 45) * 0.2)))
-        score -= crowding_penalty(day)
-        score = max(0, min(100, score))
-        window_stays_dry = window["max_precip_probability"] is not None and float(window["max_precip_probability"]) <= 25
-        score, score_before_wind_cap, grade_caps = apply_grade_caps(
-            score,
-            day,
-            temp_max,
-            precip,
-            weather_code,
-            window["avg_wind_mph"] if window["avg_wind_mph"] is not None else wind,
-            window_stays_dry,
-        )
-
+        if window["score"] is not None:
+            score = window["score"]
+            score_before_wind_cap = window["score_before_wind_cap"]
+            grade_caps = window["grade_caps"]
+        else:
+            score = 92
+            if wind is not None:
+                score -= max(0, int(round((float(wind) - 8) * 4.0)))
+            if gust is not None:
+                score -= max(0, int(round((float(gust) - 14) * 1.5)))
+            if precip is not None:
+                score -= max(0, int(round((float(precip) - 45) * 0.2)))
+            score -= crowding_penalty(day)
+            score = max(0, min(100, score))
+            window_stays_dry = window["max_precip_probability"] is not None and float(window["max_precip_probability"]) <= 25
+            score, score_before_wind_cap, grade_caps = apply_grade_caps(
+                score,
+                day,
+                temp_max,
+                precip,
+                weather_code,
+                wind,
+                window_stays_dry,
+            )
         days.append(
             {
                 "date": day_str,
@@ -483,6 +579,7 @@ def build_forecast(spot: Spot) -> dict:
         daily_source = fetch_open_meteo_daily(spot)
         existing_dates = {day["date"] for day in days}
         daily = daily_source.get("daily", {})
+        open_hourly = daily_source.get("hourly", {})
         daily_rows = zip(
             daily.get("time", []),
             daily.get("weather_code", []),
@@ -502,15 +599,21 @@ def build_forecast(spot: Spot) -> dict:
             temp_max = round(float(temp_max)) if temp_max is not None else None
             temp_min = round(float(temp_min)) if temp_min is not None else None
             chop = chop_proxy_ft(wind, wind)
+            window = best_boating_window_for_day(open_hourly, day_str, temp_max)
 
-            score = 92
-            if wind is not None:
-                score -= max(0, int(round((float(wind) - 8) * 4.0)))
-            if precip is not None:
-                score -= max(0, int(round((float(precip) - 45) * 0.2)))
-            score -= crowding_penalty(day)
-            score = max(0, min(100, score))
-            score, score_before_wind_cap, grade_caps = apply_grade_caps(score, day, temp_max, precip, weather_code, wind)
+            if window["score"] is not None:
+                score = window["score"]
+                score_before_wind_cap = window["score_before_wind_cap"]
+                grade_caps = window["grade_caps"]
+            else:
+                score = 92
+                if wind is not None:
+                    score -= max(0, int(round((float(wind) - 8) * 4.0)))
+                if precip is not None:
+                    score -= max(0, int(round((float(precip) - 45) * 0.2)))
+                score -= crowding_penalty(day)
+                score = max(0, min(100, score))
+                score, score_before_wind_cap, grade_caps = apply_grade_caps(score, day, temp_max, precip, weather_code, wind)
 
             days.append(
                 {
@@ -528,10 +631,10 @@ def build_forecast(spot: Spot) -> dict:
                     "temperature_2m_max": temp_max,
                     "temperature_2m_min": temp_min,
                     "chop_proxy_ft": chop,
-                    "best_window": "Daily outlook",
-                    "best_window_wind_mph": wind,
-                    "best_window_gust_mph": wind,
-                    "best_window_precipitation_probability_max": precip,
+                    "best_window": window["label"] if window["score"] is not None else "Daily outlook",
+                    "best_window_wind_mph": window["avg_wind_mph"] if window["score"] is not None else wind,
+                    "best_window_gust_mph": window["avg_gust_mph"] if window["score"] is not None else wind,
+                    "best_window_precipitation_probability_max": window["max_precip_probability"] if window["score"] is not None else precip,
                     "grade_caps": grade_caps,
                     "crowding_penalty": crowding_penalty(day),
                     "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
