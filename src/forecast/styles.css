@@ -107,10 +107,10 @@ body::before {
 
 .home-dashboard {
   display: grid;
-  grid-template-columns: minmax(320px, 0.66fr) minmax(360px, 0.86fr) minmax(430px, 1.14fr);
+  grid-template-columns: minmax(360px, 0.82fr) minmax(440px, 1.18fr);
   grid-template-areas:
-    "hero camera forecast"
-    "hero spots spots";
+    "camera forecast"
+    "spots spots";
   gap: 18px;
   align-items: stretch;
   margin-bottom: 20px;
@@ -119,68 +119,15 @@ body::before {
   background:
     radial-gradient(circle at 84% 4%, rgba(17, 188, 233, 0.1), transparent 26rem),
     radial-gradient(circle at 8% 96%, rgba(242, 11, 198, 0.1), transparent 24rem);
-  padding: 26px 0 14px;
+  padding: 12px 0 14px;
 }
 
-.hero-panel {
-  grid-area: hero;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
-  padding-right: 20px;
-}
-
-.intro-kicker,
 .snapshot-panel-heading strong {
   color: #137d8d;
   font-size: 0.72rem;
   font-weight: 950;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.home-dashboard h1 {
-  max-width: 8.8ch;
-  margin: 8px 0 0;
-  color: var(--text);
-  font-size: clamp(3rem, 4.45vw, 4.35rem);
-  line-height: 0.96;
-  letter-spacing: 0;
-}
-
-.hero-panel > p {
-  max-width: 28rem;
-  margin: 22px 0 0;
-  color: var(--muted);
-  font-size: clamp(1.1rem, 1.9vw, 1.32rem);
-  line-height: 1.5;
-  font-weight: 720;
-}
-
-.intro-grade-note {
-  max-width: 32rem;
-  margin-top: 26px;
-  border-left: 5px solid var(--cyan);
-  border-image: var(--grad) 1;
-  background: rgba(255, 255, 255, 0.74);
-  padding: 12px 14px;
-}
-
-.intro-grade-note strong {
-  display: block;
-  color: var(--text);
-  font-size: 0.86rem;
-  font-weight: 950;
-}
-
-.intro-grade-note span {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 760;
-  line-height: 1.38;
 }
 
 .lake-snapshot-panel {
@@ -1227,27 +1174,11 @@ h2 {
   .home-dashboard {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "hero"
       "camera"
       "spots"
       "forecast";
     gap: 14px;
-    padding: 16px;
-  }
-
-  .hero-panel {
-    padding-right: 0;
-  }
-
-  .home-dashboard h1 {
-    max-width: 11ch;
-    font-size: clamp(2.05rem, 11vw, 3rem);
-  }
-
-  .hero-panel > p {
-    margin-top: 9px;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    padding: 0;
   }
 
   .home-dashboard .camera-card,
@@ -1257,15 +1188,6 @@ h2 {
 
   .home-dashboard .forecast-strip {
     grid-auto-columns: 94px;
-  }
-
-  .intro-grade-note {
-    margin-top: 12px;
-    padding: 10px 11px;
-  }
-
-  .intro-grade-note span {
-    font-size: 0.82rem;
   }
 
   .snapshot-panel-heading {
