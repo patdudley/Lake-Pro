@@ -742,14 +742,21 @@ h2 {
 
 .map-stage {
   position: relative;
+  display: grid;
+}
+
+.map-stage > .map {
+  grid-area: 1 / 1;
 }
 
 .map-report-bubble {
-  position: absolute;
-  left: 28px;
-  bottom: 28px;
+  position: relative;
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: start;
   z-index: 12;
   width: min(132px, calc(100% - 72px));
+  margin: 0 0 28px 28px;
   margin-top: 0;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88)),
@@ -1373,9 +1380,8 @@ h2 {
   }
 
   .map-report-bubble {
-    left: 14px;
-    bottom: 14px;
     width: min(156px, calc(100% - 28px));
+    margin: 0 0 14px 14px;
     padding: 7px 8px;
     gap: 0;
   }
