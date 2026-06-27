@@ -105,10 +105,13 @@ body::before {
   padding: 0 34px 0 12px;
 }
 
-.site-intro {
+.home-dashboard {
   display: grid;
-  grid-template-columns: minmax(320px, 0.74fr) minmax(420px, 1fr);
-  gap: 48px;
+  grid-template-columns: minmax(320px, 0.66fr) minmax(360px, 0.86fr) minmax(430px, 1.14fr);
+  grid-template-areas:
+    "hero camera forecast"
+    "hero spots spots";
+  gap: 18px;
   align-items: stretch;
   margin-bottom: 20px;
   border: 0;
@@ -116,15 +119,16 @@ body::before {
   background:
     radial-gradient(circle at 84% 4%, rgba(17, 188, 233, 0.1), transparent 26rem),
     radial-gradient(circle at 8% 96%, rgba(242, 11, 198, 0.1), transparent 24rem);
-  overflow: hidden;
-  padding: 26px 0 34px;
+  padding: 26px 0 14px;
 }
 
-.intro-copy {
+.hero-panel {
+  grid-area: hero;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-width: 0;
+  padding-right: 20px;
 }
 
 .intro-kicker,
@@ -136,16 +140,16 @@ body::before {
   text-transform: uppercase;
 }
 
-.site-intro h1 {
-  max-width: 11.5ch;
+.home-dashboard h1 {
+  max-width: 8.8ch;
   margin: 8px 0 0;
   color: var(--text);
-  font-size: clamp(3rem, 6.4vw, 5.75rem);
+  font-size: clamp(3rem, 4.45vw, 4.35rem);
   line-height: 0.96;
   letter-spacing: 0;
 }
 
-.site-intro p {
+.hero-panel > p {
   max-width: 28rem;
   margin: 22px 0 0;
   color: var(--muted);
@@ -180,8 +184,9 @@ body::before {
 }
 
 .lake-snapshot-panel {
+  grid-area: spots;
   min-width: 0;
-  align-self: center;
+  align-self: stretch;
 }
 
 .snapshot-panel-heading {
@@ -317,6 +322,39 @@ body::before {
 
 .snapshot-metrics span:nth-child(3) {
   grid-column: 1 / -1;
+}
+
+.home-dashboard .lake-snapshot-slider {
+  grid-auto-columns: minmax(210px, 1fr);
+  gap: 10px;
+  padding-bottom: 2px;
+}
+
+.home-dashboard .lake-snapshot-card {
+  min-height: 0;
+  padding: 14px;
+}
+
+.home-dashboard .lake-snapshot-card > strong {
+  font-size: 1.22rem;
+}
+
+.home-dashboard .snapshot-grade {
+  margin-top: 8px;
+  font-size: 3.25rem;
+}
+
+.home-dashboard .snapshot-track {
+  margin-top: 8px;
+}
+
+.home-dashboard .snapshot-metrics {
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.home-dashboard .snapshot-metrics span {
+  padding: 8px;
 }
 
 .timelapse-control {
@@ -596,6 +634,24 @@ body::before {
   padding: 24px 28px;
 }
 
+.home-dashboard .camera-card,
+.home-dashboard .ten-day-card {
+  margin-top: 0;
+  padding: 18px;
+}
+
+.home-dashboard .camera-card {
+  grid-area: camera;
+}
+
+.home-dashboard .ten-day-card {
+  grid-area: forecast;
+}
+
+.home-dashboard .lake-snapshot-panel {
+  min-width: 0;
+}
+
 h1,
 h2,
 p {
@@ -666,6 +722,11 @@ h2 {
   background: #dfe8f6;
   box-shadow: inset 0 -64px 80px rgba(6, 22, 82, 0.24);
   overflow: hidden;
+}
+
+.home-dashboard .camera-frame {
+  aspect-ratio: 16 / 9.6;
+  margin-top: 12px;
 }
 
 .camera-frame::after {
@@ -909,6 +970,34 @@ h2 {
   scrollbar-width: thin;
 }
 
+.home-dashboard .forecast-strip {
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(86px, 1fr);
+  grid-template-columns: none;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.home-dashboard .forecast-day {
+  min-width: 86px;
+  padding: 10px 7px;
+}
+
+.home-dashboard .forecast-day strong {
+  font-size: 2rem;
+}
+
+.home-dashboard .weather-icon {
+  width: 44px;
+  height: 34px;
+  margin: 6px auto 4px;
+}
+
+.home-dashboard .forecast-day em {
+  font-size: 0.74rem;
+}
+
 @media (min-width: 1040px) {
   .forecast-strip {
     grid-auto-flow: initial;
@@ -920,6 +1009,18 @@ h2 {
   .forecast-day {
     min-width: 0;
     padding: 12px 8px;
+  }
+
+  .home-dashboard .forecast-strip {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(86px, 1fr);
+    grid-template-columns: none;
+    overflow-x: auto;
+  }
+
+  .home-dashboard .forecast-day {
+    min-width: 86px;
+    padding: 10px 7px;
   }
 }
 
@@ -1123,21 +1224,39 @@ h2 {
     min-width: 0;
   }
 
-  .site-intro {
+  .home-dashboard {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "hero"
+      "camera"
+      "spots"
+      "forecast";
     gap: 14px;
     padding: 16px;
   }
 
-  .site-intro h1 {
+  .hero-panel {
+    padding-right: 0;
+  }
+
+  .home-dashboard h1 {
     max-width: 11ch;
     font-size: clamp(2.05rem, 11vw, 3rem);
   }
 
-  .site-intro p {
+  .hero-panel > p {
     margin-top: 9px;
     font-size: 0.9rem;
     line-height: 1.4;
+  }
+
+  .home-dashboard .camera-card,
+  .home-dashboard .ten-day-card {
+    padding: 14px;
+  }
+
+  .home-dashboard .forecast-strip {
+    grid-auto-columns: 94px;
   }
 
   .intro-grade-note {

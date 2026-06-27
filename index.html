@@ -20,8 +20,8 @@
         </div>
       </nav>
 
-      <section class="site-intro" aria-labelledby="introTitle">
-        <div class="intro-copy">
+      <section class="home-dashboard" aria-labelledby="introTitle">
+        <div class="hero-panel">
           <span class="intro-kicker">Live wake-sports outlook</span>
           <h1 id="introTitle">Lake Forecast + Boating Conditions Report</h1>
           <p>Real-time boating conditions, lake forecasts, and the best times to get on the water.</p>
@@ -30,6 +30,32 @@
             <span>Blue means calmer. Purple and pink mean windier, choppier, or less protected. Forecast grades use the best daylight wake window for each day.</span>
           </div>
         </div>
+
+        <section class="camera-card" id="cameraCard" aria-labelledby="cameraTitle">
+          <div class="section-heading">
+            <div>
+              <h2 id="cameraTitle">Mile High Marina Camera</h2>
+              <p id="cameraDescription">Current Payette Lake marina view</p>
+            </div>
+            <a id="cameraSource" href="https://milehighmarina.com/webcams/" target="_blank" rel="noopener">Source</a>
+          </div>
+          <div class="camera-frame">
+            <img id="cameraImage" src="assets/mile-high-marina-camera.png" alt="Mile High Marina webcam screenshot over Payette Lake">
+            <span class="camera-live-pill"><i aria-hidden="true"></i>Live</span>
+            <strong id="cameraLocationOverlay">Payette Lake</strong>
+          </div>
+        </section>
+
+        <section class="ten-day-card" aria-labelledby="forecastTitle">
+          <div class="section-heading">
+            <div>
+              <h2 id="forecastTitle">10 Day Forecast</h2>
+              <p>Lake conditions outlook</p>
+            </div>
+          </div>
+          <div class="forecast-strip" id="forecastStrip" aria-label="10 day forecast placeholders"></div>
+        </section>
+
         <div class="lake-snapshot-panel" aria-label="Live lake condition slider">
           <div class="snapshot-panel-heading">
             <strong>Live lake cards</strong>
@@ -65,31 +91,6 @@
           </div>
           <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
         </div>
-      </section>
-
-      <section class="camera-card" id="cameraCard" aria-labelledby="cameraTitle">
-        <div class="section-heading">
-          <div>
-            <h2 id="cameraTitle">Mile High Marina Camera</h2>
-            <p id="cameraDescription">Current Payette Lake marina view</p>
-          </div>
-          <a id="cameraSource" href="https://milehighmarina.com/webcams/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="camera-frame">
-          <img id="cameraImage" src="assets/mile-high-marina-camera.png" alt="Mile High Marina webcam screenshot over Payette Lake">
-          <span class="camera-live-pill"><i aria-hidden="true"></i>Live</span>
-          <strong id="cameraLocationOverlay">Payette Lake</strong>
-        </div>
-      </section>
-
-      <section class="ten-day-card" aria-labelledby="forecastTitle">
-        <div class="section-heading">
-          <div>
-            <h2 id="forecastTitle">10 Day Forecast</h2>
-            <p>Lake conditions outlook</p>
-          </div>
-        </div>
-        <div class="forecast-strip" id="forecastStrip" aria-label="10 day forecast placeholders"></div>
       </section>
 
       <section class="rating-card" aria-labelledby="ratingTitle">
