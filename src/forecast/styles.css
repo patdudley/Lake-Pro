@@ -89,6 +89,69 @@ body {
   padding: 0 34px 0 12px;
 }
 
+.site-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.74fr) minmax(360px, 1fr);
+  gap: 18px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: var(--shadow-soft);
+  padding: 16px;
+}
+
+.site-intro h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.site-intro p {
+  max-width: 54ch;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.48;
+  font-weight: 700;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.intro-grid div {
+  border: 1px solid rgba(17, 188, 233, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(17, 188, 233, 0.06), rgba(242, 11, 198, 0.045)),
+    #ffffff;
+  padding: 12px;
+}
+
+.intro-grid strong {
+  display: block;
+  color: #137d8d;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.intro-grid span {
+  display: block;
+  margin-top: 6px;
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 760;
+  line-height: 1.34;
+}
+
 .timelapse-control {
   display: grid;
   grid-template-columns: 42px minmax(220px, 1fr) auto minmax(0, 1fr) auto;
@@ -480,6 +543,8 @@ h2 {
 
 .map-report-bubble .condition-grade-metric,
 .map-report-bubble .surface-chop-metric {
+  display: grid;
+  justify-items: center;
   border: 0;
   background: transparent;
   padding: 0;
@@ -500,6 +565,7 @@ h2 {
   font-size: 0.66rem;
   letter-spacing: 0.08em;
   line-height: 1.1;
+  text-align: center;
 }
 
 .map-report-bubble .score-track {
@@ -812,6 +878,37 @@ h2 {
     min-width: 0;
   }
 
+  .site-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding: 13px;
+  }
+
+  .site-intro h1 {
+    font-size: clamp(1.45rem, 7vw, 1.9rem);
+  }
+
+  .site-intro p {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .intro-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .intro-grid div {
+    padding: 8px 10px;
+  }
+
+  .intro-grid span {
+    margin-top: 3px;
+    font-size: 0.82rem;
+    line-height: 1.28;
+  }
+
   .map-panel,
   .report-card,
   .camera-card,
@@ -833,8 +930,8 @@ h2 {
   .map-report-bubble {
     left: 14px;
     bottom: 14px;
-    width: min(86px, calc(100% - 24px));
-    padding: 6px;
+    width: min(156px, calc(100% - 28px));
+    padding: 7px 8px;
     gap: 0;
   }
 
@@ -850,7 +947,7 @@ h2 {
   }
 
   .map-report-bubble .condition-grade-metric strong {
-    font-size: 2.75rem;
+    font-size: 2.25rem;
   }
 
   .map-report-bubble .surface-chop-metric b {
@@ -965,8 +1062,8 @@ h2 {
   }
 
   .map-report-bubble {
-    width: min(86px, calc(100% - 24px));
-    padding: 6px;
+    width: min(156px, calc(100% - 28px));
+    padding: 7px 8px;
   }
 
   .map-report-bubble .verdict-main {
@@ -980,9 +1077,14 @@ h2 {
 
   .map-report-bubble .condition-grade-metric,
   .map-report-bubble .surface-chop-metric {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    justify-items: start;
+    gap: 8px;
     justify-content: center;
     min-width: 0;
-    padding: 5px 4px;
+    padding: 4px 6px;
     border: 0;
     border-radius: 7px;
     background: rgba(255, 255, 255, 0.5);
@@ -998,9 +1100,9 @@ h2 {
   }
 
   .map-report-bubble .condition-grade-metric strong {
-    margin-top: 1px;
-    font-size: 1.8rem;
-    text-align: center;
+    margin-top: 0;
+    font-size: 2.05rem;
+    text-align: right;
   }
 
   .map-report-bubble .surface-chop-metric b {
@@ -1010,13 +1112,13 @@ h2 {
   }
 
   .map-report-bubble .verdict-main span {
-    font-size: 0.5rem;
-    line-height: 1;
-    text-align: center;
+    font-size: 0.54rem;
+    line-height: 1.05;
+    text-align: left;
   }
 
   .map-report-bubble .badge-label-full {
-    display: none;
+    display: inline;
   }
 
   .score-track {
