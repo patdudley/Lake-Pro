@@ -481,6 +481,7 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   const height = bounds.maxY - bounds.minY;
   const speed = Number(frame?.wind_speed_mph || 0);
   const exposure = Math.max(0, Math.min(1, (speed - 5.5) / 6));
+  const gale = Math.max(0, Math.min(1, (speed - 12) / 8));
   const bearing = flowBearing(frame);
   const radians = bearing * Math.PI / 180;
   const fetchOffset = Math.min(0.18, speed * 0.012);
@@ -492,9 +493,15 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   context.clip("evenodd");
 
   const base = context.createLinearGradient(bounds.minX, bounds.minY, bounds.maxX, bounds.maxY);
-  base.addColorStop(0, "rgba(24, 157, 232, 0.96)");
-  base.addColorStop(0.52, "rgba(28, 116, 235, 0.94)");
-  base.addColorStop(1, "rgba(25, 90, 220, 0.9)");
+  if (gale > 0.01) {
+    base.addColorStop(0, `rgba(85, 82, 225, ${0.92 + gale * 0.04})`);
+    base.addColorStop(0.48, `rgba(154, 63, 224, ${0.9 + gale * 0.06})`);
+    base.addColorStop(1, `rgba(230, 22, 203, ${0.86 + gale * 0.1})`);
+  } else {
+    base.addColorStop(0, "rgba(24, 157, 232, 0.96)");
+    base.addColorStop(0.52, "rgba(28, 116, 235, 0.94)");
+    base.addColorStop(1, "rgba(25, 90, 220, 0.9)");
+  }
   context.fillStyle = base;
   context.fillRect(bounds.minX, bounds.minY, width, height);
 
@@ -505,9 +512,9 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
       bounds.maxX + Math.sin(radians) * width * 0.2,
       bounds.maxY - Math.cos(radians) * height * 0.2
     );
-    windWash.addColorStop(0, `rgba(67, 87, 225, ${0.12 * exposure})`);
-    windWash.addColorStop(0.46, `rgba(116, 74, 225, ${0.28 * exposure})`);
-    windWash.addColorStop(1, `rgba(202, 42, 214, ${0.3 * exposure})`);
+    windWash.addColorStop(0, `rgba(94, 76, 225, ${0.12 * exposure + 0.18 * gale})`);
+    windWash.addColorStop(0.46, `rgba(148, 54, 222, ${0.28 * exposure + 0.2 * gale})`);
+    windWash.addColorStop(1, `rgba(242, 11, 198, ${0.3 * exposure + 0.24 * gale})`);
     context.fillStyle = windWash;
     context.fillRect(bounds.minX, bounds.minY, width, height);
 
@@ -515,10 +522,10 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
       const exposedX = center.x + Math.sin(radians) * width * fetchOffset;
       const exposedY = center.y - Math.cos(radians) * height * fetchOffset;
       const rough = context.createRadialGradient(exposedX, exposedY, center.radius * 0.08, exposedX, exposedY, center.radius);
-      rough.addColorStop(0, `rgba(242, 11, 198, ${0.62 * exposure})`);
-      rough.addColorStop(0.34, `rgba(211, 45, 220, ${0.52 * exposure})`);
-      rough.addColorStop(0.68, `rgba(88, 89, 231, ${0.32 * exposure})`);
-      rough.addColorStop(0.92, `rgba(26, 127, 238, ${0.08 * exposure})`);
+      rough.addColorStop(0, `rgba(242, 11, 198, ${0.62 * exposure + 0.2 * gale})`);
+      rough.addColorStop(0.34, `rgba(211, 45, 220, ${0.52 * exposure + 0.16 * gale})`);
+      rough.addColorStop(0.68, `rgba(116, 74, 225, ${0.32 * exposure + 0.12 * gale})`);
+      rough.addColorStop(0.92, `rgba(74, 96, 226, ${0.08 * exposure * (1 - gale)})`);
       rough.addColorStop(1, "rgba(18, 202, 234, 0)");
       context.fillStyle = rough;
       context.fillRect(bounds.minX, bounds.minY, width, height);
@@ -526,10 +533,10 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
 
     for (const center of protectedCenters) {
       const calm = context.createRadialGradient(center.x, center.y, center.radius * 0.08, center.x, center.y, center.radius);
-      const calmStrength = center.strength * (1 - exposure * 0.55);
-      calm.addColorStop(0, `rgba(31, 129, 232, ${calmStrength})`);
-      calm.addColorStop(0.5, `rgba(39, 106, 224, ${calmStrength * 0.5})`);
-      calm.addColorStop(0.84, `rgba(72, 93, 218, ${calmStrength * 0.18})`);
+      const calmStrength = center.strength * (1 - exposure * 0.55) * (1 - gale * 0.88);
+      calm.addColorStop(0, `rgba(50, 110, 226, ${calmStrength})`);
+      calm.addColorStop(0.5, `rgba(75, 96, 222, ${calmStrength * 0.5})`);
+      calm.addColorStop(0.84, `rgba(112, 82, 220, ${calmStrength * 0.18})`);
       calm.addColorStop(1, "rgba(44, 105, 225, 0)");
       context.fillStyle = calm;
       context.fillRect(bounds.minX, bounds.minY, width, height);
@@ -546,9 +553,9 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   );
   const payette = spot?.slug === "payette-lake";
   shoreGlow.addColorStop(0, "rgba(18, 202, 234, 0)");
-  shoreGlow.addColorStop(0.6, `rgba(31, 128, 232, ${payette ? 0.025 + exposure * 0.015 : 0.08 + exposure * 0.05})`);
-  shoreGlow.addColorStop(0.84, `rgba(29, 145, 232, ${payette ? 0.07 + exposure * 0.025 : 0.22 + exposure * 0.08})`);
-  shoreGlow.addColorStop(1, `rgba(31, 155, 232, ${payette ? 0.11 + exposure * 0.03 : 0.36 + exposure * 0.09})`);
+  shoreGlow.addColorStop(0.6, `rgba(63, 107, 228, ${(payette ? 0.025 + exposure * 0.015 : 0.08 + exposure * 0.05) * (1 - gale * 0.75)})`);
+  shoreGlow.addColorStop(0.84, `rgba(75, 98, 226, ${(payette ? 0.07 + exposure * 0.025 : 0.22 + exposure * 0.08) * (1 - gale * 0.82)})`);
+  shoreGlow.addColorStop(1, `rgba(117, 76, 222, ${(payette ? 0.11 + exposure * 0.03 : 0.36 + exposure * 0.09) * (1 - gale * 0.88)})`);
   context.fillStyle = shoreGlow;
   context.fillRect(bounds.minX, bounds.minY, width, height);
 
