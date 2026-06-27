@@ -34,6 +34,8 @@ const mapViewBounds = {
 };
 
 const defaultSpotSlug = "payette-lake";
+const DAYLIGHT_START_HOUR = 6;
+const DAYLIGHT_END_HOUR = 20;
 
 const cameraBySpot = {
   "lake-tahoe": {
@@ -381,6 +383,35 @@ function frameDateKey(time) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+function nightOverlayOpacity(time) {
+  if (!time) return 0;
+  const match = String(time).match(/T(\d{2}):(\d{2})/);
+  const date = new Date(time);
+  if (!match && Number.isNaN(date.getTime())) return 0;
+  const hour = match
+    ? Number(match[1]) + Number(match[2]) / 60
+    : date.getHours() + date.getMinutes() / 60;
+  if (hour >= DAYLIGHT_START_HOUR + 1 && hour <= DAYLIGHT_END_HOUR - 1) return 0;
+  if (hour < DAYLIGHT_START_HOUR || hour > DAYLIGHT_END_HOUR) return 0.42;
+  if (hour < DAYLIGHT_START_HOUR + 1) return (DAYLIGHT_START_HOUR + 1 - hour) * 0.42;
+  return (hour - (DAYLIGHT_END_HOUR - 1)) * 0.42;
+}
+
+function applyNightOverlay(context, frame) {
+  const opacity = nightOverlayOpacity(frame?.time);
+  const mapPanel = document.querySelector(".map-panel");
+  if (mapPanel) {
+    mapPanel.classList.toggle("is-night-frame", opacity > 0.08);
+    mapPanel.style.setProperty("--night-opacity", opacity.toFixed(3));
+  }
+  if (!opacity || !lakeSurfaceCanvas) return;
+  context.save();
+  context.globalCompositeOperation = "source-over";
+  context.fillStyle = `rgba(4, 12, 42, ${opacity})`;
+  context.fillRect(0, 0, lakeSurfaceCanvas.width, lakeSurfaceCanvas.height);
+  context.restore();
 }
 
 function createWindProbeElement() {
@@ -745,6 +776,7 @@ function drawLakeSurfaceOverlay(timestamp = performance.now()) {
   const frame = windFrames[windFrameIndex] || {};
   drawLakeGradient(context, polygons, bounds, frame, currentSpot);
   drawLakeParticles(context, polygons, bounds, frame, dpr, timestamp);
+  applyNightOverlay(context, frame);
   lastParticleFrame = timestamp;
 }
 
