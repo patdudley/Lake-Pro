@@ -39,14 +39,14 @@ const DAYLIGHT_END_HOUR = 20;
 
 const cameraBySpot = {
   "lake-tahoe": {
-    title: "Edgewood Tahoe Camera",
+    title: "Live Lake View",
     description: "Current South Lake Tahoe shoreline view",
     sourceUrl: "https://edgewoodtahoe.com/webcam/",
     imageUrl: "assets/edgewood-tahoe-camera.png",
     alt: "Edgewood Tahoe webcam screenshot over Lake Tahoe",
   },
   "payette-lake": {
-    title: "Mile High Marina Camera",
+    title: "Live Lake View",
     description: "Current Payette Lake marina view",
     sourceUrl: "https://milehighmarina.com/webcams/",
     imageUrl: "assets/mile-high-marina-camera.png",
@@ -312,6 +312,8 @@ function renderCameraCard(spot) {
   if (!camera) return;
   document.getElementById("cameraTitle").textContent = camera.title;
   document.getElementById("cameraDescription").textContent = camera.description;
+  const overlay = document.getElementById("cameraLocationOverlay");
+  if (overlay) overlay.textContent = `${spot.name}, ${spot.location}`;
   const source = document.getElementById("cameraSource");
   source.href = camera.sourceUrl;
   const image = document.getElementById("cameraImage");
