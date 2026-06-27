@@ -16,6 +16,7 @@ let lakeSurfaceAnimation = null;
 let lastParticleFrame = 0;
 let loadedShorelineSlug = "";
 let currentLiveLatest = null;
+const liveSpotBundles = new Map();
 
 const mapLayerUrls = {
   payetteBathymetry: "data/live/map_layers/payette_bathymetry_contours.geojson",
@@ -93,6 +94,66 @@ function forecastDetail(day) {
   }
   if (day.chop_proxy_ft != null) return `${day.chop_proxy_ft} ft chop`;
   return day.summary || "Stubbed";
+}
+
+function gradeDescription(grade) {
+  if (grade === "A") return "Epic";
+  if (grade === "B") return "Fair";
+  if (grade === "C") return "Below average";
+  if (grade === "D") return "Poor";
+  if (grade === "F") return "Avoid";
+  return "Pending";
+}
+
+function formatWind(latest = {}) {
+  const wind = latest.wind_speed_max_mph;
+  const direction = latest.wind_direction_label;
+  if (wind == null) return "Wind pending";
+  return `${Math.round(Number(wind))} mph${direction ? ` ${direction}` : ""}`;
+}
+
+function formatChop(latest = {}) {
+  if (latest.chop_proxy_ft == null) return "Chop pending";
+  return `${latest.chop_proxy_ft} ft chop`;
+}
+
+function formatBestWindow(latest = {}) {
+  if (latest.best_window && latest.best_window !== "Pending") return latest.best_window;
+  if (latest.best_window_wind_mph != null) return `${latest.best_window_wind_mph} mph best window`;
+  return "Best daylight window pending";
+}
+
+function renderLakeSnapshotSlider() {
+  const slider = document.getElementById("lakeSnapshotSlider");
+  if (!slider) return;
+  const orderedSpots = currentSpot
+    ? [currentSpot, ...lakeSpots.filter((spot) => spot.slug !== currentSpot.slug)]
+    : lakeSpots;
+  slider.replaceChildren(...orderedSpots.map((spot) => {
+    const bundle = liveSpotBundles.get(spot.slug);
+    const latest = bundle?.latest || {};
+    const grade = gradeValue(latest.grade);
+    const card = document.createElement("button");
+    card.className = "lake-snapshot-card";
+    card.type = "button";
+    card.dataset.spot = spot.slug;
+    card.dataset.active = spot.slug === currentSpot?.slug ? "true" : "false";
+    card.setAttribute("aria-pressed", spot.slug === currentSpot?.slug ? "true" : "false");
+    card.innerHTML = `
+      <span class="snapshot-location">${spot.location}</span>
+      <strong>${spot.name}</strong>
+      <span class="snapshot-grade grade-letter" data-grade="${grade}">${latest.grade || "--"}</span>
+      <span class="snapshot-grade-label">${gradeDescription(latest.grade)}</span>
+      <span class="snapshot-track" aria-hidden="true"><i style="width: ${latest.score == null ? 22 : Math.max(6, Math.min(100, latest.score))}%"></i></span>
+      <span class="snapshot-metrics">
+        <span><b>Wind</b>${formatWind(latest)}</span>
+        <span><b>Surface</b>${formatChop(latest)}</span>
+        <span><b>Window</b>${formatBestWindow(latest)}</span>
+      </span>
+    `;
+    card.addEventListener("click", () => selectSpotBySlug(spot.slug));
+    return card;
+  }));
 }
 
 function temperatureRange(day) {
@@ -208,15 +269,22 @@ function renderSpotSwitcher(activeSpot) {
     return option;
   }));
   select.addEventListener("change", () => {
-    const url = new URL(window.location.href);
-    url.searchParams.set("spot", select.value);
-    window.history.replaceState({}, "", url);
-    const nextSpot = lakeSpots.find((spot) => spot.slug === select.value)
-      || lakeSpots.find((spot) => spot.slug === defaultSpotSlug)
-      || lakeSpots[0];
-    renderSpot(nextSpot);
-    updateMapForSpot(nextSpot);
+    selectSpotBySlug(select.value);
   });
+}
+
+function selectSpotBySlug(slug) {
+  const nextSpot = lakeSpots.find((spot) => spot.slug === slug)
+    || lakeSpots.find((spot) => spot.slug === defaultSpotSlug)
+    || lakeSpots[0];
+  const url = new URL(window.location.href);
+  url.searchParams.set("spot", nextSpot.slug);
+  window.history.replaceState({}, "", url);
+  const select = document.getElementById("spotSelect");
+  if (select) select.value = nextSpot.slug;
+  renderSpot(nextSpot);
+  updateMapForSpot(nextSpot);
+  renderLakeSnapshotSlider();
 }
 
 function renderSpot(spot) {
@@ -247,14 +315,21 @@ function renderCameraCard(spot) {
 
 function renderLiveSpotData(bundle) {
   const latest = bundle.latest || {};
+  if (currentSpot) liveSpotBundles.set(currentSpot.slug, bundle);
   currentLiveLatest = latest;
   renderCondition(latest);
   renderForecastStrip(bundle.ten_day || []);
+  renderLakeSnapshotSlider();
 }
 
 async function loadLiveSpotData(spot) {
   try {
     const bundle = await fetchJson(`data/live/spots/${spot.slug}.json`);
+    liveSpotBundles.set(spot.slug, bundle);
+    if (currentSpot?.slug !== spot.slug) {
+      renderLakeSnapshotSlider();
+      return;
+    }
     renderLiveSpotData(bundle);
   } catch (error) {
     console.warn("[LakePro] Live spot data unavailable", error);
@@ -265,7 +340,20 @@ async function loadLiveSpotData(spot) {
     if (summary) summary.textContent = "Rating pending";
     currentLiveLatest = null;
     renderForecastStrip();
+    renderLakeSnapshotSlider();
   }
+}
+
+async function loadLakeSnapshotData() {
+  const results = await Promise.allSettled(lakeSpots.map(async (spot) => {
+    if (liveSpotBundles.has(spot.slug)) return;
+    const bundle = await fetchJson(`data/live/spots/${spot.slug}.json`);
+    liveSpotBundles.set(spot.slug, bundle);
+  }));
+  if (results.some((result) => result.status === "rejected")) {
+    console.warn("[LakePro] One or more live lake cards could not load", results);
+  }
+  renderLakeSnapshotSlider();
 }
 
 function flowBearing(frame) {
@@ -959,4 +1047,6 @@ function initMap(activeSpot) {
 const activeSpot = selectedSpot();
 renderSpotSwitcher(activeSpot);
 renderSpot(activeSpot);
+renderLakeSnapshotSlider();
+loadLakeSnapshotData();
 initMap(activeSpot);

@@ -91,65 +91,218 @@ body {
 
 .site-intro {
   display: grid;
-  grid-template-columns: minmax(0, 0.74fr) minmax(360px, 1fr);
-  gap: 18px;
-  margin-bottom: 16px;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(420px, 1fr);
+  gap: 22px;
+  align-items: stretch;
+  margin-bottom: 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.84);
-  box-shadow: var(--shadow-soft);
-  padding: 16px;
+  background:
+    radial-gradient(circle at 88% 14%, rgba(17, 188, 233, 0.12), transparent 30%),
+    radial-gradient(circle at 8% 92%, rgba(242, 11, 198, 0.1), transparent 28%),
+    rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 22px;
+}
+
+.intro-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.intro-kicker,
+.snapshot-panel-heading strong {
+  color: #137d8d;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .site-intro h1 {
-  margin: 0;
+  max-width: 10ch;
+  margin: 8px 0 0;
   color: var(--text);
-  font-size: clamp(1.45rem, 3vw, 2.15rem);
-  line-height: 1;
+  font-size: clamp(2.5rem, 6vw, 4.65rem);
+  line-height: 0.94;
   letter-spacing: 0;
 }
 
 .site-intro p {
-  max-width: 54ch;
-  margin: 8px 0 0;
+  max-width: 34rem;
+  margin: 14px 0 0;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: clamp(1rem, 1.8vw, 1.17rem);
   line-height: 1.48;
-  font-weight: 700;
+  font-weight: 760;
 }
 
-.intro-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  align-items: stretch;
+.intro-grade-note {
+  max-width: 34rem;
+  margin-top: 18px;
+  border-left: 5px solid var(--cyan);
+  border-image: var(--grad) 1;
+  background: rgba(255, 255, 255, 0.74);
+  padding: 12px 14px;
 }
 
-.intro-grid div {
-  border: 1px solid rgba(17, 188, 233, 0.18);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(17, 188, 233, 0.06), rgba(242, 11, 198, 0.045)),
-    #ffffff;
-  padding: 12px;
-}
-
-.intro-grid strong {
+.intro-grade-note strong {
   display: block;
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 950;
+}
+
+.intro-grade-note span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 760;
+  line-height: 1.38;
+}
+
+.lake-snapshot-panel {
+  min-width: 0;
+  align-self: center;
+}
+
+.snapshot-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.snapshot-panel-heading span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.lake-snapshot-slider {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(250px, 1fr);
+  gap: 12px;
+  overflow-x: auto;
+  padding: 2px 2px 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.lake-snapshot-card {
+  display: grid;
+  min-height: 268px;
+  border: 1px solid rgba(7, 25, 82, 0.11);
+  border-radius: 8px;
+  appearance: none;
+  background:
+    linear-gradient(145deg, rgba(17, 188, 233, 0.07), rgba(242, 11, 198, 0.045)),
+    #ffffff;
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  padding: 17px;
+  scroll-snap-align: start;
+  text-align: left;
+}
+
+.lake-snapshot-card[data-active="true"] {
+  border-color: rgba(17, 188, 233, 0.42);
+  box-shadow: 0 14px 34px rgba(7, 25, 82, 0.08);
+  outline: 3px solid rgba(17, 188, 233, 0.1);
+}
+
+.lake-snapshot-card:hover,
+.lake-snapshot-card:focus-visible {
+  border-color: rgba(242, 11, 198, 0.24);
+  outline: 3px solid rgba(242, 11, 198, 0.08);
+}
+
+.snapshot-location {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.lake-snapshot-card > strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.45rem;
+  line-height: 1.05;
+}
+
+.snapshot-grade {
+  margin-top: 12px;
+  font-size: 4.5rem;
+  font-weight: 950;
+  line-height: 0.9;
+  text-align: left;
+}
+
+.snapshot-grade-label {
+  margin-top: 3px;
   color: #137d8d;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 950;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.intro-grid span {
+.snapshot-track {
   display: block;
-  margin-top: 6px;
+  height: 9px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: #edf2f8;
+  overflow: hidden;
+}
+
+.snapshot-track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--grad);
+}
+
+.snapshot-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.snapshot-metrics span {
+  min-width: 0;
+  border: 1px solid rgba(17, 188, 233, 0.17);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
   color: var(--text);
-  font-size: 0.86rem;
-  font-weight: 760;
-  line-height: 1.34;
+  font-size: 0.78rem;
+  font-weight: 850;
+  line-height: 1.16;
+  padding: 9px;
+}
+
+.snapshot-metrics b {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.snapshot-metrics span:nth-child(3) {
+  grid-column: 1 / -1;
 }
 
 .timelapse-control {
@@ -880,33 +1033,76 @@ h2 {
 
   .site-intro {
     grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
-    padding: 13px;
+    gap: 14px;
+    padding: 14px;
   }
 
   .site-intro h1 {
-    font-size: clamp(1.45rem, 7vw, 1.9rem);
+    max-width: 11ch;
+    font-size: clamp(2.05rem, 11vw, 3rem);
   }
 
   .site-intro p {
-    margin-top: 6px;
+    margin-top: 9px;
     font-size: 0.9rem;
     line-height: 1.4;
   }
 
-  .intro-grid {
+  .intro-grade-note {
+    margin-top: 12px;
+    padding: 10px 11px;
+  }
+
+  .intro-grade-note span {
+    font-size: 0.82rem;
+  }
+
+  .snapshot-panel-heading {
+    margin-bottom: 8px;
+  }
+
+  .lake-snapshot-slider {
+    grid-auto-columns: minmax(254px, 86vw);
+    gap: 9px;
+    margin-left: -2px;
+    margin-right: -2px;
+    padding-bottom: 8px;
+  }
+
+  .lake-snapshot-card {
+    min-height: 0;
+    padding: 13px;
+  }
+
+  .lake-snapshot-card > strong {
+    font-size: 1.22rem;
+  }
+
+  .snapshot-grade {
+    margin-top: 8px;
+    font-size: 3.35rem;
+  }
+
+  .snapshot-track {
+    margin-top: 10px;
+  }
+
+  .snapshot-metrics {
     grid-template-columns: minmax(0, 1fr);
     gap: 6px;
+    margin-top: 10px;
   }
 
-  .intro-grid div {
-    padding: 8px 10px;
+  .snapshot-metrics span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 9px;
   }
 
-  .intro-grid span {
-    margin-top: 3px;
-    font-size: 0.82rem;
-    line-height: 1.28;
+  .snapshot-metrics b {
+    margin-bottom: 0;
   }
 
   .map-panel,
