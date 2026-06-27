@@ -1474,8 +1474,8 @@ h2 {
   }
 
   .map {
-    height: min(72vh, 430px);
-    min-height: 320px;
+    height: min(82vh, 560px);
+    min-height: 440px;
   }
 
   .verdict-main {
