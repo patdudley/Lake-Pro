@@ -34,6 +34,23 @@ const mapViewBounds = {
 
 const defaultSpotSlug = "payette-lake";
 
+const cameraBySpot = {
+  "lake-tahoe": {
+    title: "Edgewood Tahoe Camera",
+    description: "Current South Lake Tahoe shoreline view",
+    sourceUrl: "https://edgewoodtahoe.com/webcam/",
+    imageUrl: "assets/edgewood-tahoe-camera.png",
+    alt: "Edgewood Tahoe webcam screenshot over Lake Tahoe",
+  },
+  "payette-lake": {
+    title: "Mile High Marina Camera",
+    description: "Current Payette Lake marina view",
+    sourceUrl: "https://milehighmarina.com/webcams/",
+    imageUrl: "assets/mile-high-marina-camera.png",
+    alt: "Mile High Marina webcam screenshot over Payette Lake",
+  },
+};
+
 const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   label: index === 0 ? "Today" : new Date(Date.now() + index * 86400000).toLocaleDateString("en-US", { weekday: "short" }),
   grade: "--",
@@ -207,11 +224,25 @@ function renderSpot(spot) {
   currentLiveLatest = null;
   document.getElementById("spotName").textContent = spot.name;
   document.getElementById("spotLocation").textContent = spot.location;
-  const cameraCard = document.getElementById("cameraCard");
-  if (cameraCard) cameraCard.hidden = spot.slug !== "payette-lake";
+  renderCameraCard(spot);
   loadLiveSpotData(spot);
   loadWindTimelapse(spot);
   loadLakeShoreline(spot);
+}
+
+function renderCameraCard(spot) {
+  const camera = cameraBySpot[spot.slug];
+  const cameraCard = document.getElementById("cameraCard");
+  if (!cameraCard) return;
+  cameraCard.hidden = !camera;
+  if (!camera) return;
+  document.getElementById("cameraTitle").textContent = camera.title;
+  document.getElementById("cameraDescription").textContent = camera.description;
+  const source = document.getElementById("cameraSource");
+  source.href = camera.sourceUrl;
+  const image = document.getElementById("cameraImage");
+  image.src = camera.imageUrl;
+  image.alt = camera.alt;
 }
 
 function renderLiveSpotData(bundle) {

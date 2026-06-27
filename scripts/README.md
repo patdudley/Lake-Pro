@@ -13,10 +13,10 @@ Outputs:
 - `data/live/spots/payette-lake.json`
 - `data/live/wind_frames/*.json`
 - `data/live/map_layers/payette_*.geojson`
-- `assets/mile-high-marina-camera.png` when Node + Playwright are available
+- `assets/mile-high-marina-camera.png` and `assets/edgewood-tahoe-camera.png` when Node + Playwright are available
 
-Install macOS schedule. This refreshes weather data and the Mile High Marina
-camera screenshot hourly from 7:00 AM through 10:00 PM local time:
+Install macOS schedule. This refreshes weather data and lake camera screenshots
+hourly from 7:00 AM through 10:00 PM local time:
 
 ```sh
 chmod +x scripts/run_lakepro_pipeline.sh

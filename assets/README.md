@@ -7,5 +7,6 @@ Current files:
 - `favicon.png` - temporary favicon using the supplied boat mark.
 - `hero-image.jpg` - unused placeholder from the foundation phase.
 - `mile-high-marina-camera.png` - current screenshot captured from the Mile High Marina webcam page for the Payette Lake report slot.
+- `edgewood-tahoe-camera.png` - current screenshot captured from the Edgewood Tahoe webcam page for the Lake Tahoe report slot.
 
 The site currently uses the map-first Dive Pro-style layout, so `hero-image.jpg` is not shown.
