@@ -127,9 +127,7 @@ function formatBestWindow(latest = {}) {
 function renderLakeSnapshotSlider() {
   const slider = document.getElementById("lakeSnapshotSlider");
   if (!slider) return;
-  const orderedSpots = currentSpot
-    ? [currentSpot, ...lakeSpots.filter((spot) => spot.slug !== currentSpot.slug)]
-    : lakeSpots;
+  const orderedSpots = currentSpot ? [currentSpot] : lakeSpots.slice(0, 1);
   slider.replaceChildren(...orderedSpots.map((spot) => {
     const bundle = liveSpotBundles.get(spot.slug);
     const latest = bundle?.latest || {};
