@@ -238,10 +238,12 @@ def wind_grade_cap(speed: float | None) -> str:
     if speed is None:
         return "A"
     value = float(speed)
-    if value >= 16:
+    if value >= 24:
         return "F"
-    if value >= 12:
+    if value >= 16:
         return "D"
+    if value >= 12:
+        return "C"
     if value >= 8:
         return "C"
     if value >= 5:
@@ -442,6 +444,10 @@ def apply_grade_caps(
     if grade_cap_for_wind != "A":
         score = cap_score(score, top_score_for_grade(grade_cap_for_wind))
         grade_caps.append(f"wind_best_case_{grade_cap_for_wind.lower()}")
+        wind_value = float(wind_for_grade or 0)
+        if grade_cap_for_wind == "D" and wind_value < 24:
+            score = max(score, top_score_for_grade("F") + 1)
+            grade_caps.append("rough_wind_floor_d")
 
     return score, score_before_wind_cap, grade_caps
 

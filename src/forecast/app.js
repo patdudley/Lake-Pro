@@ -186,8 +186,9 @@ function topScoreForGrade(grade) {
 function windGradeCap(speed) {
   const wind = Number(speed);
   if (!Number.isFinite(wind)) return "A";
-  if (wind >= 16) return "F";
-  if (wind >= 12) return "D";
+  if (wind >= 24) return "F";
+  if (wind >= 16) return "D";
+  if (wind >= 12) return "C";
   if (wind >= 8) return "C";
   if (wind >= 5) return "B";
   return "A";
@@ -205,7 +206,10 @@ function windAdjustedLatest(latest = {}, frame = windFrames[windFrameIndex]) {
   const scoreBeforeWindCap = latest.score_before_wind_cap ?? latest.score;
   const baseScore = Number.isFinite(Number(scoreBeforeWindCap)) ? Number(scoreBeforeWindCap) : null;
   const cap = windGradeCap(speed);
-  const score = baseScore == null ? null : Math.min(baseScore, topScoreForGrade(cap));
+  let score = baseScore == null ? null : Math.min(baseScore, topScoreForGrade(cap));
+  if (score != null && cap === "D" && speed < 24) {
+    score = Math.max(score, topScoreForGrade("F") + 1);
+  }
   const grade = score == null ? latest.grade || "--" : gradeFromScore(score);
   return {
     ...latest,
@@ -581,9 +585,16 @@ function lakeGradientCenters(bounds, spot) {
 }
 
 function lakeProtectionCenters(bounds, spot) {
-  if (spot?.slug !== "payette-lake") return [];
   const width = bounds.maxX - bounds.minX;
   const height = bounds.maxY - bounds.minY;
+  if (spot?.slug === "lake-tahoe") {
+    return [
+      { x: bounds.minX + width * 0.45, y: bounds.minY + height * 0.24, radius: Math.max(width, height) * 0.22, strength: 0.2 },
+      { x: bounds.minX + width * 0.36, y: bounds.minY + height * 0.5, radius: Math.max(width, height) * 0.24, strength: 0.18 },
+      { x: bounds.minX + width * 0.56, y: bounds.minY + height * 0.74, radius: Math.max(width, height) * 0.23, strength: 0.16 },
+    ];
+  }
+  if (spot?.slug !== "payette-lake") return [];
   return [
     { x: bounds.minX + width * 0.52, y: bounds.minY + height * 0.47, radius: Math.max(width, height) * 0.24, strength: 0.3 },
     { x: bounds.minX + width * 0.72, y: bounds.minY + height * 0.62, radius: Math.max(width, height) * 0.3, strength: 0.26 },
@@ -631,7 +642,8 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   const height = bounds.maxY - bounds.minY;
   const speed = Number(frame?.wind_speed_mph || 0);
   const exposure = Math.max(0, Math.min(1, (speed - 5.5) / 6));
-  const gale = Math.max(0, Math.min(1, (speed - 12) / 8));
+  const roughWind = Math.max(0, Math.min(1, (speed - 12) / 10));
+  const dangerousWind = Math.max(0, Math.min(1, (speed - 24) / 8));
   const bearing = flowBearing(frame);
   const radians = bearing * Math.PI / 180;
   const fetchOffset = Math.min(0.18, speed * 0.012);
@@ -643,10 +655,10 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   context.clip("evenodd");
 
   const base = context.createLinearGradient(bounds.minX, bounds.minY, bounds.maxX, bounds.maxY);
-  if (gale > 0.01) {
-    base.addColorStop(0, `rgba(85, 82, 225, ${0.92 + gale * 0.04})`);
-    base.addColorStop(0.48, `rgba(154, 63, 224, ${0.9 + gale * 0.06})`);
-    base.addColorStop(1, `rgba(230, 22, 203, ${0.86 + gale * 0.1})`);
+  if (roughWind > 0.01) {
+    base.addColorStop(0, `rgba(50, 112, 226, ${0.92 + roughWind * 0.02})`);
+    base.addColorStop(0.48, `rgba(104, 82, 225, ${0.88 + roughWind * 0.04})`);
+    base.addColorStop(1, `rgba(168, 55, 220, ${0.74 + roughWind * 0.08 + dangerousWind * 0.1})`);
   } else {
     base.addColorStop(0, "rgba(24, 157, 232, 0.96)");
     base.addColorStop(0.52, "rgba(28, 116, 235, 0.94)");
@@ -662,9 +674,9 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
       bounds.maxX + Math.sin(radians) * width * 0.2,
       bounds.maxY - Math.cos(radians) * height * 0.2
     );
-    windWash.addColorStop(0, `rgba(94, 76, 225, ${0.12 * exposure + 0.18 * gale})`);
-    windWash.addColorStop(0.46, `rgba(148, 54, 222, ${0.28 * exposure + 0.2 * gale})`);
-    windWash.addColorStop(1, `rgba(242, 11, 198, ${0.3 * exposure + 0.24 * gale})`);
+    windWash.addColorStop(0, `rgba(94, 76, 225, ${0.12 * exposure + 0.14 * roughWind + 0.1 * dangerousWind})`);
+    windWash.addColorStop(0.46, `rgba(148, 54, 222, ${0.26 * exposure + 0.16 * roughWind + 0.14 * dangerousWind})`);
+    windWash.addColorStop(1, `rgba(242, 11, 198, ${0.26 * exposure + 0.18 * roughWind + 0.24 * dangerousWind})`);
     context.fillStyle = windWash;
     context.fillRect(bounds.minX, bounds.minY, width, height);
 
@@ -672,10 +684,10 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
       const exposedX = center.x + Math.sin(radians) * width * fetchOffset;
       const exposedY = center.y - Math.cos(radians) * height * fetchOffset;
       const rough = context.createRadialGradient(exposedX, exposedY, center.radius * 0.08, exposedX, exposedY, center.radius);
-      rough.addColorStop(0, `rgba(242, 11, 198, ${0.62 * exposure + 0.2 * gale})`);
-      rough.addColorStop(0.34, `rgba(211, 45, 220, ${0.52 * exposure + 0.16 * gale})`);
-      rough.addColorStop(0.68, `rgba(116, 74, 225, ${0.32 * exposure + 0.12 * gale})`);
-      rough.addColorStop(0.92, `rgba(74, 96, 226, ${0.08 * exposure * (1 - gale)})`);
+      rough.addColorStop(0, `rgba(242, 11, 198, ${0.5 * exposure + 0.22 * roughWind + 0.22 * dangerousWind})`);
+      rough.addColorStop(0.34, `rgba(211, 45, 220, ${0.42 * exposure + 0.18 * roughWind + 0.18 * dangerousWind})`);
+      rough.addColorStop(0.68, `rgba(116, 74, 225, ${0.28 * exposure + 0.13 * roughWind + 0.12 * dangerousWind})`);
+      rough.addColorStop(0.92, `rgba(74, 96, 226, ${0.08 * exposure * (1 - dangerousWind)})`);
       rough.addColorStop(1, "rgba(18, 202, 234, 0)");
       context.fillStyle = rough;
       context.fillRect(bounds.minX, bounds.minY, width, height);
@@ -683,7 +695,7 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
 
     for (const center of protectedCenters) {
       const calm = context.createRadialGradient(center.x, center.y, center.radius * 0.08, center.x, center.y, center.radius);
-      const calmStrength = center.strength * (1 - exposure * 0.55) * (1 - gale * 0.88);
+      const calmStrength = center.strength * (1 - exposure * 0.32) * (1 - roughWind * 0.36) * (1 - dangerousWind * 0.78);
       calm.addColorStop(0, `rgba(50, 110, 226, ${calmStrength})`);
       calm.addColorStop(0.5, `rgba(75, 96, 222, ${calmStrength * 0.5})`);
       calm.addColorStop(0.84, `rgba(112, 82, 220, ${calmStrength * 0.18})`);
@@ -703,9 +715,9 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
   );
   const payette = spot?.slug === "payette-lake";
   shoreGlow.addColorStop(0, "rgba(18, 202, 234, 0)");
-  shoreGlow.addColorStop(0.6, `rgba(63, 107, 228, ${(payette ? 0.025 + exposure * 0.015 : 0.08 + exposure * 0.05) * (1 - gale * 0.75)})`);
-  shoreGlow.addColorStop(0.84, `rgba(75, 98, 226, ${(payette ? 0.07 + exposure * 0.025 : 0.22 + exposure * 0.08) * (1 - gale * 0.82)})`);
-  shoreGlow.addColorStop(1, `rgba(117, 76, 222, ${(payette ? 0.11 + exposure * 0.03 : 0.36 + exposure * 0.09) * (1 - gale * 0.88)})`);
+  shoreGlow.addColorStop(0.6, `rgba(63, 107, 228, ${(payette ? 0.025 + exposure * 0.015 : 0.08 + exposure * 0.05) * (1 - roughWind * 0.34) * (1 - dangerousWind * 0.65)})`);
+  shoreGlow.addColorStop(0.84, `rgba(75, 98, 226, ${(payette ? 0.07 + exposure * 0.025 : 0.2 + exposure * 0.06) * (1 - roughWind * 0.38) * (1 - dangerousWind * 0.72)})`);
+  shoreGlow.addColorStop(1, `rgba(117, 76, 222, ${(payette ? 0.11 + exposure * 0.03 : 0.32 + exposure * 0.07) * (1 - roughWind * 0.44) * (1 - dangerousWind * 0.8)})`);
   context.fillStyle = shoreGlow;
   context.fillRect(bounds.minX, bounds.minY, width, height);
 

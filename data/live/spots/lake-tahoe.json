@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T02:06:50.241526+00:00",
+  "generated_at": "2026-06-27T02:48:19.044478+00:00",
   "hourly": {
     "precipitation_probability": [
       16.0,
@@ -1274,16 +1274,17 @@
     "chop_proxy_ft": 0.9,
     "crowding_penalty": 0,
     "date": "2026-06-26",
-    "grade": "F",
+    "grade": "D",
     "grade_before_wind_cap": "F",
     "grade_caps": [
       "temperature_high_below_70",
       "rainy_cold_day_best_case_c",
-      "wind_best_case_f"
+      "wind_best_case_d",
+      "rough_wind_floor_d"
     ],
     "precipitation_probability_max": 16.0,
     "report": "Live wind forecast is connected. Wind-shadow, depth scoring, danger restrictions, and final chop model are pending.",
-    "score": 35,
+    "score": 48,
     "score_before_wind_cap": 35,
     "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
     "temperature_2m_max": 56,
@@ -1323,15 +1324,16 @@
       "chop_proxy_ft": 0.9,
       "crowding_penalty": 0,
       "date": "2026-06-26",
-      "grade": "F",
+      "grade": "D",
       "grade_before_wind_cap": "F",
       "grade_caps": [
         "temperature_high_below_70",
         "rainy_cold_day_best_case_c",
-        "wind_best_case_f"
+        "wind_best_case_d",
+        "rough_wind_floor_d"
       ],
       "precipitation_probability_max": 16.0,
-      "score": 35,
+      "score": 48,
       "score_before_wind_cap": 35,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 56,
@@ -1343,22 +1345,23 @@
       "wind_speed_max_mph": 20.0
     },
     {
-      "best_window": "Early morning",
-      "best_window_gust_mph": 15.0,
-      "best_window_precipitation_probability_max": 3.0,
-      "best_window_wind_mph": 15.0,
+      "best_window": "Afternoon",
+      "best_window_gust_mph": 16.7,
+      "best_window_precipitation_probability_max": 1.0,
+      "best_window_wind_mph": 16.7,
       "chop_proxy_ft": 0.9,
       "crowding_penalty": 8,
       "date": "2026-06-27",
-      "grade": "F",
+      "grade": "D",
       "grade_before_wind_cap": "F",
       "grade_caps": [
         "temperature_high_below_70",
-        "wind_best_case_d"
+        "wind_best_case_d",
+        "rough_wind_floor_d"
       ],
       "precipitation_probability_max": 9.0,
-      "score": 28,
-      "score_before_wind_cap": 28,
+      "score": 48,
+      "score_before_wind_cap": 17,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 55,
       "temperature_2m_min": 45,
