@@ -44,6 +44,7 @@
             </div>
           </div>
           <div class="forecast-strip" id="forecastStrip" aria-label="10 day forecast placeholders"></div>
+          <div class="forecast-reports" id="forecastReports" aria-label="Written lake forecasts"></div>
         </section>
 
         <div class="lake-snapshot-panel" aria-label="Current lake condition card">
@@ -56,30 +57,32 @@
       </section>
 
       <section class="map-panel" aria-label="Lake conditions map">
+        <div class="map-stage">
+          <div id="map" class="map"></div>
+          <div class="report-card map-report-bubble" aria-label="Current lake report">
+            <div class="verdict-location">
+              <span class="pin" aria-hidden="true"></span>
+              <div>
+                <strong id="spotName">Lake spot</strong>
+                <span id="spotLocation">Location</span>
+              </div>
+            </div>
+
+            <div class="verdict-main">
+              <div class="condition-grade-metric">
+                <span><span class="badge-label-full">Boating </span>Conditions</span>
+                <strong id="conditionGrade" class="grade-letter">--</strong>
+              </div>
+            </div>
+            <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
+          </div>
+        </div>
         <div class="timelapse-control" aria-label="Wind timelapse">
           <button id="windBackButton" class="timeline-day-button" type="button" aria-label="Previous wind forecast day">Prev day</button>
           <button id="windPlayButton" class="timeline-play-button" type="button" aria-label="Play wind timeline"><span>Play</span></button>
           <input id="windFrameSlider" type="range" min="0" max="0" value="0" step="1" aria-label="Wind forecast time">
           <button id="windForwardButton" class="timeline-day-button" type="button" aria-label="Next wind forecast day">Next day</button>
           <strong id="windFrameLabel">Wind timeline pending</strong>
-        </div>
-        <div id="map" class="map"></div>
-        <div class="report-card map-report-bubble" aria-label="Current lake report">
-          <div class="verdict-location">
-            <span class="pin" aria-hidden="true"></span>
-            <div>
-              <strong id="spotName">Lake spot</strong>
-              <span id="spotLocation">Location</span>
-            </div>
-          </div>
-
-          <div class="verdict-main">
-            <div class="condition-grade-metric">
-              <span><span class="badge-label-full">Boating </span>Conditions</span>
-              <strong id="conditionGrade" class="grade-letter">--</strong>
-            </div>
-          </div>
-          <div class="score-track" aria-hidden="true"><span id="scoreFill"></span></div>
         </div>
       </section>
 

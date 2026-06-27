@@ -16,6 +16,7 @@ let lakeSurfaceAnimation = null;
 let lastParticleFrame = 0;
 let loadedShorelineSlug = "";
 let currentLiveLatest = null;
+let selectedForecastIndex = 0;
 const liveSpotBundles = new Map();
 
 const mapLayerUrls = {
@@ -106,6 +107,10 @@ function gradeDescription(grade) {
   return "Pending";
 }
 
+function gradeRank(grade) {
+  return { A: 5, B: 4, C: 3, D: 2, F: 1 }[grade] || 0;
+}
+
 function formatWind(latest = {}) {
   const wind = latest.wind_speed_max_mph;
   const direction = latest.wind_direction_label;
@@ -118,10 +123,125 @@ function formatChop(latest = {}) {
   return `${latest.chop_proxy_ft} ft chop`;
 }
 
-function formatBestWindow(latest = {}) {
-  if (latest.best_window && latest.best_window !== "Pending") return latest.best_window;
-  if (latest.best_window_wind_mph != null) return `${latest.best_window_wind_mph} mph best window`;
-  return "Best daylight window pending";
+function numberValue(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function roundedMph(value) {
+  const number = numberValue(value);
+  return number == null ? null : `${Math.round(number)} mph`;
+}
+
+function readableWindow(day = {}) {
+  if (day.best_window && day.best_window !== "Pending") return day.best_window.toLowerCase();
+  return "";
+}
+
+function bGradeChance(day = {}) {
+  const score = numberValue(day.score);
+  if (score != null) {
+    const wind = numberValue(day.wind_speed_max_mph) || 0;
+    const precip = numberValue(day.precipitation_probability_max) || 0;
+    const adjusted = score - Math.max(0, wind - 8) * 1.4 - Math.max(0, precip - 45) * 0.35;
+    return Math.max(3, Math.min(92, Math.round(adjusted / 5) * 5));
+  }
+  const grade = gradeValue(day.grade);
+  if (grade === "A") return 80;
+  if (grade === "B") return 60;
+  if (grade === "C") return 30;
+  if (grade === "D") return 12;
+  if (grade === "F") return 5;
+  return null;
+}
+
+function reportHook(day = {}, index = 0) {
+  const grade = gradeValue(day.grade);
+  const wind = numberValue(day.wind_speed_max_mph);
+  const precip = numberValue(day.precipitation_probability_max) || 0;
+  const window = readableWindow(day);
+
+  if (grade === "F" || wind >= 24) return index === 0 ? "Skip the open water." : "This one looks rough.";
+  if (wind >= 16 || grade === "D") return "Wind may make this one tricky.";
+  if (precip >= 55 && gradeRank(grade) <= gradeRank("C")) return "Worth watching, but not a lock.";
+  if (window.includes("early") || window.includes("morning")) return "Catch the lake early.";
+  if (window.includes("evening") || window.includes("afternoon")) return "The cleaner window may come later.";
+  if (grade === "A") return "This is one of the better windows of the week.";
+  if (grade === "B") return "Worth planning around.";
+  return "Best window looks short.";
+}
+
+function timingLine(day = {}, index = 0) {
+  const grade = gradeValue(day.grade);
+  const window = readableWindow(day);
+  const gradeText = grade ? `${grade}-grade` : "rated";
+  if (index === 0) {
+    if (window) return `Conditions look ${gradeText} during the ${window} window.`;
+    return `The model has today at ${gradeText}, but the cleanest window is still forming.`;
+  }
+  const label = day.label || dayLabel(day.date, index);
+  if (window) return `${label} is tracking ${gradeText}, with the best setup most likely ${window}.`;
+  return `${label} is tracking ${gradeText}, but the timing window is still uncertain.`;
+}
+
+function changeLine(day = {}, index = 0, today = {}) {
+  const grade = gradeValue(day.grade);
+  const wind = numberValue(day.wind_speed_max_mph);
+  const todayRank = gradeRank(today.grade);
+  const dayRank = gradeRank(grade);
+  const comparison = index === 0 || !todayRank || !dayRank
+    ? ""
+    : dayRank > todayRank
+      ? "better than today"
+      : dayRank < todayRank
+        ? "worse than today"
+        : "similar to today";
+
+  if (wind >= 16) return `Open water may get messy, while protected coves should hold the best relative water.`;
+  if (wind >= 8) return `Expect conditions to shift as wind builds, with open and exposed zones getting choppier first.`;
+  if (comparison) return `The setup looks ${comparison}, with calmer water most likely before traffic and afternoon texture build.`;
+  return "Morning should be the safer bet before traffic and texture have time to build.";
+}
+
+function driverLine(day = {}) {
+  const parts = [];
+  const wind = roundedMph(day.wind_speed_max_mph);
+  const gust = roundedMph(day.wind_gust_max_mph);
+  const chop = day.chop_proxy_ft == null ? "" : `${day.chop_proxy_ft} ft chop proxy`;
+  const precip = numberValue(day.precipitation_probability_max);
+  const trafficPenalty = numberValue(day.crowding_penalty);
+
+  if (wind) parts.push(gust && gust !== wind ? `wind near ${wind}, gusting around ${gust}` : `wind near ${wind}`);
+  if (chop) parts.push(chop);
+  if (precip != null && precip >= 35) parts.push(`${Math.round(precip)}% precip risk`);
+  if (trafficPenalty != null && trafficPenalty > 0) parts.push("boat traffic penalty is in the model");
+
+  if (!parts.length) return "The main drivers are still pending in the live feed.";
+  return `Main drivers: ${parts.join(", ")}.`;
+}
+
+function confidenceLine(day = {}) {
+  const chance = bGradeChance(day);
+  const missingWindow = !day.best_window || day.best_window === "Pending";
+  const summary = String(day.summary || "");
+  const confidence = missingWindow || summary.includes("fill") ? "medium" : "solid";
+  if (chance == null) return `Confidence is ${confidence}; the B-grade-or-better estimate is pending.`;
+  return `Model estimate: about a ${chance}% shot at holding B-grade or better. Confidence is ${confidence}.`;
+}
+
+function generateLakeForecastReport(day = {}, index = 0, days = []) {
+  const title = index === 0 ? "Daily Lake Forecast" : `${day.label || dayLabel(day.date, index)} Lake Forecast`;
+  return {
+    title,
+    grade: gradeValue(day.grade),
+    hook: reportHook(day, index),
+    lines: [
+      timingLine(day, index),
+      changeLine(day, index, days[0] || {}),
+      driverLine(day),
+      confidenceLine(day),
+    ].filter(Boolean),
+  };
 }
 
 function renderLakeSnapshotSlider() {
@@ -147,7 +267,6 @@ function renderLakeSnapshotSlider() {
       <span class="snapshot-metrics">
         <span><b>Wind</b>${formatWind(latest)}</span>
         <span><b>Surface</b>${formatChop(latest)}</span>
-        <span><b>Window</b>${formatBestWindow(latest)}</span>
       </span>
     `;
     card.addEventListener("click", () => selectSpotBySlug(spot.slug));
@@ -235,8 +354,11 @@ function renderCondition(latest = currentLiveLatest, frame = windFrames[windFram
 function renderForecastStrip(days = placeholderForecast) {
   const strip = document.getElementById("forecastStrip");
   strip.replaceChildren(...days.map((day, index) => {
-    const card = document.createElement("article");
+    const card = document.createElement("button");
     card.className = "forecast-day";
+    card.type = "button";
+    card.dataset.active = index === selectedForecastIndex ? "true" : "false";
+    card.setAttribute("aria-pressed", index === selectedForecastIndex ? "true" : "false");
     const grade = gradeValue(day.grade);
     card.innerHTML = `
       <span>${day.label || dayLabel(day.date, index)}</span>
@@ -245,8 +367,37 @@ function renderForecastStrip(days = placeholderForecast) {
       <strong class="grade-letter" data-grade="${grade}">${day.grade || "--"}</strong>
       <em>${forecastDetail(day)}</em>
     `;
+    card.addEventListener("click", () => {
+      selectedForecastIndex = index;
+      renderForecastStrip(days);
+      renderForecastReports(days);
+    });
     return card;
   }));
+}
+
+function renderForecastReports(days = placeholderForecast) {
+  const reports = document.getElementById("forecastReports");
+  if (!reports) return;
+  const index = Math.max(0, Math.min(selectedForecastIndex, days.length - 1));
+  selectedForecastIndex = index;
+  const day = days[index] || {};
+  const report = generateLakeForecastReport(day, index, days);
+  const article = document.createElement("article");
+  article.className = "forecast-report";
+  article.innerHTML = `
+    <div class="forecast-report-summary">
+      <span>
+        <b>${report.title}</b>
+        <small>${report.hook}</small>
+      </span>
+      <strong class="grade-letter" data-grade="${report.grade}">${report.grade || "--"}</strong>
+    </div>
+    <div class="forecast-report-body">
+      ${report.lines.map((line) => `<p>${line}</p>`).join("")}
+    </div>
+  `;
+  reports.replaceChildren(article);
 }
 
 async function fetchGeoJson(url) {
@@ -293,6 +444,7 @@ function selectSpotBySlug(slug) {
 function renderSpot(spot) {
   currentSpot = spot;
   currentLiveLatest = null;
+  selectedForecastIndex = 0;
   document.getElementById("spotName").textContent = spot.name;
   document.getElementById("spotLocation").textContent = spot.location;
   renderCameraCard(spot);
@@ -324,6 +476,7 @@ function renderLiveSpotData(bundle) {
   currentLiveLatest = latest;
   renderCondition(latest);
   renderForecastStrip(bundle.ten_day || []);
+  renderForecastReports(bundle.ten_day || []);
   renderLakeSnapshotSlider();
 }
 
@@ -345,6 +498,7 @@ async function loadLiveSpotData(spot) {
     if (summary) summary.textContent = "Rating pending";
     currentLiveLatest = null;
     renderForecastStrip();
+    renderForecastReports();
     renderLakeSnapshotSlider();
   }
 }
