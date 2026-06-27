@@ -91,8 +91,7 @@ function weatherIconClass(day = {}) {
 
 function forecastDetail(day) {
   if (day.best_window_wind_mph != null) {
-    const label = day.best_window === "Daily outlook" ? "wind forecast" : "best window";
-    return `${day.best_window_wind_mph} mph ${label}`;
+    return `${day.best_window_wind_mph} mph`;
   }
   if (day.chop_proxy_ft != null) return `${day.chop_proxy_ft} ft chop`;
   return day.summary || "Stubbed";
