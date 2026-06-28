@@ -347,8 +347,6 @@ function renderForecastReports(days = placeholderForecast) {
   selectedForecastIndex = index;
   const day = days[index] || {};
   const report = generateLakeForecastReport(day, index, days);
-  const reports = document.getElementById("forecastReports");
-  if (reports) reports.replaceChildren(createForecastReportArticle(report));
   const heroReport = document.getElementById("heroDailyReport");
   if (heroReport) heroReport.replaceChildren(createForecastReportArticle(report, "forecast-report hero-forecast-report"));
 }
