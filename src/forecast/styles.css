@@ -306,6 +306,84 @@ body.spot-mode .hero-copy {
   display: none;
 }
 
+@media (min-width: 821px) {
+  body.spot-mode .shell {
+    display: grid;
+    grid-template-columns: minmax(360px, 0.74fr) minmax(560px, 1.26fr);
+    gap: 20px 22px;
+    align-items: start;
+  }
+
+  body.spot-mode .site-hero {
+    grid-column: 1;
+    grid-row: 1;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "nav"
+      "copy"
+      "camera";
+    gap: 18px;
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 24px;
+  }
+
+  body.spot-mode .top-nav {
+    flex-wrap: wrap;
+  }
+
+  body.spot-mode .brand-link {
+    flex: 1 1 auto;
+  }
+
+  body.spot-mode .spot-switcher {
+    flex: 0 1 210px;
+    min-width: 180px;
+  }
+
+  body.spot-mode .spot-switcher select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  body.spot-mode .spot-search {
+    order: 3;
+    flex: 1 0 100%;
+    max-width: none;
+  }
+
+  body.spot-mode .hero-report {
+    align-self: start;
+    max-width: none;
+    margin-top: 0;
+  }
+
+  body.spot-mode .site-hero .camera-card {
+    align-self: start;
+  }
+
+  body.spot-mode .site-hero .camera-frame {
+    aspect-ratio: 16 / 10.2;
+  }
+
+  body.spot-mode .map-panel {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 100%;
+    margin-top: 0;
+    padding: 18px;
+  }
+
+  body.spot-mode .map-panel .map {
+    height: clamp(660px, 76vh, 860px);
+  }
+
+  body.spot-mode .home-dashboard,
+  body.spot-mode .rating-card {
+    grid-column: 1 / -1;
+  }
+}
+
 .hero-report {
   grid-area: copy;
   position: relative;
