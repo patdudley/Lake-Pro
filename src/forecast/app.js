@@ -635,6 +635,28 @@ function frameDateKey(time) {
   return `${year}-${month}-${day}`;
 }
 
+function localHourKey(date = new Date(), timeZone) {
+  if (!timeZone || Number.isNaN(date.getTime())) return "";
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date).reduce((memo, part) => {
+    if (part.type !== "literal") memo[part.type] = part.value;
+    return memo;
+  }, {});
+  if (!parts.year || !parts.month || !parts.day || !parts.hour) return "";
+  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}`;
+}
+
+function frameLocalHourKey(time) {
+  const match = String(time || "").match(/^(\d{4}-\d{2}-\d{2})T(\d{2})/);
+  return match ? `${match[1]}T${match[2]}` : "";
+}
+
 function nightOverlayOpacity(time) {
   if (!time) return 0;
   const match = String(time).match(/T(\d{2}):(\d{2})/);
@@ -1159,8 +1181,21 @@ async function loadWindTimelapse(spot) {
   renderTimelapseControls();
 }
 
-function currentWindFrameIndex(now = new Date()) {
+function currentWindFrameIndex(now = new Date(), spot = currentSpot) {
   if (!windFrames.length) return 0;
+  const targetHour = localHourKey(now, spot?.timeZone);
+  if (targetHour) {
+    const exactIndex = windFrames.findIndex((frame) => frameLocalHourKey(frame.time) === targetHour);
+    if (exactIndex >= 0) return exactIndex;
+
+    let previousIndex = -1;
+    windFrames.forEach((frame, index) => {
+      const frameHour = frameLocalHourKey(frame.time);
+      if (frameHour && frameHour <= targetHour) previousIndex = index;
+    });
+    if (previousIndex >= 0) return previousIndex;
+  }
+
   const nowMs = now.getTime();
   if (!Number.isFinite(nowMs)) return 0;
   const firstFutureIndex = windFrames.findIndex((frame) => {

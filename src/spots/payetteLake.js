@@ -2,6 +2,7 @@ export const payetteLake = {
   slug: "payette-lake",
   name: "Payette Lake",
   location: "McCall, Idaho",
+  timeZone: "America/Boise",
   latitude: 44.9406,
   longitude: -116.0910,
   shorelineOrientation: {
