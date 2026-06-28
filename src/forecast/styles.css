@@ -56,6 +56,13 @@ body::before {
 
 .site-hero {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.56fr);
+  grid-template-areas:
+    "nav nav"
+    "copy camera";
+  gap: 22px 32px;
+  align-items: start;
   margin-bottom: 16px;
   border: 1px solid rgba(7, 25, 82, 0.07);
   border-radius: 18px;
@@ -104,6 +111,7 @@ body::before {
 }
 
 .top-nav {
+  grid-area: nav;
   position: relative;
   z-index: 1;
   margin-bottom: 0;
@@ -147,6 +155,7 @@ body::before {
 }
 
 .hero-copy {
+  grid-area: copy;
   position: relative;
   z-index: 1;
   max-width: 820px;
@@ -184,8 +193,8 @@ body::before {
 
 .home-dashboard {
   display: grid;
-  grid-template-columns: minmax(360px, 0.82fr) minmax(440px, 1.18fr);
-  grid-template-areas: "camera forecast";
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "forecast";
   gap: 18px;
   align-items: stretch;
   margin-bottom: 20px;
@@ -195,6 +204,158 @@ body::before {
     radial-gradient(circle at 84% 4%, rgba(17, 188, 233, 0.1), transparent 26rem),
     radial-gradient(circle at 8% 96%, rgba(242, 11, 198, 0.1), transparent 24rem);
   padding: 12px 0 14px;
+}
+
+body.home-mode .report-only,
+body.home-mode .hero-camera {
+  display: none;
+}
+
+body.spot-mode .home-map-panel {
+  display: none;
+}
+
+body.home-mode .site-hero {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "nav"
+    "copy";
+  min-height: clamp(420px, 56vh, 620px);
+  align-content: start;
+}
+
+body.home-mode .hero-copy {
+  max-width: 920px;
+  margin-top: clamp(42px, 7vw, 96px);
+}
+
+body.home-mode .hero-copy h1 {
+  max-width: 13ch;
+  font-size: clamp(3.5rem, 7vw, 6.7rem);
+}
+
+.home-map-panel {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.62fr) minmax(420px, 1fr);
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(7, 25, 82, 0.08);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 250, 255, 0.86)),
+    radial-gradient(circle at 86% 18%, rgba(17, 188, 233, 0.1), transparent 22rem);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+.home-map-copy p {
+  margin-bottom: 10px;
+  color: #137d8d;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.home-map-copy h2 {
+  max-width: 12ch;
+  color: var(--text);
+  font-size: clamp(2.6rem, 5.2vw, 5rem);
+  font-weight: 950;
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.us-map-card {
+  border: 1px solid rgba(17, 188, 233, 0.2);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 38% 42%, rgba(17, 188, 233, 0.1), transparent 18rem),
+    linear-gradient(135deg, rgba(237, 245, 255, 0.92), rgba(255, 244, 253, 0.72));
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  padding: 18px;
+}
+
+.us-map-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 260px;
+}
+
+.us-map-shape {
+  fill: rgba(255, 255, 255, 0.8);
+  stroke: rgba(7, 25, 82, 0.12);
+  stroke-width: 2;
+}
+
+.us-map-shape.secondary {
+  fill: rgba(237, 245, 255, 0.86);
+}
+
+.us-map-line {
+  fill: none;
+  stroke: rgba(11, 88, 255, 0.14);
+  stroke-dasharray: 7 9;
+  stroke-width: 3;
+}
+
+.us-map-marker {
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.us-map-marker circle {
+  fill: var(--blue);
+  stroke: #ffffff;
+  stroke-width: 6;
+  filter: drop-shadow(0 8px 14px rgba(7, 25, 82, 0.22));
+}
+
+.us-map-marker text {
+  fill: var(--text);
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.us-map-marker text + text {
+  fill: #137d8d;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-lake-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.home-lake-link {
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgba(17, 188, 233, 0.28);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--text);
+  padding: 12px;
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+}
+
+.home-lake-link b {
+  font-size: 0.98rem;
+  line-height: 1.1;
+}
+
+.home-lake-link span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .timelapse-control {
@@ -474,14 +635,19 @@ body::before {
   padding: 24px 28px;
 }
 
-.home-dashboard .camera-card,
+.site-hero .camera-card,
 .home-dashboard .ten-day-card {
   margin-top: 0;
   padding: 18px;
 }
 
-.home-dashboard .camera-card {
+.site-hero .camera-card {
   grid-area: camera;
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(10px);
 }
 
 .home-dashboard .ten-day-card {
@@ -560,7 +726,7 @@ h2 {
   overflow: hidden;
 }
 
-.home-dashboard .camera-frame {
+.site-hero .camera-frame {
   aspect-ratio: 16 / 9.6;
   margin-top: 12px;
 }
@@ -1134,9 +1300,19 @@ h2 {
   }
 
   .site-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "nav"
+      "copy"
+      "camera";
+    gap: 14px;
     border-radius: 16px;
     margin-bottom: 12px;
     padding: 14px 14px 22px;
+  }
+
+  body.home-mode .site-hero {
+    min-height: 0;
   }
 
   .site-hero::before {
@@ -1193,6 +1369,12 @@ h2 {
     line-height: 0.98;
   }
 
+  body.home-mode .hero-copy h1 {
+    max-width: 100%;
+    font-size: clamp(1.72rem, 7.2vw, 2rem);
+    line-height: 1.02;
+  }
+
   .hero-accent {
     width: 116px;
     height: 6px;
@@ -1207,16 +1389,38 @@ h2 {
 
   .home-dashboard {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "camera"
-      "forecast";
+    grid-template-areas: "forecast";
     gap: 14px;
     padding: 0;
   }
 
-  .home-dashboard .camera-card,
+  .site-hero .camera-card,
   .home-dashboard .ten-day-card {
     padding: 14px;
+  }
+
+  .home-map-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    border-radius: 16px;
+    padding: 16px 14px;
+  }
+
+  .home-map-copy h2 {
+    max-width: 14ch;
+    font-size: clamp(2.15rem, 10vw, 3rem);
+  }
+
+  .us-map-card {
+    padding: 12px;
+  }
+
+  .us-map-art {
+    min-height: 210px;
+  }
+
+  .home-lake-links {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .home-dashboard .forecast-strip {

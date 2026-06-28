@@ -361,6 +361,27 @@ function selectedSpot() {
     || lakeSpots[0];
 }
 
+function isHomePage() {
+  return !new URLSearchParams(window.location.search).has("spot");
+}
+
+function setPageMode(mode) {
+  document.body.classList.toggle("home-mode", mode === "home");
+  document.body.classList.toggle("spot-mode", mode === "spot");
+}
+
+function renderHomeLakeLinks() {
+  const container = document.getElementById("homeLakeLinks");
+  if (!container) return;
+  container.replaceChildren(...lakeSpots.map((spot) => {
+    const link = document.createElement("a");
+    link.className = "home-lake-link";
+    link.href = `?spot=${spot.slug}`;
+    link.innerHTML = `<b>${spot.name}</b><span>${spot.location}</span>`;
+    return link;
+  }));
+}
+
 function renderSpotSwitcher(activeSpot) {
   const select = document.getElementById("spotSelect");
   select.replaceChildren(...lakeSpots.map((spot) => {
@@ -382,10 +403,12 @@ function selectSpotBySlug(slug) {
   const url = new URL(window.location.href);
   url.searchParams.set("spot", nextSpot.slug);
   window.history.replaceState({}, "", url);
+  setPageMode("spot");
   const select = document.getElementById("spotSelect");
   if (select) select.value = nextSpot.slug;
   renderSpot(nextSpot);
-  updateMapForSpot(nextSpot);
+  if (!lakeMap) initMap(nextSpot);
+  else updateMapForSpot(nextSpot);
 }
 
 function renderSpot(spot) {
@@ -1169,7 +1192,27 @@ function initMap(activeSpot) {
   });
 }
 
-const activeSpot = selectedSpot();
-renderSpotSwitcher(activeSpot);
-renderSpot(activeSpot);
-initMap(activeSpot);
+function boot() {
+  const activeSpot = selectedSpot();
+  setPageMode(isHomePage() ? "home" : "spot");
+  renderSpotSwitcher(activeSpot);
+  renderHomeLakeLinks();
+  if (!isHomePage()) {
+    renderSpot(activeSpot);
+    initMap(activeSpot);
+  }
+}
+
+window.addEventListener("popstate", () => {
+  const activeSpot = selectedSpot();
+  setPageMode(isHomePage() ? "home" : "spot");
+  const select = document.getElementById("spotSelect");
+  if (select) select.value = activeSpot.slug;
+  if (!isHomePage()) {
+    renderSpot(activeSpot);
+    if (!lakeMap) initMap(activeSpot);
+    else updateMapForSpot(activeSpot);
+  }
+});
+
+boot();

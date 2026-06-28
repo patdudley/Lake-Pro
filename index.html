@@ -25,10 +25,7 @@
           <span class="hero-accent" aria-hidden="true"></span>
           <p>Real-time boating conditions, lake forecasts, and the best windows to get on the water.</p>
         </div>
-      </section>
-
-      <section class="home-dashboard" aria-label="Lake Pro live conditions">
-        <section class="camera-card" id="cameraCard" aria-labelledby="cameraTitle">
+        <section class="camera-card hero-camera" id="cameraCard" aria-labelledby="cameraTitle">
           <div class="section-heading">
             <div>
               <h2 id="cameraTitle">Mile High Marina Camera</h2>
@@ -42,7 +39,38 @@
             <strong id="cameraLocationOverlay">Payette Lake</strong>
           </div>
         </section>
+      </section>
 
+      <section class="home-map-panel" id="homeMapPanel" aria-labelledby="homeMapTitle">
+        <div class="home-map-copy">
+          <p>Live wake-sports outlook</p>
+          <h2 id="homeMapTitle">Find the best lake window before you trailer, tow, or launch.</h2>
+          <span class="hero-accent" aria-hidden="true"></span>
+        </div>
+        <div class="us-map-card" aria-label="Lake Pro United States lake map">
+          <svg class="us-map-art" viewBox="0 0 760 430" role="img" aria-labelledby="usMapTitle usMapDescription">
+            <title id="usMapTitle">Lake Pro map of supported US lakes</title>
+            <desc id="usMapDescription">A stylized United States map with live Lake Pro lake markers for Lake Tahoe and Payette Lake.</desc>
+            <path class="us-map-shape" d="M103 143 146 113 210 122 259 91 318 114 370 104 421 129 475 118 529 142 606 145 655 183 622 226 638 282 592 316 527 302 479 334 407 312 351 334 296 306 238 316 181 282 131 286 107 235 69 206Z"/>
+            <path class="us-map-shape secondary" d="M78 292 118 289 153 311 151 346 104 360 70 336Z"/>
+            <path class="us-map-shape secondary" d="M635 303 681 319 697 358 671 385 623 365 612 327Z"/>
+            <path class="us-map-line" d="M107 235 181 282 238 316 296 306 351 334 407 312 479 334 527 302 592 316"/>
+            <a class="us-map-marker" href="?spot=lake-tahoe" aria-label="Open Lake Tahoe report" transform="translate(126 238)">
+              <circle r="15"></circle>
+              <text x="24" y="-7">Lake Tahoe</text>
+              <text x="24" y="13">live report</text>
+            </a>
+            <a class="us-map-marker" href="?spot=payette-lake" aria-label="Open Payette Lake report" transform="translate(150 175)">
+              <circle r="15"></circle>
+              <text x="24" y="-7">Payette Lake</text>
+              <text x="24" y="13">live report</text>
+            </a>
+          </svg>
+          <div class="home-lake-links" id="homeLakeLinks" aria-label="Available lake reports"></div>
+        </div>
+      </section>
+
+      <section class="home-dashboard report-only" aria-label="Lake Pro live conditions">
         <section class="ten-day-card" aria-labelledby="forecastTitle">
           <div class="section-heading">
             <div>
@@ -56,7 +84,7 @@
 
       </section>
 
-      <section class="map-panel" aria-label="Lake conditions map">
+      <section class="map-panel report-only" aria-label="Lake conditions map">
         <div class="map-stage">
           <div id="map" class="map"></div>
           <div class="report-card map-report-bubble" aria-label="Current lake report">
@@ -86,7 +114,7 @@
         </div>
       </section>
 
-      <section class="rating-card" aria-labelledby="ratingTitle">
+      <section class="rating-card report-only" aria-labelledby="ratingTitle">
         <h2 id="ratingTitle">Rating System</h2>
         <div class="rating-grid">
           <div><strong class="grade-letter" data-grade="A">A</strong><span>Epic</span></div>
