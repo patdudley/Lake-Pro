@@ -17,6 +17,7 @@ let lastParticleFrame = 0;
 let loadedShorelineSlug = "";
 let currentLiveLatest = null;
 let selectedForecastIndex = 0;
+let homeCameraIndex = 0;
 
 const mapLayerUrls = {
   payetteBathymetry: "data/live/map_layers/payette_bathymetry_contours.geojson",
@@ -395,6 +396,8 @@ function renderHomeLakeLinks() {
   hydrateHomeLakeCards();
   wireHomeSearch();
   wireSpotSearch();
+  renderHomeCameraSlider();
+  wireHomeCameraSlider();
 }
 
 async function hydrateHomeLakeCards() {
@@ -418,7 +421,18 @@ async function hydrateHomeLakeCards() {
     }
   }));
 
-  const featureSpot = lakeSpots.find((spot) => spot.slug === defaultSpotSlug) || lakeSpots[0];
+  renderHomeCameraSlide(homeCameraIndex);
+}
+
+function homeCameraSpots() {
+  return lakeSpots.filter((spot) => cameraBySpot[spot.slug]);
+}
+
+function renderHomeCameraSlide(index = homeCameraIndex) {
+  const slides = homeCameraSpots();
+  if (!slides.length) return;
+  homeCameraIndex = ((index % slides.length) + slides.length) % slides.length;
+  const featureSpot = slides[homeCameraIndex];
   const camera = cameraBySpot[featureSpot.slug];
   const featureLink = document.getElementById("homeFeatureLink");
   const featureImage = document.getElementById("homeFeatureImage");
@@ -435,6 +449,43 @@ async function hydrateHomeLakeCards() {
   if (featureShortLocation) {
     const state = featureSpot.location.split(",").pop()?.trim() || "";
     featureShortLocation.textContent = `${featureSpot.name}${state ? `, ${state}` : ""}`;
+  }
+  document.querySelectorAll(".home-camera-dot").forEach((dot, dotIndex) => {
+    dot.dataset.active = dotIndex === homeCameraIndex ? "true" : "false";
+    dot.setAttribute("aria-current", dotIndex === homeCameraIndex ? "true" : "false");
+  });
+}
+
+function renderHomeCameraSlider() {
+  const dots = document.getElementById("homeCameraDots");
+  if (!dots) return;
+  const slides = homeCameraSpots();
+  dots.replaceChildren(...slides.map((spot, index) => {
+    const button = document.createElement("button");
+    button.className = "home-camera-dot";
+    button.type = "button";
+    button.dataset.active = index === homeCameraIndex ? "true" : "false";
+    button.setAttribute("aria-label", `Show ${spot.name} camera`);
+    button.addEventListener("click", () => renderHomeCameraSlide(index));
+    return button;
+  }));
+  const hasMultipleSlides = slides.length > 1;
+  document.querySelectorAll(".home-camera-control, .home-camera-dots").forEach((element) => {
+    element.hidden = !hasMultipleSlides;
+  });
+  renderHomeCameraSlide(homeCameraIndex);
+}
+
+function wireHomeCameraSlider() {
+  const prev = document.getElementById("homeCameraPrev");
+  const next = document.getElementById("homeCameraNext");
+  if (prev && prev.dataset.bound !== "true") {
+    prev.dataset.bound = "true";
+    prev.addEventListener("click", () => renderHomeCameraSlide(homeCameraIndex - 1));
+  }
+  if (next && next.dataset.bound !== "true") {
+    next.dataset.bound = "true";
+    next.addEventListener("click", () => renderHomeCameraSlide(homeCameraIndex + 1));
   }
 }
 

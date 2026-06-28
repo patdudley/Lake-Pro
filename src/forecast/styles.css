@@ -509,6 +509,74 @@ body.home-mode .hero-copy h1 {
   font-weight: 650;
 }
 
+.home-camera-control {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.home-camera-control::before {
+  width: 12px;
+  height: 12px;
+  border-top: 3px solid var(--blue);
+  border-right: 3px solid var(--blue);
+  content: "";
+}
+
+.home-camera-control.prev {
+  left: 16px;
+}
+
+.home-camera-control.prev::before {
+  transform: rotate(-135deg);
+}
+
+.home-camera-control.next {
+  right: 16px;
+}
+
+.home-camera-control.next::before {
+  transform: rotate(45deg);
+}
+
+.home-camera-dots {
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.home-camera-dot {
+  width: 9px;
+  height: 9px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  padding: 0;
+  pointer-events: auto;
+}
+
+.home-camera-dot[data-active="true"] {
+  width: 22px;
+  background: #ffffff;
+}
+
 .home-spot-rail {
   grid-area: spots;
   position: relative;
@@ -1837,6 +1905,23 @@ h2 {
   .home-feature-card small {
     bottom: 20px;
     font-size: 0.86rem;
+  }
+
+  .home-camera-control {
+    width: 34px;
+    height: 34px;
+  }
+
+  .home-camera-control.prev {
+    left: 10px;
+  }
+
+  .home-camera-control.next {
+    right: 10px;
+  }
+
+  .home-camera-dots {
+    bottom: 12px;
   }
 
   .home-spot-heading {
