@@ -324,15 +324,9 @@ function renderForecastStrip(days = placeholderForecast) {
   }));
 }
 
-function renderForecastReports(days = placeholderForecast) {
-  const reports = document.getElementById("forecastReports");
-  if (!reports) return;
-  const index = Math.max(0, Math.min(selectedForecastIndex, days.length - 1));
-  selectedForecastIndex = index;
-  const day = days[index] || {};
-  const report = generateLakeForecastReport(day, index, days);
+function createForecastReportArticle(report, className = "forecast-report") {
   const article = document.createElement("article");
-  article.className = "forecast-report";
+  article.className = className;
   article.innerHTML = `
     <div class="forecast-report-summary">
       <span>
@@ -345,7 +339,18 @@ function renderForecastReports(days = placeholderForecast) {
       ${report.lines.map((line) => `<p>${line}</p>`).join("")}
     </div>
   `;
-  reports.replaceChildren(article);
+  return article;
+}
+
+function renderForecastReports(days = placeholderForecast) {
+  const index = Math.max(0, Math.min(selectedForecastIndex, days.length - 1));
+  selectedForecastIndex = index;
+  const day = days[index] || {};
+  const report = generateLakeForecastReport(day, index, days);
+  const reports = document.getElementById("forecastReports");
+  if (reports) reports.replaceChildren(createForecastReportArticle(report));
+  const heroReport = document.getElementById("heroDailyReport");
+  if (heroReport) heroReport.replaceChildren(createForecastReportArticle(report, "forecast-report hero-forecast-report"));
 }
 
 async function fetchGeoJson(url) {
@@ -377,9 +382,73 @@ function renderHomeLakeLinks() {
     const link = document.createElement("a");
     link.className = "home-lake-link";
     link.href = `?spot=${spot.slug}`;
-    link.innerHTML = `<b>${spot.name}</b><span>${spot.location}</span>`;
+    const camera = cameraBySpot[spot.slug];
+    link.dataset.name = `${spot.name} ${spot.location}`.toLowerCase();
+    link.innerHTML = `
+      <span class="home-lake-copy">
+        <b>${spot.name}</b>
+        <small>${spot.location}</small>
+        <em><strong class="grade-letter">--</strong> Loading</em>
+      </span>
+      <img src="${camera?.imageUrl || "assets/hero-image.jpg"}" alt="${spot.name} preview">
+    `;
     return link;
   }));
+  hydrateHomeLakeCards();
+  wireHomeSearch();
+}
+
+async function hydrateHomeLakeCards() {
+  const cards = [...document.querySelectorAll(".home-lake-link")];
+  await Promise.all(cards.map(async (card) => {
+    const slug = new URL(card.href).searchParams.get("spot");
+    try {
+      const bundle = await fetchJson(`data/live/spots/${slug}.json`);
+      const latest = bundle.latest || {};
+      const grade = gradeValue(latest.grade) || "--";
+      const detail = latest.chop_proxy_ft != null ? `${latest.chop_proxy_ft} ft chop` : `${Math.round(latest.wind_speed_max_mph || 0)} mph`;
+      const gradeNode = card.querySelector(".grade-letter");
+      if (gradeNode) {
+        gradeNode.textContent = grade;
+        gradeNode.dataset.grade = gradeValue(grade);
+      }
+      const em = card.querySelector("em");
+      if (em) em.lastChild.textContent = ` ${detail}`;
+    } catch (error) {
+      console.warn("[LakePro] Home lake card data unavailable", error);
+    }
+  }));
+
+  const featureSpot = lakeSpots.find((spot) => spot.slug === defaultSpotSlug) || lakeSpots[0];
+  const camera = cameraBySpot[featureSpot.slug];
+  const featureLink = document.getElementById("homeFeatureLink");
+  const featureImage = document.getElementById("homeFeatureImage");
+  const featureName = document.getElementById("homeFeatureName");
+  const featureLocation = document.getElementById("homeFeatureLocation");
+  const featureShortLocation = document.getElementById("homeFeatureShortLocation");
+  if (featureLink) featureLink.href = `?spot=${featureSpot.slug}`;
+  if (featureImage && camera) {
+    featureImage.src = camera.imageUrl;
+    featureImage.alt = camera.alt;
+  }
+  if (featureName) featureName.textContent = featureSpot.name;
+  if (featureLocation) featureLocation.textContent = featureSpot.location;
+  if (featureShortLocation) {
+    const state = featureSpot.location.split(",").pop()?.trim() || "";
+    featureShortLocation.textContent = `${featureSpot.name}${state ? `, ${state}` : ""}`;
+  }
+}
+
+function wireHomeSearch() {
+  const input = document.getElementById("homeLakeSearch");
+  if (!input || input.dataset.bound === "true") return;
+  input.dataset.bound = "true";
+  input.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    document.querySelectorAll(".home-lake-link").forEach((card) => {
+      card.hidden = Boolean(query) && !card.dataset.name.includes(query);
+    });
+  });
 }
 
 function renderSpotSwitcher(activeSpot) {

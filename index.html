@@ -19,12 +19,33 @@
           <div class="spot-switcher">
             <select id="spotSelect" aria-label="Lake spot"></select>
           </div>
+          <button class="home-menu-button" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
         </nav>
         <div class="hero-copy">
           <h1 id="heroTitle">Lake Conditions You Can Count On</h1>
           <span class="hero-accent" aria-hidden="true"></span>
           <p>Real-time boating conditions, lake forecasts, and the best windows to get on the water.</p>
+          <label class="home-search" for="homeLakeSearch">
+            <span aria-hidden="true"></span>
+            <input id="homeLakeSearch" type="search" placeholder="Search lakes, spots, or regions" autocomplete="off">
+          </label>
         </div>
+        <section class="home-feature-card" aria-label="Featured live lake view">
+          <a href="?spot=payette-lake" id="homeFeatureLink">
+            <img id="homeFeatureImage" src="assets/mile-high-marina-camera.png" alt="Live lake camera preview">
+            <span class="home-live-pill"><i aria-hidden="true"></i>Live <b id="homeFeatureShortLocation">Payette Lake, ID</b></span>
+            <strong id="homeFeatureName">Payette Lake</strong>
+            <small id="homeFeatureLocation">McCall, Idaho</small>
+          </a>
+        </section>
+        <section class="home-spot-rail" aria-labelledby="homeSpotRailTitle">
+          <div class="home-spot-heading">
+            <h2 id="homeSpotRailTitle"><span aria-hidden="true"></span>Spot by spot</h2>
+            <a href="#homeMapPanel">View all</a>
+          </div>
+          <div class="home-spot-cards" id="homeLakeLinks" aria-label="Available lake reports"></div>
+        </section>
+        <section class="hero-report" id="heroDailyReport" aria-label="Daily lake report"></section>
         <section class="camera-card hero-camera" id="cameraCard" aria-labelledby="cameraTitle">
           <div class="section-heading">
             <div>
@@ -43,8 +64,8 @@
 
       <section class="home-map-panel" id="homeMapPanel" aria-labelledby="homeMapTitle">
         <div class="home-map-copy">
-          <p>Live wake-sports outlook</p>
-          <h2 id="homeMapTitle">Find the best lake window before you trailer, tow, or launch.</h2>
+          <p>Lake map</p>
+          <h2 id="homeMapTitle">Explore live lake reports across the country.</h2>
           <span class="hero-accent" aria-hidden="true"></span>
         </div>
         <div class="us-map-card" aria-label="Lake Pro United States lake map">
@@ -66,7 +87,6 @@
               <text x="24" y="13">live report</text>
             </a>
           </svg>
-          <div class="home-lake-links" id="homeLakeLinks" aria-label="Available lake reports"></div>
         </div>
       </section>
 
