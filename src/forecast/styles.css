@@ -154,6 +154,57 @@ body::before {
   box-shadow: var(--shadow-soft);
 }
 
+.spot-search {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 320px;
+  max-width: 480px;
+  min-height: 44px;
+  border: 1px solid rgba(7, 25, 82, 0.11);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-soft);
+  padding: 0 14px;
+}
+
+body.spot-mode .spot-search {
+  display: flex;
+}
+
+.spot-search span {
+  position: relative;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(6, 22, 82, 0.62);
+  border-radius: 999px;
+}
+
+.spot-search span::after {
+  position: absolute;
+  right: -7px;
+  bottom: -5px;
+  width: 9px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(6, 22, 82, 0.62);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.spot-search input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 720;
+  outline: none;
+}
+
 .home-menu-button {
   display: none;
   place-items: center;
@@ -1652,6 +1703,7 @@ h2 {
 
   .top-nav {
     align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
     padding: 0;
   }
@@ -1669,7 +1721,7 @@ h2 {
   }
 
   .spot-switcher {
-    flex: 1;
+    flex: 1 1 160px;
     min-width: 0;
     align-items: stretch;
     flex-direction: row;
@@ -1680,6 +1732,13 @@ h2 {
     min-width: 0;
     min-height: 40px;
     font-size: 0.92rem;
+  }
+
+  .spot-search {
+    flex: 1 0 100%;
+    order: 3;
+    max-width: none;
+    min-height: 42px;
   }
 
   .hero-copy {

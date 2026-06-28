@@ -394,6 +394,7 @@ function renderHomeLakeLinks() {
   }));
   hydrateHomeLakeCards();
   wireHomeSearch();
+  wireSpotSearch();
 }
 
 async function hydrateHomeLakeCards() {
@@ -446,6 +447,27 @@ function wireHomeSearch() {
     document.querySelectorAll(".home-lake-link").forEach((card) => {
       card.hidden = Boolean(query) && !card.dataset.name.includes(query);
     });
+  });
+}
+
+function matchingSpot(query) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return null;
+  return lakeSpots.find((spot) => spot.name.toLowerCase() === normalized)
+    || lakeSpots.find((spot) => `${spot.name} ${spot.location}`.toLowerCase().includes(normalized));
+}
+
+function wireSpotSearch() {
+  const input = document.getElementById("spotLakeSearch");
+  if (!input || input.dataset.bound === "true") return;
+  input.dataset.bound = "true";
+  input.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    const spot = matchingSpot(input.value);
+    if (!spot) return;
+    event.preventDefault();
+    input.blur();
+    selectSpotBySlug(spot.slug);
   });
 }
 
