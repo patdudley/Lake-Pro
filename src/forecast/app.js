@@ -349,7 +349,9 @@ function renderForecastReports(days = placeholderForecast) {
   const day = days[index] || {};
   const report = generateLakeForecastReport(day, index, days);
   const heroReport = document.getElementById("heroDailyReport");
+  const mobileReport = document.getElementById("mobileDailyReport");
   if (heroReport) heroReport.replaceChildren(createForecastReportArticle(report, "forecast-report hero-forecast-report"));
+  if (mobileReport) mobileReport.replaceChildren(createForecastReportArticle(report, "forecast-report mobile-forecast-report"));
 }
 
 async function fetchGeoJson(url) {
