@@ -184,10 +184,6 @@ body::after {
   padding: 0 14px;
 }
 
-body.spot-mode .spot-search {
-  display: flex;
-}
-
 .spot-search span {
   position: relative;
   flex: 0 0 auto;
@@ -310,6 +306,8 @@ body.spot-mode .home-map-panel,
 body.spot-mode .home-feature-card,
 body.spot-mode .home-spot-rail,
 body.spot-mode .home-search,
+body.spot-mode .spot-search,
+body.spot-mode .spot-switcher,
 body.spot-mode .home-menu-button {
   display: none;
 }
