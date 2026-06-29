@@ -337,6 +337,10 @@ def crowding_penalty(day: date) -> int:
     return penalty
 
 
+def is_peak_boat_traffic(day: date) -> bool:
+    return crowding_penalty(day) >= 8
+
+
 def grade_from_score(score: int) -> str:
     if score >= 85:
         return "A"
@@ -537,6 +541,29 @@ def is_rainy_weather_code(code: int | float | None) -> bool:
     return 51 <= value <= 67 or 80 <= value <= 82 or value >= 95
 
 
+def is_sunny_weather_code(code: int | float | None) -> bool:
+    if code is None:
+        return False
+    return int(code) in {0, 1}
+
+
+def calm_sunny_a_window(
+    *,
+    day: date,
+    temp_max: float | int | None,
+    weather_code: int | float | None,
+    wind_for_grade: float | None,
+) -> bool:
+    if wind_for_grade is None or temp_max is None:
+        return False
+    return (
+        0 <= float(wind_for_grade) <= 1
+        and float(temp_max) >= 60
+        and is_sunny_weather_code(weather_code)
+        and not is_peak_boat_traffic(day)
+    )
+
+
 def cap_score(score: int, cap: int) -> int:
     return min(score, cap)
 
@@ -551,10 +578,22 @@ def apply_grade_caps(
     window_stays_dry: bool = False,
 ) -> tuple[int, int, list[str]]:
     grade_caps = []
+    calm_sunny_exception = calm_sunny_a_window(
+        day=day,
+        temp_max=temp_max,
+        weather_code=weather_code,
+        wind_for_grade=wind_for_grade,
+    )
 
-    if temp_max is not None and float(temp_max) < 70:
+    if temp_max is not None and float(temp_max) < 60:
+        score = cap_score(score, top_score_for_grade("B"))
+        grade_caps.append("temperature_high_below_60")
+    elif temp_max is not None and float(temp_max) < 70 and not calm_sunny_exception:
         score = cap_score(score, top_score_for_grade("B"))
         grade_caps.append("temperature_high_below_70")
+    elif calm_sunny_exception:
+        score = max(score, 90)
+        grade_caps.append("calm_sunny_a_window")
 
     rainy_day = (precip is not None and float(precip) >= 55) or is_rainy_weather_code(weather_code)
     warms_up = temp_max is not None and float(temp_max) >= 70
