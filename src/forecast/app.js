@@ -2,6 +2,7 @@ import { lakeSpots } from "../spots/index.js";
 import { windFrameForSpot } from "../map/windFrameSource.js";
 
 let lakeMap = null;
+let homeMap = null;
 let currentSpot = null;
 let windFrames = [];
 let windFrameIndex = 0;
@@ -18,6 +19,22 @@ let loadedShorelineSlug = "";
 let currentLiveLatest = null;
 let selectedForecastIndex = 0;
 let homeCameraIndex = 0;
+
+function cartoRasterStyle() {
+  return {
+    version: 8,
+    glyphs: "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
+    sources: {
+      osm: {
+        type: "raster",
+        tiles: ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "OpenStreetMap contributors, CARTO",
+      },
+    },
+    layers: [{ id: "osm", type: "raster", source: "osm" }],
+  };
+}
 
 const mapLayerUrls = {
   payetteBathymetry: "data/live/map_layers/payette_bathymetry_contours.geojson",
@@ -400,6 +417,67 @@ function renderHomeLakeLinks() {
   wireSpotSearch();
   renderHomeCameraSlider();
   wireHomeCameraSlider();
+}
+
+function createHomeMapMarker(spot) {
+  const marker = document.createElement("a");
+  marker.className = "home-map-marker";
+  marker.href = `?spot=${spot.slug}`;
+  marker.setAttribute("aria-label", `Open ${spot.name} lake report`);
+  marker.innerHTML = `<b>${spot.name}</b><span aria-hidden="true"></span>`;
+  marker.addEventListener("click", (event) => {
+    event.preventDefault();
+    selectSpotBySlug(spot.slug);
+  });
+  return marker;
+}
+
+function fitHomeMap(duration = 0) {
+  if (!homeMap) return;
+  const narrow = window.matchMedia("(max-width: 820px)").matches;
+  homeMap.fitBounds([[-125.2, 24.2], [-66.7, 49.5]], {
+    padding: narrow
+      ? { top: 34, right: 22, bottom: 34, left: 22 }
+      : { top: 42, right: 54, bottom: 42, left: 54 },
+    duration,
+    essential: true,
+  });
+}
+
+function initHomeMap() {
+  const container = document.getElementById("homeUsMap");
+  if (!container || !window.maplibregl) return;
+  if (homeMap) {
+    homeMap.resize();
+    fitHomeMap(0);
+    return;
+  }
+
+  homeMap = new window.maplibregl.Map({
+    container,
+    style: cartoRasterStyle(),
+    center: [-97.2, 38.6],
+    zoom: window.matchMedia("(max-width: 820px)").matches ? 2.25 : 3.25,
+    minZoom: 2,
+    attributionControl: false,
+  });
+
+  homeMap.addControl(new window.maplibregl.AttributionControl({ compact: true }), "top-left");
+  homeMap.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), "top-right");
+  lakeSpots.forEach((spot) => {
+    new window.maplibregl.Marker({
+      element: createHomeMapMarker(spot),
+      anchor: "bottom",
+    })
+      .setLngLat([spot.longitude, spot.latitude])
+      .addTo(homeMap);
+  });
+  homeMap.once("load", () => fitHomeMap(0));
+  window.addEventListener("resize", () => {
+    if (!document.body.classList.contains("home-mode")) return;
+    homeMap.resize();
+    fitHomeMap(0);
+  });
 }
 
 async function hydrateHomeLakeCards() {
@@ -1330,19 +1408,7 @@ function initMap(activeSpot) {
 
   lakeMap = new window.maplibregl.Map({
     container: "map",
-    style: {
-      version: 8,
-      glyphs: "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
-      sources: {
-        osm: {
-          type: "raster",
-          tiles: ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"],
-          tileSize: 256,
-          attribution: "OpenStreetMap contributors, CARTO",
-        },
-      },
-      layers: [{ id: "osm", type: "raster", source: "osm" }],
-    },
+    style: cartoRasterStyle(),
     center: [activeSpot.longitude, activeSpot.latitude],
     zoom: activeSpot.slug === "lake-tahoe" ? 8.35 : 11.15,
     attributionControl: false,
@@ -1374,7 +1440,9 @@ function boot() {
   setPageMode(isHomePage() ? "home" : "spot");
   renderSpotSwitcher(activeSpot);
   renderHomeLakeLinks();
-  if (!isHomePage()) {
+  if (isHomePage()) {
+    initHomeMap();
+  } else {
     renderSpot(activeSpot);
     initMap(activeSpot);
   }
@@ -1385,7 +1453,9 @@ window.addEventListener("popstate", () => {
   setPageMode(isHomePage() ? "home" : "spot");
   const select = document.getElementById("spotSelect");
   if (select) select.value = activeSpot.slug;
-  if (!isHomePage()) {
+  if (isHomePage()) {
+    initHomeMap();
+  } else {
     renderSpot(activeSpot);
     if (!lakeMap) initMap(activeSpot);
     else updateMapForSpot(activeSpot);
