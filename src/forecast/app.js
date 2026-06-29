@@ -713,6 +713,10 @@ function frameDateKey(time) {
   return `${year}-${month}-${day}`;
 }
 
+function liveDateKey(spot = currentSpot) {
+  return localHourKey(new Date(), spot?.timeZone).slice(0, 10);
+}
+
 function localHourKey(date = new Date(), timeZone) {
   if (!timeZone || Number.isNaN(date.getTime())) return "";
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -1159,7 +1163,7 @@ function renderWindFrame(index = windFrameIndex) {
     slider.value = String(windFrameIndex);
   }
   if (backButton) {
-    const currentDay = frameDateKey(windFrames[0]?.time);
+    const currentDay = liveDateKey() || frameDateKey(windFrames[0]?.time);
     const selectedDay = frameDateKey(frame?.time);
     const isFutureDay = Boolean(currentDay && selectedDay && selectedDay !== currentDay);
     backButton.closest(".timelapse-control")?.classList.toggle("has-back", isFutureDay);
