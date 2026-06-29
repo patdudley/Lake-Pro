@@ -427,17 +427,18 @@ function renderForecastReports(days = placeholderForecast) {
   const index = Math.max(0, Math.min(selectedForecastIndex, days.length - 1));
   selectedForecastIndex = index;
   const day = days[index] || {};
-  const report = index === 0
+  const dropdownReport = index === 0
     ? generateWeeklyOutlook(days)
     : generateLakeForecastReport(day, index, days);
+  const dayReport = generateLakeForecastReport(day, index, days);
   const dropdown = document.getElementById("forecastReportDropdown");
   const heroReport = document.getElementById("heroDailyReport");
   const mobileReport = document.getElementById("mobileDailyReport");
   if (dropdown) {
-    dropdown.replaceChildren(createForecastReportArticle(report, "forecast-report forecast-dropdown-report"));
+    dropdown.replaceChildren(createForecastReportArticle(dropdownReport, "forecast-report forecast-dropdown-report"));
   }
-  if (heroReport) heroReport.replaceChildren(createForecastReportArticle(report, "forecast-report hero-forecast-report"));
-  if (mobileReport) mobileReport.replaceChildren(createForecastReportArticle(report, "forecast-report mobile-forecast-report"));
+  if (heroReport) heroReport.replaceChildren(createForecastReportArticle(dayReport, "forecast-report hero-forecast-report"));
+  if (mobileReport) mobileReport.replaceChildren(createForecastReportArticle(dayReport, "forecast-report mobile-forecast-report"));
 }
 
 async function fetchGeoJson(url) {

@@ -334,8 +334,8 @@ body.spot-mode .hero-copy {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "nav"
-      "copy"
-      "camera";
+      "camera"
+      "report";
     gap: 18px;
     min-height: 0;
     margin-bottom: 0;
@@ -367,6 +367,7 @@ body.spot-mode .hero-copy {
   }
 
   body.spot-mode .hero-report {
+    grid-area: report;
     align-self: start;
     max-width: none;
     margin-top: 0;
