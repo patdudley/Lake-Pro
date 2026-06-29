@@ -498,10 +498,6 @@ function createHomeMapMarker(spot) {
   marker.type = "button";
   marker.setAttribute("aria-label", `Show ${spot.name} map popup`);
   marker.innerHTML = `<span aria-hidden="true"></span>`;
-  marker.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-  });
   return marker;
 }
 
