@@ -406,7 +406,9 @@ function spotReportUrl(spot) {
 function renderHomeLakeLinks() {
   const container = document.getElementById("homeLakeLinks");
   if (!container) return;
-  container.replaceChildren(...lakeSpots.map((spot) => {
+  const featuredSpots = lakeSpots.filter((spot) => spot.featured || spot.liveReady);
+  const visibleSpots = featuredSpots.length ? featuredSpots : lakeSpots.slice(0, 8);
+  container.replaceChildren(...visibleSpots.map((spot) => {
     const link = document.createElement("a");
     link.className = "home-lake-link";
     link.href = spotReportUrl(spot);
@@ -484,7 +486,8 @@ function initHomeMap() {
 
   homeMap.addControl(new window.maplibregl.AttributionControl({ compact: true }), "top-left");
   homeMap.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), "top-right");
-  lakeSpots.forEach((spot) => {
+  lakeSpots.filter((spot) => spot.homeMap !== false).forEach((spot) => {
+    if (!Number.isFinite(spot.latitude) || !Number.isFinite(spot.longitude)) return;
     const popup = new window.maplibregl.Popup({
       closeButton: false,
       closeOnClick: true,
@@ -606,6 +609,14 @@ function wireHomeSearch() {
     document.querySelectorAll(".home-lake-link").forEach((card) => {
       card.hidden = Boolean(query) && !card.dataset.name.includes(query);
     });
+  });
+  input.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    const spot = matchingSpot(input.value);
+    if (!spot) return;
+    event.preventDefault();
+    input.blur();
+    selectSpotBySlug(spot.slug);
   });
 }
 

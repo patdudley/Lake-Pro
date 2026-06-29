@@ -1,4 +1,3 @@
-import { lakeTahoe } from "./lakeTahoe.js";
-import { payetteLake } from "./payetteLake.js";
+import { lakeCatalog } from "./lakeCatalog.js";
 
-export const lakeSpots = [lakeTahoe, payetteLake];
+export const lakeSpots = lakeCatalog;
