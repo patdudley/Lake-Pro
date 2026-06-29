@@ -1362,6 +1362,8 @@ h2 {
 }
 
 .report-card.map-report-bubble {
+  display: flex;
+  flex-direction: column;
   grid-template-columns: none;
   align-items: stretch;
 }
@@ -1426,8 +1428,10 @@ h2 {
 
 .map-report-bubble .score-track {
   display: block;
+  flex: 0 0 auto;
+  width: 100%;
   height: 7px;
-  margin-top: 4px;
+  margin: 6px auto 0;
   border-radius: 999px;
   background: rgba(7, 25, 82, 0.08);
   overflow: hidden;
@@ -2397,6 +2401,10 @@ h2 {
 
   .score-track {
     margin-top: -6px;
+  }
+
+  .map-report-bubble .score-track {
+    margin: 6px auto 0;
   }
 
   .rating-grid {
