@@ -442,12 +442,12 @@ body.spot-mode .hero-copy {
 }
 
 body.home-mode .site-hero {
-  grid-template-columns: minmax(430px, 0.92fr) minmax(500px, 1.08fr);
+  grid-template-columns: minmax(390px, 0.78fr) minmax(460px, 1fr);
   grid-template-areas:
     "nav nav"
     "copy feature"
     "spots spots";
-  gap: 26px 56px;
+  gap: 18px 40px;
   min-height: 0;
   align-content: start;
   border: 0;
@@ -456,26 +456,27 @@ body.home-mode .site-hero {
     radial-gradient(circle at 84% 12%, rgba(11, 88, 255, 0.1), transparent 25rem),
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(250, 253, 255, 0.88));
   box-shadow: none;
-  padding: 28px 8px 14px;
+  padding: 20px 8px 6px;
 }
 
 body.home-mode .hero-copy {
-  max-width: 920px;
-  margin-top: clamp(20px, 5vw, 62px);
+  max-width: 760px;
+  margin-top: clamp(10px, 2.6vw, 34px);
 }
 
 body.home-mode .hero-copy h1 {
-  max-width: 15ch;
-  font-size: clamp(3.4rem, 4.6vw, 4.75rem);
+  max-width: 14ch;
+  font-size: clamp(2.85rem, 3.75vw, 4rem);
+  line-height: 1.02;
 }
 
 .home-search {
   display: flex;
   align-items: center;
   gap: 14px;
-  width: min(520px, 100%);
-  min-height: 68px;
-  margin-top: 34px;
+  width: min(500px, 100%);
+  min-height: 58px;
+  margin-top: 24px;
   border: 1px solid rgba(7, 25, 82, 0.11);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.9);
@@ -511,7 +512,7 @@ body.home-mode .hero-copy h1 {
   background: transparent;
   color: var(--text);
   font: inherit;
-  font-size: 1.12rem;
+  font-size: 1rem;
   font-weight: 650;
   outline: none;
 }
@@ -522,7 +523,7 @@ body.home-mode .hero-copy h1 {
 
 .home-feature-card {
   grid-area: feature;
-  align-self: end;
+  align-self: center;
   position: relative;
   z-index: 1;
 }
@@ -530,7 +531,8 @@ body.home-mode .hero-copy h1 {
 .home-feature-card a {
   position: relative;
   display: block;
-  min-height: 344px;
+  height: clamp(280px, 24vw, 330px);
+  min-height: 0;
   border-radius: 18px;
   background: #dfe8f6;
   box-shadow: var(--shadow);
@@ -542,7 +544,7 @@ body.home-mode .hero-copy h1 {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 344px;
+  min-height: 0;
   object-fit: cover;
 }
 
@@ -597,13 +599,13 @@ body.home-mode .hero-copy h1 {
 }
 
 .home-feature-card strong {
-  bottom: 46px;
-  font-size: 1.2rem;
+  bottom: 42px;
+  font-size: 1.1rem;
 }
 
 .home-feature-card small {
-  bottom: 24px;
-  font-size: 0.98rem;
+  bottom: 22px;
+  font-size: 0.88rem;
   font-weight: 650;
 }
 
@@ -679,7 +681,7 @@ body.home-mode .hero-copy h1 {
   grid-area: spots;
   position: relative;
   z-index: 1;
-  margin-top: 8px;
+  margin-top: 0;
 }
 
 .home-spot-heading {
@@ -687,7 +689,7 @@ body.home-mode .hero-copy h1 {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .home-spot-heading h2 {
@@ -717,8 +719,8 @@ body.home-mode .hero-copy h1 {
 .home-spot-cards {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(280px, 1fr);
-  gap: 18px;
+  grid-auto-columns: minmax(250px, 1fr);
+  gap: 14px;
   overflow-x: auto;
   padding: 2px 0 10px;
   scroll-snap-type: x proximity;
@@ -1866,9 +1868,9 @@ h2 {
       "copy"
       "feature"
       "spots";
-    gap: 20px;
+    gap: 16px;
     min-height: 0;
-    padding: 20px 14px 8px;
+    padding: 16px 14px 4px;
   }
 
   .site-hero::before {
@@ -1936,7 +1938,7 @@ h2 {
   }
 
   body.home-mode .hero-copy {
-    margin-top: 28px;
+    margin-top: 16px;
   }
 
   .hero-report {
@@ -1980,8 +1982,8 @@ h2 {
 
   body.home-mode .hero-copy h1 {
     max-width: 100%;
-    font-size: clamp(2rem, 8.4vw, 2.4rem);
-    line-height: 1.05;
+    font-size: clamp(1.9rem, 7.6vw, 2.3rem);
+    line-height: 1.03;
   }
 
   .hero-accent {
@@ -1992,13 +1994,13 @@ h2 {
 
   .hero-copy p {
     max-width: 21rem;
-    margin-top: 18px;
+    margin-top: 14px;
     font-size: 1rem;
   }
 
   .home-search {
-    min-height: 58px;
-    margin-top: 28px;
+    min-height: 52px;
+    margin-top: 20px;
     border-radius: 16px;
     padding: 0 18px;
   }
@@ -2008,12 +2010,13 @@ h2 {
   }
 
   .home-feature-card a {
-    min-height: 232px;
+    height: 210px;
+    min-height: 0;
     border-radius: 18px;
   }
 
   .home-feature-card img {
-    min-height: 232px;
+    min-height: 0;
   }
 
   .home-live-pill {
