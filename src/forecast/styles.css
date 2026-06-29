@@ -217,29 +217,6 @@ body::after {
   outline: none;
 }
 
-.home-menu-button {
-  display: none;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: var(--shadow);
-}
-
-.home-menu-button span {
-  display: block;
-  width: 22px;
-  height: 3px;
-  border-radius: 999px;
-  background: var(--text);
-}
-
-.home-menu-button span + span {
-  margin-top: 5px;
-}
-
 .hero-copy {
   grid-area: copy;
   position: relative;
@@ -307,8 +284,7 @@ body.spot-mode .home-feature-card,
 body.spot-mode .home-spot-rail,
 body.spot-mode .home-search,
 body.spot-mode .spot-search,
-body.spot-mode .spot-switcher,
-body.spot-mode .home-menu-button {
+body.spot-mode .spot-switcher {
   display: none;
 }
 
@@ -1943,10 +1919,6 @@ h2 {
 
   body.home-mode .top-nav {
     justify-content: space-between;
-  }
-
-  body.home-mode .home-menu-button {
-    display: grid;
   }
 
   .brand-link img {
