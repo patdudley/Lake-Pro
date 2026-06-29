@@ -11,6 +11,7 @@ Outputs:
 - `data/live/manifest.json`
 - `data/live/spots/lake-tahoe.json`
 - `data/live/spots/payette-lake.json`
+- `data/live/spots/*.json` for the full Lake Pro catalog
 - `data/live/wind_frames/*.json`
 - `data/live/map_layers/payette_*.geojson`
 - `assets/mile-high-marina-camera.png` and `assets/edgewood-tahoe-camera.png` when Node + Playwright are available
@@ -29,7 +30,8 @@ launchctl kickstart -k "gui/$(id -u)/com.lakepro.refresh-data"
 
 Notes:
 
-- Weather data comes from the National Weather Service API.
+- Tahoe and Payette weather data comes from the National Weather Service API, with Open-Meteo fallback.
+- Catalog lake weather data comes from Open-Meteo until each lake has approved lake-specific model assets.
 - Payette depth/no-wake layers come from McCall GIS and Valley County GIS.
 - Chop height is currently a wind-based proxy, not a measured value.
 - Wind-shadow scoring, danger restrictions, and final boating-area grading still need approved model rules and verified hazard polygons.

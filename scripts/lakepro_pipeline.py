@@ -38,14 +38,36 @@ class Spot:
     slug: str
     name: str
     location: str
+    time_zone: str
     latitude: float
     longitude: float
+    live_ready: bool = False
 
 
-SPOTS = [
-    Spot("lake-tahoe", "Lake Tahoe", "California / Nevada", 39.0968, -120.0324),
-    Spot("payette-lake", "Payette Lake", "McCall, Idaho", 44.9406, -116.0910),
-]
+def load_catalog_spots() -> list[Spot]:
+    catalog_path = ROOT / "src" / "spots" / "lakeCatalog.js"
+    text = catalog_path.read_text()
+    start = text.index("[")
+    end = text.rindex("];") + 1
+    catalog_json = re.sub(r",\s*]$", "]", text[start:end])
+    rows = json.loads(catalog_json)
+    spots = []
+    for row in rows:
+        spots.append(
+            Spot(
+                slug=row["slug"],
+                name=row["name"],
+                location=row["location"],
+                time_zone=row.get("timeZone") or TIMEZONE,
+                latitude=float(row["latitude"]),
+                longitude=float(row["longitude"]),
+                live_ready=bool(row.get("liveReady")),
+            )
+        )
+    return spots
+
+
+SPOTS = load_catalog_spots()
 
 PAYETTE_LAYER_URLS = {
     "bathymetry_contours": "https://mccallgis.mccall.id.us/mcgis/rest/services/PUB/Payette_Lake_Bathymetry_Contours/FeatureServer/1/query",
@@ -187,13 +209,118 @@ def fetch_open_meteo_daily(spot: Spot) -> dict:
         ),
         "temperature_unit": "fahrenheit",
         "wind_speed_unit": "mph",
-        "timezone": TIMEZONE,
+        "timezone": spot.time_zone,
         "forecast_days": 10,
     }
     url = build_url("https://api.open-meteo.com/v1/forecast", params)
     payload = fetch_json(url)
     payload["url"] = url
     return payload
+
+
+def build_open_meteo_forecast(spot: Spot, fallback_error: str | None = None) -> dict:
+    daily_source = fetch_open_meteo_daily(spot)
+    daily = daily_source.get("daily", {})
+    hourly = daily_source.get("hourly", {})
+    days = []
+
+    daily_rows = zip(
+        daily.get("time", []),
+        daily.get("weather_code", []),
+        daily.get("temperature_2m_max", []),
+        daily.get("temperature_2m_min", []),
+        daily.get("precipitation_probability_max", []),
+        daily.get("wind_speed_10m_max", []),
+        daily.get("wind_direction_10m_dominant", []),
+    )
+    for day_str, weather_code, temp_max, temp_min, precip, wind, direction in daily_rows:
+        day = date.fromisoformat(day_str)
+        wind = round(float(wind), 1) if wind is not None else None
+        direction = int(round(float(direction))) if direction is not None else None
+        precip = round(float(precip), 1) if precip is not None else None
+        temp_max = round(float(temp_max)) if temp_max is not None else None
+        temp_min = round(float(temp_min)) if temp_min is not None else None
+        chop = chop_proxy_ft(wind, wind)
+        window = best_boating_window_for_day(hourly, day_str, temp_max)
+
+        if window["score"] is not None:
+            score = window["score"]
+            score_before_wind_cap = window["score_before_wind_cap"]
+            grade_caps = window["grade_caps"]
+        else:
+            score = 92
+            if wind is not None:
+                score -= max(0, int(round((float(wind) - 8) * 4.0)))
+            if precip is not None:
+                score -= max(0, int(round((float(precip) - 45) * 0.2)))
+            score -= crowding_penalty(day)
+            score = max(0, min(100, score))
+            score, score_before_wind_cap, grade_caps = apply_grade_caps(score, day, temp_max, precip, weather_code, wind)
+
+        days.append(
+            {
+                "date": day_str,
+                "grade": grade_from_score(score),
+                "score": score,
+                "score_before_wind_cap": score_before_wind_cap,
+                "grade_before_wind_cap": grade_from_score(score_before_wind_cap),
+                "wind_speed_max_mph": wind,
+                "wind_gust_max_mph": wind,
+                "wind_direction_deg": direction,
+                "wind_direction_label": wind_direction_label(direction),
+                "precipitation_probability_max": precip,
+                "weather_code": weather_code,
+                "temperature_2m_max": temp_max,
+                "temperature_2m_min": temp_min,
+                "chop_proxy_ft": chop,
+                "best_window": window["label"] if window["score"] is not None else "Daily outlook",
+                "best_window_wind_mph": window["avg_wind_mph"] if window["score"] is not None else wind,
+                "best_window_gust_mph": window["avg_gust_mph"] if window["score"] is not None else wind,
+                "best_window_precipitation_probability_max": window["max_precip_probability"] if window["score"] is not None else precip,
+                "grade_caps": grade_caps,
+                "crowding_penalty": crowding_penalty(day),
+                "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
+            }
+        )
+        if len(days) >= 10:
+            break
+
+    latest = days[0] if days else {}
+    source = {
+        "weather": "Open-Meteo forecast API",
+        "url": daily_source.get("url"),
+        "hourly_url": None,
+        "points_url": None,
+        "daily_fill_url": daily_source.get("url"),
+    }
+    if fallback_error:
+        source["nws_fallback_error"] = fallback_error
+
+    return {
+        "spot": {
+            "slug": spot.slug,
+            "name": spot.name,
+            "location": spot.location,
+            "latitude": spot.latitude,
+            "longitude": spot.longitude,
+        },
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "source": source,
+        "latest": {
+            **latest,
+            "best_window": latest.get("best_window") or best_window(hourly),
+            "report": "Live forecast is connected. Lake shape, wind-shadow, depth scoring, danger restrictions, and final chop model are pending for this lake.",
+        },
+        "ten_day": days,
+        "hourly": hourly,
+        "model_status": {
+            "wind_shadow": "pending",
+            "depth_scoring": "pending",
+            "danger_restrictions": "pending",
+            "chop_height": "proxy_only_not_measured",
+            "lake_shape": "pending",
+        },
+    }
 
 
 def crowding_penalty(day: date) -> int:
@@ -477,7 +604,13 @@ def best_window(hourly: dict) -> str:
 
 
 def build_forecast(spot: Spot) -> dict:
-    nws = fetch_nws_forecast(spot)
+    if not spot.live_ready:
+        return build_open_meteo_forecast(spot)
+
+    try:
+        nws = fetch_nws_forecast(spot)
+    except Exception as exc:
+        return build_open_meteo_forecast(spot, str(exc))
     hourly_periods = nws["hourly"].get("properties", {}).get("periods", [])
     hourly = {
         "time": [],
@@ -655,7 +788,13 @@ def build_forecast(spot: Spot) -> dict:
 
     latest = days[0] if days else {}
     return {
-        "spot": spot.__dict__,
+        "spot": {
+            "slug": spot.slug,
+            "name": spot.name,
+            "location": spot.location,
+            "latitude": spot.latitude,
+            "longitude": spot.longitude,
+        },
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": {
             "weather": "National Weather Service API",
