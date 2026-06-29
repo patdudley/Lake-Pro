@@ -462,13 +462,17 @@ function setPageMode(mode) {
   document.body.classList.toggle("spot-mode", mode === "spot");
 }
 
+function spotReportUrl(spot) {
+  return `?spot=${spot.slug}`;
+}
+
 function renderHomeLakeLinks() {
   const container = document.getElementById("homeLakeLinks");
   if (!container) return;
   container.replaceChildren(...lakeSpots.map((spot) => {
     const link = document.createElement("a");
     link.className = "home-lake-link";
-    link.href = `?spot=${spot.slug}`;
+    link.href = spotReportUrl(spot);
     const camera = cameraBySpot[spot.slug];
     link.dataset.name = `${spot.name} ${spot.location}`.toLowerCase();
     link.innerHTML = `
@@ -489,16 +493,30 @@ function renderHomeLakeLinks() {
 }
 
 function createHomeMapMarker(spot) {
-  const marker = document.createElement("a");
+  const marker = document.createElement("button");
   marker.className = "home-map-marker";
-  marker.href = `?spot=${spot.slug}`;
-  marker.setAttribute("aria-label", `Open ${spot.name} lake report`);
-  marker.innerHTML = `<b>${spot.name}</b><span aria-hidden="true"></span>`;
+  marker.type = "button";
+  marker.setAttribute("aria-label", `Show ${spot.name} map popup`);
+  marker.innerHTML = `<span aria-hidden="true"></span>`;
   marker.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  });
+  return marker;
+}
+
+function createHomeMapPopup(spot) {
+  const container = document.createElement("div");
+  container.className = "home-map-popup";
+  container.innerHTML = `
+    <a href="${spotReportUrl(spot)}">${spot.name}</a>
+    <span>${spot.location}</span>
+  `;
+  container.querySelector("a")?.addEventListener("click", (event) => {
     event.preventDefault();
     selectSpotBySlug(spot.slug);
   });
-  return marker;
+  return container;
 }
 
 function fitHomeMap(duration = 0) {
@@ -534,11 +552,19 @@ function initHomeMap() {
   homeMap.addControl(new window.maplibregl.AttributionControl({ compact: true }), "top-left");
   homeMap.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), "top-right");
   lakeSpots.forEach((spot) => {
+    const popup = new window.maplibregl.Popup({
+      closeButton: false,
+      closeOnClick: true,
+      offset: 18,
+      maxWidth: "220px",
+    }).setDOMContent(createHomeMapPopup(spot));
+
     new window.maplibregl.Marker({
       element: createHomeMapMarker(spot),
       anchor: "bottom",
     })
       .setLngLat([spot.longitude, spot.latitude])
+      .setPopup(popup)
       .addTo(homeMap);
   });
   homeMap.once("load", () => fitHomeMap(0));
