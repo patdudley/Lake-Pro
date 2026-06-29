@@ -240,6 +240,67 @@ function generateLakeForecastReport(day = {}, index = 0, days = []) {
   };
 }
 
+function gradeName(grade) {
+  if (grade === "A") return "Epic";
+  if (grade === "B") return "Fair";
+  if (grade === "C") return "Below average";
+  if (grade === "D") return "Poor";
+  if (grade === "F") return "Avoid";
+  return "Pending";
+}
+
+function generateWeeklyOutlook(days = []) {
+  const realDays = days.filter((day) => day && day.date).slice(0, 10);
+  const gradeCounts = realDays.reduce((memo, day) => {
+    const grade = gradeValue(day.grade) || "--";
+    memo[grade] = (memo[grade] || 0) + 1;
+    return memo;
+  }, {});
+  const goodDays = realDays.filter((day) => gradeRank(day.grade) >= gradeRank("B"));
+  const roughDays = realDays.filter((day) => gradeRank(day.grade) <= gradeRank("D"));
+  const windiest = realDays.reduce((best, day) => {
+    const wind = numberValue(day.wind_speed_max_mph);
+    if (wind == null) return best;
+    return !best || wind > numberValue(best.wind_speed_max_mph) ? day : best;
+  }, null);
+  const wetDays = realDays.filter((day) => numberValue(day.precipitation_probability_max) >= 45);
+  const bestDay = realDays.reduce((best, day) => {
+    const rank = gradeRank(day.grade);
+    if (!rank) return best;
+    if (!best || rank > gradeRank(best.grade)) return day;
+    return best;
+  }, null);
+  const bestLabel = bestDay ? (bestDay.label || dayLabel(bestDay.date, realDays.indexOf(bestDay))) : "";
+  const gradeMix = ["A", "B", "C", "D", "F"]
+    .filter((grade) => gradeCounts[grade])
+    .map((grade) => `${gradeCounts[grade]} ${gradeName(grade).toLowerCase()}`)
+    .join(", ");
+  const lines = [
+    realDays.length
+      ? `This week is showing ${gradeMix || "a pending grade mix"} across the 10-day outlook.`
+      : "The weekly setup is still loading.",
+    goodDays.length
+      ? `${goodDays.length} day${goodDays.length === 1 ? "" : "s"} look B-grade or better, with ${bestLabel || "one of the later windows"} currently the best planning target.`
+      : "No clear B-grade-or-better run is showing yet, so keep expectations conservative.",
+    roughDays.length
+      ? `${roughDays.length} day${roughDays.length === 1 ? "" : "s"} look D/F or close to it; open water is the first place to get messy when wind builds.`
+      : "Protected coves and near-shore bands should stay more useful than exposed open water if wind stays modest.",
+    windiest
+      ? `Biggest wind signal: ${dayLabel(windiest.date, realDays.indexOf(windiest))} near ${roundedMph(windiest.wind_speed_max_mph)}.`
+      : "",
+    wetDays.length
+      ? `Rain or storm risk shows up on ${wetDays.length} day${wetDays.length === 1 ? "" : "s"}, so the best lake windows may be shorter.`
+      : "Rain risk is not the main driver in the current 10-day read.",
+  ].filter(Boolean);
+
+  return {
+    title: "Weekly Lake Outlook",
+    grade: gradeValue(bestDay?.grade || realDays[0]?.grade),
+    hook: goodDays.length ? "Plan around the cleanest windows." : "Watch the setup before committing.",
+    lines,
+  };
+}
+
 function temperatureRange(day) {
   if (day.temperature_2m_max == null || day.temperature_2m_min == null) return "";
   return `<span class="forecast-temps">${Math.round(day.temperature_2m_max)}&deg; <small>${Math.round(day.temperature_2m_min)}&deg;</small></span>`;
@@ -325,6 +386,8 @@ function renderForecastStrip(days = placeholderForecast) {
     card.type = "button";
     card.dataset.active = index === selectedForecastIndex ? "true" : "false";
     card.setAttribute("aria-pressed", index === selectedForecastIndex ? "true" : "false");
+    card.setAttribute("aria-expanded", index === selectedForecastIndex ? "true" : "false");
+    card.setAttribute("aria-controls", "forecastReportDropdown");
     const grade = gradeValue(day.grade);
     card.innerHTML = `
       <span>${day.label || dayLabel(day.date, index)}</span>
@@ -364,9 +427,15 @@ function renderForecastReports(days = placeholderForecast) {
   const index = Math.max(0, Math.min(selectedForecastIndex, days.length - 1));
   selectedForecastIndex = index;
   const day = days[index] || {};
-  const report = generateLakeForecastReport(day, index, days);
+  const report = index === 0
+    ? generateWeeklyOutlook(days)
+    : generateLakeForecastReport(day, index, days);
+  const dropdown = document.getElementById("forecastReportDropdown");
   const heroReport = document.getElementById("heroDailyReport");
   const mobileReport = document.getElementById("mobileDailyReport");
+  if (dropdown) {
+    dropdown.replaceChildren(createForecastReportArticle(report, "forecast-report forecast-dropdown-report"));
+  }
   if (heroReport) heroReport.replaceChildren(createForecastReportArticle(report, "forecast-report hero-forecast-report"));
   if (mobileReport) mobileReport.replaceChildren(createForecastReportArticle(report, "forecast-report mobile-forecast-report"));
 }
