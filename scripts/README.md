@@ -14,7 +14,8 @@ Outputs:
 - `data/live/spots/*.json` for the full Lake Pro catalog
 - `data/live/wind_frames/*.json`
 - `data/live/map_layers/payette_*.geojson`
-- `assets/mile-high-marina-camera.png` and `assets/edgewood-tahoe-camera.png` when Node + Playwright are available
+- `assets/cameras/{spot-slug}.png` for catalog webcam sources when Node + Playwright are available
+- `reports/camera-audit.md` and `reports/camera-audit.json` showing captured, failed, and missing camera sources
 
 Install macOS schedule. This refreshes weather data and lake camera screenshots
 hourly from 7:00 AM through 10:00 PM local time:
@@ -35,5 +36,5 @@ Notes:
 - Payette depth/no-wake layers come from McCall GIS and Valley County GIS.
 - Chop height is currently a wind-based proxy, not a measured value.
 - Wind-shadow scoring, danger restrictions, and final boating-area grading still need approved model rules and verified hazard polygons.
-- The camera refresh script uses Playwright and Google Chrome. If Node/Playwright is unavailable, the scheduled data run still succeeds and leaves the last camera screenshot in place.
+- The camera refresh script uses Playwright and Google Chrome. If Node/Playwright is unavailable, the scheduled data run still succeeds and leaves the last camera screenshots in place.
 - If macOS blocks the LaunchAgent with `Operation not permitted`, move the repo out of `Documents` or grant Full Disk Access to the shell used by launchd. The script itself can still be run manually from Terminal.

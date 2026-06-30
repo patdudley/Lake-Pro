@@ -56,7 +56,7 @@ const defaultSpotSlug = "payette-lake";
 const DAYLIGHT_START_HOUR = 6;
 const DAYLIGHT_END_HOUR = 20;
 
-const cameraBySpot = {
+const approvedCameraOverrides = {
   "lake-tahoe": {
     title: "Live Lake View",
     description: "Current South Lake Tahoe shoreline view",
@@ -72,6 +72,25 @@ const cameraBySpot = {
     alt: "Mile High Marina webcam screenshot over Payette Lake",
   },
 };
+
+function cameraAssetUrl(spot) {
+  if (!spot?.slug) return "assets/hero-image.jpg";
+  return `assets/cameras/${spot.slug}.png`;
+}
+
+function cameraForSpot(spot) {
+  if (!spot) return null;
+  const override = approvedCameraOverrides[spot.slug];
+  if (override) return override;
+  if (!spot.webcam?.url) return null;
+  return {
+    title: "Live Lake View",
+    description: spot.webcam.label || `Current ${spot.name} lake view`,
+    sourceUrl: spot.webcam.url,
+    imageUrl: cameraAssetUrl(spot),
+    alt: `${spot.name} webcam screenshot`,
+  };
+}
 
 const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   label: index === 0 ? "Today" : new Date(Date.now() + index * 86400000).toLocaleDateString("en-US", { weekday: "short" }),
@@ -420,7 +439,7 @@ function renderHomeLakeLinks() {
     const link = document.createElement("a");
     link.className = "home-lake-link";
     link.href = spotReportUrl(spot);
-    const camera = cameraBySpot[spot.slug];
+    const camera = cameraForSpot(spot);
     link.dataset.name = `${spot.name} ${spot.location}`.toLowerCase();
     link.innerHTML = `
       <span class="home-lake-copy">
@@ -430,6 +449,8 @@ function renderHomeLakeLinks() {
       </span>
       <img src="${camera?.imageUrl || "assets/hero-image.jpg"}" alt="${spot.name} preview">
     `;
+    const image = link.querySelector("img");
+    if (image) image.onerror = () => { image.src = "assets/hero-image.jpg"; };
     return link;
   }));
   hydrateHomeLakeCards();
@@ -544,7 +565,7 @@ async function hydrateHomeLakeCards() {
 }
 
 function homeCameraSpots() {
-  return lakeSpots.filter((spot) => cameraBySpot[spot.slug]);
+  return lakeSpots.filter((spot) => cameraForSpot(spot));
 }
 
 function renderHomeCameraSlide(index = homeCameraIndex) {
@@ -552,7 +573,7 @@ function renderHomeCameraSlide(index = homeCameraIndex) {
   if (!slides.length) return;
   homeCameraIndex = ((index % slides.length) + slides.length) % slides.length;
   const featureSpot = slides[homeCameraIndex];
-  const camera = cameraBySpot[featureSpot.slug];
+  const camera = cameraForSpot(featureSpot);
   const featureLink = document.getElementById("homeFeatureLink");
   const featureImage = document.getElementById("homeFeatureImage");
   const featureName = document.getElementById("homeFeatureName");
@@ -560,6 +581,7 @@ function renderHomeCameraSlide(index = homeCameraIndex) {
   const featureShortLocation = document.getElementById("homeFeatureShortLocation");
   if (featureLink) featureLink.href = `?spot=${featureSpot.slug}`;
   if (featureImage && camera) {
+    featureImage.onerror = () => { featureImage.src = "assets/hero-image.jpg"; };
     featureImage.src = camera.imageUrl;
     featureImage.alt = camera.alt;
   }
@@ -780,7 +802,7 @@ function renderSpot(spot) {
 }
 
 function renderCameraCard(spot) {
-  const camera = cameraBySpot[spot.slug];
+  const camera = cameraForSpot(spot);
   const cameraCard = document.getElementById("cameraCard");
   if (!cameraCard) return;
   cameraCard.hidden = !camera;
@@ -792,6 +814,7 @@ function renderCameraCard(spot) {
   const source = document.getElementById("cameraSource");
   source.href = camera.sourceUrl;
   const image = document.getElementById("cameraImage");
+  image.onerror = () => { image.src = "assets/hero-image.jpg"; };
   image.src = camera.imageUrl;
   image.alt = camera.alt;
 }

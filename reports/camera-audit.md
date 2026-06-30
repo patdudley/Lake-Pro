@@ -1,0 +1,127 @@
+# Lake Pro Camera Audit
+
+Generated: 2026-06-30T22:16:32.982Z
+
+- Captured: 24
+- Suspect: 0
+- Failed: 0
+- No catalog webcam source yet: 88
+
+## Captured
+- Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
+- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
+- Jordanelle Reservoir (UT) — Park City Sailing — PWC Ramp Cam: https://sailpc.org/webcam
+- Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
+- Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
+- Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/
+- Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
+- Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
+- Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
+- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
+- Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
+- Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
+- Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
+- Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
+- Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
+- Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
+- Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
+- Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
+- Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
+- Lake Mead (NV/AZ) — NPS — Lake Mead Webcams: https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm
+- Lake Amistad (TX/Mexico) — National Park Service — Amistad webcams: https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm
+- Utah Lake (UT) — Utah State Parks — Live Webcam: https://stateparks.utah.gov/parks/utah-lake/current-conditions/
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/
+- Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
+
+## Failed Or Needs Manual Work
+
+## No Verified Webcam Source Yet
+- Pineview Reservoir (UT)
+- Lake Austin (TX)
+- Lake LBJ (TX)
+- Lake Lewisville (TX)
+- Lake Ray Hubbard (TX)
+- Gull Lake (MN)
+- Bear Lake (UT/ID)
+- Lake Pend Oreille (ID)
+- Canyon Lake (TX)
+- Lake McQueeney (TX)
+- Table Rock Lake (MO/AR)
+- Lake Cumberland (KY)
+- Lake Norris (TN)
+- Center Hill Lake (TN)
+- Lake Keowee (SC)
+- Lake Hartwell (GA/SC)
+- Lake Murray (SC)
+- Grand Lake O' the Cherokees (OK)
+- California Delta (CA)
+- Lake Oconee (GA)
+- Possum Kingdom Lake (TX)
+- Donner Lake (CA)
+- Horsetooth Reservoir (CO)
+- Cherry Creek Reservoir (CO)
+- Carter Lake (CO)
+- Pewaukee Lake (WI)
+- Lake Wylie (NC/SC)
+- Lewis Smith Lake (AL)
+- Lake Martin (AL)
+- Lake Hamilton / Lake Ouachita (AR)
+- Lake Sinclair (GA)
+- Lake Allatoona (GA)
+- Clarks Hill / Strom Thurmond (GA/SC)
+- Lake Hickory / Catawba chain (NC)
+- Claytor Lake (VA)
+- Tims Ford Lake (TN)
+- Dale Hollow Lake (TN/KY)
+- Tellico Lake (TN)
+- Watts Bar / TN River chain (TN)
+- Green River Lake (KY)
+- Lake Texoma (TX/OK)
+- Eagle Mountain Lake (TX)
+- Lake Buchanan / Inks Lake (TX)
+- Lake Marble Falls (TX)
+- Stillhouse Hollow / Belton (TX)
+- Lake Somerville (TX)
+- Lake Houston (TX)
+- Sam Rayburn (TX)
+- Big Bear Lake (CA)
+- Pyramid Lake (CA)
+- Lake Berryessa (CA)
+- Folsom Lake (CA)
+- Lake Mohave (NV/AZ)
+- Sand Hollow / Quail Creek (UT)
+- Flaming Gorge (UT/WY)
+- Strawberry Reservoir (UT)
+- Lake Pueblo (CO)
+- Grand Lake (CO)
+- Lake Granby (CO)
+- Blue Mesa Reservoir (CO)
+- Boyd Lake (CO)
+- Hayden Lake (ID)
+- Lake Billy Chinook (OR)
+- Cultus Lake (OR)
+- Lake Washington / Sammamish (WA)
+- Lake Chelan (WA)
+- Okoboji (Iowa Great Lakes) (IA)
+- Prior Lake / Cross Lake (MN)
+- Lake Wallenpaupack (PA)
+- Deep Creek Lake (MD)
+- Sebago Lake (ME)
+- Candlewood Lake (CT)
+- Lake Conway / Clermont chain (FL)
+- Lake Tarpon / Tampa Bay area (FL)
+- Lake Lure (NC)
+- Lake Wateree (SC)
+- Lake Greenwood (SC)
+- Shuswap Lake (BC, Canada)
+- Lake Muskoka / Joseph / Rosseau (ON, Canada)
+- Lake Simcoe (ON, Canada)
+- Lake Koocanusa (BC, Canada)
+- Lake Geneva (Léman) (Switzerland/France)
+- Lake Como (Italy)
+- Lake Zurich / Thun / Davos (Switzerland)
+- Austrian Lakes / AREA 47 (Austria)
+- Lake Macquarie / Hume (Australia)
+- Lake Wanaka (New Zealand)
+- Dubai Marina / Creek (UAE)
+

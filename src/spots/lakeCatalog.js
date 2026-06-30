@@ -395,7 +395,10 @@ export const lakeCatalog = [
     "featured": false,
     "liveReady": false,
     "homeMap": true,
-    "webcam": null,
+    "webcam": {
+      "label": "Palms Marina — Lake Conroe live view",
+      "url": "https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/"
+    },
     "slug": "lake-conroe",
     "shorelineOrientation": {
       "status": "placeholder",
@@ -1290,7 +1293,10 @@ export const lakeCatalog = [
     "featured": false,
     "liveReady": false,
     "homeMap": true,
-    "webcam": null,
+    "webcam": {
+      "label": "National Park Service — Amistad webcams",
+      "url": "https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm"
+    },
     "slug": "lake-amistad",
     "shorelineOrientation": {
       "status": "placeholder",

@@ -1,0 +1,713 @@
+{
+  "generatedAt": "2026-06-30T22:16:32.982Z",
+  "captured": [
+    {
+      "slug": "lake-tahoe",
+      "name": "Lake Tahoe",
+      "location": "CA/NV",
+      "status": "captured",
+      "sourceUrl": "https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/",
+      "label": "HDOnTap — Tahoe Vista PTZ",
+      "imageUrl": "assets/cameras/lake-tahoe.png",
+      "bytes": 353802,
+      "checkedAt": "2026-06-30T22:12:50.722Z"
+    },
+    {
+      "slug": "payette-lake",
+      "name": "Payette Lake",
+      "location": "ID (McCall)",
+      "status": "captured",
+      "sourceUrl": "https://milehighmarina.com/webcams/",
+      "label": "Mile High Marina RampCam",
+      "imageUrl": "assets/cameras/payette-lake.png",
+      "bytes": 1746939,
+      "checkedAt": "2026-06-30T22:13:00.565Z"
+    },
+    {
+      "slug": "jordanelle-reservoir",
+      "name": "Jordanelle Reservoir",
+      "location": "UT",
+      "status": "captured",
+      "sourceUrl": "https://sailpc.org/webcam",
+      "label": "Park City Sailing — PWC Ramp Cam",
+      "imageUrl": "assets/cameras/jordanelle-reservoir.png",
+      "bytes": 683404,
+      "checkedAt": "2026-06-30T22:13:09.920Z"
+    },
+    {
+      "slug": "deer-creek-reservoir",
+      "name": "Deer Creek Reservoir",
+      "location": "UT",
+      "status": "captured",
+      "sourceUrl": "https://stateparks.utah.gov/parks/deer-creek/current-conditions/",
+      "label": "Utah State Parks — Current Conditions",
+      "imageUrl": "assets/cameras/deer-creek-reservoir.png",
+      "bytes": 1226018,
+      "checkedAt": "2026-06-30T22:13:27.081Z"
+    },
+    {
+      "slug": "lake-havasu",
+      "name": "Lake Havasu",
+      "location": "AZ/CA",
+      "status": "captured",
+      "sourceUrl": "https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/",
+      "label": "HDOnTap — London Bridge PTZ",
+      "imageUrl": "assets/cameras/lake-havasu.png",
+      "bytes": 304580,
+      "checkedAt": "2026-06-30T22:13:35.393Z"
+    },
+    {
+      "slug": "lake-powell",
+      "name": "Lake Powell",
+      "location": "UT/AZ",
+      "status": "captured",
+      "sourceUrl": "https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/",
+      "label": "HDOnTap — Antelope Point Marina",
+      "imageUrl": "assets/cameras/lake-powell.png",
+      "bytes": 385011,
+      "checkedAt": "2026-06-30T22:13:45.478Z"
+    },
+    {
+      "slug": "lake-coeur-d-alene",
+      "name": "Lake Coeur d'Alene",
+      "location": "ID",
+      "status": "captured",
+      "sourceUrl": "https://www.cdaresort.com/live-feed/",
+      "label": "CDA Resort — Live Lake Cam",
+      "imageUrl": "assets/cameras/lake-coeur-d-alene.png",
+      "bytes": 817052,
+      "checkedAt": "2026-06-30T22:13:55.410Z"
+    },
+    {
+      "slug": "lake-travis",
+      "name": "Lake Travis",
+      "location": "TX",
+      "status": "captured",
+      "sourceUrl": "https://ltlakecam.com/",
+      "label": "LT Lake Cam — AI-tracked PTZ",
+      "imageUrl": "assets/cameras/lake-travis.png",
+      "bytes": 1347643,
+      "checkedAt": "2026-06-30T22:14:04.342Z"
+    },
+    {
+      "slug": "lake-minnetonka",
+      "name": "Lake Minnetonka",
+      "location": "MN",
+      "status": "captured",
+      "sourceUrl": "https://www.wyc.org/webcam",
+      "label": "Wayzata Yacht Club — Marina PTZ",
+      "imageUrl": "assets/cameras/lake-minnetonka.png",
+      "bytes": 755568,
+      "checkedAt": "2026-06-30T22:14:12.441Z"
+    },
+    {
+      "slug": "lake-of-the-ozarks",
+      "name": "Lake of the Ozarks",
+      "location": "MO",
+      "status": "captured",
+      "sourceUrl": "https://www.lakeexpo.com/webcams/",
+      "label": "LakeExpo — Multi-cam Hub",
+      "imageUrl": "assets/cameras/lake-of-the-ozarks.png",
+      "bytes": 1159797,
+      "checkedAt": "2026-06-30T22:14:23.128Z"
+    },
+    {
+      "slug": "lake-lanier",
+      "name": "Lake Lanier",
+      "location": "GA",
+      "status": "captured",
+      "sourceUrl": "https://www.llsc.com/web-cam",
+      "label": "Lake Lanier Sailing Club",
+      "imageUrl": "assets/cameras/lake-lanier.png",
+      "bytes": 12240,
+      "checkedAt": "2026-06-30T22:14:31.212Z"
+    },
+    {
+      "slug": "lake-norman",
+      "name": "Lake Norman",
+      "location": "NC",
+      "status": "captured",
+      "sourceUrl": "https://www.visitlakenorman.org/things-to-do/stream-lake-norman/",
+      "label": "Visit Lake Norman — Live Stream",
+      "imageUrl": "assets/cameras/lake-norman.png",
+      "bytes": 1206780,
+      "checkedAt": "2026-06-30T22:14:40.369Z"
+    },
+    {
+      "slug": "smith-mountain-lake",
+      "name": "Smith Mountain Lake",
+      "location": "VA",
+      "status": "captured",
+      "sourceUrl": "https://wset.com/weather/cameras/smith-mountain-lake",
+      "label": "WSET SkyCam — Vista Pointe",
+      "imageUrl": "assets/cameras/smith-mountain-lake.png",
+      "bytes": 105596,
+      "checkedAt": "2026-06-30T22:14:48.578Z"
+    },
+    {
+      "slug": "lake-shasta",
+      "name": "Lake Shasta",
+      "location": "CA",
+      "status": "captured",
+      "sourceUrl": "https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/",
+      "label": "Bridge Bay Houseboats — Live Cam",
+      "imageUrl": "assets/cameras/lake-shasta.png",
+      "bytes": 1175961,
+      "checkedAt": "2026-06-30T22:14:56.895Z"
+    },
+    {
+      "slug": "lake-conroe",
+      "name": "Lake Conroe",
+      "location": "TX",
+      "status": "captured",
+      "sourceUrl": "https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/",
+      "label": "Palms Marina — Lake Conroe live view",
+      "imageUrl": "assets/cameras/lake-conroe.png",
+      "bytes": 843180,
+      "checkedAt": "2026-06-30T22:15:05.114Z"
+    },
+    {
+      "slug": "flathead-lake",
+      "name": "Flathead Lake",
+      "location": "MT",
+      "status": "captured",
+      "sourceUrl": "https://flbs.umt.edu/newflbs/flathead-lake/webcams/",
+      "label": "FLBS-UMT — Yellow Bay & West Shore Cams",
+      "imageUrl": "assets/cameras/flathead-lake.png",
+      "bytes": 189375,
+      "checkedAt": "2026-06-30T22:15:13.998Z"
+    },
+    {
+      "slug": "lake-george",
+      "name": "Lake George",
+      "location": "NY",
+      "status": "captured",
+      "sourceUrl": "https://www.earthcam.com/usa/newyork/lakegeorge/",
+      "label": "EarthCam — Lake Motel PTZ",
+      "imageUrl": "assets/cameras/lake-george.png",
+      "bytes": 872870,
+      "checkedAt": "2026-06-30T22:15:23.811Z"
+    },
+    {
+      "slug": "lake-winnipesaukee",
+      "name": "Lake Winnipesaukee",
+      "location": "NH",
+      "status": "captured",
+      "sourceUrl": "https://winnisquammarine.com/webcams/winni-marine-live-feed/",
+      "label": "Winni Marine — Paugus Bay",
+      "imageUrl": "assets/cameras/lake-winnipesaukee.png",
+      "bytes": 298631,
+      "checkedAt": "2026-06-30T22:15:32.854Z"
+    },
+    {
+      "slug": "lake-geneva",
+      "name": "Lake Geneva",
+      "location": "WI",
+      "status": "captured",
+      "sourceUrl": "https://lgyc.com/geneva-lake-web-camera/",
+      "label": "Lake Geneva Yacht Club",
+      "imageUrl": "assets/cameras/lake-geneva.png",
+      "bytes": 405916,
+      "checkedAt": "2026-06-30T22:15:40.724Z"
+    },
+    {
+      "slug": "lake-mead",
+      "name": "Lake Mead",
+      "location": "NV/AZ",
+      "status": "captured",
+      "sourceUrl": "https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm",
+      "label": "NPS — Lake Mead Webcams",
+      "imageUrl": "assets/cameras/lake-mead.png",
+      "bytes": 1153822,
+      "checkedAt": "2026-06-30T22:15:48.678Z"
+    },
+    {
+      "slug": "lake-amistad",
+      "name": "Lake Amistad",
+      "location": "TX/Mexico",
+      "status": "captured",
+      "sourceUrl": "https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm",
+      "label": "National Park Service — Amistad webcams",
+      "imageUrl": "assets/cameras/lake-amistad.png",
+      "bytes": 359451,
+      "checkedAt": "2026-06-30T22:15:57.397Z"
+    },
+    {
+      "slug": "utah-lake",
+      "name": "Utah Lake",
+      "location": "UT",
+      "status": "captured",
+      "sourceUrl": "https://stateparks.utah.gov/parks/utah-lake/current-conditions/",
+      "label": "Utah State Parks — Live Webcam",
+      "imageUrl": "assets/cameras/utah-lake.png",
+      "bytes": 1418701,
+      "checkedAt": "2026-06-30T22:16:06.108Z"
+    },
+    {
+      "slug": "lake-winnisquam",
+      "name": "Lake Winnisquam",
+      "location": "NH",
+      "status": "captured",
+      "sourceUrl": "https://newhampshirewebcams.com/winnisquam-lake-webcam/",
+      "label": "NH Webcams — Winnisquam",
+      "imageUrl": "assets/cameras/lake-winnisquam.png",
+      "bytes": 256248,
+      "checkedAt": "2026-06-30T22:16:14.591Z"
+    },
+    {
+      "slug": "okanagan-lake",
+      "name": "Okanagan Lake",
+      "location": "BC, Canada",
+      "status": "captured",
+      "sourceUrl": "https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html",
+      "label": "SkylineWebcams — Kelowna/Okanagan",
+      "imageUrl": "assets/cameras/okanagan-lake.png",
+      "bytes": 1514488,
+      "checkedAt": "2026-06-30T22:16:24.790Z"
+    }
+  ],
+  "suspect": [],
+  "failed": [],
+  "noSource": [
+    {
+      "slug": "pineview-reservoir",
+      "name": "Pineview Reservoir",
+      "location": "UT"
+    },
+    {
+      "slug": "lake-austin",
+      "name": "Lake Austin",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-lbj",
+      "name": "Lake LBJ",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-lewisville",
+      "name": "Lake Lewisville",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-ray-hubbard",
+      "name": "Lake Ray Hubbard",
+      "location": "TX"
+    },
+    {
+      "slug": "gull-lake",
+      "name": "Gull Lake",
+      "location": "MN"
+    },
+    {
+      "slug": "bear-lake",
+      "name": "Bear Lake",
+      "location": "UT/ID"
+    },
+    {
+      "slug": "lake-pend-oreille",
+      "name": "Lake Pend Oreille",
+      "location": "ID"
+    },
+    {
+      "slug": "canyon-lake",
+      "name": "Canyon Lake",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-mcqueeney",
+      "name": "Lake McQueeney",
+      "location": "TX"
+    },
+    {
+      "slug": "table-rock-lake",
+      "name": "Table Rock Lake",
+      "location": "MO/AR"
+    },
+    {
+      "slug": "lake-cumberland",
+      "name": "Lake Cumberland",
+      "location": "KY"
+    },
+    {
+      "slug": "lake-norris",
+      "name": "Lake Norris",
+      "location": "TN"
+    },
+    {
+      "slug": "center-hill-lake",
+      "name": "Center Hill Lake",
+      "location": "TN"
+    },
+    {
+      "slug": "lake-keowee",
+      "name": "Lake Keowee",
+      "location": "SC"
+    },
+    {
+      "slug": "lake-hartwell",
+      "name": "Lake Hartwell",
+      "location": "GA/SC"
+    },
+    {
+      "slug": "lake-murray",
+      "name": "Lake Murray",
+      "location": "SC"
+    },
+    {
+      "slug": "grand-lake-o-the-cherokees",
+      "name": "Grand Lake O' the Cherokees",
+      "location": "OK"
+    },
+    {
+      "slug": "california-delta",
+      "name": "California Delta",
+      "location": "CA"
+    },
+    {
+      "slug": "lake-oconee",
+      "name": "Lake Oconee",
+      "location": "GA"
+    },
+    {
+      "slug": "possum-kingdom-lake",
+      "name": "Possum Kingdom Lake",
+      "location": "TX"
+    },
+    {
+      "slug": "donner-lake",
+      "name": "Donner Lake",
+      "location": "CA"
+    },
+    {
+      "slug": "horsetooth-reservoir",
+      "name": "Horsetooth Reservoir",
+      "location": "CO"
+    },
+    {
+      "slug": "cherry-creek-reservoir",
+      "name": "Cherry Creek Reservoir",
+      "location": "CO"
+    },
+    {
+      "slug": "carter-lake",
+      "name": "Carter Lake",
+      "location": "CO"
+    },
+    {
+      "slug": "pewaukee-lake",
+      "name": "Pewaukee Lake",
+      "location": "WI"
+    },
+    {
+      "slug": "lake-wylie",
+      "name": "Lake Wylie",
+      "location": "NC/SC"
+    },
+    {
+      "slug": "lewis-smith-lake",
+      "name": "Lewis Smith Lake",
+      "location": "AL"
+    },
+    {
+      "slug": "lake-martin",
+      "name": "Lake Martin",
+      "location": "AL"
+    },
+    {
+      "slug": "lake-hamilton-lake-ouachita",
+      "name": "Lake Hamilton / Lake Ouachita",
+      "location": "AR"
+    },
+    {
+      "slug": "lake-sinclair",
+      "name": "Lake Sinclair",
+      "location": "GA"
+    },
+    {
+      "slug": "lake-allatoona",
+      "name": "Lake Allatoona",
+      "location": "GA"
+    },
+    {
+      "slug": "clarks-hill-strom-thurmond",
+      "name": "Clarks Hill / Strom Thurmond",
+      "location": "GA/SC"
+    },
+    {
+      "slug": "lake-hickory-catawba-chain",
+      "name": "Lake Hickory / Catawba chain",
+      "location": "NC"
+    },
+    {
+      "slug": "claytor-lake",
+      "name": "Claytor Lake",
+      "location": "VA"
+    },
+    {
+      "slug": "tims-ford-lake",
+      "name": "Tims Ford Lake",
+      "location": "TN"
+    },
+    {
+      "slug": "dale-hollow-lake",
+      "name": "Dale Hollow Lake",
+      "location": "TN/KY"
+    },
+    {
+      "slug": "tellico-lake",
+      "name": "Tellico Lake",
+      "location": "TN"
+    },
+    {
+      "slug": "watts-bar-tn-river-chain",
+      "name": "Watts Bar / TN River chain",
+      "location": "TN"
+    },
+    {
+      "slug": "green-river-lake",
+      "name": "Green River Lake",
+      "location": "KY"
+    },
+    {
+      "slug": "lake-texoma",
+      "name": "Lake Texoma",
+      "location": "TX/OK"
+    },
+    {
+      "slug": "eagle-mountain-lake",
+      "name": "Eagle Mountain Lake",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-buchanan-inks-lake",
+      "name": "Lake Buchanan / Inks Lake",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-marble-falls",
+      "name": "Lake Marble Falls",
+      "location": "TX"
+    },
+    {
+      "slug": "stillhouse-hollow-belton",
+      "name": "Stillhouse Hollow / Belton",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-somerville",
+      "name": "Lake Somerville",
+      "location": "TX"
+    },
+    {
+      "slug": "lake-houston",
+      "name": "Lake Houston",
+      "location": "TX"
+    },
+    {
+      "slug": "sam-rayburn",
+      "name": "Sam Rayburn",
+      "location": "TX"
+    },
+    {
+      "slug": "big-bear-lake",
+      "name": "Big Bear Lake",
+      "location": "CA"
+    },
+    {
+      "slug": "pyramid-lake",
+      "name": "Pyramid Lake",
+      "location": "CA"
+    },
+    {
+      "slug": "lake-berryessa",
+      "name": "Lake Berryessa",
+      "location": "CA"
+    },
+    {
+      "slug": "folsom-lake",
+      "name": "Folsom Lake",
+      "location": "CA"
+    },
+    {
+      "slug": "lake-mohave",
+      "name": "Lake Mohave",
+      "location": "NV/AZ"
+    },
+    {
+      "slug": "sand-hollow-quail-creek",
+      "name": "Sand Hollow / Quail Creek",
+      "location": "UT"
+    },
+    {
+      "slug": "flaming-gorge",
+      "name": "Flaming Gorge",
+      "location": "UT/WY"
+    },
+    {
+      "slug": "strawberry-reservoir",
+      "name": "Strawberry Reservoir",
+      "location": "UT"
+    },
+    {
+      "slug": "lake-pueblo",
+      "name": "Lake Pueblo",
+      "location": "CO"
+    },
+    {
+      "slug": "grand-lake",
+      "name": "Grand Lake",
+      "location": "CO"
+    },
+    {
+      "slug": "lake-granby",
+      "name": "Lake Granby",
+      "location": "CO"
+    },
+    {
+      "slug": "blue-mesa-reservoir",
+      "name": "Blue Mesa Reservoir",
+      "location": "CO"
+    },
+    {
+      "slug": "boyd-lake",
+      "name": "Boyd Lake",
+      "location": "CO"
+    },
+    {
+      "slug": "hayden-lake",
+      "name": "Hayden Lake",
+      "location": "ID"
+    },
+    {
+      "slug": "lake-billy-chinook",
+      "name": "Lake Billy Chinook",
+      "location": "OR"
+    },
+    {
+      "slug": "cultus-lake",
+      "name": "Cultus Lake",
+      "location": "OR"
+    },
+    {
+      "slug": "lake-washington-sammamish",
+      "name": "Lake Washington / Sammamish",
+      "location": "WA"
+    },
+    {
+      "slug": "lake-chelan",
+      "name": "Lake Chelan",
+      "location": "WA"
+    },
+    {
+      "slug": "okoboji-iowa-great-lakes",
+      "name": "Okoboji (Iowa Great Lakes)",
+      "location": "IA"
+    },
+    {
+      "slug": "prior-lake-cross-lake",
+      "name": "Prior Lake / Cross Lake",
+      "location": "MN"
+    },
+    {
+      "slug": "lake-wallenpaupack",
+      "name": "Lake Wallenpaupack",
+      "location": "PA"
+    },
+    {
+      "slug": "deep-creek-lake",
+      "name": "Deep Creek Lake",
+      "location": "MD"
+    },
+    {
+      "slug": "sebago-lake",
+      "name": "Sebago Lake",
+      "location": "ME"
+    },
+    {
+      "slug": "candlewood-lake",
+      "name": "Candlewood Lake",
+      "location": "CT"
+    },
+    {
+      "slug": "lake-conway-clermont-chain",
+      "name": "Lake Conway / Clermont chain",
+      "location": "FL"
+    },
+    {
+      "slug": "lake-tarpon-tampa-bay-area",
+      "name": "Lake Tarpon / Tampa Bay area",
+      "location": "FL"
+    },
+    {
+      "slug": "lake-lure",
+      "name": "Lake Lure",
+      "location": "NC"
+    },
+    {
+      "slug": "lake-wateree",
+      "name": "Lake Wateree",
+      "location": "SC"
+    },
+    {
+      "slug": "lake-greenwood",
+      "name": "Lake Greenwood",
+      "location": "SC"
+    },
+    {
+      "slug": "shuswap-lake",
+      "name": "Shuswap Lake",
+      "location": "BC, Canada"
+    },
+    {
+      "slug": "lake-muskoka-joseph-rosseau",
+      "name": "Lake Muskoka / Joseph / Rosseau",
+      "location": "ON, Canada"
+    },
+    {
+      "slug": "lake-simcoe",
+      "name": "Lake Simcoe",
+      "location": "ON, Canada"
+    },
+    {
+      "slug": "lake-koocanusa",
+      "name": "Lake Koocanusa",
+      "location": "BC, Canada"
+    },
+    {
+      "slug": "lake-geneva-leman",
+      "name": "Lake Geneva (Léman)",
+      "location": "Switzerland/France"
+    },
+    {
+      "slug": "lake-como",
+      "name": "Lake Como",
+      "location": "Italy"
+    },
+    {
+      "slug": "lake-zurich-thun-davos",
+      "name": "Lake Zurich / Thun / Davos",
+      "location": "Switzerland"
+    },
+    {
+      "slug": "austrian-lakes-area-47",
+      "name": "Austrian Lakes / AREA 47",
+      "location": "Austria"
+    },
+    {
+      "slug": "lake-macquarie-hume",
+      "name": "Lake Macquarie / Hume",
+      "location": "Australia"
+    },
+    {
+      "slug": "lake-wanaka",
+      "name": "Lake Wanaka",
+      "location": "New Zealand"
+    },
+    {
+      "slug": "dubai-marina-creek",
+      "name": "Dubai Marina / Creek",
+      "location": "UAE"
+    }
+  ]
+}
