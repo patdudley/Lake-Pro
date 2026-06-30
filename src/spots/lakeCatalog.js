@@ -541,7 +541,10 @@ export const lakeCatalog = [
     "featured": false,
     "liveReady": false,
     "homeMap": true,
-    "webcam": null,
+    "webcam": {
+      "label": "Lake Canyon Yacht Club — webcam",
+      "url": "https://lcyc.net/info/weather-links-web-cam/"
+    },
     "slug": "canyon-lake",
     "shorelineOrientation": {
       "status": "placeholder",

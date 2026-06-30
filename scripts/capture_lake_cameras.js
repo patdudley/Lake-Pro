@@ -53,12 +53,13 @@ async function dismissCommonOverlays(page) {
   }
 }
 
-async function bestCameraTarget(page) {
+async function bestCameraTarget(page, spot) {
   const candidates = [
     "iframe[src*='earthcam']",
     "iframe[src*='hdontap']",
     "iframe[src*='youtube']",
     "iframe[src*='weatherstem']",
+    ...(spot.slug === "canyon-lake" ? ["iframe"] : []),
     "video",
     "canvas",
     "img[src*='webcam']",
@@ -90,7 +91,7 @@ async function captureCamera(browser, spot) {
     await page.waitForTimeout(5500);
     await dismissCommonOverlays(page);
     await page.waitForTimeout(1500);
-    const target = await bestCameraTarget(page);
+    const target = await bestCameraTarget(page, spot);
     await target.screenshot({ path: outputPath });
     const stat = fs.statSync(outputPath);
     return {

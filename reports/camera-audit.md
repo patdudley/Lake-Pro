@@ -1,11 +1,11 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-06-30T22:16:32.982Z
+Generated: 2026-06-30T23:42:27.535Z
 
-- Captured: 24
+- Captured: 25
 - Suspect: 0
 - Failed: 0
-- No catalog webcam source yet: 88
+- No catalog webcam source yet: 87
 
 ## Captured
 - Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
@@ -24,6 +24,7 @@ Generated: 2026-06-30T22:16:32.982Z
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
+- Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
 - Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
 - Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
@@ -44,7 +45,6 @@ Generated: 2026-06-30T22:16:32.982Z
 - Gull Lake (MN)
 - Bear Lake (UT/ID)
 - Lake Pend Oreille (ID)
-- Canyon Lake (TX)
 - Lake McQueeney (TX)
 - Table Rock Lake (MO/AR)
 - Lake Cumberland (KY)
