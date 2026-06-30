@@ -282,6 +282,7 @@ body.home-mode .spot-switcher {
 body.spot-mode .home-map-panel,
 body.spot-mode .home-feature-card,
 body.spot-mode .home-spot-rail,
+body.spot-mode .home-search-shell,
 body.spot-mode .home-search,
 body.spot-mode .spot-search,
 body.spot-mode .spot-switcher {
@@ -290,6 +291,37 @@ body.spot-mode .spot-switcher {
 
 body.spot-mode .hero-copy {
   display: none;
+}
+
+.spot-page-heading {
+  grid-area: copy;
+  position: relative;
+  z-index: 1;
+}
+
+.spot-page-heading p {
+  margin: 0 0 6px;
+  color: #137d8d;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.spot-page-heading h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 950;
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.spot-page-heading span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 850;
 }
 
 .mobile-daily-report {
@@ -310,6 +342,7 @@ body.spot-mode .hero-copy {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "nav"
+      "title"
       "camera"
       "report";
     gap: 18px;
@@ -347,6 +380,10 @@ body.spot-mode .hero-copy {
     align-self: start;
     max-width: none;
     margin-top: 0;
+  }
+
+  body.spot-mode .spot-page-heading {
+    grid-area: title;
   }
 
   body.spot-mode .site-hero .camera-card {
@@ -444,13 +481,19 @@ body.home-mode .hero-copy h1 {
   line-height: 1.02;
 }
 
+.home-search-shell {
+  position: relative;
+  width: min(500px, 100%);
+  margin-top: 24px;
+  z-index: 5;
+}
+
 .home-search {
   display: flex;
   align-items: center;
   gap: 14px;
-  width: min(500px, 100%);
+  width: 100%;
   min-height: 58px;
-  margin-top: 24px;
   border: 1px solid rgba(7, 25, 82, 0.11);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.9);
@@ -493,6 +536,69 @@ body.home-mode .hero-copy h1 {
 
 .home-search input::placeholder {
   color: rgba(6, 22, 82, 0.58);
+}
+
+.home-search-results {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  display: grid;
+  gap: 6px;
+  max-height: 310px;
+  overflow: auto;
+  border: 1px solid rgba(7, 25, 82, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24px 60px rgba(7, 25, 82, 0.16);
+  padding: 8px;
+}
+
+.home-search-results[hidden] {
+  display: none;
+}
+
+.home-search-option {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 14px;
+  padding: 11px 12px;
+  text-align: left;
+  font: inherit;
+}
+
+.home-search-option:hover,
+.home-search-option:focus-visible,
+.home-search-option[data-active="true"] {
+  background: linear-gradient(100deg, rgba(33, 150, 255, 0.12), rgba(240, 17, 197, 0.1));
+  outline: none;
+}
+
+.home-search-option strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.98rem;
+}
+
+.home-search-option small {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  justify-self: end;
+}
+
+.home-search-empty {
+  color: var(--muted);
+  font-weight: 800;
+  padding: 12px;
 }
 
 .home-feature-card {
@@ -1959,6 +2065,14 @@ h2 {
     margin-top: 18px;
   }
 
+  body.spot-mode .spot-page-heading {
+    margin-top: 8px;
+  }
+
+  .spot-page-heading h1 {
+    font-size: clamp(1.8rem, 8vw, 2.45rem);
+  }
+
   body.spot-mode .hero-report {
     display: none;
   }
@@ -2011,15 +2125,32 @@ h2 {
     font-size: 1rem;
   }
 
+  .home-search-shell {
+    margin-top: 20px;
+  }
+
   .home-search {
     min-height: 52px;
-    margin-top: 20px;
     border-radius: 16px;
     padding: 0 18px;
   }
 
   .home-search input {
     font-size: 1rem;
+  }
+
+  .home-search-results {
+    max-height: 270px;
+    border-radius: 14px;
+  }
+
+  .home-search-option {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3px;
+  }
+
+  .home-search-option small {
+    justify-self: start;
   }
 
   .home-feature-card a {

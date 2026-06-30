@@ -406,8 +406,9 @@ function spotReportUrl(spot) {
 function renderHomeLakeLinks() {
   const container = document.getElementById("homeLakeLinks");
   if (!container) return;
-  const featuredSpots = lakeSpots.filter((spot) => spot.featured || spot.liveReady);
-  const visibleSpots = featuredSpots.length ? featuredSpots : lakeSpots.slice(0, 8);
+  const prioritySpots = lakeSpots.filter((spot) => spot.featured || spot.liveReady);
+  const catalogSpots = lakeSpots.filter((spot) => spot.homeMap !== false && !prioritySpots.includes(spot));
+  const visibleSpots = [...prioritySpots, ...catalogSpots].slice(0, 28);
   container.replaceChildren(...visibleSpots.map((spot) => {
     const link = document.createElement("a");
     link.className = "home-lake-link";
@@ -603,21 +604,106 @@ function wireHomeCameraSlider() {
 function wireHomeSearch() {
   const input = document.getElementById("homeLakeSearch");
   if (!input || input.dataset.bound === "true") return;
+  const results = document.getElementById("homeSearchResults");
+  let activeIndex = 0;
+
+  const openResults = () => {
+    if (!results) return;
+    renderHomeSearchResults(input.value, activeIndex);
+    results.hidden = false;
+    input.setAttribute("aria-expanded", "true");
+  };
+
+  const closeResults = () => {
+    if (!results) return;
+    results.hidden = true;
+    input.setAttribute("aria-expanded", "false");
+  };
+
+  const chooseActiveResult = () => {
+    const matches = homeSearchMatches(input.value);
+    const spot = matches[activeIndex] || matchingSpot(input.value);
+    if (!spot) return false;
+    input.blur();
+    closeResults();
+    selectSpotBySlug(spot.slug);
+    return true;
+  };
+
   input.dataset.bound = "true";
+  if (results) results.hidden = true;
   input.addEventListener("input", () => {
     const query = input.value.trim().toLowerCase();
     document.querySelectorAll(".home-lake-link").forEach((card) => {
       card.hidden = Boolean(query) && !card.dataset.name.includes(query);
     });
+    activeIndex = 0;
+    openResults();
+  });
+  input.addEventListener("focus", openResults);
+  input.addEventListener("blur", () => {
+    window.setTimeout(closeResults, 140);
   });
   input.addEventListener("keydown", (event) => {
+    const matches = homeSearchMatches(input.value);
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      activeIndex = matches.length ? (activeIndex + 1) % matches.length : 0;
+      openResults();
+      return;
+    }
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      activeIndex = matches.length ? (activeIndex - 1 + matches.length) % matches.length : 0;
+      openResults();
+      return;
+    }
+    if (event.key === "Escape") {
+      closeResults();
+      return;
+    }
     if (event.key !== "Enter") return;
-    const spot = matchingSpot(input.value);
-    if (!spot) return;
+    if (!chooseActiveResult()) return;
     event.preventDefault();
-    input.blur();
-    selectSpotBySlug(spot.slug);
   });
+}
+
+function homeSearchMatches(query) {
+  const normalized = query.trim().toLowerCase();
+  const source = normalized
+    ? lakeSpots.filter((spot) => `${spot.name} ${spot.location}`.toLowerCase().includes(normalized))
+    : lakeSpots;
+  return source.slice(0, 8);
+}
+
+function renderHomeSearchResults(query, activeIndex = 0) {
+  const results = document.getElementById("homeSearchResults");
+  if (!results) return;
+  const matches = homeSearchMatches(query);
+  if (!matches.length) {
+    const empty = document.createElement("div");
+    empty.className = "home-search-empty";
+    empty.textContent = "No matching lakes yet";
+    results.replaceChildren(empty);
+    return;
+  }
+  results.replaceChildren(...matches.map((spot, index) => {
+    const option = document.createElement("button");
+    option.className = "home-search-option";
+    option.type = "button";
+    option.setAttribute("role", "option");
+    option.dataset.active = String(index === activeIndex);
+    option.setAttribute("aria-selected", String(index === activeIndex));
+
+    const name = document.createElement("strong");
+    name.textContent = spot.name;
+    const location = document.createElement("small");
+    location.textContent = spot.location;
+    option.append(name, location);
+    option.addEventListener("mousedown", (event) => event.preventDefault());
+    option.addEventListener("click", () => selectSpotBySlug(spot.slug));
+    return option;
+  }));
 }
 
 function matchingSpot(query) {
@@ -676,6 +762,10 @@ function renderSpot(spot) {
   selectedForecastIndex = 0;
   document.getElementById("spotName").textContent = spot.name;
   document.getElementById("spotLocation").textContent = spot.location;
+  const pageSpotName = document.getElementById("pageSpotName");
+  const pageSpotLocation = document.getElementById("pageSpotLocation");
+  if (pageSpotName) pageSpotName.textContent = spot.name;
+  if (pageSpotLocation) pageSpotLocation.textContent = spot.location;
   renderCameraCard(spot);
   loadLiveSpotData(spot);
   loadWindTimelapse(spot);
@@ -868,14 +958,15 @@ function extractLakeRings(geojson) {
 
 async function loadLakeShoreline(spot) {
   const url = mapLayerUrls.shorelines[spot.slug];
-  if (loadedShorelineSlug === spot.slug && lakeSurfaceRings.length) {
+  if (loadedShorelineSlug === spot.slug) {
     drawLakeSurfaceOverlay(performance.now());
     return;
   }
   if (!url) {
     lakeSurfaceRings = [];
     lakeSurfaceParticles = [];
-    loadedShorelineSlug = "";
+    loadedShorelineSlug = spot.slug;
+    drawLakeSurfaceOverlay(performance.now());
     return;
   }
   try {
@@ -889,7 +980,8 @@ async function loadLakeShoreline(spot) {
     console.warn("[LakePro] Shoreline mask unavailable", error);
     lakeSurfaceRings = [];
     lakeSurfaceParticles = [];
-    loadedShorelineSlug = "";
+    loadedShorelineSlug = spot.slug;
+    drawLakeSurfaceOverlay(performance.now());
   }
 }
 
@@ -920,10 +1012,46 @@ function resizeLakeSurfaceCanvas() {
 
 function projectedLakePolygons(dpr) {
   if (!lakeMap) return [];
+  if (!lakeSurfaceRings.length) return fallbackLakePolygons(dpr, currentSpot);
   return lakeSurfaceRings.map((polygon) => polygon.map((ring) => ring.map(([lng, lat]) => {
     const point = lakeMap.project([lng, lat]);
     return [point.x * dpr, point.y * dpr];
   })));
+}
+
+function fallbackLakePolygons(dpr, spot) {
+  if (!lakeMap || !spot) return [];
+  const mapCanvas = lakeMap.getCanvas();
+  const center = lakeMap.project([spot.longitude, spot.latitude]);
+  const width = mapCanvas.clientWidth * dpr;
+  const height = mapCanvas.clientHeight * dpr;
+  const radiusX = Math.max(110 * dpr, Math.min(width * 0.24, 290 * dpr));
+  const radiusY = Math.max(150 * dpr, Math.min(height * 0.34, 390 * dpr));
+  const rotation = fallbackLakeRotation(spot);
+  const radians = rotation * Math.PI / 180;
+  const ring = [];
+
+  for (let index = 0; index < 72; index += 1) {
+    const angle = (index / 72) * Math.PI * 2;
+    const branchBias = Math.abs(Math.sin(angle)) ** 1.8;
+    const wobble = 1 + Math.sin(angle * 3) * 0.07 + Math.cos(angle * 5) * 0.04;
+    const x = Math.cos(angle) * radiusX * (0.78 + branchBias * 0.28) * wobble;
+    const y = Math.sin(angle) * radiusY * (0.92 + Math.abs(Math.cos(angle)) * 0.14) * wobble;
+    ring.push([
+      (center.x * dpr) + x * Math.cos(radians) - y * Math.sin(radians),
+      (center.y * dpr) + x * Math.sin(radians) + y * Math.cos(radians),
+    ]);
+  }
+
+  return [[ring]];
+}
+
+function fallbackLakeRotation(spot) {
+  const slug = spot?.slug || "";
+  if (slug.includes("travis") || slug.includes("austin")) return -34;
+  if (slug.includes("amistad") || slug.includes("texoma") || slug.includes("powell")) return 74;
+  if (slug.includes("havasu") || slug.includes("mead") || slug.includes("mohave")) return 14;
+  return 18;
 }
 
 function tracePolygonPath(context, polygons) {
@@ -1164,13 +1292,13 @@ function drawLakeSurfaceOverlay(timestamp = performance.now()) {
   const context = lakeSurfaceContext;
   context.clearRect(0, 0, lakeSurfaceCanvas.width, lakeSurfaceCanvas.height);
 
-  if (!lakeSurfaceRings.length) {
+  const polygons = projectedLakePolygons(dpr);
+  if (!polygons.length) {
     lakeSurfaceCanvas.hidden = true;
     lastParticleFrame = timestamp;
     return;
   }
   lakeSurfaceCanvas.hidden = false;
-  const polygons = projectedLakePolygons(dpr);
   const bounds = polygonBounds(polygons);
   if (!Number.isFinite(bounds.minX) || bounds.maxX <= bounds.minX || bounds.maxY <= bounds.minY) return;
 

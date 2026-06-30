@@ -7,7 +7,7 @@
     <meta name="description" content="Lake Pro wake-sports conditions.">
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-    <link rel="stylesheet" href="src/forecast/styles.css?v=lake-catalog-2">
+    <link rel="stylesheet" href="src/forecast/styles.css?v=all-lake-gradients-2">
   </head>
   <body>
     <main class="shell">
@@ -24,14 +24,22 @@
             <select id="spotSelect" aria-label="Lake spot"></select>
           </div>
         </nav>
+        <div class="spot-page-heading report-only">
+          <p>Lake report</p>
+          <h1 id="pageSpotName">Lake spot</h1>
+          <span id="pageSpotLocation">Location</span>
+        </div>
         <div class="hero-copy">
           <h1 id="heroTitle">Lake Conditions You Can Count On</h1>
           <span class="hero-accent" aria-hidden="true"></span>
           <p>Real-time boating conditions, lake forecasts, and the best windows to get on the water.</p>
-          <label class="home-search" for="homeLakeSearch">
-            <span aria-hidden="true"></span>
-            <input id="homeLakeSearch" type="search" placeholder="Search lakes, spots, or regions" autocomplete="off">
-          </label>
+          <div class="home-search-shell">
+            <label class="home-search" for="homeLakeSearch">
+              <span aria-hidden="true"></span>
+              <input id="homeLakeSearch" type="search" placeholder="Search lakes, spots, or regions" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="homeSearchResults">
+            </label>
+            <div class="home-search-results" id="homeSearchResults" role="listbox" aria-label="Lake search results"></div>
+          </div>
         </div>
         <section class="home-feature-card" aria-label="Featured live lake view">
           <a href="?spot=payette-lake" id="homeFeatureLink">
@@ -137,6 +145,6 @@
       </section>
     </main>
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-    <script type="module" src="src/forecast/app.js?v=lake-catalog-2"></script>
+    <script type="module" src="src/forecast/app.js?v=all-lake-gradients-2"></script>
   </body>
 </html>
