@@ -16,6 +16,7 @@ let lakeSurfaceParticles = [];
 let lakeSurfaceAnimation = null;
 let lastParticleFrame = 0;
 let loadedShorelineSlug = "";
+const lakeShorelineBounds = new Map();
 let currentLiveLatest = null;
 let selectedForecastIndex = 0;
 let homeCameraIndex = 0;
@@ -380,6 +381,12 @@ function renderForecastReports(days = placeholderForecast) {
 async function fetchGeoJson(url) {
   const response = await fetch(url, { cache: "force-cache" });
   if (!response.ok) throw new Error(`${url} unavailable`);
+  return response.json();
+}
+
+async function fetchOptionalGeoJson(url) {
+  const response = await fetch(url, { cache: "force-cache" });
+  if (!response.ok) return null;
   return response.json();
 }
 
@@ -947,7 +954,7 @@ function extractLakeRings(geojson) {
   for (const feature of geojson?.features || []) {
     const geometry = feature.geometry || {};
     if (geometry.type === "Polygon") {
-      rings.push(...geometry.coordinates.map((polygon) => polygon));
+      rings.push(geometry.coordinates);
     }
     if (geometry.type === "MultiPolygon") {
       rings.push(...geometry.coordinates);
@@ -957,24 +964,19 @@ function extractLakeRings(geojson) {
 }
 
 async function loadLakeShoreline(spot) {
-  const url = mapLayerUrls.shorelines[spot.slug];
   if (loadedShorelineSlug === spot.slug) {
     drawLakeSurfaceOverlay(performance.now());
     return;
   }
-  if (!url) {
-    lakeSurfaceRings = [];
-    lakeSurfaceParticles = [];
-    loadedShorelineSlug = spot.slug;
-    drawLakeSurfaceOverlay(performance.now());
-    return;
-  }
   try {
-    const shoreline = await fetchGeoJson(url);
+    const shoreline = await loadShorelineGeoJson(spot);
     if (currentSpot?.slug !== spot.slug) return;
-    lakeSurfaceRings = extractLakeRings(shoreline);
+    lakeSurfaceRings = shoreline ? extractLakeRings(shoreline) : [];
+    const bounds = shoreline ? geoJsonLngLatBounds(shoreline) : null;
+    if (bounds) lakeShorelineBounds.set(spot.slug, bounds);
     lakeSurfaceParticles = [];
     loadedShorelineSlug = spot.slug;
+    if (lakeMap) fitMapToSpot(spot, 0);
     drawLakeSurfaceOverlay(performance.now());
   } catch (error) {
     console.warn("[LakePro] Shoreline mask unavailable", error);
@@ -983,6 +985,289 @@ async function loadLakeShoreline(spot) {
     loadedShorelineSlug = spot.slug;
     drawLakeSurfaceOverlay(performance.now());
   }
+}
+
+async function loadShorelineGeoJson(spot) {
+  const staticUrls = [
+    mapLayerUrls.shorelines[spot.slug],
+    `data/live/map_layers/${spot.slug}_shoreline.geojson`,
+  ].filter(Boolean);
+
+  for (const url of staticUrls) {
+    const shoreline = await fetchOptionalGeoJson(url);
+    if (shoreline?.features?.length) return shoreline;
+  }
+
+  return fetchOsmShorelineGeoJson(spot);
+}
+
+async function fetchOsmShorelineGeoJson(spot) {
+  if (!spot?.latitude || !spot?.longitude) return null;
+  const cacheKey = `lakepro:shoreline:${spot.slug}:v1`;
+  try {
+    const cached = window.localStorage?.getItem(cacheKey);
+    if (cached) return JSON.parse(cached);
+  } catch {
+    // Local storage is an optional speed-up only.
+  }
+
+  const radiusMeters = spot.slug.includes("powell") || spot.slug.includes("mead") || spot.slug.includes("amistad")
+    ? 48000
+    : 26000;
+
+  const relationShoreline = await fetchOsmRelationShorelineGeoJson(spot, radiusMeters);
+  if (relationShoreline?.features?.length) {
+    try {
+      window.localStorage?.setItem(cacheKey, JSON.stringify(relationShoreline));
+    } catch {
+      // Ignore storage quota/private-mode failures.
+    }
+    return relationShoreline;
+  }
+
+  const query = `
+    [out:json][timeout:25];
+    (
+      way(around:${radiusMeters},${spot.latitude},${spot.longitude})["natural"="water"];
+      way(around:${radiusMeters},${spot.latitude},${spot.longitude})["water"="reservoir"];
+      way(around:${radiusMeters},${spot.latitude},${spot.longitude})["water"="lake"];
+    );
+    out tags geom;
+  `;
+  const response = await fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+    body: new URLSearchParams({ data: query }),
+  });
+  if (!response.ok) return null;
+  const osm = await response.json();
+  const shoreline = osmWaterWaysToGeoJson(osm, spot);
+  if (!shoreline.features.length) return null;
+
+  try {
+    window.localStorage?.setItem(cacheKey, JSON.stringify(shoreline));
+  } catch {
+    // Ignore storage quota/private-mode failures.
+  }
+  return shoreline;
+}
+
+async function fetchOsmRelationShorelineGeoJson(spot, radiusMeters) {
+  const relationQuery = `
+    [out:json][timeout:25];
+    (
+      relation(around:${radiusMeters},${spot.latitude},${spot.longitude})["type"="multipolygon"]["natural"="water"];
+      relation(around:${radiusMeters},${spot.latitude},${spot.longitude})["type"="multipolygon"]["water"~"^(lake|reservoir)$"];
+    );
+    out tags center;
+  `;
+  const relationResponse = await fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+    body: new URLSearchParams({ data: relationQuery }),
+  });
+  if (!relationResponse.ok) return null;
+  const relationList = await relationResponse.json();
+  const relation = chooseOsmWaterRelation(relationList, spot);
+  if (!relation) return null;
+
+  const geometryQuery = `
+    [out:json][timeout:45];
+    relation(${relation.id});
+    out body;
+    way(r);
+    out geom;
+  `;
+  const geometryResponse = await fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+    body: new URLSearchParams({ data: geometryQuery }),
+  });
+  if (!geometryResponse.ok) return null;
+  const osm = await geometryResponse.json();
+  return osmWaterRelationToGeoJson(osm, spot, relation.id);
+}
+
+function chooseOsmWaterRelation(osm, spot) {
+  const terms = spot.name.toLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 2);
+  return (osm?.elements || [])
+    .filter((element) => element.type === "relation")
+    .map((element) => {
+      const name = String(element.tags?.name || "").toLowerCase();
+      const nameScore = terms.filter((term) => name.includes(term)).length;
+      const center = element.center || {};
+      const centerDistance = Number.isFinite(center.lon) && Number.isFinite(center.lat)
+        ? Math.hypot(center.lon - spot.longitude, center.lat - spot.latitude)
+        : Infinity;
+      return { element, nameScore, centerDistance };
+    })
+    .sort((a, b) => (b.nameScore - a.nameScore) || (a.centerDistance - b.centerDistance))[0]?.element || null;
+}
+
+function osmWaterRelationToGeoJson(osm, spot, relationId) {
+  const relation = (osm?.elements || []).find((element) => element.type === "relation" && element.id === relationId);
+  if (!relation) return emptyFeatureCollection();
+
+  const ways = new Map((osm?.elements || [])
+    .filter((element) => element.type === "way" && Array.isArray(element.geometry) && element.geometry.length > 1)
+    .map((element) => [element.id, element.geometry.map((point) => [point.lon, point.lat])]));
+
+  const rings = assembleOsmRings((relation.members || [])
+    .filter((member) => member.type === "way" && member.role !== "inner")
+    .map((member) => ways.get(member.ref))
+    .filter(Boolean));
+
+  const validRings = rings.filter((ring) => ring.length >= 4);
+  if (!validRings.length) return emptyFeatureCollection();
+
+  return {
+    type: "FeatureCollection",
+    features: [{
+      type: "Feature",
+      properties: {
+        source: "OpenStreetMap",
+        osm_type: "relation",
+        osm_id: relationId,
+        name: relation.tags?.name || spot.name,
+      },
+      geometry: {
+        type: validRings.length === 1 ? "Polygon" : "MultiPolygon",
+        coordinates: validRings.length === 1 ? [validRings[0]] : validRings.map((ring) => [ring]),
+      },
+    }],
+  };
+}
+
+function assembleOsmRings(segments) {
+  const remaining = segments
+    .map((segment) => segment.filter(([lng, lat]) => Number.isFinite(lng) && Number.isFinite(lat)))
+    .filter((segment) => segment.length > 1);
+  const rings = [];
+
+  while (remaining.length) {
+    let ring = remaining.shift();
+    let changed = true;
+    while (!isClosedRing(ring) && changed) {
+      changed = false;
+      const start = coordinateKey(ring[0]);
+      const end = coordinateKey(ring.at(-1));
+      const matchIndex = remaining.findIndex((segment) => {
+        const segmentStart = coordinateKey(segment[0]);
+        const segmentEnd = coordinateKey(segment.at(-1));
+        return segmentStart === end || segmentEnd === end || segmentEnd === start || segmentStart === start;
+      });
+      if (matchIndex < 0) continue;
+      const next = remaining.splice(matchIndex, 1)[0];
+      const nextStart = coordinateKey(next[0]);
+      const nextEnd = coordinateKey(next.at(-1));
+      if (nextStart === end) ring = ring.concat(next.slice(1));
+      else if (nextEnd === end) ring = ring.concat([...next].reverse().slice(1));
+      else if (nextEnd === start) ring = next.concat(ring.slice(1));
+      else if (nextStart === start) ring = [...next].reverse().concat(ring.slice(1));
+      changed = true;
+    }
+    if (isClosedRing(ring)) rings.push(ring);
+  }
+
+  return rings.sort((a, b) => Math.abs(ringArea(b)) - Math.abs(ringArea(a)));
+}
+
+function emptyFeatureCollection() {
+  return { type: "FeatureCollection", features: [] };
+}
+
+function coordinateKey(coordinate) {
+  return `${coordinate[0].toFixed(6)},${coordinate[1].toFixed(6)}`;
+}
+
+function isClosedRing(ring) {
+  return ring.length >= 4 && coordinateKey(ring[0]) === coordinateKey(ring.at(-1));
+}
+
+function ringArea(ring) {
+  let area = 0;
+  for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
+    area += (ring[previous][0] * ring[index][1]) - (ring[index][0] * ring[previous][1]);
+  }
+  return area / 2;
+}
+
+function osmWaterWaysToGeoJson(osm, spot) {
+  const spotTerms = new Set([
+    ...spot.name.toLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 2),
+    "lake",
+    "reservoir",
+  ]);
+  const candidates = [];
+
+  for (const element of osm?.elements || []) {
+    const geometry = element.geometry || [];
+    if (element.type !== "way" || geometry.length < 4) continue;
+    const tags = element.tags || {};
+    if (!(tags.natural === "water" || tags.water === "reservoir" || tags.water === "lake")) continue;
+
+    const coordinates = geometry.map((point) => [point.lon, point.lat]);
+    if (!coordinates.length || coordinates[0][0] !== coordinates.at(-1)[0] || coordinates[0][1] !== coordinates.at(-1)[1]) continue;
+
+    const name = String(tags.name || "").toLowerCase();
+    const nameScore = name
+      ? [...spotTerms].filter((term) => name.includes(term)).length
+      : 0;
+    const bounds = lngLatBounds(coordinates);
+    const area = Math.abs((bounds.east - bounds.west) * (bounds.north - bounds.south));
+    const centerDistance = Math.hypot(
+      ((bounds.west + bounds.east) / 2) - spot.longitude,
+      ((bounds.south + bounds.north) / 2) - spot.latitude
+    );
+    candidates.push({ coordinates, tags, area, nameScore, centerDistance, id: element.id });
+  }
+
+  const relevant = candidates
+    .filter((candidate) => candidate.area > 0.000002)
+    .sort((a, b) => (b.nameScore - a.nameScore) || (b.area - a.area) || (a.centerDistance - b.centerDistance))
+    .slice(0, 24);
+
+  return {
+    type: "FeatureCollection",
+    features: relevant.map((candidate) => ({
+      type: "Feature",
+      properties: {
+        source: "OpenStreetMap",
+        osm_type: "way",
+        osm_id: candidate.id,
+        name: candidate.tags.name || spot.name,
+      },
+      geometry: {
+        type: "Polygon",
+        coordinates: [candidate.coordinates],
+      },
+    })),
+  };
+}
+
+function lngLatBounds(coordinates) {
+  return coordinates.reduce((bounds, [lng, lat]) => ({
+    west: Math.min(bounds.west, lng),
+    south: Math.min(bounds.south, lat),
+    east: Math.max(bounds.east, lng),
+    north: Math.max(bounds.north, lat),
+  }), { west: Infinity, south: Infinity, east: -Infinity, north: -Infinity });
+}
+
+function geoJsonLngLatBounds(geojson) {
+  const flatCoordinates = [];
+  for (const feature of geojson?.features || []) {
+    const geometry = feature.geometry || {};
+    if (geometry.type === "Polygon") {
+      flatCoordinates.push(...geometry.coordinates.flat());
+    } else if (geometry.type === "MultiPolygon") {
+      flatCoordinates.push(...geometry.coordinates.flat(2));
+    }
+  }
+  if (!flatCoordinates.length) return null;
+  const bounds = lngLatBounds(flatCoordinates);
+  if (!Number.isFinite(bounds.west) || bounds.east <= bounds.west || bounds.north <= bounds.south) return null;
+  return [bounds.west, bounds.south, bounds.east, bounds.north];
 }
 
 function ensureLakeSurfaceCanvas() {
@@ -1012,7 +1297,7 @@ function resizeLakeSurfaceCanvas() {
 
 function projectedLakePolygons(dpr) {
   if (!lakeMap) return [];
-  if (!lakeSurfaceRings.length) return fallbackLakePolygons(dpr, currentSpot);
+  if (!lakeSurfaceRings.length) return [];
   return lakeSurfaceRings.map((polygon) => polygon.map((ring) => ring.map(([lng, lat]) => {
     const point = lakeMap.project([lng, lat]);
     return [point.x * dpr, point.y * dpr];
@@ -1476,7 +1761,7 @@ function fitMapPadding() {
 function fitMapToSpot(spot, duration = 650) {
   if (!lakeMap || !spot) return;
   const source = windFrameForSpot(spot);
-  const bounds = mapViewBounds[spot.slug] || source?.bounds;
+  const bounds = mapViewBounds[spot.slug] || lakeShorelineBounds.get(spot.slug) || source?.bounds;
   if (!bounds) {
     lakeMap.easeTo({
       center: [spot.longitude, spot.latitude],

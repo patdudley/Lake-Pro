@@ -1,5 +1,5 @@
 // Generated from the Lake Pro launch catalog attachment.
-// Only Tahoe and Payette currently have live forecast/map layer data.
+// Tahoe, Payette, and selected launch lakes have checked-in shoreline masks.
 export const lakeCatalog = [
   {
     "rank": "1",
