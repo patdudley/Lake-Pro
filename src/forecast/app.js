@@ -20,6 +20,7 @@ const lakeShorelineBounds = new Map();
 const lakeNarrowProtectionCache = new Map();
 let currentLiveLatest = null;
 let selectedForecastIndex = 0;
+let currentForecastDays = [];
 let homeCameraIndex = 0;
 
 function cartoRasterStyle() {
@@ -339,6 +340,7 @@ function renderCondition(latest = currentLiveLatest, frame = windFrames[windFram
 }
 
 function renderForecastStrip(days = placeholderForecast) {
+  currentForecastDays = days;
   const strip = document.getElementById("forecastStrip");
   strip.replaceChildren(...days.map((day, index) => {
     const card = document.createElement("button");
@@ -358,6 +360,7 @@ function renderForecastStrip(days = placeholderForecast) {
     `;
     card.addEventListener("click", () => {
       selectedForecastIndex = index;
+      syncMapToForecastDay(day, index);
       renderForecastStrip(days);
       renderForecastReports(days);
     });
@@ -898,6 +901,34 @@ function localHourKey(date = new Date(), timeZone) {
 function frameLocalHourKey(time) {
   const match = String(time || "").match(/^(\d{4}-\d{2}-\d{2})T(\d{2})/);
   return match ? `${match[1]}T${match[2]}` : "";
+}
+
+function frameLocalHour(time) {
+  const match = frameLocalHourKey(time).match(/T(\d{2})$/);
+  return match ? Number(match[1]) : NaN;
+}
+
+function forecastFrameIndex(day, index = selectedForecastIndex) {
+  if (!windFrames.length) return -1;
+  const targetDate = day?.date;
+  if (!targetDate) return index === 0 ? currentWindFrameIndex() : -1;
+  const liveDay = liveDateKey();
+  if (index === 0 && (!liveDay || targetDate === liveDay)) return currentWindFrameIndex();
+  const sameDayFrames = windFrames
+    .map((frame, frameIndex) => ({ frame, frameIndex, hour: frameLocalHour(frame.time) }))
+    .filter(({ frame }) => frameDateKey(frame.time) === targetDate);
+  if (!sameDayFrames.length) return -1;
+  const daylightFrame = sameDayFrames.find(({ hour }) => (
+    Number.isFinite(hour) && hour >= Math.max(8, DAYLIGHT_START_HOUR) && hour <= DAYLIGHT_END_HOUR
+  ));
+  return (daylightFrame || sameDayFrames[0]).frameIndex;
+}
+
+function syncMapToForecastDay(day, index = selectedForecastIndex) {
+  const nextFrameIndex = forecastFrameIndex(day, index);
+  if (nextFrameIndex < 0) return;
+  stopWindTimelapse();
+  renderWindFrame(nextFrameIndex);
 }
 
 function nightOverlayOpacity(time) {
@@ -1822,7 +1853,9 @@ function renderTimelapseControls() {
       renderWindFrame(windFrameIndex + dayStep);
     };
   }
-  renderWindFrame(currentWindFrameIndex());
+  const selectedDay = currentForecastDays[selectedForecastIndex];
+  const selectedIndex = selectedDay ? forecastFrameIndex(selectedDay, selectedForecastIndex) : -1;
+  renderWindFrame(selectedIndex >= 0 ? selectedIndex : currentWindFrameIndex());
 }
 
 async function loadWindTimelapse(spot) {
