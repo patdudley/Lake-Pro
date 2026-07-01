@@ -79,6 +79,7 @@
           </div>
         </section>
         <section class="hero-report" id="heroDailyReport" aria-label="Daily lake report"></section>
+        <section class="today-weather-card report-only" id="todayWeatherCard" aria-label="Today weather"></section>
       </section>
 
       <section class="home-map-panel" id="homeMapPanel" aria-labelledby="homeMapTitle">
@@ -131,12 +132,14 @@
           <button id="windBackButton" class="timeline-day-button" type="button" aria-label="Previous wind forecast day">Prev day</button>
           <button id="windPlayButton" class="timeline-play-button" type="button" aria-label="Play wind timeline"><span>Play</span></button>
           <input id="windFrameSlider" type="range" min="0" max="0" value="0" step="1" aria-label="Wind forecast time">
+          <div id="windDayLabels" class="timeline-day-labels" aria-label="Wind forecast days"></div>
           <button id="windForwardButton" class="timeline-day-button" type="button" aria-label="Next wind forecast day">Next day</button>
           <strong id="windFrameLabel">Wind timeline pending</strong>
         </div>
       </section>
 
       <section class="mobile-daily-report report-only" id="mobileDailyReport" aria-label="Daily lake report"></section>
+      <section class="today-weather-card mobile-weather-card report-only" id="mobileTodayWeatherCard" aria-label="Today weather"></section>
 
       <section class="rating-card report-only" aria-labelledby="ratingTitle">
         <h2 id="ratingTitle">Rating System</h2>

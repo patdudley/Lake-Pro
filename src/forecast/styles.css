@@ -344,8 +344,10 @@ body.spot-mode .hero-copy {
       "nav"
       "title"
       "camera"
-      "report";
+      "report"
+      "weather";
     gap: 18px;
+    align-self: stretch;
     min-height: 0;
     margin-bottom: 0;
     padding: 24px;
@@ -397,17 +399,25 @@ body.spot-mode .hero-copy {
   body.spot-mode .map-panel {
     grid-column: 2;
     grid-row: 1;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-self: stretch;
     min-height: 100%;
     margin-top: 0;
     padding: 18px;
   }
 
+  body.spot-mode .map-panel .map-stage {
+    min-height: 0;
+  }
+
   body.spot-mode .map-panel .map {
-    height: clamp(660px, 76vh, 860px);
+    height: 100%;
+    min-height: clamp(660px, 76vh, 860px);
   }
 
   body.spot-mode.no-camera .map-panel .map {
-    height: clamp(360px, 45vh, 460px);
+    min-height: clamp(360px, 45vh, 460px);
   }
 
   body.spot-mode .home-dashboard,
@@ -423,6 +433,158 @@ body.spot-mode .hero-copy {
   align-self: end;
   max-width: 720px;
   margin-top: 34px;
+}
+
+.today-weather-card {
+  grid-area: weather;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(17, 188, 233, 0.28);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 251, 255, 0.88)),
+    linear-gradient(135deg, rgba(17, 188, 233, 0.1), rgba(242, 11, 198, 0.055));
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  padding: 16px;
+}
+
+.mobile-weather-card {
+  display: none;
+}
+
+.today-weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.today-weather-header span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 950;
+}
+
+.today-weather-header span i {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--cyan);
+  box-shadow: 0 0 0 5px rgba(17, 188, 233, 0.14);
+}
+
+.today-weather-header strong {
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.today-weather-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 6px;
+  overflow: visible;
+}
+
+.today-weather-chart text {
+  fill: rgba(6, 22, 82, 0.66);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.today-weather-chart .weather-temp-label {
+  fill: rgba(6, 22, 82, 0.46);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.today-weather-area {
+  fill: rgba(255, 196, 0, 0.22);
+}
+
+.today-weather-line {
+  fill: none;
+  stroke: #ffbf00;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.today-weather-days {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(74px, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.today-weather-day {
+  min-width: 74px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 9px 7px;
+  text-align: center;
+}
+
+.today-weather-day:first-child {
+  border-color: rgba(7, 25, 82, 0.08);
+  background: rgba(6, 22, 82, 0.055);
+}
+
+.today-weather-day strong,
+.today-weather-day span,
+.today-weather-day em {
+  display: block;
+}
+
+.today-weather-day strong {
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.today-weather-day .weather-icon {
+  width: 42px;
+  height: 32px;
+  margin: 7px auto 5px;
+}
+
+.today-weather-day span {
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.today-weather-day span small {
+  color: var(--muted);
+}
+
+.today-weather-day em {
+  margin-top: 3px;
+  font-size: 1.05rem;
+  font-style: normal;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.today-weather-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 720;
+  line-height: 1.4;
 }
 
 .hero-forecast-report {
@@ -633,6 +795,7 @@ body.home-mode .hero-copy h1 {
   height: 100%;
   min-height: 0;
   object-fit: cover;
+  object-position: center center;
 }
 
 .home-feature-card a::after {
@@ -986,6 +1149,7 @@ body.home-mode .hero-copy h1 {
   height: 88px;
   border-radius: 10px;
   object-fit: cover;
+  object-position: center center;
 }
 
 .lake-directory-shell {
@@ -1122,6 +1286,7 @@ body.home-mode .hero-copy h1 {
   height: 100%;
   min-height: 96px;
   object-fit: cover;
+  object-position: center center;
 }
 
 .directory-card-media::after {
@@ -1238,6 +1403,7 @@ body.home-mode .hero-copy h1 {
 .timelapse-control {
   display: grid;
   grid-template-columns: 42px minmax(220px, 1fr) auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto;
   margin-top: 16px;
   align-items: center;
   gap: 8px 10px;
@@ -1266,7 +1432,7 @@ body.home-mode .hero-copy h1 {
 
 #windBackButton {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 #windPlayButton {
@@ -1279,18 +1445,62 @@ body.home-mode .hero-copy h1 {
   grid-row: 1;
 }
 
+#windDayLabels {
+  grid-column: 2 / -1;
+  grid-row: 2;
+}
+
 #windForwardButton {
   grid-column: -2;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 #windFrameLabel {
   grid-column: 2 / -2;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .timelapse-control:not(.has-back) #windFrameLabel {
   grid-column: 1 / -2;
+}
+
+.timeline-day-labels {
+  display: grid;
+  grid-auto-columns: minmax(76px, 1fr);
+  grid-auto-flow: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(11, 88, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(6, 22, 82, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.timeline-day-labels[hidden] {
+  display: none;
+}
+
+.timeline-day-labels button {
+  min-height: 30px;
+  border: 0;
+  border-left: 1px solid rgba(6, 22, 82, 0.1);
+  border-radius: 0;
+  background: transparent;
+  color: rgba(6, 22, 82, 0.68);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0 10px;
+  text-transform: none;
+}
+
+.timeline-day-labels button:first-child {
+  border-left: 0;
+}
+
+.timeline-day-labels button[data-active="true"] {
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(11, 88, 255, 0.18);
 }
 
 .timeline-play-button {
@@ -1594,7 +1804,7 @@ h2 {
 .camera-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 7.4;
+  aspect-ratio: 16 / 9;
   margin-top: 16px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -2228,8 +2438,18 @@ h2 {
     margin-top: 12px;
   }
 
-  body.spot-mode .rating-card {
+  body.spot-mode .site-hero > .today-weather-card {
+    display: none;
+  }
+
+  body.spot-mode .mobile-weather-card {
+    display: block;
     order: 5;
+    margin-top: 0;
+  }
+
+  body.spot-mode .rating-card {
+    order: 6;
   }
 
   .site-hero {
@@ -2358,6 +2578,28 @@ h2 {
 
   .hero-forecast-report .forecast-report-body p {
     font-size: 0.88rem;
+  }
+
+  .today-weather-card {
+    padding: 14px;
+  }
+
+  .today-weather-header span {
+    font-size: 0.96rem;
+  }
+
+  .today-weather-card .today-weather-chart {
+    margin-inline: -2px;
+  }
+
+  .today-weather-card {
+    overflow-x: hidden;
+  }
+
+  .today-weather-days {
+    grid-auto-columns: minmax(82px, 1fr);
+    margin-right: -6px;
+    padding-right: 6px;
   }
 
   .hero-copy h1 {
@@ -2539,7 +2781,7 @@ h2 {
   }
 
   .camera-frame {
-    aspect-ratio: 16 / 9.2;
+    aspect-ratio: 16 / 9;
     margin-top: 12px;
   }
 
@@ -2606,9 +2848,25 @@ h2 {
     grid-row: 1;
   }
 
-  .timelapse-control strong {
-    grid-column: 1 / 3;
+  .timeline-day-labels {
+    grid-column: 1 / -1;
     grid-row: 2;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .timeline-day-labels::-webkit-scrollbar {
+    display: none;
+  }
+
+  .timeline-day-labels button {
+    min-width: 76px;
+    font-size: 0.68rem;
+  }
+
+  .timelapse-control strong {
+    grid-column: 2 / 3;
+    grid-row: 3;
   }
 
   .timelapse-control button {
@@ -2632,12 +2890,12 @@ h2 {
 
   #windBackButton {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 3;
   }
 
   #windForwardButton {
     grid-column: 3;
-    grid-row: 2;
+    grid-row: 3;
   }
 
   .timelapse-control.has-back #windPlayButton {
@@ -2646,15 +2904,19 @@ h2 {
 
   .timelapse-control.has-back #windForwardButton {
     grid-column: 3;
-    grid-row: 2;
+    grid-row: 3;
   }
 
   .timelapse-control.has-back strong {
     grid-column: 2 / 3;
   }
 
+  .timelapse-control:not(.has-back) #windFrameLabel {
+    grid-column: 2 / 3;
+  }
+
   .timelapse-control strong {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
@@ -3084,7 +3346,7 @@ body.home-mode .site-hero {
 
   .timelapse-control,
   .timelapse-control.has-back {
-    grid-template-columns: 44px minmax(0, 1fr) minmax(88px, auto);
+    grid-template-columns: 82px minmax(0, 1fr) 82px;
     border-radius: 14px;
   }
 
@@ -3097,13 +3359,19 @@ body.home-mode .site-hero {
     grid-column: 2 / -1;
   }
 
+  .timeline-day-labels {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .timelapse-control strong {
     font-size: 0.875rem;
     padding: 11px 12px;
   }
 
   .timeline-day-button {
-    min-width: 88px;
+    min-width: 0;
+    padding-inline: 8px;
   }
 
   .forecast-strip {

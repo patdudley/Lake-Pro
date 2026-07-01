@@ -15,6 +15,18 @@ const approvedCameraOverrides = {
   },
 };
 
+const unusableCameraSlugs = new Set([
+  "deer-creek-reservoir",
+  "lake-lanier",
+  "lake-mead",
+  "lake-minnetonka",
+  "lake-norman",
+  "lake-shasta",
+  "okanagan-lake",
+  "smith-mountain-lake",
+  "utah-lake",
+]);
+
 export function cameraAssetUrl(spot) {
   if (!spot?.slug) return "assets/hero-image.jpg";
   return `assets/cameras/${spot.slug}.png`;
@@ -24,6 +36,7 @@ export function cameraForSpot(spot) {
   if (!spot) return null;
   const override = approvedCameraOverrides[spot.slug];
   if (override) return override;
+  if (unusableCameraSlugs.has(spot.slug)) return null;
   if (!spot.webcam?.url) return null;
   return {
     title: "Live Lake View",

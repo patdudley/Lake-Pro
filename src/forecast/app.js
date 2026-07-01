@@ -232,6 +232,143 @@ function temperatureRange(day) {
   return `<span class="forecast-temps">${Math.round(day.temperature_2m_max)}&deg; <small>${Math.round(day.temperature_2m_min)}&deg;</small></span>`;
 }
 
+function shortDayLabel(date, index = 0) {
+  const value = new Date(`${date}T12:00:00`);
+  if (Number.isNaN(value.getTime())) return index === 0 ? "Today" : "";
+  return index === 0 ? "Today" : value.toLocaleDateString("en-US", { weekday: "short" });
+}
+
+function hourlyDateKey(time) {
+  const match = String(time || "").match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? match[1] : "";
+}
+
+function hourlyTimeLabel(time) {
+  const match = String(time || "").match(/T(\d{2}):/);
+  if (!match) return "";
+  const hour = Number(match[1]);
+  if (!Number.isFinite(hour)) return "";
+  if (hour === 0) return "12am";
+  if (hour < 12) return `${hour}am`;
+  if (hour === 12) return "12pm";
+  return `${hour - 12}pm`;
+}
+
+function todayHourlyWeather(bundle = {}) {
+  const hourly = bundle.hourly || {};
+  const targetDate = bundle.latest?.date || bundle.ten_day?.[0]?.date || "";
+  const times = Array.isArray(hourly.time) ? hourly.time : [];
+  return times.reduce((items, time, index) => {
+    if (targetDate && hourlyDateKey(time) !== targetDate) return items;
+    const temp = numberValue(hourly.temperature_2m?.[index]);
+    if (temp == null) return items;
+    items.push({
+      time,
+      temp,
+      label: hourlyTimeLabel(time),
+      weather_code: hourly.weather_code?.[index],
+      precipitation_probability: hourly.precipitation_probability?.[index],
+      short_forecast: hourly.short_forecast?.[index],
+    });
+    return items;
+  }, []).slice(0, 24);
+}
+
+function weatherChartSvg(hourlyItems = []) {
+  const samples = hourlyItems.length ? hourlyItems : [{ temp: 0, label: "" }];
+  const width = 720;
+  const height = 150;
+  const chartTop = 20;
+  const chartBottom = 112;
+  const chartLeft = 16;
+  const chartRight = width - 16;
+  const temps = samples.map((item) => item.temp);
+  const minTemp = Math.min(...temps);
+  const maxTemp = Math.max(...temps);
+  const span = Math.max(6, maxTemp - minTemp);
+  const points = samples.map((item, index) => {
+    const x = samples.length === 1
+      ? width / 2
+      : chartLeft + (index / (samples.length - 1)) * (chartRight - chartLeft);
+    const y = chartBottom - ((item.temp - minTemp) / span) * (chartBottom - chartTop);
+    return { ...item, x, y };
+  });
+  const line = points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ");
+  const area = `${line} L${points.at(-1).x.toFixed(1)} ${chartBottom} L${points[0].x.toFixed(1)} ${chartBottom} Z`;
+  const labelEvery = Math.max(1, Math.ceil(points.length / 7));
+  const labels = points
+    .filter((_, index) => index % labelEvery === 0 || index === points.length - 1)
+    .map((point) => `
+      <text x="${point.x.toFixed(1)}" y="142" text-anchor="middle">${point.label}</text>
+    `).join("");
+  const tempLabels = points
+    .filter((_, index) => index % Math.max(2, labelEvery * 2) === 0 || index === points.length - 1)
+    .map((point) => `
+      <text class="weather-temp-label" x="${point.x.toFixed(1)}" y="${Math.max(12, point.y - 8).toFixed(1)}" text-anchor="middle">${Math.round(point.temp)}</text>
+    `).join("");
+
+  return `
+    <svg class="today-weather-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Hourly temperature chart">
+      <path class="today-weather-area" d="${area}"></path>
+      <path class="today-weather-line" d="${line}"></path>
+      ${tempLabels}
+      ${labels}
+    </svg>
+  `;
+}
+
+function todayWeatherSummary(latest = {}, hourlyItems = []) {
+  const forecast = hourlyItems.find((item) => item.short_forecast)?.short_forecast || "";
+  const high = numberValue(latest.temperature_2m_max);
+  const low = numberValue(latest.temperature_2m_min);
+  const precip = numberValue(latest.precipitation_probability_max);
+  const wind = roundedMph(latest.wind_speed_max_mph);
+  const parts = [];
+
+  if (forecast) parts.push(forecast);
+  if (high != null && low != null) parts.push(`${Math.round(high)} / ${Math.round(low)} degrees`);
+  if (wind) parts.push(`wind near ${wind}`);
+  if (precip != null && precip >= 25) parts.push(`${Math.round(precip)}% precip risk`);
+  if (!parts.length) return "";
+  return `${parts.join(", ")}.`;
+}
+
+function renderTodayWeatherCard(target, bundle = {}) {
+  if (!target) return;
+  const days = (bundle.ten_day || []).map((day) => heatAdjustedDay(day)).slice(0, 8);
+  const hourlyItems = todayHourlyWeather(bundle);
+  const latest = heatAdjustedDay(bundle.latest || days[0] || {});
+  const high = numberValue(latest.temperature_2m_max);
+  const low = numberValue(latest.temperature_2m_min);
+  const summary = todayWeatherSummary(latest, hourlyItems);
+  const cards = days.map((day, index) => {
+    const grade = gradeValue(day.grade);
+    return `
+      <div class="today-weather-day">
+        <strong>${shortDayLabel(day.date, index)}</strong>
+        <i class="weather-icon ${weatherIconClass(day)}" aria-hidden="true"></i>
+        <span>${Math.round(day.temperature_2m_max ?? 0)}&deg; <small>${Math.round(day.temperature_2m_min ?? 0)}&deg;</small></span>
+        <em class="grade-letter" data-grade="${grade}">${grade || "--"}</em>
+      </div>
+    `;
+  }).join("");
+
+  target.innerHTML = `
+    <div class="today-weather-header">
+      <span><i aria-hidden="true"></i>Today Weather</span>
+      <strong>${high == null || low == null ? "Live" : `${Math.round(high)}&deg; / ${Math.round(low)}&deg;`}</strong>
+    </div>
+    ${weatherChartSvg(hourlyItems)}
+    <div class="today-weather-days" aria-label="Daily weather outlook">${cards}</div>
+    ${summary ? `<p>${summary}</p>` : ""}
+  `;
+}
+
+function renderTodayWeather(bundle = {}) {
+  renderTodayWeatherCard(document.getElementById("todayWeatherCard"), bundle);
+  renderTodayWeatherCard(document.getElementById("mobileTodayWeatherCard"), bundle);
+}
+
 function gradeValue(grade) {
   return ["A", "B", "C", "D", "F"].includes(grade) ? grade : "";
 }
@@ -828,6 +965,7 @@ function renderLiveSpotData(bundle) {
   renderCondition(latest);
   renderForecastStrip(bundle.ten_day || []);
   renderForecastReports(bundle.ten_day || []);
+  renderTodayWeather(bundle);
 }
 
 async function loadLiveSpotData(spot) {
@@ -845,6 +983,7 @@ async function loadLiveSpotData(spot) {
     currentLiveLatest = null;
     renderForecastStrip();
     renderForecastReports();
+    renderTodayWeather({});
   }
 }
 
@@ -865,6 +1004,14 @@ function formatFrameTime(time) {
   });
 }
 
+function formatFrameDayLabel(time) {
+  if (!time) return "";
+  const date = new Date(time);
+  if (Number.isNaN(date.getTime())) return "";
+  const weekday = date.toLocaleDateString("en-US", { weekday: "short" });
+  return `${weekday} ${date.getDate()}`;
+}
+
 function frameDateKey(time) {
   if (!time) return "";
   const date = new Date(time);
@@ -875,8 +1022,61 @@ function frameDateKey(time) {
   return `${year}-${month}-${day}`;
 }
 
+function timelineDays() {
+  const seen = new Set();
+  const currentDay = liveDateKey() || frameDateKey(windFrames[0]?.time);
+  return windFrames.reduce((days, frame, index) => {
+    const key = frameDateKey(frame?.time);
+    if (!key || seen.has(key) || (currentDay && key < currentDay)) return days;
+    seen.add(key);
+    days.push({
+      key,
+      index,
+      label: formatFrameDayLabel(frame.time),
+    });
+    return days;
+  }, []);
+}
+
+function updateTimelineDaySelection() {
+  const selectedDay = frameDateKey(windFrames[windFrameIndex]?.time);
+  document.querySelectorAll("#windDayLabels button").forEach((button) => {
+    const isSelected = button.dataset.day === selectedDay;
+    button.dataset.active = isSelected ? "true" : "false";
+    button.setAttribute("aria-current", isSelected ? "date" : "false");
+  });
+}
+
+function renderTimelineDayLabels() {
+  const labels = document.getElementById("windDayLabels");
+  if (!labels) return;
+  const days = timelineDays();
+  labels.replaceChildren(...days.map((day) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.day = day.key;
+    button.textContent = day.label;
+    button.setAttribute("aria-label", `Show wind forecast for ${day.label}`);
+    button.addEventListener("click", () => {
+      stopWindTimelapse();
+      renderWindFrame(day.index);
+    });
+    return button;
+  }));
+  labels.hidden = days.length < 2;
+  updateTimelineDaySelection();
+}
+
 function liveDateKey(spot = currentSpot) {
   return localHourKey(new Date(), spot?.timeZone).slice(0, 10);
+}
+
+function firstLiveFrameIndex() {
+  if (!windFrames.length) return 0;
+  const currentDay = liveDateKey() || frameDateKey(windFrames[0]?.time);
+  if (!currentDay) return 0;
+  const todayIndex = windFrames.findIndex((frame) => frameDateKey(frame.time) >= currentDay);
+  return todayIndex >= 0 ? todayIndex : Math.max(0, windFrames.length - 1);
 }
 
 function localHourKey(date = new Date(), timeZone) {
@@ -908,10 +1108,9 @@ function frameLocalHour(time) {
 
 function forecastFrameIndex(day, index = selectedForecastIndex) {
   if (!windFrames.length) return -1;
+  if (index === 0) return currentWindFrameIndex();
   const targetDate = day?.date;
-  if (!targetDate) return index === 0 ? currentWindFrameIndex() : -1;
-  const liveDay = liveDateKey();
-  if (index === 0 && (!liveDay || targetDate === liveDay)) return currentWindFrameIndex();
+  if (!targetDate) return -1;
   const sameDayFrames = windFrames
     .map((frame, frameIndex) => ({ frame, frameIndex, hour: frameLocalHour(frame.time) }))
     .filter(({ frame }) => frameDateKey(frame.time) === targetDate);
@@ -1756,16 +1955,19 @@ function startLakeSurfaceAnimation() {
 }
 
 function renderWindFrame(index = windFrameIndex) {
-  windFrameIndex = Math.max(0, Math.min(index, Math.max(0, windFrames.length - 1)));
+  const minimumFrame = firstLiveFrameIndex();
+  windFrameIndex = Math.max(minimumFrame, Math.min(index, Math.max(0, windFrames.length - 1)));
   const frame = windFrames[windFrameIndex];
   const slider = document.getElementById("windFrameSlider");
   const label = document.getElementById("windFrameLabel");
   const backButton = document.getElementById("windBackButton");
   const forwardButton = document.getElementById("windForwardButton");
   if (slider) {
+    slider.min = String(minimumFrame);
     slider.max = String(Math.max(0, windFrames.length - 1));
     slider.value = String(windFrameIndex);
   }
+  updateTimelineDaySelection();
   if (backButton) {
     const currentDay = liveDateKey() || frameDateKey(windFrames[0]?.time);
     const selectedDay = frameDateKey(frame?.time);
@@ -1815,7 +2017,8 @@ function startWindTimelapse() {
     button.setAttribute("aria-pressed", "true");
   }
   windTimer = window.setInterval(() => {
-    renderWindFrame((windFrameIndex + 1) % windFrames.length);
+    const nextIndex = windFrameIndex + 1 > windFrames.length - 1 ? firstLiveFrameIndex() : windFrameIndex + 1;
+    renderWindFrame(nextIndex);
   }, 850);
 }
 
@@ -1826,6 +2029,7 @@ function renderTimelapseControls() {
   const forwardButton = document.getElementById("windForwardButton");
   const dayStep = 24;
   if (slider) {
+    slider.min = String(firstLiveFrameIndex());
     slider.max = String(Math.max(0, windFrames.length - 1));
     slider.value = String(windFrameIndex);
     slider.oninput = () => {
@@ -1833,6 +2037,7 @@ function renderTimelapseControls() {
       renderWindFrame(Number(slider.value));
     };
   }
+  renderTimelineDayLabels();
   if (button) {
     button.onclick = () => {
       if (windTimer) stopWindTimelapse();
