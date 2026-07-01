@@ -9,7 +9,24 @@ function reportUrl(spot) {
 }
 
 function gradeValue(value) {
-  return String(value || "--").trim().toUpperCase();
+  const grade = String(value || "--").trim().toUpperCase();
+  return ["A", "B", "C", "D", "F"].includes(grade) ? grade : "--";
+}
+
+function capGrade(grade, maxGrade) {
+  const grades = ["A", "B", "C", "D", "F"];
+  const gradeIndex = grades.indexOf(gradeValue(grade));
+  const capIndex = grades.indexOf(gradeValue(maxGrade));
+  if (gradeIndex < 0 || capIndex < 0) return gradeValue(grade);
+  return gradeIndex < capIndex ? grades[capIndex] : grades[gradeIndex];
+}
+
+function heatAdjustedGrade(latest = {}) {
+  const high = Number(latest.temperature_2m_max ?? latest.temperature_high_f ?? latest.temp_high_f);
+  if (!Number.isFinite(high)) return gradeValue(latest.grade);
+  if (high > 105) return capGrade(latest.grade, "C");
+  if (high > 90) return capGrade(latest.grade, "B");
+  return gradeValue(latest.grade);
 }
 
 function firstLetter(name = "") {
@@ -103,7 +120,7 @@ async function hydrateDirectoryCards(spots) {
     try {
       const bundle = await fetchJson(`data/live/spots/${spot.slug}.json`);
       const latest = bundle.latest || {};
-      const grade = gradeValue(latest.grade);
+      const grade = heatAdjustedGrade(latest);
       const detail = latest.chop_proxy_ft != null
         ? `${latest.chop_proxy_ft} ft chop`
         : latest.wind_speed_mph != null

@@ -236,6 +236,37 @@ function gradeValue(grade) {
   return ["A", "B", "C", "D", "F"].includes(grade) ? grade : "";
 }
 
+function capGrade(grade, maxGrade) {
+  const grades = ["A", "B", "C", "D", "F"];
+  const gradeIndex = grades.indexOf(gradeValue(grade));
+  const capIndex = grades.indexOf(gradeValue(maxGrade));
+  if (gradeIndex < 0 || capIndex < 0) return gradeValue(grade);
+  return gradeIndex < capIndex ? grades[capIndex] : grades[gradeIndex];
+}
+
+function heatGradeCap(day = {}) {
+  const high = numberValue(day.temperature_2m_max ?? day.temperature_high_f ?? day.temp_high_f);
+  if (high == null) return "A";
+  if (high > 105) return "C";
+  if (high > 90) return "B";
+  return "A";
+}
+
+function heatAdjustedDay(day = {}) {
+  const grade = gradeValue(day.grade);
+  const cap = heatGradeCap(day);
+  const cappedGrade = capGrade(grade, cap);
+  if (!grade || cappedGrade === grade) return day;
+  const score = numberValue(day.score);
+  const capName = cap === "C" ? "temperature_high_over_105_best_case_c" : "temperature_high_over_90_best_case_b";
+  return {
+    ...day,
+    grade: cappedGrade,
+    score: score == null ? day.score : Math.min(score, topScoreForGrade(cappedGrade)),
+    grade_caps: [...(Array.isArray(day.grade_caps) ? day.grade_caps : []), capName],
+  };
+}
+
 function gradeFromScore(score) {
   if (score >= 85) return "A";
   if (score >= 72) return "B";
@@ -290,7 +321,7 @@ function windAdjustedLatest(latest = {}, frame = windFrames[windFrameIndex]) {
 
 function renderCondition(latest = currentLiveLatest, frame = windFrames[windFrameIndex]) {
   if (!latest) return;
-  const adjusted = windAdjustedLatest(latest, frame);
+  const adjusted = heatAdjustedDay(windAdjustedLatest(latest, frame));
   const grade = document.getElementById("conditionGrade");
   grade.textContent = adjusted.grade || "--";
   grade.dataset.grade = gradeValue(adjusted.grade);
@@ -305,9 +336,10 @@ function renderCondition(latest = currentLiveLatest, frame = windFrames[windFram
 }
 
 function renderForecastStrip(days = placeholderForecast) {
-  currentForecastDays = days;
+  const renderedDays = days.map((day) => heatAdjustedDay(day));
+  currentForecastDays = renderedDays;
   const strip = document.getElementById("forecastStrip");
-  strip.replaceChildren(...days.map((day, index) => {
+  strip.replaceChildren(...renderedDays.map((day, index) => {
     const card = document.createElement("button");
     card.className = "forecast-day";
     card.type = "button";
@@ -326,8 +358,8 @@ function renderForecastStrip(days = placeholderForecast) {
     card.addEventListener("click", () => {
       selectedForecastIndex = index;
       syncMapToForecastDay(day, index);
-      renderForecastStrip(days);
-      renderForecastReports(days);
+      renderForecastStrip(renderedDays);
+      renderForecastReports(renderedDays);
     });
     return card;
   }));
@@ -352,10 +384,11 @@ function createForecastReportArticle(report, className = "forecast-report") {
 }
 
 function renderForecastReports(days = placeholderForecast) {
-  const index = Math.max(0, Math.min(selectedForecastIndex, days.length - 1));
+  const renderedDays = days.map((day) => heatAdjustedDay(day));
+  const index = Math.max(0, Math.min(selectedForecastIndex, renderedDays.length - 1));
   selectedForecastIndex = index;
-  const day = days[index] || {};
-  const dayReport = generateLakeForecastReport(day, index, days);
+  const day = renderedDays[index] || {};
+  const dayReport = generateLakeForecastReport(day, index, renderedDays);
   const dropdown = document.getElementById("forecastReportDropdown");
   const heroReport = document.getElementById("heroDailyReport");
   const mobileReport = document.getElementById("mobileDailyReport");
@@ -515,7 +548,7 @@ async function hydrateHomeLakeCards() {
     const slug = new URL(card.href).searchParams.get("spot");
     try {
       const bundle = await fetchJson(`data/live/spots/${slug}.json`);
-      const latest = bundle.latest || {};
+      const latest = heatAdjustedDay(bundle.latest || {});
       const grade = gradeValue(latest.grade) || "--";
       const detail = latest.chop_proxy_ft != null ? `${latest.chop_proxy_ft} ft chop` : `${Math.round(latest.wind_speed_max_mph || 0)} mph`;
       const gradeNode = card.querySelector(".grade-letter");

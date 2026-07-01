@@ -595,6 +595,13 @@ def apply_grade_caps(
         score = max(score, 90)
         grade_caps.append("calm_sunny_a_window")
 
+    if temp_max is not None and float(temp_max) > 105:
+        score = cap_score(score, top_score_for_grade("C"))
+        grade_caps.append("temperature_high_over_105_best_case_c")
+    elif temp_max is not None and float(temp_max) > 90:
+        score = cap_score(score, top_score_for_grade("B"))
+        grade_caps.append("temperature_high_over_90_best_case_b")
+
     rainy_day = (precip is not None and float(precip) >= 55) or is_rainy_weather_code(weather_code)
     warms_up = temp_max is not None and float(temp_max) >= 70
     cold_rainy_day = rainy_day and temp_max is not None and float(temp_max) < 65
