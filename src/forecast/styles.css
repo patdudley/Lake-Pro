@@ -406,6 +406,10 @@ body.spot-mode .hero-copy {
     height: clamp(660px, 76vh, 860px);
   }
 
+  body.spot-mode.no-camera .map-panel .map {
+    height: clamp(360px, 45vh, 460px);
+  }
+
   body.spot-mode .home-dashboard,
   body.spot-mode .rating-card {
     grid-column: 1 / -1;

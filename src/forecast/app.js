@@ -806,6 +806,7 @@ function renderCameraCard(spot) {
   const camera = cameraForSpot(spot);
   const cameraCard = document.getElementById("cameraCard");
   if (!cameraCard) return;
+  document.body.classList.toggle("no-camera", !camera);
   cameraCard.hidden = !camera;
   if (!camera) return;
   document.getElementById("cameraTitle").textContent = camera.title;
