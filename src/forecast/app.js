@@ -17,6 +17,7 @@ let lakeSurfaceAnimation = null;
 let lastParticleFrame = 0;
 let loadedShorelineSlug = "";
 const lakeShorelineBounds = new Map();
+const lakeNarrowProtectionCache = new Map();
 let currentLiveLatest = null;
 let selectedForecastIndex = 0;
 let homeCameraIndex = 0;
@@ -1462,6 +1463,102 @@ function randomLakePoint(bounds, polygons) {
   };
 }
 
+function distanceToSegmentSquared(point, start, end) {
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  if (dx === 0 && dy === 0) {
+    const sx = point.x - start[0];
+    const sy = point.y - start[1];
+    return sx * sx + sy * sy;
+  }
+  const t = Math.max(0, Math.min(1, ((point.x - start[0]) * dx + (point.y - start[1]) * dy) / (dx * dx + dy * dy)));
+  const x = start[0] + t * dx;
+  const y = start[1] + t * dy;
+  const px = point.x - x;
+  const py = point.y - y;
+  return px * px + py * py;
+}
+
+function distanceToLakeEdge(point, polygons) {
+  let best = Infinity;
+  for (const polygon of polygons) {
+    for (const ring of polygon) {
+      for (let index = 0; index < ring.length; index += 1) {
+        const start = ring[index];
+        const end = ring[(index + 1) % ring.length];
+        best = Math.min(best, distanceToSegmentSquared(point, start, end));
+      }
+    }
+  }
+  return Math.sqrt(best);
+}
+
+function narrowProtectionCacheKey(bounds, spot) {
+  return [
+    spot?.slug || "lake",
+    Math.round(bounds.minX),
+    Math.round(bounds.minY),
+    Math.round(bounds.maxX),
+    Math.round(bounds.maxY),
+  ].join(":");
+}
+
+function narrowWaterProtectionPoints(polygons, bounds, spot) {
+  const key = narrowProtectionCacheKey(bounds, spot);
+  if (lakeNarrowProtectionCache.has(key)) return lakeNarrowProtectionCache.get(key);
+
+  const width = bounds.maxX - bounds.minX;
+  const height = bounds.maxY - bounds.minY;
+  const maxDim = Math.max(width, height);
+  const step = Math.max(26, Math.min(58, maxDim / 18));
+  const protectedEdgeDistance = maxDim * 0.082;
+  const fadeDistance = maxDim * 0.062;
+  const points = [];
+
+  for (let y = bounds.minY + step * 0.5; y <= bounds.maxY; y += step) {
+    for (let x = bounds.minX + step * 0.5; x <= bounds.maxX; x += step) {
+      const point = { x, y };
+      if (!pointInLake(point, polygons)) continue;
+      const edgeDistance = distanceToLakeEdge(point, polygons);
+      const strength = Math.max(0, Math.min(1, (protectedEdgeDistance - edgeDistance) / fadeDistance));
+      if (strength <= 0.06) continue;
+      points.push({
+        x,
+        y,
+        strength,
+        radius: step * (1.45 + strength * 0.75),
+      });
+    }
+  }
+
+  if (lakeNarrowProtectionCache.size > 18) lakeNarrowProtectionCache.clear();
+  lakeNarrowProtectionCache.set(key, points);
+  return points;
+}
+
+function drawNarrowWaterProtection(context, polygons, bounds, frame, spot) {
+  const speed = Number(frame?.wind_speed_mph || 0);
+  const exposure = Math.max(0, Math.min(1, (speed - 5.5) / 6));
+  if (exposure <= 0.04) return;
+
+  const roughWind = Math.max(0, Math.min(1, (speed - 12) / 10));
+  const dangerousWind = Math.max(0, Math.min(1, (speed - 24) / 8));
+  const calmBase = (0.18 + exposure * 0.26 + roughWind * 0.14) * (1 - dangerousWind * 0.72);
+  if (calmBase <= 0.02) return;
+
+  const points = narrowWaterProtectionPoints(polygons, bounds, spot);
+  for (const point of points) {
+    const alpha = calmBase * point.strength;
+    const calm = context.createRadialGradient(point.x, point.y, 0, point.x, point.y, point.radius);
+    calm.addColorStop(0, `rgba(24, 150, 232, ${alpha})`);
+    calm.addColorStop(0.48, `rgba(43, 116, 229, ${alpha * 0.58})`);
+    calm.addColorStop(0.82, `rgba(73, 96, 225, ${alpha * 0.2})`);
+    calm.addColorStop(1, "rgba(24, 150, 232, 0)");
+    context.fillStyle = calm;
+    context.fillRect(bounds.minX, bounds.minY, bounds.maxX - bounds.minX, bounds.maxY - bounds.minY);
+  }
+}
+
 function drawLakeGradient(context, polygons, bounds, frame, spot) {
   const width = bounds.maxX - bounds.minX;
   const height = bounds.maxY - bounds.minY;
@@ -1528,6 +1625,8 @@ function drawLakeGradient(context, polygons, bounds, frame, spot) {
       context.fillStyle = calm;
       context.fillRect(bounds.minX, bounds.minY, width, height);
     }
+
+    drawNarrowWaterProtection(context, polygons, bounds, frame, spot);
   }
 
   const shoreGlow = context.createRadialGradient(
