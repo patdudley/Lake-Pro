@@ -1,0 +1,1442 @@
+[
+  {
+    "route": "home",
+    "breakpoint": "375x667",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/home-375x667.png",
+    "heroHeight": 996,
+    "mapHeight": 480,
+    "overflowX": 0,
+    "pageHeight": 1762,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 480,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 307
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html",
+    "viewport": "375x667"
+  },
+  {
+    "route": "payette",
+    "breakpoint": "375x667",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/payette-375x667.png",
+    "heroHeight": 471,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2411,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 32,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current Payette Lake marina view",
+        "visibility": "visible",
+        "w": 186
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 520,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 317
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph",
+        "visibility": "visible",
+        "w": 315
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=payette-lake",
+    "viewport": "375x667"
+  },
+  {
+    "route": "tahoe",
+    "breakpoint": "375x667",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/tahoe-375x667.png",
+    "heroHeight": 471,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2385,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 32,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current South Lake Tahoe shoreline view",
+        "visibility": "visible",
+        "w": 186
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 520,
+        "size": 12,
+        "tag": "div",
+        "text": "0 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 317
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "0 mph",
+        "visibility": "visible",
+        "w": 315
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-tahoe",
+    "viewport": "375x667"
+  },
+  {
+    "route": "catalog-lake",
+    "breakpoint": "375x667",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/catalog-lake-375x667.png",
+    "heroHeight": 471,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2411,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 32,
+        "size": 13.44,
+        "tag": "p",
+        "text": "LT Lake Cam — AI-tracked PTZ",
+        "visibility": "visible",
+        "w": 186
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 520,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 317
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph",
+        "visibility": "visible",
+        "w": 315
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-travis",
+    "viewport": "375x667"
+  },
+  {
+    "route": "directory",
+    "breakpoint": "375x667",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/directory-375x667.png",
+    "heroHeight": null,
+    "mapHeight": null,
+    "overflowX": 0,
+    "pageHeight": 15647,
+    "smallTargets": [],
+    "smallText": [],
+    "url": "http://127.0.0.1:4213/lakes.html",
+    "viewport": "375x667"
+  },
+  {
+    "route": "home",
+    "breakpoint": "390x844",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/home-390x844.png",
+    "heroHeight": 1012,
+    "mapHeight": 480,
+    "overflowX": 0,
+    "pageHeight": 1778,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 480,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 322
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html",
+    "viewport": "390x844"
+  },
+  {
+    "route": "payette",
+    "breakpoint": "390x844",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/payette-390x844.png",
+    "heroHeight": 481,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2499,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 32,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current Payette Lake marina view",
+        "visibility": "visible",
+        "w": 201
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 332
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph",
+        "visibility": "visible",
+        "w": 330
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=payette-lake",
+    "viewport": "390x844"
+  },
+  {
+    "route": "tahoe",
+    "breakpoint": "390x844",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/tahoe-390x844.png",
+    "heroHeight": 481,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2457,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 32,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current South Lake Tahoe shoreline view",
+        "visibility": "visible",
+        "w": 201
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 332
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph",
+        "visibility": "visible",
+        "w": 330
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-tahoe",
+    "viewport": "390x844"
+  },
+  {
+    "route": "catalog-lake",
+    "breakpoint": "390x844",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/catalog-lake-390x844.png",
+    "heroHeight": 468,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2466,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 16,
+        "size": 13.44,
+        "tag": "p",
+        "text": "LT Lake Cam — AI-tracked PTZ",
+        "visibility": "visible",
+        "w": 193
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 332
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph",
+        "visibility": "visible",
+        "w": 330
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-travis",
+    "viewport": "390x844"
+  },
+  {
+    "route": "directory",
+    "breakpoint": "390x844",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/directory-390x844.png",
+    "heroHeight": null,
+    "mapHeight": null,
+    "overflowX": 0,
+    "pageHeight": 15622,
+    "smallTargets": [],
+    "smallText": [],
+    "url": "http://127.0.0.1:4213/lakes.html",
+    "viewport": "390x844"
+  },
+  {
+    "route": "home",
+    "breakpoint": "428x926",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/home-428x926.png",
+    "heroHeight": 983,
+    "mapHeight": 480,
+    "overflowX": 0,
+    "pageHeight": 1756,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 480,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 360
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html",
+    "viewport": "428x926"
+  },
+  {
+    "route": "payette",
+    "breakpoint": "428x926",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/payette-428x926.png",
+    "heroHeight": 497,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2473,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 16,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current Payette Lake marina view",
+        "visibility": "visible",
+        "w": 208
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 370
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph",
+        "visibility": "visible",
+        "w": 368
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=payette-lake",
+    "viewport": "428x926"
+  },
+  {
+    "route": "tahoe",
+    "breakpoint": "428x926",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/tahoe-428x926.png",
+    "heroHeight": 510,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2443,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 32,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current South Lake Tahoe shoreline view",
+        "visibility": "visible",
+        "w": 239
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 370
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph",
+        "visibility": "visible",
+        "w": 368
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-tahoe",
+    "viewport": "428x926"
+  },
+  {
+    "route": "catalog-lake",
+    "breakpoint": "428x926",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/catalog-lake-428x926.png",
+    "heroHeight": 497,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2431,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 16,
+        "size": 13.44,
+        "tag": "p",
+        "text": "LT Lake Cam — AI-tracked PTZ",
+        "visibility": "visible",
+        "w": 193
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 370
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph",
+        "visibility": "visible",
+        "w": 368
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-travis",
+    "viewport": "428x926"
+  },
+  {
+    "route": "directory",
+    "breakpoint": "428x926",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/directory-428x926.png",
+    "heroHeight": null,
+    "mapHeight": null,
+    "overflowX": 0,
+    "pageHeight": 15597,
+    "smallTargets": [],
+    "smallText": [],
+    "url": "http://127.0.0.1:4213/lakes.html",
+    "viewport": "428x926"
+  },
+  {
+    "route": "home",
+    "breakpoint": "768x1024",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/home-768x1024.png",
+    "heroHeight": 1111,
+    "mapHeight": 480,
+    "overflowX": 0,
+    "pageHeight": 1865,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 480,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 700
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html",
+    "viewport": "768x1024"
+  },
+  {
+    "route": "payette",
+    "breakpoint": "768x1024",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/payette-768x1024.png",
+    "heroHeight": 712,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2479,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 16,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current Payette Lake marina view",
+        "visibility": "visible",
+        "w": 208
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 710
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph",
+        "visibility": "visible",
+        "w": 708
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=payette-lake",
+    "viewport": "768x1024"
+  },
+  {
+    "route": "tahoe",
+    "breakpoint": "768x1024",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/tahoe-768x1024.png",
+    "heroHeight": 712,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2479,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 16,
+        "size": 13.44,
+        "tag": "p",
+        "text": "Current South Lake Tahoe shoreline view",
+        "visibility": "visible",
+        "w": 254
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 710
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph",
+        "visibility": "visible",
+        "w": 708
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-tahoe",
+    "viewport": "768x1024"
+  },
+  {
+    "route": "catalog-lake",
+    "breakpoint": "768x1024",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/catalog-lake-768x1024.png",
+    "heroHeight": 712,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 2479,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 16,
+        "size": 13.44,
+        "tag": "p",
+        "text": "LT Lake Cam — AI-tracked PTZ",
+        "visibility": "visible",
+        "w": 193
+      },
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 620,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 710
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph",
+        "visibility": "visible",
+        "w": 708
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-travis",
+    "viewport": "768x1024"
+  },
+  {
+    "route": "directory",
+    "breakpoint": "768x1024",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/directory-768x1024.png",
+    "heroHeight": null,
+    "mapHeight": null,
+    "overflowX": 0,
+    "pageHeight": 9429,
+    "smallTargets": [],
+    "smallText": [],
+    "url": "http://127.0.0.1:4213/lakes.html",
+    "viewport": "768x1024"
+  },
+  {
+    "route": "home",
+    "breakpoint": "1024x768",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/home-1024x768.png",
+    "heroHeight": 657,
+    "mapHeight": 440,
+    "overflowX": 0,
+    "pageHeight": 1269,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 440,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 613
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html",
+    "viewport": "1024x768"
+  },
+  {
+    "route": "payette",
+    "breakpoint": "1024x768",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/payette-1024x768.png",
+    "heroHeight": 958,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 1806,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 660,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 548
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph",
+        "visibility": "visible",
+        "w": 546
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      },
+      {
+        "display": "block",
+        "h": 23,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating Conditions",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 12,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 31,
+        "size": 12.48,
+        "tag": "strong",
+        "text": "Mon 8:00 AM · 7 mph WSW",
+        "visibility": "visible",
+        "w": 308
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=payette-lake",
+    "viewport": "1024x768"
+  },
+  {
+    "route": "tahoe",
+    "breakpoint": "1024x768",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/tahoe-1024x768.png",
+    "heroHeight": 958,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 1806,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 660,
+        "size": 12,
+        "tag": "div",
+        "text": "0 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 548
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "0 mph",
+        "visibility": "visible",
+        "w": 546
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      },
+      {
+        "display": "block",
+        "h": 23,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating Conditions",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 12,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 31,
+        "size": 12.48,
+        "tag": "strong",
+        "text": "Wed 4:00 AM · 0 mph",
+        "visibility": "visible",
+        "w": 417
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-tahoe",
+    "viewport": "1024x768"
+  },
+  {
+    "route": "catalog-lake",
+    "breakpoint": "1024x768",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/catalog-lake-1024x768.png",
+    "heroHeight": 958,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 1806,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 660,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 548
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph",
+        "visibility": "visible",
+        "w": 546
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      },
+      {
+        "display": "block",
+        "h": 23,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating Conditions",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 12,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 31,
+        "size": 12.48,
+        "tag": "strong",
+        "text": "Mon 8:00 AM · 12 mph S",
+        "visibility": "visible",
+        "w": 308
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-travis",
+    "viewport": "1024x768"
+  },
+  {
+    "route": "directory",
+    "breakpoint": "1024x768",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/directory-1024x768.png",
+    "heroHeight": null,
+    "mapHeight": null,
+    "overflowX": 0,
+    "pageHeight": 7470,
+    "smallTargets": [],
+    "smallText": [],
+    "url": "http://127.0.0.1:4213/lakes.html",
+    "viewport": "1024x768"
+  },
+  {
+    "route": "home",
+    "breakpoint": "1440x900",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/home-1440x900.png",
+    "heroHeight": 678,
+    "mapHeight": 540,
+    "overflowX": 0,
+    "pageHeight": 1390,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "block",
+        "h": 540,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 913
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html",
+    "viewport": "1440x900"
+  },
+  {
+    "route": "payette",
+    "breakpoint": "1440x900",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/payette-1440x900.png",
+    "heroHeight": 976,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 1808,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 684,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 795
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "7 mph",
+        "visibility": "visible",
+        "w": 793
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      },
+      {
+        "display": "block",
+        "h": 23,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating Conditions",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 12,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 31,
+        "size": 12.48,
+        "tag": "strong",
+        "text": "Mon 8:00 AM · 7 mph WSW",
+        "visibility": "visible",
+        "w": 555
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=payette-lake",
+    "viewport": "1440x900"
+  },
+  {
+    "route": "tahoe",
+    "breakpoint": "1440x900",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/tahoe-1440x900.png",
+    "heroHeight": 951,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 1783,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 684,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 795
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "5 mph",
+        "visibility": "visible",
+        "w": 793
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      },
+      {
+        "display": "block",
+        "h": 23,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating Conditions",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 12,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 31,
+        "size": 12.48,
+        "tag": "strong",
+        "text": "Mon 8:00 AM · 5 mph E",
+        "visibility": "visible",
+        "w": 555
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-tahoe",
+    "viewport": "1440x900"
+  },
+  {
+    "route": "catalog-lake",
+    "breakpoint": "1440x900",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/catalog-lake-1440x900.png",
+    "heroHeight": 976,
+    "mapHeight": 0,
+    "overflowX": 0,
+    "pageHeight": 1808,
+    "smallTargets": [],
+    "smallText": [
+      {
+        "display": "flex",
+        "h": 44,
+        "size": 12.48,
+        "tag": "a",
+        "text": "Source",
+        "visibility": "visible",
+        "w": 77
+      },
+      {
+        "display": "block",
+        "h": 684,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 795
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "12 mph",
+        "visibility": "visible",
+        "w": 793
+      },
+      {
+        "display": "block",
+        "h": 44,
+        "size": 12,
+        "tag": "div",
+        "text": "OpenStreetMap contributors, CARTO",
+        "visibility": "visible",
+        "w": 290
+      },
+      {
+        "display": "block",
+        "h": 23,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating Conditions",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 12,
+        "size": 10.56,
+        "tag": "span",
+        "text": "Boating",
+        "visibility": "visible",
+        "w": 81
+      },
+      {
+        "display": "block",
+        "h": 31,
+        "size": 12.48,
+        "tag": "strong",
+        "text": "Mon 8:00 AM · 12 mph S",
+        "visibility": "visible",
+        "w": 555
+      }
+    ],
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-travis",
+    "viewport": "1440x900"
+  },
+  {
+    "route": "directory",
+    "breakpoint": "1440x900",
+    "file": "/Users/patduds/Documents/Lake Pro/reports/ui-audit/screenshots/final/directory-1440x900.png",
+    "heroHeight": null,
+    "mapHeight": null,
+    "overflowX": 0,
+    "pageHeight": 6544,
+    "smallTargets": [],
+    "smallText": [],
+    "url": "http://127.0.0.1:4213/lakes.html",
+    "viewport": "1440x900"
+  }
+]

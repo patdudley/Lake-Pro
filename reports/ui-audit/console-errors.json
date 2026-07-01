@@ -1,0 +1,32 @@
+[
+  {
+    "route": "home",
+    "url": "http://127.0.0.1:4213/index.html",
+    "errorCount": 0,
+    "errors": []
+  },
+  {
+    "route": "payette",
+    "url": "http://127.0.0.1:4213/index.html?spot=payette-lake",
+    "errorCount": 0,
+    "errors": []
+  },
+  {
+    "route": "tahoe",
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-tahoe",
+    "errorCount": 0,
+    "errors": []
+  },
+  {
+    "route": "catalog-lake",
+    "url": "http://127.0.0.1:4213/index.html?spot=lake-travis",
+    "errorCount": 0,
+    "errors": []
+  },
+  {
+    "route": "directory",
+    "url": "http://127.0.0.1:4213/lakes.html",
+    "errorCount": 0,
+    "errors": []
+  }
+]
