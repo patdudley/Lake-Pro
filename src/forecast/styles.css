@@ -864,8 +864,8 @@ body.home-mode .hero-copy h1 {
 .home-map-marker {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
   border: 0;
   appearance: none;
   background: transparent;
@@ -881,6 +881,11 @@ body.home-mode .hero-copy h1 {
   border-radius: 999px;
   background: linear-gradient(135deg, var(--magenta), var(--blue), var(--cyan));
   box-shadow: 0 10px 18px rgba(7, 25, 82, 0.24);
+}
+
+.maplibregl-ctrl-attrib,
+.maplibregl-ctrl-attrib * {
+  font-size: 0.875rem !important;
 }
 
 .home-map-marker:hover span,
@@ -2431,7 +2436,7 @@ h2 {
 
   .home-feature-card small {
     bottom: 20px;
-    font-size: 0.86rem;
+    font-size: 0.875rem;
   }
 
   .home-camera-control {
@@ -2807,5 +2812,321 @@ h2 {
 
   .score-track {
     grid-column: 1 / -1;
+  }
+}
+
+/* UI audit cleanup: keep layouts bounded and touch-friendly across breakpoints. */
+html,
+body {
+  overflow-x: clip;
+}
+
+img,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+.brand-link {
+  min-height: 44px;
+}
+
+.spot-search input,
+.home-search input {
+  min-height: 44px;
+}
+
+.camera-card .section-heading a,
+.home-spot-heading a,
+.directory-home-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+.home-camera-control,
+.timeline-play-button {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+}
+
+.home-camera-dots {
+  pointer-events: auto;
+}
+
+button.home-camera-dot {
+  position: relative;
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px !important;
+  height: 44px !important;
+  place-items: center;
+  background: transparent;
+}
+
+button.home-camera-dot::before {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.58);
+  content: "";
+}
+
+button.home-camera-dot[data-active="true"] {
+  width: 44px !important;
+  background: transparent;
+}
+
+button.home-camera-dot[data-active="true"]::before {
+  width: 22px;
+  background: #ffffff;
+}
+
+.timelapse-control button {
+  min-height: 44px;
+  font-size: 0.875rem;
+}
+
+.timelapse-control input {
+  height: 44px;
+}
+
+.wind-probe {
+  min-height: 44px;
+  font-size: 0.875rem;
+}
+
+.maplibregl-ctrl button {
+  width: 44px !important;
+  height: 44px !important;
+}
+
+.home-search-option small,
+.home-map-copy p,
+.home-map-popup span,
+.home-lake-copy small,
+.spot-page-heading p,
+.section-heading p,
+.section-heading a,
+.forecast-report-summary small,
+.rating-grid span,
+.directory-card-media span,
+.directory-map-name,
+.directory-copy > p:first-child,
+.lake-directory-group h3,
+.directory-lake-copy small,
+.forecast-day span,
+.forecast-day em,
+.home-dashboard .forecast-day em,
+.camera-live-pill,
+.home-live-pill {
+  font-size: 0.875rem;
+}
+
+body.home-mode .site-hero,
+body.home-mode .hero-copy,
+.home-feature-card,
+.home-map-panel,
+.home-us-map,
+.home-spot-rail,
+.home-spot-cards {
+  min-width: 0;
+}
+
+body.home-mode .site-hero {
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+}
+
+.home-feature-card a {
+  aspect-ratio: 16 / 8.8;
+  height: auto;
+  max-height: 330px;
+}
+
+.home-lake-link {
+  min-width: 0;
+}
+
+.map-report-bubble .condition-grade-metric {
+  min-height: 96px;
+}
+
+.map-report-bubble .condition-grade-metric strong {
+  display: grid;
+  min-height: 1em;
+  place-items: center;
+}
+
+.map-report-bubble .score-track {
+  height: 8px;
+}
+
+@media (max-width: 820px) {
+  .shell {
+    padding: 14px 14px 34px;
+  }
+
+  .site-hero,
+  body.home-mode .site-hero {
+    gap: 16px;
+    padding: 18px 18px 22px;
+  }
+
+  body.home-mode .site-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "nav"
+      "copy"
+      "feature"
+      "spots";
+  }
+
+  body.home-mode .hero-copy {
+    margin-top: 10px;
+  }
+
+  body.home-mode .hero-copy h1 {
+    max-width: 12ch;
+    font-size: clamp(2.65rem, 11.4vw, 3.35rem);
+    line-height: 1.03;
+  }
+
+  .hero-copy p {
+    max-width: 26rem;
+    line-height: 1.42;
+  }
+
+  .brand-link img {
+    width: clamp(150px, 44vw, 210px);
+  }
+
+  .spot-switcher select,
+  .spot-search {
+    min-height: 44px;
+  }
+
+  .home-search {
+    min-height: 58px;
+  }
+
+  .home-search-results {
+    z-index: 300;
+  }
+
+  .home-feature-card a {
+    height: auto;
+    aspect-ratio: 16 / 9.8;
+  }
+
+  .home-live-pill {
+    max-width: calc(100% - 28px);
+    white-space: normal;
+  }
+
+  .home-camera-control {
+    width: 44px;
+    height: 44px;
+  }
+
+  .home-camera-dots {
+    bottom: 4px;
+  }
+
+  .home-spot-cards {
+    grid-auto-columns: minmax(214px, 76vw);
+    margin-right: -18px;
+    padding-right: 18px;
+  }
+
+  .home-lake-link img {
+    height: 124px;
+  }
+
+  .home-map-panel {
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .home-map-copy h2 {
+    max-width: none;
+    font-size: clamp(2rem, 8vw, 2.65rem);
+    line-height: 1.02;
+  }
+
+  .home-us-map {
+    height: min(72vh, 480px);
+    min-height: 360px;
+  }
+
+  .map {
+    height: min(78vh, 620px);
+    min-height: 520px;
+  }
+
+  .map-report-bubble {
+    width: min(132px, calc(100% - 32px));
+    margin: 0 0 16px 16px;
+    padding: 10px;
+  }
+
+  .map-report-bubble .condition-grade-metric {
+    min-height: 76px;
+  }
+
+  .map-report-bubble .condition-grade-metric strong {
+    font-size: 2.35rem;
+  }
+
+  .map-report-bubble .verdict-main span {
+    font-size: 0.875rem;
+  }
+
+  .timelapse-control,
+  .timelapse-control.has-back {
+    grid-template-columns: 44px minmax(0, 1fr) minmax(88px, auto);
+    border-radius: 14px;
+  }
+
+  .timeline-play-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .timelapse-control input {
+    grid-column: 2 / -1;
+  }
+
+  .timelapse-control strong {
+    font-size: 0.875rem;
+    padding: 11px 12px;
+  }
+
+  .timeline-day-button {
+    min-width: 88px;
+  }
+
+  .forecast-strip {
+    grid-auto-columns: 108px;
+  }
+
+  .forecast-day {
+    min-height: 180px;
+    padding: 12px 8px;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1180px) {
+  body.home-mode .site-hero {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  body.home-mode .hero-copy h1 {
+    font-size: clamp(2.65rem, 4.3vw, 3.4rem);
+  }
+
+  .home-map-panel {
+    grid-template-columns: minmax(0, 0.44fr) minmax(0, 1fr);
   }
 }
