@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All Lakes | Lake Pro</title>
+    <meta name="description" content="Browse Lake Pro wake-sports lake reports alphabetically.">
+    <link rel="icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="src/forecast/styles.css?v=osm-shorelines-2">
+  </head>
+  <body class="lake-directory-mode">
+    <main class="shell lake-directory-shell">
+      <section class="directory-hero" aria-labelledby="directoryTitle">
+        <nav class="top-nav" aria-label="Site navigation">
+          <a class="brand-link" href="index.html">
+            <img src="assets/logo.png?v=transparent-2" alt="Lake Pro">
+          </a>
+          <a class="directory-home-link" href="index.html">Home</a>
+        </nav>
+        <div class="directory-copy">
+          <p>Lake directory</p>
+          <h1 id="directoryTitle">All Lake Reports</h1>
+          <span class="hero-accent" aria-hidden="true"></span>
+          <p>Browse every Lake Pro spot alphabetically. Camera-ready lakes show the latest lake-view screenshot; the rest use a live report preview.</p>
+        </div>
+      </section>
+
+      <section class="lake-directory-panel" aria-labelledby="lakeDirectoryHeading">
+        <div class="section-heading">
+          <div>
+            <h2 id="lakeDirectoryHeading">A-Z Lakes</h2>
+            <p id="lakeDirectoryCount">Loading lake reports</p>
+          </div>
+        </div>
+        <div class="lake-directory-list" id="lakeDirectoryList"></div>
+      </section>
+    </main>
+    <script type="module" src="src/forecast/lakes.js"></script>
+  </body>
+</html>

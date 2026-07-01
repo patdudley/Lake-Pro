@@ -1,5 +1,6 @@
 import { lakeSpots } from "../spots/index.js";
 import { windFrameForSpot } from "../map/windFrameSource.js";
+import { cameraForSpot } from "./cameras.js";
 
 let lakeMap = null;
 let homeMap = null;
@@ -57,42 +58,6 @@ const mapViewBounds = {
 const defaultSpotSlug = "payette-lake";
 const DAYLIGHT_START_HOUR = 6;
 const DAYLIGHT_END_HOUR = 20;
-
-const approvedCameraOverrides = {
-  "lake-tahoe": {
-    title: "Live Lake View",
-    description: "Current South Lake Tahoe shoreline view",
-    sourceUrl: "https://edgewoodtahoe.com/webcam/",
-    imageUrl: "assets/edgewood-tahoe-camera.png",
-    alt: "Edgewood Tahoe webcam screenshot over Lake Tahoe",
-  },
-  "payette-lake": {
-    title: "Live Lake View",
-    description: "Current Payette Lake marina view",
-    sourceUrl: "https://milehighmarina.com/webcams/",
-    imageUrl: "assets/mile-high-marina-camera.png",
-    alt: "Mile High Marina webcam screenshot over Payette Lake",
-  },
-};
-
-function cameraAssetUrl(spot) {
-  if (!spot?.slug) return "assets/hero-image.jpg";
-  return `assets/cameras/${spot.slug}.png`;
-}
-
-function cameraForSpot(spot) {
-  if (!spot) return null;
-  const override = approvedCameraOverrides[spot.slug];
-  if (override) return override;
-  if (!spot.webcam?.url) return null;
-  return {
-    title: "Live Lake View",
-    description: spot.webcam.label || `Current ${spot.name} lake view`,
-    sourceUrl: spot.webcam.url,
-    imageUrl: cameraAssetUrl(spot),
-    alt: `${spot.name} webcam screenshot`,
-  };
-}
 
 const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   label: index === 0 ? "Today" : new Date(Date.now() + index * 86400000).toLocaleDateString("en-US", { weekday: "short" }),
