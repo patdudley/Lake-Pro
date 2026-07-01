@@ -343,9 +343,9 @@ body.spot-mode .hero-copy {
     grid-template-areas:
       "nav"
       "title"
-      "camera"
       "report"
-      "weather";
+      "weather"
+      "camera";
     gap: 18px;
     align-self: stretch;
     min-height: 0;
@@ -453,6 +453,10 @@ body.spot-mode .hero-copy {
   display: none;
 }
 
+.mobile-camera-slot {
+  display: none;
+}
+
 .today-weather-header {
   display: flex;
   align-items: center;
@@ -517,66 +521,33 @@ body.spot-mode .hero-copy {
   stroke-width: 4;
 }
 
-.today-weather-days {
+.today-weather-metrics {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(74px, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin-top: 8px;
-  overflow-x: auto;
-  padding-bottom: 2px;
-  scrollbar-width: thin;
 }
 
-.today-weather-day {
-  min-width: 74px;
-  border: 1px solid transparent;
-  border-radius: 13px;
+.today-weather-metrics span {
+  min-width: 0;
+  border: 1px solid rgba(17, 188, 233, 0.18);
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.72);
-  padding: 9px 7px;
-  text-align: center;
-}
-
-.today-weather-day:first-child {
-  border-color: rgba(7, 25, 82, 0.08);
-  background: rgba(6, 22, 82, 0.055);
-}
-
-.today-weather-day strong,
-.today-weather-day span,
-.today-weather-day em {
-  display: block;
-}
-
-.today-weather-day strong {
   color: var(--text);
-  font-size: 0.75rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.today-weather-day .weather-icon {
-  width: 42px;
-  height: 32px;
-  margin: 7px auto 5px;
-}
-
-.today-weather-day span {
-  color: var(--text);
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   font-weight: 900;
+  line-height: 1.2;
+  padding: 10px 11px;
 }
 
-.today-weather-day span small {
+.today-weather-metrics b {
+  display: block;
+  margin-bottom: 3px;
   color: var(--muted);
-}
-
-.today-weather-day em {
-  margin-top: 3px;
-  font-size: 1.05rem;
-  font-style: normal;
+  font-size: 0.68rem;
   font-weight: 950;
-  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .today-weather-card p {
@@ -2448,8 +2419,17 @@ h2 {
     margin-top: 0;
   }
 
-  body.spot-mode .rating-card {
+  body.spot-mode .mobile-camera-slot {
+    display: block;
     order: 6;
+  }
+
+  body.spot-mode .mobile-camera-slot .camera-card {
+    display: block;
+  }
+
+  body.spot-mode .rating-card {
+    order: 7;
   }
 
   .site-hero {
@@ -2596,10 +2576,9 @@ h2 {
     overflow-x: hidden;
   }
 
-  .today-weather-days {
-    grid-auto-columns: minmax(82px, 1fr);
-    margin-right: -6px;
-    padding-right: 6px;
+  .today-weather-metrics {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
   }
 
   .hero-copy h1 {

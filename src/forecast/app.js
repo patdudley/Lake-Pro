@@ -335,23 +335,14 @@ function todayWeatherSummary(latest = {}, hourlyItems = []) {
 
 function renderTodayWeatherCard(target, bundle = {}) {
   if (!target) return;
-  const days = (bundle.ten_day || []).map((day) => heatAdjustedDay(day)).slice(0, 8);
   const hourlyItems = todayHourlyWeather(bundle);
-  const latest = heatAdjustedDay(bundle.latest || days[0] || {});
+  const latest = heatAdjustedDay(bundle.latest || bundle.ten_day?.[0] || {});
   const high = numberValue(latest.temperature_2m_max);
   const low = numberValue(latest.temperature_2m_min);
   const summary = todayWeatherSummary(latest, hourlyItems);
-  const cards = days.map((day, index) => {
-    const grade = gradeValue(day.grade);
-    return `
-      <div class="today-weather-day">
-        <strong>${shortDayLabel(day.date, index)}</strong>
-        <i class="weather-icon ${weatherIconClass(day)}" aria-hidden="true"></i>
-        <span>${Math.round(day.temperature_2m_max ?? 0)}&deg; <small>${Math.round(day.temperature_2m_min ?? 0)}&deg;</small></span>
-        <em class="grade-letter" data-grade="${grade}">${grade || "--"}</em>
-      </div>
-    `;
-  }).join("");
+  const condition = latest.short_forecast || hourlyItems.find((item) => item.short_forecast)?.short_forecast || "Live weather";
+  const wind = roundedMph(latest.wind_speed_max_mph);
+  const precip = numberValue(latest.precipitation_probability_max);
 
   target.innerHTML = `
     <div class="today-weather-header">
@@ -359,7 +350,11 @@ function renderTodayWeatherCard(target, bundle = {}) {
       <strong>${high == null || low == null ? "Live" : `${Math.round(high)}&deg; / ${Math.round(low)}&deg;`}</strong>
     </div>
     ${weatherChartSvg(hourlyItems)}
-    <div class="today-weather-days" aria-label="Daily weather outlook">${cards}</div>
+    <div class="today-weather-metrics" aria-label="Today weather details">
+      <span><b>Condition</b>${condition}</span>
+      ${wind ? `<span><b>Wind</b>${wind}</span>` : ""}
+      ${precip == null ? "" : `<span><b>Precip</b>${Math.round(precip)}%</span>`}
+    </div>
     ${summary ? `<p>${summary}</p>` : ""}
   `;
 }
@@ -367,6 +362,23 @@ function renderTodayWeatherCard(target, bundle = {}) {
 function renderTodayWeather(bundle = {}) {
   renderTodayWeatherCard(document.getElementById("todayWeatherCard"), bundle);
   renderTodayWeatherCard(document.getElementById("mobileTodayWeatherCard"), bundle);
+}
+
+function placeCameraCard() {
+  const cameraCard = document.getElementById("cameraCard");
+  if (!cameraCard) return;
+  const mobileSlot = document.getElementById("mobileCameraSlot");
+  const desktopWeather = document.getElementById("todayWeatherCard");
+  const useMobileSlot = window.matchMedia("(max-width: 820px)").matches;
+
+  if (useMobileSlot && mobileSlot) {
+    if (cameraCard.parentElement !== mobileSlot) mobileSlot.appendChild(cameraCard);
+    return;
+  }
+
+  if (desktopWeather?.parentElement && cameraCard.parentElement !== desktopWeather.parentElement) {
+    desktopWeather.insertAdjacentElement("afterend", cameraCard);
+  }
 }
 
 function gradeValue(grade) {
@@ -935,6 +947,7 @@ function renderSpot(spot) {
   if (pageSpotName) pageSpotName.textContent = spot.name;
   if (pageSpotLocation) pageSpotLocation.textContent = spot.location;
   renderCameraCard(spot);
+  placeCameraCard();
   loadLiveSpotData(spot);
   loadWindTimelapse(spot);
   loadLakeShoreline(spot);
@@ -2236,6 +2249,7 @@ function initMap(activeSpot) {
   window.setTimeout(resizeMapToPanel, 250);
   window.setTimeout(resizeMapToPanel, 1000);
   window.addEventListener("resize", resizeMapToPanel);
+  window.addEventListener("resize", placeCameraCard);
   lakeMap.on("click", (event) => {
     ensureWindProbeMarker();
     if (windProbeMarker) windProbeMarker.setLngLat(event.lngLat);
