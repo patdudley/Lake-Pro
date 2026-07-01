@@ -14,8 +14,15 @@ Outputs:
 - `data/live/spots/*.json` for the full Lake Pro catalog
 - `data/live/wind_frames/*.json`
 - `data/live/map_layers/payette_*.geojson`
+- `data/live/map_layers/*_shoreline.geojson` for deterministic lake-surface overlays
 - `assets/cameras/{spot-slug}.png` for catalog webcam sources when Node + Playwright are available
 - `reports/camera-audit.md` and `reports/camera-audit.json` showing captured, failed, and missing camera sources
+
+Refresh shoreline masks manually:
+
+```sh
+python3 scripts/refresh_shoreline_masks.py --only-missing
+```
 
 Install macOS schedule. This refreshes weather data and lake camera screenshots
 hourly from 7:00 AM through 10:00 PM local time:

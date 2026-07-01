@@ -1,5 +1,5 @@
 // Generated from the Lake Pro launch catalog attachment.
-// Tahoe, Payette, and selected launch lakes have checked-in shoreline masks.
+// Launch lakes have checked-in shoreline masks for deterministic map overlays.
 export const lakeCatalog = [
   {
     "rank": "1",
