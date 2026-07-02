@@ -1201,12 +1201,6 @@ function formatFrameTimeShort(time) {
   });
 }
 
-function windKt(speedMph) {
-  const speed = Number(speedMph);
-  if (!Number.isFinite(speed)) return 0;
-  return Math.max(0, Math.round(speed * 0.868976));
-}
-
 function formatFrameDayLabel(time) {
   if (!time) return "";
   const date = new Date(time);
@@ -1359,25 +1353,6 @@ function renderTimelineDayLabels() {
   }));
   labels.hidden = days.length < 2;
   updateTimelineDaySelection();
-}
-
-function renderTimelineTimeTicks(frame) {
-  const container = document.getElementById("windTimeTicks");
-  if (!container) return;
-  const selectedDay = frameDateKey(frame?.time);
-  const dayFrames = windFrames.filter((item) => frameDateKey(item?.time) === selectedDay);
-  if (!dayFrames.length) {
-    container.replaceChildren();
-    return;
-  }
-  const start = dayFrames[0];
-  const middle = dayFrames[Math.floor((dayFrames.length - 1) / 2)];
-  const end = dayFrames[dayFrames.length - 1];
-  container.replaceChildren(...[start, middle, end].map((item) => {
-    const span = document.createElement("span");
-    span.textContent = formatFrameTimeShort(item.time).replace(":00", "");
-    return span;
-  }));
 }
 
 function liveDateKey(spot = currentSpot) {
@@ -2278,7 +2253,6 @@ function renderWindFrame(index = windFrameIndex) {
     slider.value = String(windFrameIndex);
   }
   updateTimelineDaySelection();
-  renderTimelineTimeTicks(frame);
   if (backButton) {
     const currentDay = liveDateKey() || frameDateKey(windFrames[0]?.time);
     const selectedDay = frameDateKey(frame?.time);
@@ -2295,7 +2269,9 @@ function renderWindFrame(index = windFrameIndex) {
   }
 
   if (label) {
-    label.textContent = `${formatFrameTimeShort(frame.time)} · ${windKt(frame.wind_speed_mph)} kt`;
+    const speed = Number(frame.wind_speed_mph);
+    const mph = Number.isFinite(speed) ? Math.max(0, Math.round(speed)) : 0;
+    label.textContent = `${formatFrameTimeShort(frame.time)} · ${mph} mph`;
   }
   renderCondition(currentLiveLatest, frame);
 
