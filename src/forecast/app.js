@@ -1,6 +1,6 @@
 import { lakeSpots } from "../spots/index.js";
 import { windFrameForSpot } from "../map/windFrameSource.js";
-import { cameraForSpot } from "./cameras.js";
+import { cameraForSpot } from "./cameras.js?v=live-camera-audit-20260702";
 
 let lakeMap = null;
 let homeMap = null;

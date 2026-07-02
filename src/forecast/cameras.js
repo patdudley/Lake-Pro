@@ -17,10 +17,12 @@ const approvedCameraOverrides = {
 
 const unusableCameraSlugs = new Set([
   "deer-creek-reservoir",
+  "jordanelle-reservoir",
   "lake-lanier",
   "lake-mead",
   "lake-minnetonka",
   "lake-norman",
+  "lake-of-the-ozarks",
   "lake-shasta",
   "okanagan-lake",
   "smith-mountain-lake",
