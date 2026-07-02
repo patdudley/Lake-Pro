@@ -277,15 +277,17 @@ function todayHourlyWeather(bundle = {}) {
 function weatherChartSvg(hourlyItems = []) {
   const samples = hourlyItems.length ? hourlyItems : [{ temp: 0, label: "" }];
   const width = 720;
-  const height = 150;
-  const chartTop = 20;
-  const chartBottom = 112;
-  const chartLeft = 16;
-  const chartRight = width - 16;
+  const height = 220;
+  const chartTop = 30;
+  const chartBottom = 168;
+  const chartLeft = 58;
+  const chartRight = width - 24;
   const temps = samples.map((item) => item.temp);
-  const minTemp = Math.min(...temps);
-  const maxTemp = Math.max(...temps);
-  const span = Math.max(6, maxTemp - minTemp);
+  const rawMinTemp = Math.min(...temps);
+  const rawMaxTemp = Math.max(...temps);
+  const minTemp = Math.floor(rawMinTemp / 5) * 5 - 2;
+  const maxTemp = Math.ceil(rawMaxTemp / 5) * 5 + 2;
+  const span = Math.max(8, maxTemp - minTemp);
   const points = samples.map((item, index) => {
     const x = samples.length === 1
       ? width / 2
@@ -295,22 +297,38 @@ function weatherChartSvg(hourlyItems = []) {
   });
   const line = points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ");
   const area = `${line} L${points.at(-1).x.toFixed(1)} ${chartBottom} L${points[0].x.toFixed(1)} ${chartBottom} Z`;
-  const labelEvery = Math.max(1, Math.ceil(points.length / 7));
+  const tickValues = [maxTemp, Math.round((maxTemp + minTemp) / 2), minTemp];
+  const gridLines = tickValues.map((temp) => {
+    const y = chartBottom - ((temp - minTemp) / span) * (chartBottom - chartTop);
+    return `
+      <line class="weather-grid-line" x1="${chartLeft}" x2="${chartRight}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"></line>
+      <text class="weather-axis-label" x="12" y="${(y + 5).toFixed(1)}">${Math.round(temp)}&deg;</text>
+    `;
+  }).join("");
+  const labelEvery = Math.max(1, Math.ceil(points.length / 6));
   const labels = points
     .filter((_, index) => index % labelEvery === 0 || index === points.length - 1)
     .map((point) => `
-      <text x="${point.x.toFixed(1)}" y="142" text-anchor="middle">${point.label}</text>
+      <text class="weather-time-label" x="${point.x.toFixed(1)}" y="205" text-anchor="middle">${point.label}</text>
     `).join("");
   const tempLabels = points
     .filter((_, index) => index % Math.max(2, labelEvery * 2) === 0 || index === points.length - 1)
     .map((point) => `
-      <text class="weather-temp-label" x="${point.x.toFixed(1)}" y="${Math.max(12, point.y - 8).toFixed(1)}" text-anchor="middle">${Math.round(point.temp)}</text>
+      <text class="weather-temp-label" x="${point.x.toFixed(1)}" y="${Math.max(16, point.y - 11).toFixed(1)}" text-anchor="middle">${Math.round(point.temp)}&deg;</text>
+    `).join("");
+  const markers = points
+    .filter((_, index) => index % Math.max(2, labelEvery) === 0 || index === points.length - 1)
+    .map((point) => `
+      <circle class="weather-point" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="4"></circle>
     `).join("");
 
   return `
     <svg class="today-weather-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Hourly temperature chart">
+      <rect class="weather-chart-bg" x="0" y="0" width="${width}" height="${height}" rx="22"></rect>
+      ${gridLines}
       <path class="today-weather-area" d="${area}"></path>
       <path class="today-weather-line" d="${line}"></path>
+      ${markers}
       ${tempLabels}
       ${labels}
     </svg>
@@ -1017,6 +1035,22 @@ function formatFrameTime(time) {
   });
 }
 
+function formatFrameTimeShort(time) {
+  if (!time) return "Pending";
+  const date = new Date(time);
+  if (Number.isNaN(date.getTime())) return String(time);
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+function windKt(speedMph) {
+  const speed = Number(speedMph);
+  if (!Number.isFinite(speed)) return 0;
+  return Math.max(0, Math.round(speed * 0.868976));
+}
+
 function formatFrameDayLabel(time) {
   if (!time) return "";
   const date = new Date(time);
@@ -1057,6 +1091,11 @@ function updateTimelineDaySelection() {
     const isSelected = button.dataset.day === selectedDay;
     button.dataset.active = isSelected ? "true" : "false";
     button.setAttribute("aria-current", isSelected ? "date" : "false");
+    if (isSelected) {
+      window.requestAnimationFrame(() => {
+        button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+      });
+    }
   });
 }
 
@@ -1078,6 +1117,25 @@ function renderTimelineDayLabels() {
   }));
   labels.hidden = days.length < 2;
   updateTimelineDaySelection();
+}
+
+function renderTimelineTimeTicks(frame) {
+  const container = document.getElementById("windTimeTicks");
+  if (!container) return;
+  const selectedDay = frameDateKey(frame?.time);
+  const dayFrames = windFrames.filter((item) => frameDateKey(item?.time) === selectedDay);
+  if (!dayFrames.length) {
+    container.replaceChildren();
+    return;
+  }
+  const start = dayFrames[0];
+  const middle = dayFrames[Math.floor((dayFrames.length - 1) / 2)];
+  const end = dayFrames[dayFrames.length - 1];
+  container.replaceChildren(...[start, middle, end].map((item) => {
+    const span = document.createElement("span");
+    span.textContent = formatFrameTimeShort(item.time).replace(":00", "");
+    return span;
+  }));
 }
 
 function liveDateKey(spot = currentSpot) {
@@ -1981,6 +2039,7 @@ function renderWindFrame(index = windFrameIndex) {
     slider.value = String(windFrameIndex);
   }
   updateTimelineDaySelection();
+  renderTimelineTimeTicks(frame);
   if (backButton) {
     const currentDay = liveDateKey() || frameDateKey(windFrames[0]?.time);
     const selectedDay = frameDateKey(frame?.time);
@@ -1997,7 +2056,7 @@ function renderWindFrame(index = windFrameIndex) {
   }
 
   if (label) {
-    label.textContent = `${formatFrameTime(frame.time)} · ${Math.round(frame.wind_speed_mph || 0)} mph ${frame.wind_direction_label || ""}`.trim();
+    label.textContent = `${formatFrameTimeShort(frame.time)} · ${windKt(frame.wind_speed_mph)} kt`;
   }
   renderCondition(currentLiveLatest, frame);
 

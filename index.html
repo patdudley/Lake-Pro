@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-    <link rel="stylesheet" href="src/forecast/styles.css?v=ui-audit-20260701">
+    <link rel="stylesheet" href="src/forecast/styles.css?v=mobile-timeline-20260702">
   </head>
   <body>
     <main class="shell">
@@ -132,6 +132,7 @@
           <button id="windBackButton" class="timeline-day-button" type="button" aria-label="Previous wind forecast day">Prev day</button>
           <button id="windPlayButton" class="timeline-play-button" type="button" aria-label="Play wind timeline"><span>Play</span></button>
           <input id="windFrameSlider" type="range" min="0" max="0" value="0" step="1" aria-label="Wind forecast time">
+          <div id="windTimeTicks" class="timeline-time-ticks" aria-hidden="true"></div>
           <div id="windDayLabels" class="timeline-day-labels" aria-label="Wind forecast days"></div>
           <button id="windForwardButton" class="timeline-day-button" type="button" aria-label="Next wind forecast day">Next day</button>
           <strong id="windFrameLabel">Wind timeline pending</strong>
@@ -154,6 +155,6 @@
       </section>
     </main>
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-    <script type="module" src="src/forecast/app.js?v=osm-shorelines-2"></script>
+    <script type="module" src="src/forecast/app.js?v=mobile-timeline-20260702"></script>
   </body>
 </html>
