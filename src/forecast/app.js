@@ -651,6 +651,55 @@ function spotReportUrl(spot) {
   return `?spot=${spot.slug}`;
 }
 
+function seededNumber(seed, offset = 0) {
+  const text = `${seed || "lake"}-${offset}`;
+  let hash = 2166136261;
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0) / 4294967295;
+}
+
+function lakeMapPreviewDataUri(spot) {
+  const lakePoints = Array.from({ length: 18 }, (_, index) => {
+    const theta = (Math.PI * 2 * index) / 18;
+    const radiusX = 34 + seededNumber(spot?.slug, index) * 16;
+    const radiusY = 22 + seededNumber(spot?.name, index) * 11;
+    const x = 66 + Math.cos(theta) * radiusX + (seededNumber(spot?.location, index) - 0.5) * 8;
+    const y = 44 + Math.sin(theta) * radiusY + (seededNumber(spot?.slug, index + 40) - 0.5) * 7;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+  const routeOffset = Math.round(seededNumber(spot?.slug, 90) * 24);
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 88" role="img" aria-label="${spot?.name || "Lake"} map preview">
+      <defs>
+        <linearGradient id="water" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#17c0e8"/>
+          <stop offset="0.52" stop-color="#1167ff"/>
+          <stop offset="1" stop-color="#f20bc6"/>
+        </linearGradient>
+        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2.2"/>
+        </filter>
+      </defs>
+      <rect width="132" height="88" rx="10" fill="#f8fbff"/>
+      <path d="M-12 69 C18 56 28 70 58 58 S101 54 145 39" fill="none" stroke="#dfe8f3" stroke-width="3"/>
+      <path d="M-8 28 C20 16 39 22 63 18 S104 12 142 18" fill="none" stroke="#edf3f8" stroke-width="10"/>
+      <polygon points="${lakePoints}" fill="url(#water)" opacity="0.92"/>
+      <polygon points="${lakePoints}" fill="none" stroke="#ffffff" stroke-opacity="0.82" stroke-width="1.5"/>
+      <g stroke="#fff" stroke-linecap="round" stroke-width="2" opacity="0.55" filter="url(#soft)">
+        <path d="M${18 + routeOffset} 27 l25 -10"/>
+        <path d="M${31 + routeOffset} 48 l31 -13"/>
+        <path d="M${15 + routeOffset} 63 l22 -8"/>
+      </g>
+      <circle cx="72" cy="44" r="10" fill="#061848" opacity="0.88"/>
+      <path d="M67 45 h12 m0 0 -4 -4 m4 4 -4 4" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `.trim().replace(/\s+/g, " ");
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
 function renderHomeLakeLinks() {
   const container = document.getElementById("homeLakeLinks");
   if (!container) return;
@@ -662,17 +711,19 @@ function renderHomeLakeLinks() {
     link.className = "home-lake-link";
     link.href = spotReportUrl(spot);
     const camera = cameraForSpot(spot);
+    const fallbackPreview = lakeMapPreviewDataUri(spot);
     link.dataset.name = `${spot.name} ${spot.location}`.toLowerCase();
+    link.dataset.preview = camera ? "camera" : "map";
     link.innerHTML = `
       <span class="home-lake-copy">
         <b>${spot.name}</b>
         <small>${spot.location}</small>
         <em><strong class="grade-letter">--</strong> Loading</em>
       </span>
-      <img src="${camera?.imageUrl || "assets/hero-image.jpg"}" alt="${spot.name} preview">
+      <img src="${camera?.imageUrl || fallbackPreview}" alt="${spot.name} ${camera ? "camera" : "live map"} preview">
     `;
     const image = link.querySelector("img");
-    if (image) image.onerror = () => { image.src = "assets/hero-image.jpg"; };
+    if (image) image.onerror = () => { image.src = fallbackPreview; };
     return link;
   }));
   hydrateHomeLakeCards();
