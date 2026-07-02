@@ -1115,12 +1115,97 @@ function formatFrameDayLabel(time) {
 
 function frameDateKey(time) {
   if (!time) return "";
+  const localDate = String(time).match(/^(\d{4}-\d{2}-\d{2})/);
+  if (localDate) return localDate[1];
   const date = new Date(time);
   if (Number.isNaN(date.getTime())) return "";
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+function normalizeDegrees(value) {
+  return ((value % 360) + 360) % 360;
+}
+
+function dayOfYear(dateKey) {
+  const match = String(dateKey || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return 1;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const date = Date.UTC(year, month - 1, day);
+  const start = Date.UTC(year, 0, 0);
+  return Math.floor((date - start) / 86400000);
+}
+
+function timeZoneOffsetHours(dateKey, timeZone) {
+  if (!timeZone) return 0;
+  const match = String(dateKey || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return 0;
+  const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12));
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    timeZoneName: "shortOffset",
+  }).formatToParts(date);
+  const value = parts.find((part) => part.type === "timeZoneName")?.value || "";
+  const offset = value.match(/GMT([+-]\d{1,2})(?::(\d{2}))?/);
+  if (!offset) return 0;
+  const sign = offset[1].startsWith("-") ? -1 : 1;
+  const hours = Math.abs(Number(offset[1]));
+  const minutes = Number(offset[2] || 0) / 60;
+  return sign * (hours + minutes);
+}
+
+function sunriseHourForDate(dateKey, spot = currentSpot) {
+  const latitude = Number(spot?.latitude);
+  const longitude = Number(spot?.longitude);
+  if (!dateKey || !Number.isFinite(latitude) || !Number.isFinite(longitude)) return DAYLIGHT_START_HOUR;
+
+  const zenith = 90.833;
+  const n = dayOfYear(dateKey);
+  const lngHour = longitude / 15;
+  const t = n + ((6 - lngHour) / 24);
+  const meanAnomaly = (0.9856 * t) - 3.289;
+  const trueLongitude = normalizeDegrees(
+    meanAnomaly
+    + (1.916 * Math.sin(meanAnomaly * Math.PI / 180))
+    + (0.020 * Math.sin(2 * meanAnomaly * Math.PI / 180))
+    + 282.634
+  );
+  let rightAscension = Math.atan(0.91764 * Math.tan(trueLongitude * Math.PI / 180)) * 180 / Math.PI;
+  rightAscension = normalizeDegrees(rightAscension);
+  rightAscension += Math.floor(trueLongitude / 90) * 90 - Math.floor(rightAscension / 90) * 90;
+  rightAscension /= 15;
+
+  const sinDec = 0.39782 * Math.sin(trueLongitude * Math.PI / 180);
+  const cosDec = Math.cos(Math.asin(sinDec));
+  const cosHour = (
+    Math.cos(zenith * Math.PI / 180)
+    - (sinDec * Math.sin(latitude * Math.PI / 180))
+  ) / (cosDec * Math.cos(latitude * Math.PI / 180));
+
+  if (cosHour > 1 || cosHour < -1) return DAYLIGHT_START_HOUR;
+
+  const localHourAngle = (360 - (Math.acos(cosHour) * 180 / Math.PI)) / 15;
+  const localMeanTime = localHourAngle + rightAscension - (0.06571 * t) - 6.622;
+  const utcHour = ((localMeanTime - lngHour) % 24 + 24) % 24;
+  const localHour = ((utcHour + timeZoneOffsetHours(dateKey, spot?.timeZone)) % 24 + 24) % 24;
+  return Math.max(0, Math.min(23, Math.floor(localHour)));
+}
+
+function frameIndexForDayAtHour(dateKey, targetHour) {
+  const sameDayFrames = windFrames
+    .map((frame, frameIndex) => ({ frame, frameIndex, hour: frameLocalHour(frame.time) }))
+    .filter(({ frame }) => frameDateKey(frame.time) === dateKey);
+  if (!sameDayFrames.length) return -1;
+  const exactOrNext = sameDayFrames.find(({ hour }) => Number.isFinite(hour) && hour >= targetHour);
+  return (exactOrNext || sameDayFrames[sameDayFrames.length - 1]).frameIndex;
+}
+
+function sunriseFrameIndexForDay(dateKey, spot = currentSpot) {
+  return frameIndexForDayAtHour(dateKey, sunriseHourForDate(dateKey, spot));
 }
 
 function timelineDays() {
@@ -1165,7 +1250,8 @@ function renderTimelineDayLabels() {
     button.setAttribute("aria-label", `Show wind forecast for ${day.label}`);
     button.addEventListener("click", () => {
       stopWindTimelapse();
-      renderWindFrame(day.index);
+      const sunriseIndex = sunriseFrameIndexForDay(day.key);
+      renderWindFrame(sunriseIndex >= 0 ? sunriseIndex : day.index);
     });
     return button;
   }));
@@ -1234,16 +1320,13 @@ function frameLocalHour(time) {
 function forecastFrameIndex(day, index = selectedForecastIndex) {
   if (!windFrames.length) return -1;
   if (index === 0) return currentWindFrameIndex();
-  const targetDate = day?.date;
+  let targetDate = day?.date;
   if (!targetDate) return -1;
-  const sameDayFrames = windFrames
-    .map((frame, frameIndex) => ({ frame, frameIndex, hour: frameLocalHour(frame.time) }))
-    .filter(({ frame }) => frameDateKey(frame.time) === targetDate);
-  if (!sameDayFrames.length) return -1;
-  const daylightFrame = sameDayFrames.find(({ hour }) => (
-    Number.isFinite(hour) && hour >= Math.max(8, DAYLIGHT_START_HOUR) && hour <= DAYLIGHT_END_HOUR
-  ));
-  return (daylightFrame || sameDayFrames[0]).frameIndex;
+  const currentDay = liveDateKey();
+  if (currentDay && targetDate < currentDay) {
+    targetDate = timelineDays()[index]?.key || targetDate;
+  }
+  return sunriseFrameIndexForDay(targetDate);
 }
 
 function syncMapToForecastDay(day, index = selectedForecastIndex) {
