@@ -2522,6 +2522,10 @@ h2 {
     justify-content: space-between;
   }
 
+  body.lake-directory-mode .top-nav {
+    display: none;
+  }
+
   .brand-link img {
     width: clamp(126px, 38vw, 166px);
   }
