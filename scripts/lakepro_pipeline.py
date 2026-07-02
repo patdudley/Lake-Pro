@@ -375,8 +375,6 @@ def wind_grade_cap(speed: float | None) -> str:
         return "D"
     if value >= 12:
         return "C"
-    if value >= 8:
-        return "C"
     if value >= 5:
         return "B"
     return "A"

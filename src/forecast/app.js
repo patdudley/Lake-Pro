@@ -506,7 +506,6 @@ function windGradeCap(speed) {
   if (wind >= 24) return "F";
   if (wind >= 16) return "D";
   if (wind >= 12) return "C";
-  if (wind >= 8) return "C";
   if (wind >= 5) return "B";
   return "A";
 }
