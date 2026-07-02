@@ -651,53 +651,103 @@ function spotReportUrl(spot) {
   return `?spot=${spot.slug}`;
 }
 
-function seededNumber(seed, offset = 0) {
-  const text = `${seed || "lake"}-${offset}`;
-  let hash = 2166136261;
-  for (let index = 0; index < text.length; index += 1) {
-    hash ^= text.charCodeAt(index);
-    hash = Math.imul(hash, 16777619);
-  }
-  return (hash >>> 0) / 4294967295;
+function mapPreviewPlaceholderDataUri(spot) {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 88" role="img" aria-label="${spot?.name || "Lake"} map preview">
+      <rect width="132" height="88" rx="10" fill="#f8fbff"/>
+      <path d="M-12 69 C18 56 28 70 58 58 S101 54 145 39" fill="none" stroke="#dfe8f3" stroke-width="3"/>
+      <path d="M-8 28 C20 16 39 22 63 18 S104 12 142 18" fill="none" stroke="#edf3f8" stroke-width="10"/>
+      <rect x="28" y="29" width="76" height="30" rx="15" fill="#e9f4fb"/>
+      <text x="66" y="47" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="800" fill="#61708f">Map preview</text>
+    </svg>
+  `.trim().replace(/\s+/g, " ");
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-function lakeMapPreviewDataUri(spot) {
-  const lakePoints = Array.from({ length: 18 }, (_, index) => {
-    const theta = (Math.PI * 2 * index) / 18;
-    const radiusX = 34 + seededNumber(spot?.slug, index) * 16;
-    const radiusY = 22 + seededNumber(spot?.name, index) * 11;
-    const x = 66 + Math.cos(theta) * radiusX + (seededNumber(spot?.location, index) - 0.5) * 8;
-    const y = 44 + Math.sin(theta) * radiusY + (seededNumber(spot?.slug, index + 40) - 0.5) * 7;
+function shorelineRingsFromGeoJson(geojson) {
+  const rings = [];
+  for (const feature of geojson?.features || []) {
+    const geometry = feature?.geometry;
+    if (geometry?.type === "Polygon") {
+      rings.push(...geometry.coordinates);
+    }
+    if (geometry?.type === "MultiPolygon") {
+      geometry.coordinates.forEach((polygon) => rings.push(...polygon));
+    }
+  }
+  return rings
+    .filter((ring) => Array.isArray(ring) && ring.length > 2)
+    .map((ring) => ring.filter((point) => Number.isFinite(point?.[0]) && Number.isFinite(point?.[1])))
+    .filter((ring) => ring.length > 2);
+}
+
+function projectedPreviewRings(rings) {
+  const points = rings.flat();
+  if (!points.length) return [];
+  const lngs = points.map((point) => point[0]);
+  const lats = points.map((point) => point[1]);
+  const minLng = Math.min(...lngs);
+  const maxLng = Math.max(...lngs);
+  const minLat = Math.min(...lats);
+  const maxLat = Math.max(...lats);
+  const lngSpan = Math.max(maxLng - minLng, 0.00001);
+  const latSpan = Math.max(maxLat - minLat, 0.00001);
+  const targetWidth = 112;
+  const targetHeight = 68;
+  const scale = Math.min(targetWidth / lngSpan, targetHeight / latSpan);
+  const centerLng = (minLng + maxLng) / 2;
+  const centerLat = (minLat + maxLat) / 2;
+  return rings.map((ring) => ring.map(([lng, lat]) => {
+    const x = 66 + (lng - centerLng) * scale;
+    const y = 44 - (lat - centerLat) * scale;
     return `${x.toFixed(1)},${y.toFixed(1)}`;
-  }).join(" ");
-  const routeOffset = Math.round(seededNumber(spot?.slug, 90) * 24);
+  }).join(" "));
+}
+
+function shorelineMapPreviewDataUri(spot, geojson) {
+  const rings = projectedPreviewRings(shorelineRingsFromGeoJson(geojson));
+  if (!rings.length) return "";
+  const idSuffix = (spot?.slug || "lake").replace(/[^a-z0-9-]/gi, "");
+  const polygons = rings.map((points) => `<polygon points="${points}"/>`).join("");
+  const strokedPolygons = rings.map((points) => `<polygon points="${points}" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.25"/>`).join("");
+  const linePaths = Array.from({ length: 9 }, (_, index) => {
+    const y = 16 + index * 7;
+    const x = 20 + (index % 3) * 12;
+    return `<path d="M${x} ${y} l26 -10"/>`;
+  }).join("");
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 88" role="img" aria-label="${spot?.name || "Lake"} map preview">
       <defs>
-        <linearGradient id="water" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id="water-${idSuffix}" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stop-color="#17c0e8"/>
           <stop offset="0.52" stop-color="#1167ff"/>
           <stop offset="1" stop-color="#f20bc6"/>
         </linearGradient>
-        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="2.2"/>
-        </filter>
+        <clipPath id="lake-${idSuffix}">
+          ${polygons}
+        </clipPath>
       </defs>
       <rect width="132" height="88" rx="10" fill="#f8fbff"/>
       <path d="M-12 69 C18 56 28 70 58 58 S101 54 145 39" fill="none" stroke="#dfe8f3" stroke-width="3"/>
       <path d="M-8 28 C20 16 39 22 63 18 S104 12 142 18" fill="none" stroke="#edf3f8" stroke-width="10"/>
-      <polygon points="${lakePoints}" fill="url(#water)" opacity="0.92"/>
-      <polygon points="${lakePoints}" fill="none" stroke="#ffffff" stroke-opacity="0.82" stroke-width="1.5"/>
-      <g stroke="#fff" stroke-linecap="round" stroke-width="2" opacity="0.55" filter="url(#soft)">
-        <path d="M${18 + routeOffset} 27 l25 -10"/>
-        <path d="M${31 + routeOffset} 48 l31 -13"/>
-        <path d="M${15 + routeOffset} 63 l22 -8"/>
-      </g>
-      <circle cx="72" cy="44" r="10" fill="#061848" opacity="0.88"/>
-      <path d="M67 45 h12 m0 0 -4 -4 m4 4 -4 4" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="url(#water-${idSuffix})" opacity="0.94">${polygons}</g>
+      <g clip-path="url(#lake-${idSuffix})" stroke="#fff" stroke-linecap="round" stroke-width="1.7" opacity="0.48">${linePaths}</g>
+      ${strokedPolygons}
     </svg>
   `.trim().replace(/\s+/g, " ");
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+async function hydrateHomeMapPreviews() {
+  const cards = [...document.querySelectorAll(".home-lake-link[data-preview='map']")];
+  await Promise.all(cards.map(async (card) => {
+    const spot = lakeSpots.find((candidate) => candidate.slug === card.dataset.spot);
+    const image = card.querySelector("img");
+    if (!spot || !image) return;
+    const shoreline = await fetchOptionalGeoJson(`data/live/map_layers/${spot.slug}_shoreline.geojson`);
+    const preview = shorelineMapPreviewDataUri(spot, shoreline);
+    if (preview) image.src = preview;
+  }));
 }
 
 function renderHomeLakeLinks() {
@@ -711,7 +761,8 @@ function renderHomeLakeLinks() {
     link.className = "home-lake-link";
     link.href = spotReportUrl(spot);
     const camera = cameraForSpot(spot);
-    const fallbackPreview = lakeMapPreviewDataUri(spot);
+    const fallbackPreview = mapPreviewPlaceholderDataUri(spot);
+    link.dataset.spot = spot.slug;
     link.dataset.name = `${spot.name} ${spot.location}`.toLowerCase();
     link.dataset.preview = camera ? "camera" : "map";
     link.innerHTML = `
@@ -727,6 +778,7 @@ function renderHomeLakeLinks() {
     return link;
   }));
   hydrateHomeLakeCards();
+  hydrateHomeMapPreviews();
   wireHomeSearch();
   wireSpotSearch();
   renderHomeCameraSlider();
