@@ -274,7 +274,7 @@ function todayHourlyWeather(bundle = {}) {
   }, []).slice(0, 24);
 }
 
-function weatherChartSvg(hourlyItems = []) {
+function weatherChartMarkup(hourlyItems = []) {
   const samples = hourlyItems.length ? hourlyItems : [{ temp: 0, label: "" }];
   const width = 720;
   const height = 220;
@@ -293,7 +293,7 @@ function weatherChartSvg(hourlyItems = []) {
       ? width / 2
       : chartLeft + (index / (samples.length - 1)) * (chartRight - chartLeft);
     const y = chartBottom - ((item.temp - minTemp) / span) * (chartBottom - chartTop);
-    return { ...item, x, y };
+    return { ...item, x, y, tempLabel: `${Math.round(item.temp)}°` };
   });
   const line = points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ");
   const area = `${line} L${points.at(-1).x.toFixed(1)} ${chartBottom} L${points[0].x.toFixed(1)} ${chartBottom} Z`;
@@ -322,17 +322,65 @@ function weatherChartSvg(hourlyItems = []) {
       <circle class="weather-point" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="4"></circle>
     `).join("");
 
-  return `
-    <svg class="today-weather-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Hourly temperature chart">
-      <rect class="weather-chart-bg" x="0" y="0" width="${width}" height="${height}" rx="22"></rect>
-      ${gridLines}
-      <path class="today-weather-area" d="${area}"></path>
-      <path class="today-weather-line" d="${line}"></path>
-      ${markers}
-      ${tempLabels}
-      ${labels}
-    </svg>
-  `;
+  return {
+    points,
+    width,
+    html: `
+      <div class="today-weather-chart-wrap">
+        <svg class="today-weather-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Hourly temperature chart">
+          <rect class="weather-chart-bg" x="0" y="0" width="${width}" height="${height}" rx="22"></rect>
+          ${gridLines}
+          <path class="today-weather-area" d="${area}"></path>
+          <path class="today-weather-line" d="${line}"></path>
+          ${markers}
+          ${tempLabels}
+          ${labels}
+          <g class="weather-hover-layer" hidden>
+            <line class="weather-hover-line" x1="0" x2="0" y1="${chartTop}" y2="${chartBottom}"></line>
+            <circle class="weather-hover-point" cx="0" cy="0" r="6"></circle>
+          </g>
+        </svg>
+        <output class="weather-hover-tooltip" aria-live="polite" hidden></output>
+      </div>
+    `,
+  };
+}
+
+function bindWeatherChart(target, chart) {
+  const wrap = target?.querySelector(".today-weather-chart-wrap");
+  const svg = wrap?.querySelector(".today-weather-chart");
+  const hoverLayer = wrap?.querySelector(".weather-hover-layer");
+  const hoverLine = wrap?.querySelector(".weather-hover-line");
+  const hoverPoint = wrap?.querySelector(".weather-hover-point");
+  const tooltip = wrap?.querySelector(".weather-hover-tooltip");
+  if (!wrap || !svg || !hoverLayer || !hoverLine || !hoverPoint || !tooltip || !chart?.points?.length) return;
+
+  const showPoint = (clientX) => {
+    const bounds = svg.getBoundingClientRect();
+    const percent = bounds.width ? (clientX - bounds.left) / bounds.width : 0;
+    const svgX = Math.max(0, Math.min(chart.width, percent * chart.width));
+    const point = chart.points.reduce((nearest, candidate) => (
+      Math.abs(candidate.x - svgX) < Math.abs(nearest.x - svgX) ? candidate : nearest
+    ), chart.points[0]);
+    hoverLayer.hidden = false;
+    tooltip.hidden = false;
+    hoverLine.setAttribute("x1", point.x.toFixed(1));
+    hoverLine.setAttribute("x2", point.x.toFixed(1));
+    hoverPoint.setAttribute("cx", point.x.toFixed(1));
+    hoverPoint.setAttribute("cy", point.y.toFixed(1));
+    tooltip.textContent = `${point.label || "Now"} · ${point.tempLabel}`;
+    const tooltipX = Math.max(8, Math.min(bounds.width - 104, (point.x / chart.width) * bounds.width - 48));
+    tooltip.style.left = `${tooltipX}px`;
+  };
+
+  const hidePoint = () => {
+    hoverLayer.hidden = true;
+    tooltip.hidden = true;
+  };
+
+  wrap.addEventListener("pointermove", (event) => showPoint(event.clientX));
+  wrap.addEventListener("pointerdown", (event) => showPoint(event.clientX));
+  wrap.addEventListener("pointerleave", hidePoint);
 }
 
 function todayWeatherSummary(latest = {}, hourlyItems = []) {
@@ -361,13 +409,14 @@ function renderTodayWeatherCard(target, bundle = {}) {
   const condition = latest.short_forecast || hourlyItems.find((item) => item.short_forecast)?.short_forecast || "Live weather";
   const wind = roundedMph(latest.wind_speed_max_mph);
   const precip = numberValue(latest.precipitation_probability_max);
+  const chart = weatherChartMarkup(hourlyItems);
 
   target.innerHTML = `
     <div class="today-weather-header">
       <span><i aria-hidden="true"></i>Today Weather</span>
       <strong>${high == null || low == null ? "Live" : `${Math.round(high)}&deg; / ${Math.round(low)}&deg;`}</strong>
     </div>
-    ${weatherChartSvg(hourlyItems)}
+    ${chart.html}
     <div class="today-weather-metrics" aria-label="Today weather details">
       <span><b>Condition</b>${condition}</span>
       ${wind ? `<span><b>Wind</b>${wind}</span>` : ""}
@@ -375,6 +424,7 @@ function renderTodayWeatherCard(target, bundle = {}) {
     </div>
     ${summary ? `<p>${summary}</p>` : ""}
   `;
+  bindWeatherChart(target, chart);
 }
 
 function renderTodayWeather(bundle = {}) {
@@ -563,7 +613,10 @@ function renderForecastReports(days = placeholderForecast) {
     dropdown.replaceChildren(createForecastReportArticle(dayReport, "forecast-report forecast-dropdown-report"));
   }
   if (heroReport) heroReport.replaceChildren(createForecastReportArticle(dayReport, "forecast-report hero-forecast-report"));
-  if (mobileReport) mobileReport.replaceChildren(createForecastReportArticle(dayReport, "forecast-report mobile-forecast-report"));
+  if (mobileReport) {
+    mobileReport.hidden = true;
+    mobileReport.replaceChildren();
+  }
 }
 
 async function fetchGeoJson(url) {
