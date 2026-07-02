@@ -894,34 +894,6 @@ body.home-mode .hero-copy h1 {
   transform: rotate(45deg);
 }
 
-.home-camera-dots {
-  position: absolute;
-  right: 0;
-  bottom: 18px;
-  left: 0;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  pointer-events: none;
-}
-
-.home-camera-dot {
-  width: 9px;
-  height: 9px;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  cursor: pointer;
-  padding: 0;
-  pointer-events: auto;
-}
-
-.home-camera-dot[data-active="true"] {
-  width: 22px;
-  background: #ffffff;
-}
-
 .home-spot-rail {
   grid-area: spots;
   position: relative;
@@ -2697,10 +2669,6 @@ h2 {
     right: 10px;
   }
 
-  .home-camera-dots {
-    bottom: 12px;
-  }
-
   .home-spot-heading {
     margin-bottom: 12px;
   }
@@ -3116,38 +3084,6 @@ svg {
   min-height: 44px;
 }
 
-.home-camera-dots {
-  pointer-events: auto;
-}
-
-button.home-camera-dot {
-  position: relative;
-  display: grid;
-  flex: 0 0 44px;
-  width: 44px !important;
-  height: 44px !important;
-  place-items: center;
-  background: transparent;
-}
-
-button.home-camera-dot::before {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.58);
-  content: "";
-}
-
-button.home-camera-dot[data-active="true"] {
-  width: 44px !important;
-  background: transparent;
-}
-
-button.home-camera-dot[data-active="true"]::before {
-  width: 22px;
-  background: #ffffff;
-}
-
 .timelapse-control button {
   min-height: 44px;
   font-size: 0.875rem;
@@ -3292,10 +3228,6 @@ body.home-mode .site-hero {
   .home-camera-control {
     width: 44px;
     height: 44px;
-  }
-
-  .home-camera-dots {
-    bottom: 4px;
   }
 
   .home-spot-cards {

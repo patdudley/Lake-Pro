@@ -760,27 +760,12 @@ function renderHomeCameraSlide(index = homeCameraIndex) {
     const state = featureSpot.location.split(",").pop()?.trim() || "";
     featureShortLocation.textContent = `${featureSpot.name}${state ? `, ${state}` : ""}`;
   }
-  document.querySelectorAll(".home-camera-dot").forEach((dot, dotIndex) => {
-    dot.dataset.active = dotIndex === homeCameraIndex ? "true" : "false";
-    dot.setAttribute("aria-current", dotIndex === homeCameraIndex ? "true" : "false");
-  });
 }
 
 function renderHomeCameraSlider() {
-  const dots = document.getElementById("homeCameraDots");
-  if (!dots) return;
   const slides = homeCameraSpots();
-  dots.replaceChildren(...slides.map((spot, index) => {
-    const button = document.createElement("button");
-    button.className = "home-camera-dot";
-    button.type = "button";
-    button.dataset.active = index === homeCameraIndex ? "true" : "false";
-    button.setAttribute("aria-label", `Show ${spot.name} camera`);
-    button.addEventListener("click", () => renderHomeCameraSlide(index));
-    return button;
-  }));
   const hasMultipleSlides = slides.length > 1;
-  document.querySelectorAll(".home-camera-control, .home-camera-dots").forEach((element) => {
+  document.querySelectorAll(".home-camera-control").forEach((element) => {
     element.hidden = !hasMultipleSlides;
   });
   renderHomeCameraSlide(homeCameraIndex);
