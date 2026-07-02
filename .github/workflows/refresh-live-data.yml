@@ -47,14 +47,14 @@ jobs:
         if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           python3 scripts/lakepro_pipeline.py
-          node scripts/capture_mile_high_camera.js
+          node scripts/capture_lake_cameras.js
 
       - name: Commit refreshed artifacts
         if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/mile-high-marina-camera.png assets/edgewood-tahoe-camera.png data/live
+          git add assets/cameras reports/camera-audit.json reports/camera-audit.md data/live
           if git diff --cached --quiet; then
             echo "No live data changes to commit."
           else

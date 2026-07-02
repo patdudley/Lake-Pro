@@ -55,6 +55,7 @@ async function dismissCommonOverlays(page) {
 
 async function bestCameraTarget(page, spot) {
   const candidates = [
+    "iframe[src*='ipcamlive']",
     "iframe[src*='earthcam']",
     "iframe[src*='hdontap']",
     "iframe[src*='youtube']",

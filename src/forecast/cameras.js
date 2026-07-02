@@ -1,16 +1,16 @@
 const approvedCameraOverrides = {
   "lake-tahoe": {
     title: "Live Lake View",
-    description: "Current South Lake Tahoe shoreline view",
-    sourceUrl: "https://edgewoodtahoe.com/webcam/",
-    imageUrl: "assets/edgewood-tahoe-camera.png",
-    alt: "Edgewood Tahoe webcam screenshot over Lake Tahoe",
+    description: "Current Lake Tahoe shoreline view",
+    sourceUrl: "https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/",
+    imageUrl: "assets/cameras/lake-tahoe.png",
+    alt: "Lake Tahoe webcam screenshot",
   },
   "payette-lake": {
     title: "Live Lake View",
     description: "Current Payette Lake marina view",
     sourceUrl: "https://milehighmarina.com/webcams/",
-    imageUrl: "assets/mile-high-marina-camera.png",
+    imageUrl: "assets/cameras/payette-lake.png",
     alt: "Mile High Marina webcam screenshot over Payette Lake",
   },
 };
