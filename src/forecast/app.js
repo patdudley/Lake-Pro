@@ -1,6 +1,6 @@
 import { lakeSpots } from "../spots/index.js";
 import { windFrameForSpot } from "../map/windFrameSource.js";
-import { cameraForSpot } from "./cameras.js?v=live-camera-audit-20260702";
+import { cameraForSpot } from "./cameras.js?v=approved-camera-only-20260702";
 
 let lakeMap = null;
 let homeMap = null;
@@ -1015,7 +1015,23 @@ function renderCameraCard(spot) {
   if (!cameraCard) return;
   document.body.classList.toggle("no-camera", !camera);
   cameraCard.hidden = !camera;
-  if (!camera) return;
+  if (!camera) {
+    const title = document.getElementById("cameraTitle");
+    const description = document.getElementById("cameraDescription");
+    const overlay = document.getElementById("cameraLocationOverlay");
+    const source = document.getElementById("cameraSource");
+    const image = document.getElementById("cameraImage");
+    if (title) title.textContent = "";
+    if (description) description.textContent = "";
+    if (overlay) overlay.textContent = "";
+    if (source) source.removeAttribute("href");
+    if (image) {
+      image.removeAttribute("src");
+      image.alt = "";
+      image.onerror = null;
+    }
+    return;
+  }
   document.getElementById("cameraTitle").textContent = camera.title;
   document.getElementById("cameraDescription").textContent = camera.description;
   const overlay = document.getElementById("cameraLocationOverlay");

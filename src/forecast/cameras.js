@@ -15,6 +15,21 @@ const approvedCameraOverrides = {
   },
 };
 
+const capturedCameraSlugs = new Set([
+  "canyon-lake",
+  "flathead-lake",
+  "lake-amistad",
+  "lake-coeur-d-alene",
+  "lake-conroe",
+  "lake-geneva",
+  "lake-george",
+  "lake-havasu",
+  "lake-powell",
+  "lake-travis",
+  "lake-winnipesaukee",
+  "lake-winnisquam",
+]);
+
 const unusableCameraSlugs = new Set([
   "deer-creek-reservoir",
   "jordanelle-reservoir",
@@ -39,6 +54,7 @@ export function cameraForSpot(spot) {
   const override = approvedCameraOverrides[spot.slug];
   if (override) return override;
   if (unusableCameraSlugs.has(spot.slug)) return null;
+  if (!capturedCameraSlugs.has(spot.slug)) return null;
   if (!spot.webcam?.url) return null;
   return {
     title: "Live Lake View",
