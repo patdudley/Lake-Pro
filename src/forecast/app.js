@@ -619,13 +619,13 @@ function renderForecastReports(days = placeholderForecast) {
 }
 
 async function fetchGeoJson(url) {
-  const response = await fetch(url, { cache: "force-cache" });
+  const response = await fetch(url);
   if (!response.ok) throw new Error(`${url} unavailable`);
   return response.json();
 }
 
 async function fetchOptionalGeoJson(url) {
-  const response = await fetch(url, { cache: "force-cache" });
+  const response = await fetch(url);
   if (!response.ok) return null;
   return response.json();
 }
@@ -1004,7 +1004,8 @@ function selectSpotBySlug(slug) {
     || lakeSpots[0];
   const url = new URL(window.location.href);
   url.searchParams.set("spot", nextSpot.slug);
-  window.history.replaceState({}, "", url);
+  if (url.href === window.location.href) return;
+  window.history.pushState({}, "", url);
   setPageMode("spot");
   const select = document.getElementById("spotSelect");
   if (select) select.value = nextSpot.slug;
