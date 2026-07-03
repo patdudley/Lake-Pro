@@ -58,11 +58,14 @@ def load_catalog_rows() -> list[dict]:
 
 
 def write_catalog_rows(rows: list[dict]) -> None:
-    CATALOG_PATH.write_text(
+    text = (
         "// Generated from the Lake Pro launch catalog attachment.\n"
         "// Launch lakes have checked-in shoreline masks for deterministic map overlays.\n"
         f"export const lakeCatalog = {json.dumps(rows, indent=2, ensure_ascii=False)};\n"
     )
+    if CATALOG_PATH.exists() and CATALOG_PATH.read_text() == text:
+        return
+    CATALOG_PATH.write_text(text)
 
 
 def load_catalog_spots() -> list[Spot]:
@@ -144,6 +147,14 @@ def shoreline_rings_from_geojson(geojson: dict) -> list[list[list[float]]]:
     return valid_rings
 
 
+# The preview canvas is 132x88, so anything finer than 0.1px is invisible.
+# Dedupe, decimate, and drop sub-pixel islands to keep the data URIs small —
+# unsimplified shorelines once grew lakeCatalog.js past 60 MB.
+MAX_PREVIEW_RINGS = 60
+MAX_PREVIEW_RING_POINTS = 160
+MIN_PREVIEW_RING_SPAN_PX = 1.5
+
+
 def projected_preview_rings(rings: list[list[list[float]]]) -> list[str]:
     points = [point for ring in rings for point in ring]
     if not points:
@@ -161,13 +172,25 @@ def projected_preview_rings(rings: list[list[list[float]]]) -> list[str]:
     center_lat = (min_lat + max_lat) / 2
     projected = []
     for ring in rings:
-        projected.append(
-            " ".join(
-                f"{66 + (lng - center_lng) * scale:.1f},{44 - (lat - center_lat) * scale:.1f}"
-                for lng, lat, *_ in ring
-            )
-        )
-    return projected
+        coords: list[tuple[float, float]] = []
+        for lng, lat, *_ in ring:
+            x = round(66 + (lng - center_lng) * scale, 1)
+            y = round(44 - (lat - center_lat) * scale, 1)
+            if coords and coords[-1] == (x, y):
+                continue
+            coords.append((x, y))
+        if len(coords) < 3:
+            continue
+        span_x = max(x for x, _ in coords) - min(x for x, _ in coords)
+        span_y = max(y for _, y in coords) - min(y for _, y in coords)
+        if span_x < MIN_PREVIEW_RING_SPAN_PX and span_y < MIN_PREVIEW_RING_SPAN_PX:
+            continue
+        if len(coords) > MAX_PREVIEW_RING_POINTS:
+            step = len(coords) / MAX_PREVIEW_RING_POINTS
+            coords = [coords[int(index * step)] for index in range(MAX_PREVIEW_RING_POINTS)]
+        projected.append((span_x * span_y, " ".join(f"{x:.1f},{y:.1f}" for x, y in coords)))
+    projected.sort(key=lambda item: item[0], reverse=True)
+    return [ring_points for _, ring_points in projected[:MAX_PREVIEW_RINGS]]
 
 
 def build_preview_svg_data_uri(spot: dict, shoreline: dict) -> str:
@@ -268,7 +291,7 @@ def wind_direction_degrees(label: str | None) -> int | None:
     value = label.strip().upper()
     if value not in labels:
         return None
-    return labels.index(value) * 22
+    return int(round(labels.index(value) * 22.5))
 
 
 def parse_wind_mph(value: str | None) -> float | None:
@@ -353,10 +376,21 @@ def fetch_open_meteo_daily(spot: Spot) -> dict:
     return payload
 
 
+def daily_gust_max(hourly: dict) -> dict[str, float]:
+    gusts: dict[str, float] = {}
+    for timestamp, gust in zip(hourly.get("time", []), hourly.get("wind_gusts_10m", [])):
+        if gust is None:
+            continue
+        key = str(timestamp)[:10]
+        gusts[key] = max(gusts.get(key, 0.0), float(gust))
+    return gusts
+
+
 def build_open_meteo_forecast(spot: Spot, fallback_error: str | None = None) -> dict:
     daily_source = fetch_open_meteo_daily(spot)
     daily = daily_source.get("daily", {})
     hourly = daily_source.get("hourly", {})
+    gusts_by_day = daily_gust_max(hourly)
     days = []
 
     daily_rows = zip(
@@ -371,11 +405,12 @@ def build_open_meteo_forecast(spot: Spot, fallback_error: str | None = None) -> 
     for day_str, weather_code, temp_max, temp_min, precip, wind, direction in daily_rows:
         day = date.fromisoformat(day_str)
         wind = round(float(wind), 1) if wind is not None else None
+        gust = round(gusts_by_day[day_str], 1) if day_str in gusts_by_day else wind
         direction = int(round(float(direction))) if direction is not None else None
         precip = round(float(precip), 1) if precip is not None else None
         temp_max = round(float(temp_max)) if temp_max is not None else None
         temp_min = round(float(temp_min)) if temp_min is not None else None
-        chop = chop_proxy_ft(wind, wind)
+        chop = chop_proxy_ft(wind, gust)
         window = best_boating_window_for_day(hourly, day_str, temp_max)
 
         if window["score"] is not None:
@@ -400,7 +435,7 @@ def build_open_meteo_forecast(spot: Spot, fallback_error: str | None = None) -> 
                 "score_before_wind_cap": score_before_wind_cap,
                 "grade_before_wind_cap": grade_from_score(score_before_wind_cap),
                 "wind_speed_max_mph": wind,
-                "wind_gust_max_mph": wind,
+                "wind_gust_max_mph": gust,
                 "wind_direction_deg": direction,
                 "wind_direction_label": wind_direction_label(direction),
                 "precipitation_probability_max": precip,
@@ -410,7 +445,7 @@ def build_open_meteo_forecast(spot: Spot, fallback_error: str | None = None) -> 
                 "chop_proxy_ft": chop,
                 "best_window": window["label"] if window["score"] is not None else "Daily outlook",
                 "best_window_wind_mph": window["avg_wind_mph"] if window["score"] is not None else wind,
-                "best_window_gust_mph": window["avg_gust_mph"] if window["score"] is not None else wind,
+                "best_window_gust_mph": window["avg_gust_mph"] if window["score"] is not None else gust,
                 "best_window_precipitation_probability_max": window["max_precip_probability"] if window["score"] is not None else precip,
                 "grade_caps": grade_caps,
                 "crowding_penalty": crowding_penalty(day),
@@ -652,7 +687,14 @@ def best_boating_window_for_day(hourly: dict, day_str: str, day_temp_max: float 
             "grade_caps": [],
         }
 
-    best = max(candidates, key=lambda item: (item["score"], -float(item["avg_wind_mph"] or 99), -item["start_hour"]))
+    best = max(
+        candidates,
+        key=lambda item: (
+            item["score"],
+            -(99.0 if item["avg_wind_mph"] is None else float(item["avg_wind_mph"])),
+            -item["start_hour"],
+        ),
+    )
     return {
         "label": window_label(best["start_hour"]),
         "avg_wind_mph": best["avg_wind_mph"],
@@ -898,6 +940,7 @@ def build_forecast(spot: Spot) -> dict:
         existing_dates = {day["date"] for day in days}
         daily = daily_source.get("daily", {})
         open_hourly = daily_source.get("hourly", {})
+        gusts_by_day = daily_gust_max(open_hourly)
         daily_rows = zip(
             daily.get("time", []),
             daily.get("weather_code", []),
@@ -912,11 +955,12 @@ def build_forecast(spot: Spot) -> dict:
                 continue
             day = date.fromisoformat(day_str)
             wind = round(float(wind), 1) if wind is not None else None
+            gust = round(gusts_by_day[day_str], 1) if day_str in gusts_by_day else wind
             direction = int(round(float(direction))) if direction is not None else None
             precip = round(float(precip), 1) if precip is not None else None
             temp_max = round(float(temp_max)) if temp_max is not None else None
             temp_min = round(float(temp_min)) if temp_min is not None else None
-            chop = chop_proxy_ft(wind, wind)
+            chop = chop_proxy_ft(wind, gust)
             window = best_boating_window_for_day(open_hourly, day_str, temp_max)
 
             if window["score"] is not None:
@@ -941,7 +985,7 @@ def build_forecast(spot: Spot) -> dict:
                     "score_before_wind_cap": score_before_wind_cap,
                     "grade_before_wind_cap": grade_from_score(score_before_wind_cap),
                     "wind_speed_max_mph": wind,
-                    "wind_gust_max_mph": wind,
+                    "wind_gust_max_mph": gust,
                     "wind_direction_deg": direction,
                     "wind_direction_label": wind_direction_label(direction),
                     "precipitation_probability_max": precip,
@@ -951,7 +995,7 @@ def build_forecast(spot: Spot) -> dict:
                     "chop_proxy_ft": chop,
                     "best_window": window["label"] if window["score"] is not None else "Daily outlook",
                     "best_window_wind_mph": window["avg_wind_mph"] if window["score"] is not None else wind,
-                    "best_window_gust_mph": window["avg_gust_mph"] if window["score"] is not None else wind,
+                    "best_window_gust_mph": window["avg_gust_mph"] if window["score"] is not None else gust,
                     "best_window_precipitation_probability_max": window["max_precip_probability"] if window["score"] is not None else precip,
                     "grade_caps": grade_caps,
                     "crowding_penalty": crowding_penalty(day),
