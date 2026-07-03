@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.2
     }
   ],
-  "generated_at": "2026-07-03T19:26:51.727123+00:00",
+  "generated_at": "2026-07-03T19:43:48.729240+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "strawberry-reservoir",
   "status": "live_weather_stub_grid"

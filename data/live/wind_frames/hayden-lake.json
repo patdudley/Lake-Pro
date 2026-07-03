@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.6
     }
   ],
-  "generated_at": "2026-07-03T19:26:56.246097+00:00",
+  "generated_at": "2026-07-03T19:44:40.431337+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "hayden-lake",
   "status": "live_weather_stub_grid"

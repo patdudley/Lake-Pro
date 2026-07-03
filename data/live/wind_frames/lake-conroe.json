@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 10.9
     }
   ],
-  "generated_at": "2026-07-03T19:22:17.354685+00:00",
+  "generated_at": "2026-07-03T19:38:16.967706+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-conroe",
   "status": "live_weather_stub_grid"
