@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
-cd "/Users/patduds/Documents/Lake Pro"
+cd "$(dirname "$0")/.."
+mkdir -p logs
 /usr/bin/python3 scripts/lakepro_pipeline.py >> logs/lakepro_pipeline.out.log 2>> logs/lakepro_pipeline.err.log
 NODE_RUNTIME="/Users/patduds/.cache/codex-runtimes/codex-primary-runtime/dependencies/node"
 NODE_BIN="$NODE_RUNTIME/bin/node"
