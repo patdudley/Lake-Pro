@@ -1,10 +1,10 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-07-02T22:05:36.773Z
+Generated: 2026-07-03T19:33:19.476Z
 
-- Captured: 23
-- Suspect: 0
-- Failed: 2
+- Captured: 24
+- Suspect: 1
+- Failed: 0
 - No catalog webcam source yet: 87
 
 ## Captured
@@ -18,6 +18,8 @@ Generated: 2026-07-02T22:05:36.773Z
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
 - Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
+- Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
+- Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
@@ -25,7 +27,6 @@ Generated: 2026-07-02T22:05:36.773Z
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
 - Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
-- Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
 - Lake Mead (NV/AZ) — NPS — Lake Mead Webcams: https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm
 - Lake Amistad (TX/Mexico) — National Park Service — Amistad webcams: https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm
 - Utah Lake (UT) — Utah State Parks — Live Webcam: https://stateparks.utah.gov/parks/utah-lake/current-conditions/
@@ -33,14 +34,7 @@ Generated: 2026-07-02T22:05:36.773Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam — page.goto: net::ERR_TIMED_OUT at https://www.llsc.com/web-cam
-Call log:
-[2m  - navigating to "https://www.llsc.com/web-cam", waiting until "domcontentloaded"[22m
-
-- Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/ — page.goto: net::ERR_TIMED_OUT at https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
-Call log:
-[2m  - navigating to "https://www.visitlakenorman.org/things-to-do/stream-lake-norman/", waiting until "domcontentloaded"[22m
-
+- Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
