@@ -11,6 +11,7 @@ This pipeline intentionally separates fetched facts from model placeholders:
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import math
 import re
@@ -44,13 +45,27 @@ class Spot:
     live_ready: bool = False
 
 
-def load_catalog_spots() -> list[Spot]:
-    catalog_path = ROOT / "src" / "spots" / "lakeCatalog.js"
-    text = catalog_path.read_text()
+CATALOG_PATH = ROOT / "src" / "spots" / "lakeCatalog.js"
+
+
+def load_catalog_rows() -> list[dict]:
+    text = CATALOG_PATH.read_text()
     start = text.index("[")
     end = text.rindex("];") + 1
     catalog_json = re.sub(r",\s*]$", "]", text[start:end])
-    rows = json.loads(catalog_json)
+    return json.loads(catalog_json)
+
+
+def write_catalog_rows(rows: list[dict]) -> None:
+    CATALOG_PATH.write_text(
+        "// Generated from the Lake Pro launch catalog attachment.\n"
+        "// Launch lakes have checked-in shoreline masks for deterministic map overlays.\n"
+        f"export const lakeCatalog = {json.dumps(rows, indent=2, ensure_ascii=False)};\n"
+    )
+
+
+def load_catalog_spots() -> list[Spot]:
+    rows = load_catalog_rows()
     spots = []
     for row in rows:
         spots.append(
@@ -93,6 +108,118 @@ def round_coordinates(value):
     if isinstance(value, float):
         return round(value, 6)
     return value
+
+
+def shoreline_rings_from_geojson(geojson: dict) -> list[list[list[float]]]:
+    rings = []
+    for feature in geojson.get("features", []):
+        geometry = feature.get("geometry") or {}
+        geometry_type = geometry.get("type")
+        coordinates = geometry.get("coordinates") or []
+        if geometry_type == "Polygon":
+            rings.extend(coordinates)
+        elif geometry_type == "MultiPolygon":
+            for polygon in coordinates:
+                rings.extend(polygon)
+    valid_rings = []
+    for ring in rings:
+        points = [
+            point
+            for point in ring
+            if isinstance(point, list)
+            and len(point) >= 2
+            and isinstance(point[0], (int, float))
+            and isinstance(point[1], (int, float))
+        ]
+        if len(points) > 2:
+            valid_rings.append(points)
+    return valid_rings
+
+
+def projected_preview_rings(rings: list[list[list[float]]]) -> list[str]:
+    points = [point for ring in rings for point in ring]
+    if not points:
+        return []
+    lngs = [point[0] for point in points]
+    lats = [point[1] for point in points]
+    min_lng = min(lngs)
+    max_lng = max(lngs)
+    min_lat = min(lats)
+    max_lat = max(lats)
+    lng_span = max(max_lng - min_lng, 0.00001)
+    lat_span = max(max_lat - min_lat, 0.00001)
+    scale = min(112 / lng_span, 68 / lat_span)
+    center_lng = (min_lng + max_lng) / 2
+    center_lat = (min_lat + max_lat) / 2
+    projected = []
+    for ring in rings:
+        projected.append(
+            " ".join(
+                f"{66 + (lng - center_lng) * scale:.1f},{44 - (lat - center_lat) * scale:.1f}"
+                for lng, lat, *_ in ring
+            )
+        )
+    return projected
+
+
+def build_preview_svg_data_uri(spot: dict, shoreline: dict) -> str:
+    rings = projected_preview_rings(shoreline_rings_from_geojson(shoreline))
+    if not rings:
+        return ""
+    slug = re.sub(r"[^a-z0-9-]", "", spot.get("slug", "lake"), flags=re.IGNORECASE)
+    name = html.escape(spot.get("name") or "Lake", quote=True)
+    polygons = "".join(f'<polygon points="{points}"/>' for points in rings)
+    stroked_polygons = "".join(
+        f'<polygon points="{points}" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.25"/>'
+        for points in rings
+    )
+    line_paths = "".join(
+        f'<path d="M{20 + (index % 3) * 12} {16 + index * 7} l26 -10"/>'
+        for index in range(9)
+    )
+    svg = f"""
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 88" role="img" aria-label="{name} map preview">
+          <defs>
+            <linearGradient id="water-{slug}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#17c0e8"/>
+              <stop offset="0.52" stop-color="#1167ff"/>
+              <stop offset="1" stop-color="#f20bc6"/>
+            </linearGradient>
+            <clipPath id="lake-{slug}">{polygons}</clipPath>
+          </defs>
+          <rect width="132" height="88" rx="10" fill="#f8fbff"/>
+          <path d="M-12 69 C18 56 28 70 58 58 S101 54 145 39" fill="none" stroke="#dfe8f3" stroke-width="3"/>
+          <path d="M-8 28 C20 16 39 22 63 18 S104 12 142 18" fill="none" stroke="#edf3f8" stroke-width="10"/>
+          <g fill="url(#water-{slug})" opacity="0.94">{polygons}</g>
+          <g clip-path="url(#lake-{slug})" stroke="#fff" stroke-linecap="round" stroke-width="1.7" opacity="0.48">{line_paths}</g>
+          {stroked_polygons}
+        </svg>
+    """
+    compact = re.sub(r"\s+", " ", svg.strip())
+    return f"data:image/svg+xml;charset=UTF-8,{urllib.parse.quote(compact, safe='')}"
+
+
+def refresh_catalog_preview_svgs() -> dict:
+    rows = load_catalog_rows()
+    generated = 0
+    missing = []
+    for row in rows:
+        slug = row.get("slug")
+        shoreline_path = MAP_LAYERS_DIR / f"{slug}_shoreline.geojson"
+        if not slug or not shoreline_path.exists():
+            row.pop("previewSvg", None)
+            if slug:
+                missing.append(slug)
+            continue
+        preview = build_preview_svg_data_uri(row, json.loads(shoreline_path.read_text()))
+        if preview:
+            row["previewSvg"] = preview
+            generated += 1
+        else:
+            row.pop("previewSvg", None)
+            missing.append(slug)
+    write_catalog_rows(rows)
+    return {"generated": generated, "missing": missing}
 
 
 def slim_geojson(payload: dict, keep_properties: set[str] | None = None) -> dict:
@@ -922,6 +1049,29 @@ def refresh_map_layers() -> dict:
     return results
 
 
+def build_home_summary() -> dict:
+    rows = []
+    for spot in SPOTS:
+        spot_path = SPOTS_DIR / f"{spot.slug}.json"
+        if not spot_path.exists():
+            continue
+        latest = (json.loads(spot_path.read_text()).get("latest") or {})
+        rows.append(
+            {
+                "slug": spot.slug,
+                "grade": latest.get("grade"),
+                "chop_proxy_ft": latest.get("chop_proxy_ft"),
+                "wind_speed_max_mph": latest.get("wind_speed_max_mph"),
+            }
+        )
+    payload = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "spots": rows,
+    }
+    write_json(DATA_DIR / "home-summary.json", payload)
+    return {"spots": len(rows)}
+
+
 def run_pipeline() -> int:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     spot_summaries = []
@@ -947,10 +1097,14 @@ def run_pipeline() -> int:
             failures.append({"spot": spot.slug, "error": str(exc)})
 
     map_layers = refresh_map_layers()
+    home_summary = build_home_summary()
+    preview_svgs = refresh_catalog_preview_svgs()
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "spots": spot_summaries,
         "map_layers": map_layers,
+        "home_summary": home_summary,
+        "preview_svgs": preview_svgs,
         "failures": failures,
     }
     write_json(DATA_DIR / "manifest.json", manifest)

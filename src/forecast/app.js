@@ -663,92 +663,6 @@ function mapPreviewPlaceholderDataUri(spot) {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-function shorelineRingsFromGeoJson(geojson) {
-  const rings = [];
-  for (const feature of geojson?.features || []) {
-    const geometry = feature?.geometry;
-    if (geometry?.type === "Polygon") {
-      rings.push(...geometry.coordinates);
-    }
-    if (geometry?.type === "MultiPolygon") {
-      geometry.coordinates.forEach((polygon) => rings.push(...polygon));
-    }
-  }
-  return rings
-    .filter((ring) => Array.isArray(ring) && ring.length > 2)
-    .map((ring) => ring.filter((point) => Number.isFinite(point?.[0]) && Number.isFinite(point?.[1])))
-    .filter((ring) => ring.length > 2);
-}
-
-function projectedPreviewRings(rings) {
-  const points = rings.flat();
-  if (!points.length) return [];
-  const lngs = points.map((point) => point[0]);
-  const lats = points.map((point) => point[1]);
-  const minLng = Math.min(...lngs);
-  const maxLng = Math.max(...lngs);
-  const minLat = Math.min(...lats);
-  const maxLat = Math.max(...lats);
-  const lngSpan = Math.max(maxLng - minLng, 0.00001);
-  const latSpan = Math.max(maxLat - minLat, 0.00001);
-  const targetWidth = 112;
-  const targetHeight = 68;
-  const scale = Math.min(targetWidth / lngSpan, targetHeight / latSpan);
-  const centerLng = (minLng + maxLng) / 2;
-  const centerLat = (minLat + maxLat) / 2;
-  return rings.map((ring) => ring.map(([lng, lat]) => {
-    const x = 66 + (lng - centerLng) * scale;
-    const y = 44 - (lat - centerLat) * scale;
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
-  }).join(" "));
-}
-
-function shorelineMapPreviewDataUri(spot, geojson) {
-  const rings = projectedPreviewRings(shorelineRingsFromGeoJson(geojson));
-  if (!rings.length) return "";
-  const idSuffix = (spot?.slug || "lake").replace(/[^a-z0-9-]/gi, "");
-  const polygons = rings.map((points) => `<polygon points="${points}"/>`).join("");
-  const strokedPolygons = rings.map((points) => `<polygon points="${points}" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.25"/>`).join("");
-  const linePaths = Array.from({ length: 9 }, (_, index) => {
-    const y = 16 + index * 7;
-    const x = 20 + (index % 3) * 12;
-    return `<path d="M${x} ${y} l26 -10"/>`;
-  }).join("");
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 88" role="img" aria-label="${spot?.name || "Lake"} map preview">
-      <defs>
-        <linearGradient id="water-${idSuffix}" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#17c0e8"/>
-          <stop offset="0.52" stop-color="#1167ff"/>
-          <stop offset="1" stop-color="#f20bc6"/>
-        </linearGradient>
-        <clipPath id="lake-${idSuffix}">
-          ${polygons}
-        </clipPath>
-      </defs>
-      <rect width="132" height="88" rx="10" fill="#f8fbff"/>
-      <path d="M-12 69 C18 56 28 70 58 58 S101 54 145 39" fill="none" stroke="#dfe8f3" stroke-width="3"/>
-      <path d="M-8 28 C20 16 39 22 63 18 S104 12 142 18" fill="none" stroke="#edf3f8" stroke-width="10"/>
-      <g fill="url(#water-${idSuffix})" opacity="0.94">${polygons}</g>
-      <g clip-path="url(#lake-${idSuffix})" stroke="#fff" stroke-linecap="round" stroke-width="1.7" opacity="0.48">${linePaths}</g>
-      ${strokedPolygons}
-    </svg>
-  `.trim().replace(/\s+/g, " ");
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
-async function hydrateHomeMapPreviews() {
-  const cards = [...document.querySelectorAll(".home-lake-link[data-preview='map']")];
-  await Promise.all(cards.map(async (card) => {
-    const spot = lakeSpots.find((candidate) => candidate.slug === card.dataset.spot);
-    const image = card.querySelector("img");
-    if (!spot || !image) return;
-    const shoreline = await fetchOptionalGeoJson(`data/live/map_layers/${spot.slug}_shoreline.geojson`);
-    const preview = shorelineMapPreviewDataUri(spot, shoreline);
-    if (preview) image.src = preview;
-  }));
-}
-
 function renderHomeLakeLinks() {
   const container = document.getElementById("homeLakeLinks");
   if (!container) return;
@@ -760,10 +674,9 @@ function renderHomeLakeLinks() {
     link.className = "home-lake-link";
     link.href = spotReportUrl(spot);
     const camera = cameraForSpot(spot);
-    const fallbackPreview = mapPreviewPlaceholderDataUri(spot);
+    const fallbackPreview = spot.previewSvg || mapPreviewPlaceholderDataUri(spot);
     link.dataset.spot = spot.slug;
     link.dataset.name = `${spot.name} ${spot.location}`.toLowerCase();
-    link.dataset.preview = camera ? "camera" : "map";
     link.innerHTML = `
       <span class="home-lake-copy">
         <b>${spot.name}</b>
@@ -777,7 +690,6 @@ function renderHomeLakeLinks() {
     return link;
   }));
   hydrateHomeLakeCards();
-  hydrateHomeMapPreviews();
   wireHomeSearch();
   wireSpotSearch();
   renderHomeCameraSlider();
@@ -866,24 +778,31 @@ function initHomeMap() {
 
 async function hydrateHomeLakeCards() {
   const cards = [...document.querySelectorAll(".home-lake-link")];
-  await Promise.all(cards.map(async (card) => {
+  let summaryBySlug = new Map();
+  try {
+    const payload = await fetchJson("data/live/home-summary.json");
+    const rows = Array.isArray(payload) ? payload : payload?.spots || [];
+    summaryBySlug = new Map(rows.map((entry) => [entry.slug, entry]));
+  } catch (error) {
+    console.warn("[LakePro] Home summary unavailable", error);
+  }
+
+  cards.forEach((card) => {
     const slug = new URL(card.href).searchParams.get("spot");
-    try {
-      const bundle = await fetchJson(`data/live/spots/${slug}.json`);
-      const latest = heatAdjustedDay(bundle.latest || {});
-      const grade = gradeValue(latest.grade) || "--";
-      const detail = latest.chop_proxy_ft != null ? `${latest.chop_proxy_ft} ft chop` : `${Math.round(latest.wind_speed_max_mph || 0)} mph`;
-      const gradeNode = card.querySelector(".grade-letter");
-      if (gradeNode) {
-        gradeNode.textContent = grade;
-        gradeNode.dataset.grade = gradeValue(grade);
-      }
-      const em = card.querySelector("em");
-      if (em) em.lastChild.textContent = ` ${detail}`;
-    } catch (error) {
-      console.warn("[LakePro] Home lake card data unavailable", error);
+    const latest = summaryBySlug.get(slug);
+    if (!latest) return;
+    const grade = gradeValue(latest.grade) || "--";
+    const detail = latest.chop_proxy_ft != null
+      ? `${latest.chop_proxy_ft} ft chop`
+      : `${Math.round(latest.wind_speed_max_mph || 0)} mph`;
+    const gradeNode = card.querySelector(".grade-letter");
+    if (gradeNode) {
+      gradeNode.textContent = grade;
+      gradeNode.dataset.grade = gradeValue(grade);
     }
-  }));
+    const em = card.querySelector("em");
+    if (em) em.lastChild.textContent = ` ${detail}`;
+  });
 
   renderHomeCameraSlide(homeCameraIndex);
 }
