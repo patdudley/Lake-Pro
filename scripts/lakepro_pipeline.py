@@ -16,6 +16,7 @@ import json
 import math
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
@@ -91,10 +92,17 @@ PAYETTE_LAYER_URLS = {
 }
 
 
-def fetch_json(url: str, timeout: int = 45) -> dict:
+def fetch_json(url: str, timeout: int = 45, attempts: int = 3) -> dict:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        return json.loads(response.read().decode("utf-8"))
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except Exception:
+            if attempt == attempts:
+                raise
+            time.sleep(2 ** attempt)
+    raise RuntimeError(f"unreachable: {url}")
 
 
 def write_json(path: Path, payload: dict | list) -> None:

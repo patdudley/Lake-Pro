@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: refresh-live-data
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -43,14 +47,21 @@ jobs:
           npm install --no-save playwright
           npx playwright install --with-deps chromium
 
-      - name: Refresh data and camera
+      - name: Refresh weather data
+        id: pipeline
         if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
-        run: |
-          python3 scripts/lakepro_pipeline.py
-          node scripts/capture_lake_cameras.js
+        run: python3 scripts/lakepro_pipeline.py
 
+      - name: Capture lake cameras
+        if: always() && (steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.pipeline.outcome != 'skipped'
+        run: node scripts/capture_lake_cameras.js
+
+      # Commit whatever refreshed successfully even if some lakes failed —
+      # the pipeline exits non-zero on partial failure (details land in
+      # data/live/manifest.json), but discarding the other lakes' fresh data
+      # would leave the whole site stale.
       - name: Commit refreshed artifacts
-        if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        if: always() && (steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.pipeline.outcome != 'skipped'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -59,5 +70,6 @@ jobs:
             echo "No live data changes to commit."
           else
             git commit -m "Refresh live Lake Pro data"
+            git pull --rebase origin main
             git push
           fi
