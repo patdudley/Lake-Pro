@@ -50,10 +50,12 @@ jobs:
       - name: Refresh weather data
         id: pipeline
         if: steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch'
+        timeout-minutes: 40
         run: python3 scripts/lakepro_pipeline.py
 
       - name: Capture lake cameras
         if: always() && (steps.window.outputs.should_run == 'true' || github.event_name == 'workflow_dispatch') && steps.pipeline.outcome != 'skipped'
+        timeout-minutes: 20
         run: node scripts/capture_lake_cameras.js
 
       # Commit whatever refreshed successfully even if some lakes failed —

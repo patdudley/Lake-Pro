@@ -935,8 +935,15 @@ def build_forecast(spot: Spot) -> dict:
         )
 
     daily_source = None
+    daily_fill_error = None
     if len(days) < 10:
-        daily_source = fetch_open_meteo_daily(spot)
+        # NWS hourly covers ~7 days; Open-Meteo fills the rest. Publish the
+        # NWS days rather than failing the lake when only the fill is down.
+        try:
+            daily_source = fetch_open_meteo_daily(spot)
+        except Exception as exc:
+            daily_fill_error = str(exc)
+    if daily_source is not None:
         existing_dates = {day["date"] for day in days}
         daily = daily_source.get("daily", {})
         open_hourly = daily_source.get("hourly", {})
@@ -1025,6 +1032,7 @@ def build_forecast(spot: Spot) -> dict:
             "hourly_url": nws["hourly_url"],
             "points_url": nws["points_url"],
             "daily_fill_url": daily_source.get("url") if daily_source else None,
+            "daily_fill_error": daily_fill_error,
         },
         "latest": {
             **latest,
@@ -1124,29 +1132,57 @@ def build_home_summary() -> dict:
     return {"spots": len(rows)}
 
 
+def refresh_spot(spot: Spot) -> dict:
+    forecast = build_forecast(spot)
+    write_json(SPOTS_DIR / f"{spot.slug}.json", forecast)
+    write_json(WIND_FRAMES_DIR / f"{spot.slug}.json", build_wind_frame(spot, forecast))
+    latest = forecast.get("latest", {})
+    return {
+        "slug": spot.slug,
+        "name": spot.name,
+        "grade": latest.get("grade"),
+        "score": latest.get("score"),
+        "wind_speed_max_mph": latest.get("wind_speed_max_mph"),
+        "best_window": latest.get("best_window"),
+    }
+
+
+RETRY_PASS_DELAY_SECONDS = 60
+RETRY_PASS_MAX_SPOTS = 15
+
+
 def run_pipeline() -> int:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     spot_summaries = []
     failures = []
+    failed_spots = []
 
     for spot in SPOTS:
         try:
-            forecast = build_forecast(spot)
-            write_json(SPOTS_DIR / f"{spot.slug}.json", forecast)
-            write_json(WIND_FRAMES_DIR / f"{spot.slug}.json", build_wind_frame(spot, forecast))
-            latest = forecast.get("latest", {})
-            spot_summaries.append(
-                {
-                    "slug": spot.slug,
-                    "name": spot.name,
-                    "grade": latest.get("grade"),
-                    "score": latest.get("score"),
-                    "wind_speed_max_mph": latest.get("wind_speed_max_mph"),
-                    "best_window": latest.get("best_window"),
-                }
-            )
+            spot_summaries.append(refresh_spot(spot))
         except Exception as exc:
-            failures.append({"spot": spot.slug, "error": str(exc)})
+            failed_spots.append((spot, exc))
+
+    # Transient network brownouts on CI runners can drop a handful of lakes.
+    # Give them one more pass after a pause so a red run means a persistent
+    # problem, not a blip; failed lakes keep their last-good JSON either way.
+    # A large failure count means the weather provider itself is down, where
+    # another pass would only burn runner minutes.
+    if failed_spots and len(failed_spots) <= RETRY_PASS_MAX_SPOTS:
+        time.sleep(RETRY_PASS_DELAY_SECONDS)
+        for spot, first_error in failed_spots:
+            try:
+                spot_summaries.append(refresh_spot(spot))
+            except Exception as exc:
+                failures.append(
+                    {
+                        "spot": spot.slug,
+                        "error": str(exc),
+                        "first_attempt_error": str(first_error),
+                    }
+                )
+    else:
+        failures.extend({"spot": spot.slug, "error": str(exc)} for spot, exc in failed_spots)
 
     map_layers = refresh_map_layers()
     home_summary = build_home_summary()

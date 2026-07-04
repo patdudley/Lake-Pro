@@ -18,7 +18,7 @@ python3 -m http.server 4174                          # serve the site locally fr
 python3 -m unittest discover test_scripts -v        # unit tests for pipeline pure functions
 ```
 
-The pipeline exits non-zero when any lake fails to fetch; per-lake failures are recorded in `data/live/manifest.json` under `failures`. Check there first when a run is red.
+The pipeline exits non-zero when any lake fails to fetch; per-lake failures are recorded in `data/live/manifest.json` under `failures`. Check there first when a run is red. Failed lakes get one retry pass after a pause (skipped when so many fail that the provider itself is down), keep their last-good JSON either way, and Tahoe/Payette publish NWS-only days when just the Open-Meteo 10-day fill is unreachable (`source.daily_fill_error`). A red run therefore means failures persisted through retries — not lost data.
 
 ## Architecture
 
