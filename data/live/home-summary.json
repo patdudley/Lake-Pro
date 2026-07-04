@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-04T14:54:35.324443+00:00",
+  "generated_at": "2026-07-04T16:26:29.986667+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.3,
@@ -9,43 +9,43 @@
     },
     {
       "chop_proxy_ft": 0.5,
-      "grade": "B",
+      "grade": "C",
       "slug": "payette-lake",
       "wind_speed_max_mph": 13.0
     },
     {
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 1.3,
       "grade": "B",
       "slug": "jordanelle-reservoir",
-      "wind_speed_max_mph": 18.1
+      "wind_speed_max_mph": 26.3
     },
     {
-      "chop_proxy_ft": 0.7,
+      "chop_proxy_ft": 0.9,
       "grade": "B",
       "slug": "deer-creek-reservoir",
-      "wind_speed_max_mph": 15.3
+      "wind_speed_max_mph": 19.9
     },
     {
-      "chop_proxy_ft": 0.4,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "pineview-reservoir",
-      "wind_speed_max_mph": 11.3
+      "wind_speed_max_mph": 11.4
+    },
+    {
+      "chop_proxy_ft": 0.5,
+      "grade": "C",
+      "slug": "lake-havasu",
+      "wind_speed_max_mph": 11.6
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "C",
-      "slug": "lake-havasu",
-      "wind_speed_max_mph": 12.3
+      "slug": "lake-powell",
+      "wind_speed_max_mph": 15.9
     },
     {
       "chop_proxy_ft": 0.6,
-      "grade": "C",
-      "slug": "lake-powell",
-      "wind_speed_max_mph": 13.5
-    },
-    {
-      "chop_proxy_ft": 0.7,
-      "grade": "F",
+      "grade": "D",
       "slug": "lake-coeur-d-alene",
       "wind_speed_max_mph": 11.8
     },
@@ -53,61 +53,61 @@
       "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "lake-travis",
-      "wind_speed_max_mph": 11.0
+      "wind_speed_max_mph": 10.5
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "lake-austin",
-      "wind_speed_max_mph": 10.1
+      "wind_speed_max_mph": 10.5
+    },
+    {
+      "chop_proxy_ft": 0.8,
+      "grade": "B",
+      "slug": "lake-minnetonka",
+      "wind_speed_max_mph": 14.4
     },
     {
       "chop_proxy_ft": 1.3,
       "grade": "B",
-      "slug": "lake-minnetonka",
-      "wind_speed_max_mph": 22.8
-    },
-    {
-      "chop_proxy_ft": 0.7,
-      "grade": "B",
       "slug": "lake-of-the-ozarks",
-      "wind_speed_max_mph": 11.9
-    },
-    {
-      "chop_proxy_ft": 0.2,
-      "grade": "B",
-      "slug": "lake-lanier",
-      "wind_speed_max_mph": 6.2
+      "wind_speed_max_mph": 16.0
     },
     {
       "chop_proxy_ft": 0.4,
       "grade": "B",
+      "slug": "lake-lanier",
+      "wind_speed_max_mph": 10.1
+    },
+    {
+      "chop_proxy_ft": 0.3,
+      "grade": "B",
       "slug": "lake-norman",
-      "wind_speed_max_mph": 9.0
+      "wind_speed_max_mph": 8.2
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "lake-lbj",
-      "wind_speed_max_mph": 10.2
+      "wind_speed_max_mph": 10.3
     },
     {
-      "chop_proxy_ft": 1.0,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "smith-mountain-lake",
-      "wind_speed_max_mph": 18.7
+      "wind_speed_max_mph": 11.2
     },
     {
       "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "lake-shasta",
-      "wind_speed_max_mph": 12.9
+      "wind_speed_max_mph": 12.7
     },
     {
       "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "lake-conroe",
-      "wind_speed_max_mph": 9.7
+      "wind_speed_max_mph": 10.7
     },
     {
       "chop_proxy_ft": 0.7,
@@ -119,109 +119,109 @@
       "chop_proxy_ft": 0.5,
       "grade": "C",
       "slug": "lake-ray-hubbard",
-      "wind_speed_max_mph": 8.5
+      "wind_speed_max_mph": 8.6
     },
     {
       "chop_proxy_ft": 0.6,
       "grade": "C",
       "slug": "gull-lake",
-      "wind_speed_max_mph": 11.8
+      "wind_speed_max_mph": 11.5
     },
     {
-      "chop_proxy_ft": 0.4,
+      "chop_proxy_ft": 0.3,
       "grade": "B",
       "slug": "bear-lake",
-      "wind_speed_max_mph": 10.5
+      "wind_speed_max_mph": 7.1
     },
     {
       "chop_proxy_ft": 0.7,
-      "grade": "C",
+      "grade": "B",
       "slug": "lake-pend-oreille",
-      "wind_speed_max_mph": 14.0
+      "wind_speed_max_mph": 13.9
     },
     {
       "chop_proxy_ft": 0.9,
-      "grade": "D",
+      "grade": "C",
       "slug": "flathead-lake",
       "wind_speed_max_mph": 16.3
     },
     {
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "canyon-lake",
-      "wind_speed_max_mph": 11.6
+      "wind_speed_max_mph": 11.0
     },
     {
       "chop_proxy_ft": 0.8,
       "grade": "C",
       "slug": "lake-mcqueeney",
-      "wind_speed_max_mph": 12.1
+      "wind_speed_max_mph": 11.9
     },
     {
-      "chop_proxy_ft": 0.7,
+      "chop_proxy_ft": 1.1,
       "grade": "B",
       "slug": "table-rock-lake",
-      "wind_speed_max_mph": 12.4
+      "wind_speed_max_mph": 15.8
+    },
+    {
+      "chop_proxy_ft": 0.1,
+      "grade": "B",
+      "slug": "lake-cumberland",
+      "wind_speed_max_mph": 4.4
+    },
+    {
+      "chop_proxy_ft": 0.3,
+      "grade": "B",
+      "slug": "lake-norris",
+      "wind_speed_max_mph": 6.1
     },
     {
       "chop_proxy_ft": 0.2,
       "grade": "B",
-      "slug": "lake-cumberland",
-      "wind_speed_max_mph": 4.8
-    },
-    {
-      "chop_proxy_ft": 0.4,
-      "grade": "B",
-      "slug": "lake-norris",
-      "wind_speed_max_mph": 8.7
-    },
-    {
-      "chop_proxy_ft": 0.4,
-      "grade": "B",
       "slug": "center-hill-lake",
-      "wind_speed_max_mph": 11.3
+      "wind_speed_max_mph": 6.8
     },
     {
-      "chop_proxy_ft": 0.3,
+      "chop_proxy_ft": 0.2,
       "grade": "B",
       "slug": "lake-keowee",
-      "wind_speed_max_mph": 7.1
+      "wind_speed_max_mph": 6.0
     },
     {
-      "chop_proxy_ft": 0.3,
+      "chop_proxy_ft": 0.2,
       "grade": "B",
       "slug": "lake-hartwell",
-      "wind_speed_max_mph": 6.1
-    },
-    {
-      "chop_proxy_ft": 0.8,
-      "grade": "B",
-      "slug": "lake-murray",
-      "wind_speed_max_mph": 12.9
-    },
-    {
-      "chop_proxy_ft": 0.5,
-      "grade": "B",
-      "slug": "lake-george",
-      "wind_speed_max_mph": 9.2
+      "wind_speed_max_mph": 6.7
     },
     {
       "chop_proxy_ft": 0.6,
+      "grade": "B",
+      "slug": "lake-murray",
+      "wind_speed_max_mph": 8.9
+    },
+    {
+      "chop_proxy_ft": 0.6,
+      "grade": "B",
+      "slug": "lake-george",
+      "wind_speed_max_mph": 10.2
+    },
+    {
+      "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "lake-winnipesaukee",
-      "wind_speed_max_mph": 11.5
+      "wind_speed_max_mph": 12.5
     },
     {
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 0.4,
       "grade": "B",
       "slug": "lake-geneva",
-      "wind_speed_max_mph": 15.5
+      "wind_speed_max_mph": 9.8
     },
     {
-      "chop_proxy_ft": 1.9,
+      "chop_proxy_ft": 1.4,
       "grade": "B",
       "slug": "grand-lake-o-the-cherokees",
-      "wind_speed_max_mph": 26.4
+      "wind_speed_max_mph": 22.6
     },
     {
       "chop_proxy_ft": 0.5,
@@ -233,55 +233,55 @@
       "chop_proxy_ft": 0.9,
       "grade": "D",
       "slug": "california-delta",
-      "wind_speed_max_mph": 16.1
+      "wind_speed_max_mph": 15.7
     },
     {
-      "chop_proxy_ft": 1.4,
+      "chop_proxy_ft": 0.2,
       "grade": "B",
       "slug": "lake-oconee",
-      "wind_speed_max_mph": 23.5
+      "wind_speed_max_mph": 5.6
     },
     {
-      "chop_proxy_ft": 0.4,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "possum-kingdom-lake",
-      "wind_speed_max_mph": 6.6
+      "wind_speed_max_mph": 10.6
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "donner-lake",
-      "wind_speed_max_mph": 13.7
+      "wind_speed_max_mph": 13.5
     },
     {
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 1.6,
       "grade": "B",
       "slug": "horsetooth-reservoir",
-      "wind_speed_max_mph": 16.0
+      "wind_speed_max_mph": 31.4
+    },
+    {
+      "chop_proxy_ft": 1.1,
+      "grade": "B",
+      "slug": "cherry-creek-reservoir",
+      "wind_speed_max_mph": 17.5
     },
     {
       "chop_proxy_ft": 0.9,
       "grade": "B",
-      "slug": "cherry-creek-reservoir",
-      "wind_speed_max_mph": 19.1
+      "slug": "carter-lake",
+      "wind_speed_max_mph": 16.5
     },
     {
-      "chop_proxy_ft": 1.0,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
-      "slug": "carter-lake",
-      "wind_speed_max_mph": 17.9
+      "slug": "pewaukee-lake",
+      "wind_speed_max_mph": 11.0
     },
     {
       "chop_proxy_ft": 0.4,
       "grade": "B",
-      "slug": "pewaukee-lake",
-      "wind_speed_max_mph": 10.0
-    },
-    {
-      "chop_proxy_ft": 0.3,
-      "grade": "B",
       "slug": "lake-wylie",
-      "wind_speed_max_mph": 6.5
+      "wind_speed_max_mph": 6.2
     },
     {
       "chop_proxy_ft": 0.2,
@@ -293,19 +293,19 @@
       "chop_proxy_ft": 0.2,
       "grade": "B",
       "slug": "lake-martin",
-      "wind_speed_max_mph": 4.7
+      "wind_speed_max_mph": 4.1
+    },
+    {
+      "chop_proxy_ft": 0.5,
+      "grade": "B",
+      "slug": "lake-hamilton-lake-ouachita",
+      "wind_speed_max_mph": 8.3
     },
     {
       "chop_proxy_ft": 0.4,
       "grade": "B",
-      "slug": "lake-hamilton-lake-ouachita",
-      "wind_speed_max_mph": 8.7
-    },
-    {
-      "chop_proxy_ft": 0.8,
-      "grade": "B",
       "slug": "lake-sinclair",
-      "wind_speed_max_mph": 15.6
+      "wind_speed_max_mph": 6.7
     },
     {
       "chop_proxy_ft": 0.2,
@@ -314,52 +314,52 @@
       "wind_speed_max_mph": 5.0
     },
     {
-      "chop_proxy_ft": 0.3,
+      "chop_proxy_ft": 0.4,
       "grade": "B",
       "slug": "clarks-hill-strom-thurmond",
-      "wind_speed_max_mph": 7.0
-    },
-    {
-      "chop_proxy_ft": 0.8,
-      "grade": "B",
-      "slug": "lake-hickory-catawba-chain",
-      "wind_speed_max_mph": 17.2
-    },
-    {
-      "chop_proxy_ft": 1.2,
-      "grade": "B",
-      "slug": "claytor-lake",
-      "wind_speed_max_mph": 24.4
-    },
-    {
-      "chop_proxy_ft": 0.9,
-      "grade": "B",
-      "slug": "tims-ford-lake",
-      "wind_speed_max_mph": 15.6
+      "wind_speed_max_mph": 6.9
     },
     {
       "chop_proxy_ft": 0.3,
       "grade": "B",
-      "slug": "dale-hollow-lake",
-      "wind_speed_max_mph": 6.8
+      "slug": "lake-hickory-catawba-chain",
+      "wind_speed_max_mph": 8.1
     },
     {
-      "chop_proxy_ft": 0.6,
+      "chop_proxy_ft": 0.4,
+      "grade": "B",
+      "slug": "claytor-lake",
+      "wind_speed_max_mph": 9.5
+    },
+    {
+      "chop_proxy_ft": 0.4,
+      "grade": "B",
+      "slug": "tims-ford-lake",
+      "wind_speed_max_mph": 9.0
+    },
+    {
+      "chop_proxy_ft": 0.4,
+      "grade": "B",
+      "slug": "dale-hollow-lake",
+      "wind_speed_max_mph": 6.4
+    },
+    {
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "tellico-lake",
-      "wind_speed_max_mph": 9.9
+      "wind_speed_max_mph": 10.1
     },
     {
-      "chop_proxy_ft": 0.6,
+      "chop_proxy_ft": 0.3,
       "grade": "B",
       "slug": "watts-bar-tn-river-chain",
-      "wind_speed_max_mph": 9.8
+      "wind_speed_max_mph": 8.3
     },
     {
       "chop_proxy_ft": 0.3,
       "grade": "B",
       "slug": "green-river-lake",
-      "wind_speed_max_mph": 7.4
+      "wind_speed_max_mph": 7.5
     },
     {
       "chop_proxy_ft": 0.6,
@@ -371,7 +371,7 @@
       "chop_proxy_ft": 1.0,
       "grade": "F",
       "slug": "lake-amistad",
-      "wind_speed_max_mph": 15.2
+      "wind_speed_max_mph": 15.3
     },
     {
       "chop_proxy_ft": 0.8,
@@ -389,13 +389,13 @@
       "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "lake-marble-falls",
-      "wind_speed_max_mph": 10.5
+      "wind_speed_max_mph": 10.1
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "stillhouse-hollow-belton",
-      "wind_speed_max_mph": 11.1
+      "wind_speed_max_mph": 9.6
     },
     {
       "chop_proxy_ft": 0.8,
@@ -404,124 +404,124 @@
       "wind_speed_max_mph": 11.0
     },
     {
-      "chop_proxy_ft": 0.6,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "lake-houston",
-      "wind_speed_max_mph": 10.4
+      "wind_speed_max_mph": 10.0
     },
     {
-      "chop_proxy_ft": 0.6,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "sam-rayburn",
-      "wind_speed_max_mph": 8.2
+      "wind_speed_max_mph": 8.4
     },
     {
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "big-bear-lake",
-      "wind_speed_max_mph": 16.0
+      "wind_speed_max_mph": 14.0
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "pyramid-lake",
-      "wind_speed_max_mph": 14.8
+      "wind_speed_max_mph": 15.0
     },
     {
       "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "lake-berryessa",
-      "wind_speed_max_mph": 13.2
+      "wind_speed_max_mph": 12.3
     },
     {
       "chop_proxy_ft": 0.4,
       "grade": "C",
       "slug": "folsom-lake",
-      "wind_speed_max_mph": 10.5
+      "wind_speed_max_mph": 10.0
     },
     {
-      "chop_proxy_ft": 0.6,
+      "chop_proxy_ft": 0.8,
       "grade": "C",
       "slug": "lake-mohave",
-      "wind_speed_max_mph": 12.9
+      "wind_speed_max_mph": 15.5
     },
     {
-      "chop_proxy_ft": 0.4,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "sand-hollow-quail-creek",
       "wind_speed_max_mph": 10.8
     },
     {
-      "chop_proxy_ft": 0.4,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "flaming-gorge",
-      "wind_speed_max_mph": 9.9
+      "wind_speed_max_mph": 13.2
     },
     {
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 0.9,
       "grade": "B",
       "slug": "strawberry-reservoir",
-      "wind_speed_max_mph": 17.7
+      "wind_speed_max_mph": 20.5
     },
     {
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "utah-lake",
-      "wind_speed_max_mph": 15.7
+      "wind_speed_max_mph": 14.9
     },
     {
       "chop_proxy_ft": 0.8,
       "grade": "B",
       "slug": "lake-pueblo",
-      "wind_speed_max_mph": 15.6
+      "wind_speed_max_mph": 15.4
     },
     {
-      "chop_proxy_ft": 0.7,
+      "chop_proxy_ft": 0.8,
       "grade": "B",
       "slug": "grand-lake",
-      "wind_speed_max_mph": 13.9
+      "wind_speed_max_mph": 15.5
     },
     {
-      "chop_proxy_ft": 1.2,
+      "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "lake-granby",
-      "wind_speed_max_mph": 23.8
+      "wind_speed_max_mph": 13.9
     },
     {
       "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "blue-mesa-reservoir",
-      "wind_speed_max_mph": 13.4
+      "wind_speed_max_mph": 13.3
     },
     {
-      "chop_proxy_ft": 1.4,
+      "chop_proxy_ft": 0.9,
       "grade": "B",
       "slug": "boyd-lake",
-      "wind_speed_max_mph": 26.0
+      "wind_speed_max_mph": 18.5
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "F",
       "slug": "hayden-lake",
-      "wind_speed_max_mph": 13.3
+      "wind_speed_max_mph": 13.0
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "lake-billy-chinook",
-      "wind_speed_max_mph": 14.4
+      "wind_speed_max_mph": 14.5
     },
     {
       "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "cultus-lake",
-      "wind_speed_max_mph": 10.4
+      "wind_speed_max_mph": 10.3
     },
     {
       "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "lake-washington-sammamish",
-      "wind_speed_max_mph": 10.2
+      "wind_speed_max_mph": 10.7
     },
     {
       "chop_proxy_ft": 1.0,
@@ -530,64 +530,64 @@
       "wind_speed_max_mph": 18.1
     },
     {
-      "chop_proxy_ft": 0.2,
-      "grade": "B",
-      "slug": "okoboji-iowa-great-lakes",
-      "wind_speed_max_mph": 6.7
-    },
-    {
       "chop_proxy_ft": 0.4,
       "grade": "B",
+      "slug": "okoboji-iowa-great-lakes",
+      "wind_speed_max_mph": 10.4
+    },
+    {
+      "chop_proxy_ft": 0.3,
+      "grade": "B",
       "slug": "prior-lake-cross-lake",
-      "wind_speed_max_mph": 6.5
+      "wind_speed_max_mph": 6.0
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "lake-wallenpaupack",
-      "wind_speed_max_mph": 11.3
+      "wind_speed_max_mph": 10.4
     },
     {
-      "chop_proxy_ft": 1.2,
+      "chop_proxy_ft": 0.8,
       "grade": "B",
       "slug": "deep-creek-lake",
-      "wind_speed_max_mph": 14.3
-    },
-    {
-      "chop_proxy_ft": 0.5,
-      "grade": "B",
-      "slug": "lake-winnisquam",
-      "wind_speed_max_mph": 10.1
-    },
-    {
-      "chop_proxy_ft": 0.7,
-      "grade": "C",
-      "slug": "sebago-lake",
-      "wind_speed_max_mph": 12.2
-    },
-    {
-      "chop_proxy_ft": 0.7,
-      "grade": "B",
-      "slug": "candlewood-lake",
-      "wind_speed_max_mph": 10.9
+      "wind_speed_max_mph": 14.1
     },
     {
       "chop_proxy_ft": 0.6,
       "grade": "B",
+      "slug": "lake-winnisquam",
+      "wind_speed_max_mph": 10.9
+    },
+    {
+      "chop_proxy_ft": 0.8,
+      "grade": "C",
+      "slug": "sebago-lake",
+      "wind_speed_max_mph": 13.7
+    },
+    {
+      "chop_proxy_ft": 0.8,
+      "grade": "B",
+      "slug": "candlewood-lake",
+      "wind_speed_max_mph": 13.3
+    },
+    {
+      "chop_proxy_ft": 0.8,
+      "grade": "B",
       "slug": "lake-conway-clermont-chain",
-      "wind_speed_max_mph": 11.7
+      "wind_speed_max_mph": 15.2
     },
     {
       "chop_proxy_ft": 0.4,
       "grade": "B",
       "slug": "lake-tarpon-tampa-bay-area",
-      "wind_speed_max_mph": 9.4
+      "wind_speed_max_mph": 9.7
     },
     {
-      "chop_proxy_ft": 0.5,
+      "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "lake-lure",
-      "wind_speed_max_mph": 9.2
+      "wind_speed_max_mph": 12.0
     },
     {
       "chop_proxy_ft": 0.3,
@@ -599,13 +599,13 @@
       "chop_proxy_ft": 0.3,
       "grade": "B",
       "slug": "lake-greenwood",
-      "wind_speed_max_mph": 6.3
+      "wind_speed_max_mph": 6.2
     },
     {
       "chop_proxy_ft": 0.8,
       "grade": "B",
       "slug": "okanagan-lake",
-      "wind_speed_max_mph": 14.6
+      "wind_speed_max_mph": 14.8
     },
     {
       "chop_proxy_ft": 0.6,
@@ -617,7 +617,7 @@
       "chop_proxy_ft": 0.4,
       "grade": "B",
       "slug": "lake-muskoka-joseph-rosseau",
-      "wind_speed_max_mph": 9.5
+      "wind_speed_max_mph": 8.7
     },
     {
       "chop_proxy_ft": 0.8,
@@ -626,10 +626,10 @@
       "wind_speed_max_mph": 17.6
     },
     {
-      "chop_proxy_ft": 0.6,
-      "grade": "D",
+      "chop_proxy_ft": 0.7,
+      "grade": "C",
       "slug": "lake-koocanusa",
-      "wind_speed_max_mph": 12.2
+      "wind_speed_max_mph": 12.0
     },
     {
       "chop_proxy_ft": 0.8,
