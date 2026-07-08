@@ -1810,41 +1810,6 @@ function projectedLakePolygons(dpr) {
   })));
 }
 
-function fallbackLakePolygons(dpr, spot) {
-  if (!lakeMap || !spot) return [];
-  const mapCanvas = lakeMap.getCanvas();
-  const center = lakeMap.project([spot.longitude, spot.latitude]);
-  const width = mapCanvas.clientWidth * dpr;
-  const height = mapCanvas.clientHeight * dpr;
-  const radiusX = Math.max(110 * dpr, Math.min(width * 0.24, 290 * dpr));
-  const radiusY = Math.max(150 * dpr, Math.min(height * 0.34, 390 * dpr));
-  const rotation = fallbackLakeRotation(spot);
-  const radians = rotation * Math.PI / 180;
-  const ring = [];
-
-  for (let index = 0; index < 72; index += 1) {
-    const angle = (index / 72) * Math.PI * 2;
-    const branchBias = Math.abs(Math.sin(angle)) ** 1.8;
-    const wobble = 1 + Math.sin(angle * 3) * 0.07 + Math.cos(angle * 5) * 0.04;
-    const x = Math.cos(angle) * radiusX * (0.78 + branchBias * 0.28) * wobble;
-    const y = Math.sin(angle) * radiusY * (0.92 + Math.abs(Math.cos(angle)) * 0.14) * wobble;
-    ring.push([
-      (center.x * dpr) + x * Math.cos(radians) - y * Math.sin(radians),
-      (center.y * dpr) + x * Math.sin(radians) + y * Math.cos(radians),
-    ]);
-  }
-
-  return [[ring]];
-}
-
-function fallbackLakeRotation(spot) {
-  const slug = spot?.slug || "";
-  if (slug.includes("travis") || slug.includes("austin")) return -34;
-  if (slug.includes("amistad") || slug.includes("texoma") || slug.includes("powell")) return 74;
-  if (slug.includes("havasu") || slug.includes("mead") || slug.includes("mohave")) return 14;
-  return 18;
-}
-
 function tracePolygonPath(context, polygons) {
   context.beginPath();
   for (const polygon of polygons) {
