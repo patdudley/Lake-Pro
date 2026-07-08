@@ -449,7 +449,8 @@ function placeCameraCard() {
   }
 }
 
-function gradeValue(grade) {
+function gradeValue(value) {
+  const grade = String(value || "").trim().toUpperCase();
   return ["A", "B", "C", "D", "F"].includes(grade) ? grade : "";
 }
 
