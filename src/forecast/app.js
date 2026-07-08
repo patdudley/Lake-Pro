@@ -65,8 +65,8 @@ const placeholderForecast = Array.from({ length: 10 }, (_, index) => ({
   summary: "Stubbed",
 }));
 
-async function fetchJson(path) {
-  const response = await fetch(path, { cache: "no-store" });
+async function fetchJson(path, { cache = "no-store" } = {}) {
+  const response = await fetch(path, { cache });
   if (!response.ok) throw new Error(`${path} unavailable`);
   return response.json();
 }
@@ -674,7 +674,7 @@ let homePreviewPayloadPromise;
 
 async function loadHomePreviewSvgs() {
   if (!homePreviewPayloadPromise) {
-    homePreviewPayloadPromise = fetchJson("data/live/home-previews.json").catch((error) => {
+    homePreviewPayloadPromise = fetchJson("data/live/home-previews.json", { cache: "default" }).catch((error) => {
       console.warn("[LakePro] Home map previews unavailable", error);
       return {};
     });

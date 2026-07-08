@@ -56,7 +56,7 @@ let directoryPreviewPayloadPromise;
 
 async function loadDirectoryPreviewSvgs() {
   if (!directoryPreviewPayloadPromise) {
-    directoryPreviewPayloadPromise = fetchJson("data/live/home-previews.json").catch((error) => {
+    directoryPreviewPayloadPromise = fetchJson("data/live/home-previews.json", { cache: "default" }).catch((error) => {
       console.warn("[LakePro] Directory map previews unavailable", error);
       return {};
     });
@@ -139,8 +139,8 @@ function renderDirectory() {
   hydrateDirectoryMapPreviews();
 }
 
-async function fetchJson(path) {
-  const response = await fetch(path, { cache: "no-store" });
+async function fetchJson(path, { cache = "no-store" } = {}) {
+  const response = await fetch(path, { cache });
   if (!response.ok) throw new Error(`${path} unavailable`);
   return response.json();
 }
