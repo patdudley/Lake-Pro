@@ -46,10 +46,28 @@ function mapPreviewPlaceholderDataUri(spot) {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
+function previewSvgDataUri(svg) {
+  if (!svg) return "";
+  if (svg.startsWith("data:image/svg+xml")) return svg;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+let directoryPreviewPayloadPromise;
+
+async function loadDirectoryPreviewSvgs() {
+  if (!directoryPreviewPayloadPromise) {
+    directoryPreviewPayloadPromise = fetchJson("data/live/home-previews.json").catch((error) => {
+      console.warn("[LakePro] Directory map previews unavailable", error);
+      return {};
+    });
+  }
+  return directoryPreviewPayloadPromise;
+}
+
 function fallbackMapPreview(spot) {
   return `
     <span class="directory-map-preview" aria-hidden="true">
-      <img src="${spot.previewSvg || mapPreviewPlaceholderDataUri(spot)}" alt="">
+      <img src="${mapPreviewPlaceholderDataUri(spot)}" alt="">
     </span>
   `;
 }
@@ -102,6 +120,7 @@ function renderDirectory() {
   list.replaceChildren(...sections);
   if (count) count.textContent = `${spots.length} lake reports`;
   hydrateDirectoryCards(spots);
+  hydrateDirectoryMapPreviews();
 }
 
 async function fetchJson(path) {
@@ -132,6 +151,16 @@ async function hydrateDirectoryCards(spots) {
       gradeEl.dataset.grade = grade;
       gradeEl.setAttribute("aria-label", `${grade} grade`);
     }
+  });
+}
+
+async function hydrateDirectoryMapPreviews() {
+  const previews = await loadDirectoryPreviewSvgs();
+  list.querySelectorAll(".directory-lake-card").forEach((card) => {
+    const svg = previews?.[card.dataset.slug];
+    const image = card.querySelector(".directory-map-preview img");
+    if (!svg || !image) return;
+    image.src = previewSvgDataUri(svg);
   });
 }
 

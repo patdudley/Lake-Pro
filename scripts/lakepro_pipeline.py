@@ -28,6 +28,7 @@ DATA_DIR = ROOT / "data" / "live"
 SPOTS_DIR = DATA_DIR / "spots"
 MAP_LAYERS_DIR = DATA_DIR / "map_layers"
 WIND_FRAMES_DIR = DATA_DIR / "wind_frames"
+HOME_PREVIEWS_PATH = DATA_DIR / "home-previews.json"
 
 TIMEZONE = "America/Los_Angeles"
 USER_AGENT = "LakePro/0.1 foundation data pipeline"
@@ -148,10 +149,9 @@ def shoreline_rings_from_geojson(geojson: dict) -> list[list[list[float]]]:
 
 
 # The preview canvas is 132x88, so anything finer than 0.1px is invisible.
-# Dedupe, decimate, and drop sub-pixel islands to keep the data URIs small —
-# unsimplified shorelines once grew lakeCatalog.js past 60 MB.
-MAX_PREVIEW_RINGS = 60
-MAX_PREVIEW_RING_POINTS = 160
+# Dedupe, decimate, and drop sub-pixel islands to keep the preview bundle small.
+MAX_PREVIEW_RINGS = 16
+MAX_PREVIEW_RING_POINTS = 24
 MIN_PREVIEW_RING_SPAN_PX = 1.5
 
 
@@ -193,64 +193,51 @@ def projected_preview_rings(rings: list[list[list[float]]]) -> list[str]:
     return [ring_points for _, ring_points in projected[:MAX_PREVIEW_RINGS]]
 
 
-def build_preview_svg_data_uri(spot: dict, shoreline: dict) -> str:
+def build_preview_svg(spot: dict, shoreline: dict) -> str:
     rings = projected_preview_rings(shoreline_rings_from_geojson(shoreline))
     if not rings:
         return ""
     slug = re.sub(r"[^a-z0-9-]", "", spot.get("slug", "lake"), flags=re.IGNORECASE)
     name = html.escape(spot.get("name") or "Lake", quote=True)
     polygons = "".join(f'<polygon points="{points}"/>' for points in rings)
-    stroked_polygons = "".join(
-        f'<polygon points="{points}" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.25"/>'
-        for points in rings
+    if not polygons:
+        return ""
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 88" role="img" aria-label="{name} map preview">'
+        f'<defs><linearGradient id="water-{slug}" x1="0" y1="0" x2="1" y2="1">'
+        '<stop offset="0" stop-color="#17c0e8"/><stop offset=".55" stop-color="#1167ff"/>'
+        '<stop offset="1" stop-color="#f20bc6"/></linearGradient></defs>'
+        '<rect width="132" height="88" rx="10" fill="#f8fbff"/>'
+        '<path d="M-12 69C18 56 28 70 58 58S101 54 145 39" fill="none" stroke="#dfe8f3" stroke-width="3"/>'
+        '<path d="M-8 28C20 16 39 22 63 18S104 12 142 18" fill="none" stroke="#edf3f8" stroke-width="10"/>'
+        f'<g fill="url(#water-{slug})" opacity=".95" stroke="#fff" stroke-opacity=".85" stroke-width="1.15">{polygons}</g>'
+        "</svg>"
     )
-    line_paths = "".join(
-        f'<path d="M{20 + (index % 3) * 12} {16 + index * 7} l26 -10"/>'
-        for index in range(9)
-    )
-    svg = f"""
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 88" role="img" aria-label="{name} map preview">
-          <defs>
-            <linearGradient id="water-{slug}" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#17c0e8"/>
-              <stop offset="0.52" stop-color="#1167ff"/>
-              <stop offset="1" stop-color="#f20bc6"/>
-            </linearGradient>
-            <clipPath id="lake-{slug}">{polygons}</clipPath>
-          </defs>
-          <rect width="132" height="88" rx="10" fill="#f8fbff"/>
-          <path d="M-12 69 C18 56 28 70 58 58 S101 54 145 39" fill="none" stroke="#dfe8f3" stroke-width="3"/>
-          <path d="M-8 28 C20 16 39 22 63 18 S104 12 142 18" fill="none" stroke="#edf3f8" stroke-width="10"/>
-          <g fill="url(#water-{slug})" opacity="0.94">{polygons}</g>
-          <g clip-path="url(#lake-{slug})" stroke="#fff" stroke-linecap="round" stroke-width="1.7" opacity="0.48">{line_paths}</g>
-          {stroked_polygons}
-        </svg>
-    """
-    compact = re.sub(r"\s+", " ", svg.strip())
-    return f"data:image/svg+xml;charset=UTF-8,{urllib.parse.quote(compact, safe='')}"
 
 
 def refresh_catalog_preview_svgs() -> dict:
     rows = load_catalog_rows()
+    previews = {}
     generated = 0
     missing = []
     for row in rows:
         slug = row.get("slug")
+        row.pop("previewSvg", None)
         shoreline_path = MAP_LAYERS_DIR / f"{slug}_shoreline.geojson"
         if not slug or not shoreline_path.exists():
-            row.pop("previewSvg", None)
             if slug:
                 missing.append(slug)
             continue
-        preview = build_preview_svg_data_uri(row, json.loads(shoreline_path.read_text()))
+        preview = build_preview_svg(row, json.loads(shoreline_path.read_text()))
         if preview:
-            row["previewSvg"] = preview
+            previews[slug] = preview
             generated += 1
         else:
-            row.pop("previewSvg", None)
             missing.append(slug)
     write_catalog_rows(rows)
-    return {"generated": generated, "missing": missing}
+    HOME_PREVIEWS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    HOME_PREVIEWS_PATH.write_text(json.dumps(previews, ensure_ascii=False, separators=(",", ":")))
+    return {"generated": generated, "missing": missing, "bytes": HOME_PREVIEWS_PATH.stat().st_size}
 
 
 def slim_geojson(payload: dict, keep_properties: set[str] | None = None) -> dict:

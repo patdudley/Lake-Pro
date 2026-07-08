@@ -663,6 +663,24 @@ function mapPreviewPlaceholderDataUri(spot) {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
+function previewSvgDataUri(svg) {
+  if (!svg) return "";
+  if (svg.startsWith("data:image/svg+xml")) return svg;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+let homePreviewPayloadPromise;
+
+async function loadHomePreviewSvgs() {
+  if (!homePreviewPayloadPromise) {
+    homePreviewPayloadPromise = fetchJson("data/live/home-previews.json").catch((error) => {
+      console.warn("[LakePro] Home map previews unavailable", error);
+      return {};
+    });
+  }
+  return homePreviewPayloadPromise;
+}
+
 function renderHomeLakeLinks() {
   const container = document.getElementById("homeLakeLinks");
   if (!container) return;
@@ -674,7 +692,7 @@ function renderHomeLakeLinks() {
     link.className = "home-lake-link";
     link.href = spotReportUrl(spot);
     const camera = cameraForSpot(spot);
-    const fallbackPreview = spot.previewSvg || mapPreviewPlaceholderDataUri(spot);
+    const fallbackPreview = mapPreviewPlaceholderDataUri(spot);
     link.dataset.spot = spot.slug;
     link.dataset.name = `${spot.name} ${spot.location}`.toLowerCase();
     link.innerHTML = `
@@ -686,14 +704,34 @@ function renderHomeLakeLinks() {
       <img src="${camera?.imageUrl || fallbackPreview}" alt="${spot.name} ${camera ? "camera" : "live map"} preview">
     `;
     const image = link.querySelector("img");
-    if (image) image.onerror = () => { image.src = fallbackPreview; };
+    if (image) {
+      if (camera) image.dataset.camera = "true";
+      image.onerror = () => {
+        image.dataset.camera = "false";
+        image.src = fallbackPreview;
+      };
+    }
     return link;
   }));
   hydrateHomeLakeCards();
+  hydrateHomeMapPreviews();
   wireHomeSearch();
   wireSpotSearch();
   renderHomeCameraSlider();
   wireHomeCameraSlider();
+}
+
+async function hydrateHomeMapPreviews() {
+  const cards = [...document.querySelectorAll(".home-lake-link")];
+  if (!cards.length) return;
+  const previews = await loadHomePreviewSvgs();
+  cards.forEach((card) => {
+    const slug = card.dataset.spot;
+    const svg = previews?.[slug];
+    const image = card.querySelector("img");
+    if (!svg || !image || image.dataset.camera === "true") return;
+    image.src = previewSvgDataUri(svg);
+  });
 }
 
 function createHomeMapMarker(spot) {
