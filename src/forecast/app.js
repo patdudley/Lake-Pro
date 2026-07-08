@@ -681,6 +681,14 @@ async function loadHomePreviewSvgs() {
   return homePreviewPayloadPromise;
 }
 
+async function applyHomePreviewImage(image, slug, fallbackPreview) {
+  if (!image) return;
+  image.onerror = null;
+  const previews = await loadHomePreviewSvgs();
+  const svg = previews?.[slug];
+  image.src = svg ? previewSvgDataUri(svg) : fallbackPreview;
+}
+
 function renderHomeLakeLinks() {
   const container = document.getElementById("homeLakeLinks");
   if (!container) return;
@@ -708,7 +716,7 @@ function renderHomeLakeLinks() {
       if (camera) image.dataset.camera = "true";
       image.onerror = () => {
         image.dataset.camera = "false";
-        image.src = fallbackPreview;
+        applyHomePreviewImage(image, spot.slug, fallbackPreview);
       };
     }
     return link;
@@ -730,6 +738,7 @@ async function hydrateHomeMapPreviews() {
     const svg = previews?.[slug];
     const image = card.querySelector("img");
     if (!svg || !image || image.dataset.camera === "true") return;
+    image.onerror = null;
     image.src = previewSvgDataUri(svg);
   });
 }

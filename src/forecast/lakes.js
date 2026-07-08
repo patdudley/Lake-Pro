@@ -64,6 +64,14 @@ async function loadDirectoryPreviewSvgs() {
   return directoryPreviewPayloadPromise;
 }
 
+async function applyDirectoryPreviewImage(image, slug, fallbackPreview) {
+  if (!image) return;
+  image.onerror = null;
+  const previews = await loadDirectoryPreviewSvgs();
+  const svg = previews?.[slug];
+  image.src = svg ? previewSvgDataUri(svg) : fallbackPreview;
+}
+
 function fallbackMapPreview(spot) {
   return `
     <span class="directory-map-preview" aria-hidden="true">
@@ -89,6 +97,14 @@ function createLakeCard(spot) {
       <em><strong class="grade-letter" aria-label="Grade pending"></strong></em>
     </span>
   `;
+  const image = card.querySelector(".directory-map-preview img");
+  if (image) {
+    const fallbackPreview = mapPreviewPlaceholderDataUri(spot);
+    image.onerror = () => {
+      image.dataset.camera = "false";
+      applyDirectoryPreviewImage(image, spot.slug, fallbackPreview);
+    };
+  }
   return card;
 }
 
@@ -160,6 +176,7 @@ async function hydrateDirectoryMapPreviews() {
     const svg = previews?.[card.dataset.slug];
     const image = card.querySelector(".directory-map-preview img");
     if (!svg || !image) return;
+    image.onerror = null;
     image.src = previewSvgDataUri(svg);
   });
 }
