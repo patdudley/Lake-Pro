@@ -939,7 +939,7 @@
       "wind_speed_mph": 0
     }
   ],
-  "generated_at": "2026-07-07T23:16:25.270760+00:00",
+  "generated_at": "2026-07-08T00:14:05.414490+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-tahoe",
   "status": "live_weather_stub_grid"
