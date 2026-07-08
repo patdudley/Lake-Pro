@@ -232,12 +232,6 @@ function temperatureRange(day) {
   return `<span class="forecast-temps">${Math.round(day.temperature_2m_max)}&deg; <small>${Math.round(day.temperature_2m_min)}&deg;</small></span>`;
 }
 
-function shortDayLabel(date, index = 0) {
-  const value = new Date(`${date}T12:00:00`);
-  if (Number.isNaN(value.getTime())) return index === 0 ? "Today" : "";
-  return index === 0 ? "Today" : value.toLocaleDateString("en-US", { weekday: "short" });
-}
-
 function hourlyDateKey(time) {
   const match = String(time || "").match(/^(\d{4}-\d{2}-\d{2})/);
   return match ? match[1] : "";
@@ -1146,17 +1140,6 @@ function flowBearing(frame) {
   const fromDirection = Number(frame?.wind_direction_deg);
   if (!Number.isFinite(fromDirection)) return 0;
   return (fromDirection + 180) % 360;
-}
-
-function formatFrameTime(time) {
-  if (!time) return "Wind timeline pending";
-  const date = new Date(time);
-  if (Number.isNaN(date.getTime())) return time;
-  return date.toLocaleString("en-US", {
-    weekday: "short",
-    hour: "numeric",
-    minute: "2-digit",
-  });
 }
 
 function formatFrameTimeShort(time) {
