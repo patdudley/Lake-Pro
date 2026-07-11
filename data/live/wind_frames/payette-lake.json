@@ -3,24 +3,6 @@
   "frame_hours": 1,
   "frames": [
     {
-      "time": "2026-07-10T18:00:00-06:00",
-      "wind_direction_deg": 202,
-      "wind_direction_label": "SSW",
-      "wind_speed_mph": 9.0
-    },
-    {
-      "time": "2026-07-10T19:00:00-06:00",
-      "wind_direction_deg": 202,
-      "wind_direction_label": "SSW",
-      "wind_speed_mph": 7.0
-    },
-    {
-      "time": "2026-07-10T20:00:00-06:00",
-      "wind_direction_deg": 202,
-      "wind_direction_label": "SSW",
-      "wind_speed_mph": 3.0
-    },
-    {
       "time": "2026-07-10T21:00:00-06:00",
       "wind_direction_deg": 180,
       "wind_direction_label": "S",
@@ -937,9 +919,27 @@
       "wind_direction_deg": 68,
       "wind_direction_label": "ENE",
       "wind_speed_mph": 3.0
+    },
+    {
+      "time": "2026-07-17T06:00:00-06:00",
+      "wind_direction_deg": 68,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-07-17T07:00:00-06:00",
+      "wind_direction_deg": 68,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-07-17T08:00:00-06:00",
+      "wind_direction_deg": 68,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 2.0
     }
   ],
-  "generated_at": "2026-07-11T00:12:24.917348+00:00",
+  "generated_at": "2026-07-11T03:45:45.046998+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "payette-lake",
   "status": "live_weather_stub_grid"
