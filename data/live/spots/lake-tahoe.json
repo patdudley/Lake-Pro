@@ -1,9 +1,8 @@
 {
-  "generated_at": "2026-07-12T22:10:16.312425+00:00",
+  "generated_at": "2026-07-12T23:11:55.977068+00:00",
   "hourly": {
     "precipitation_probability": [
       3.0,
-      3.0,
       7.0,
       7.0,
       7.0,
@@ -154,6 +153,7 @@
       16.0,
       16.0,
       16.0,
+      12.0,
       12.0,
       12.0,
       12.0,
@@ -161,7 +161,6 @@
     ],
     "short_forecast": [
       "Partly Sunny",
-      "Partly Sunny",
       "Mostly Cloudy",
       "Mostly Cloudy",
       "Mostly Cloudy",
@@ -312,13 +311,13 @@
       "Slight Chance Showers And Thunderstorms",
       "Slight Chance Showers And Thunderstorms",
       "Slight Chance Showers And Thunderstorms",
+      "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy"
     ],
     "temperature_2m": [
-      69,
       71,
       71,
       71,
@@ -473,10 +472,10 @@
       65,
       63,
       61,
-      59
+      59,
+      58
     ],
     "time": [
-      "2026-07-12T15:00:00-07:00",
       "2026-07-12T16:00:00-07:00",
       "2026-07-12T17:00:00-07:00",
       "2026-07-12T18:00:00-07:00",
@@ -631,11 +630,11 @@
       "2026-07-18T23:00:00-07:00",
       "2026-07-19T00:00:00-07:00",
       "2026-07-19T01:00:00-07:00",
-      "2026-07-19T02:00:00-07:00"
+      "2026-07-19T02:00:00-07:00",
+      "2026-07-19T03:00:00-07:00"
     ],
     "weather_code": [
       2,
-      2,
       3,
       3,
       3,
@@ -786,6 +785,7 @@
       95,
       95,
       95,
+      2,
       2,
       2,
       2,
@@ -799,7 +799,6 @@
       270,
       270,
       270,
-      270,
       null,
       null,
       null,
@@ -947,6 +946,7 @@
       270,
       270,
       270,
+      null,
       null
     ],
     "wind_gusts_10m": [
@@ -957,7 +957,6 @@
       5.0,
       5.0,
       5.0,
-      5.0,
       0,
       0,
       0,
@@ -1105,6 +1104,7 @@
       5.0,
       5.0,
       5.0,
+      0,
       0
     ],
     "wind_speed_10m": [
@@ -1115,7 +1115,6 @@
       5.0,
       5.0,
       5.0,
-      5.0,
       0,
       0,
       0,
@@ -1263,6 +1262,7 @@
       5.0,
       5.0,
       5.0,
+      0,
       0
     ]
   },
@@ -1503,7 +1503,7 @@
       "score_before_wind_cap": 84,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 63,
-      "temperature_2m_min": 59,
+      "temperature_2m_min": 58,
       "weather_code": 2,
       "wind_direction_deg": 270,
       "wind_direction_label": "W",
