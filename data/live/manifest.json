@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-07-12T23:19:12.937640+00:00",
+  "generated_at": "2026-07-13T00:20:54.142514+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -36,20 +36,20 @@
       "wind_speed_max_mph": 5.0
     },
     {
-      "best_window": "Evening",
-      "grade": "A",
+      "best_window": "Pending",
+      "grade": "B",
       "name": "Payette Lake",
-      "score": 86,
+      "score": 84,
       "slug": "payette-lake",
       "wind_speed_max_mph": 5.0
     },
     {
       "best_window": "Evening",
-      "grade": "B",
+      "grade": "C",
       "name": "Jordanelle Reservoir",
-      "score": 77,
+      "score": 70,
       "slug": "jordanelle-reservoir",
-      "wind_speed_max_mph": 12.5
+      "wind_speed_max_mph": 12.4
     },
     {
       "best_window": "Early morning",
@@ -73,7 +73,7 @@
       "name": "Lake Havasu",
       "score": 71,
       "slug": "lake-havasu",
-      "wind_speed_max_mph": 13.5
+      "wind_speed_max_mph": 15.4
     },
     {
       "best_window": "Early morning",
@@ -81,13 +81,13 @@
       "name": "Lake Powell",
       "score": 71,
       "slug": "lake-powell",
-      "wind_speed_max_mph": 13.2
+      "wind_speed_max_mph": 12.4
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Evening",
       "grade": "B",
       "name": "Lake Coeur d'Alene",
-      "score": 83,
+      "score": 84,
       "slug": "lake-coeur-d-alene",
       "wind_speed_max_mph": 8.2
     },
@@ -97,7 +97,7 @@
       "name": "Lake Travis",
       "score": 84,
       "slug": "lake-travis",
-      "wind_speed_max_mph": 12.0
+      "wind_speed_max_mph": 12.6
     },
     {
       "best_window": "Early morning",
@@ -105,13 +105,13 @@
       "name": "Lake Austin",
       "score": 84,
       "slug": "lake-austin",
-      "wind_speed_max_mph": 10.4
+      "wind_speed_max_mph": 11.4
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Evening",
       "grade": "D",
       "name": "Lake Minnetonka",
-      "score": 57,
+      "score": 59,
       "slug": "lake-minnetonka",
       "wind_speed_max_mph": 10.9
     },
@@ -121,7 +121,7 @@
       "name": "Lake of the Ozarks",
       "score": 86,
       "slug": "lake-of-the-ozarks",
-      "wind_speed_max_mph": 7.2
+      "wind_speed_max_mph": 8.0
     },
     {
       "best_window": "Early morning",
@@ -129,7 +129,7 @@
       "name": "Lake Lanier",
       "score": 86,
       "slug": "lake-lanier",
-      "wind_speed_max_mph": 13.4
+      "wind_speed_max_mph": 7.7
     },
     {
       "best_window": "Early morning",
@@ -137,7 +137,7 @@
       "name": "Lake Norman",
       "score": 86,
       "slug": "lake-norman",
-      "wind_speed_max_mph": 6.7
+      "wind_speed_max_mph": 8.7
     },
     {
       "best_window": "Early morning",
@@ -145,7 +145,7 @@
       "name": "Lake LBJ",
       "score": 84,
       "slug": "lake-lbj",
-      "wind_speed_max_mph": 13.0
+      "wind_speed_max_mph": 18.3
     },
     {
       "best_window": "Late morning",
@@ -161,7 +161,7 @@
       "name": "Lake Shasta",
       "score": 84,
       "slug": "lake-shasta",
-      "wind_speed_max_mph": 11.8
+      "wind_speed_max_mph": 12.4
     },
     {
       "best_window": "Early morning",
@@ -169,7 +169,7 @@
       "name": "Lake Conroe",
       "score": 86,
       "slug": "lake-conroe",
-      "wind_speed_max_mph": 17.0
+      "wind_speed_max_mph": 12.9
     },
     {
       "best_window": "Afternoon",
@@ -177,7 +177,7 @@
       "name": "Lake Lewisville",
       "score": 84,
       "slug": "lake-lewisville",
-      "wind_speed_max_mph": 17.0
+      "wind_speed_max_mph": 21.7
     },
     {
       "best_window": "Afternoon",
@@ -185,7 +185,7 @@
       "name": "Lake Ray Hubbard",
       "score": 84,
       "slug": "lake-ray-hubbard",
-      "wind_speed_max_mph": 20.2
+      "wind_speed_max_mph": 24.8
     },
     {
       "best_window": "Early morning",
@@ -193,7 +193,7 @@
       "name": "Gull Lake",
       "score": 54,
       "slug": "gull-lake",
-      "wind_speed_max_mph": 13.0
+      "wind_speed_max_mph": 13.7
     },
     {
       "best_window": "Late morning",
@@ -204,20 +204,20 @@
       "wind_speed_max_mph": 13.2
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Afternoon",
       "grade": "C",
       "name": "Lake Pend Oreille",
-      "score": 61,
+      "score": 66,
       "slug": "lake-pend-oreille",
-      "wind_speed_max_mph": 9.8
+      "wind_speed_max_mph": 9.2
     },
     {
       "best_window": "Late morning",
-      "grade": "B",
+      "grade": "A",
       "name": "Flathead Lake",
-      "score": 84,
+      "score": 86,
       "slug": "flathead-lake",
-      "wind_speed_max_mph": 10.9
+      "wind_speed_max_mph": 11.9
     },
     {
       "best_window": "Early morning",
@@ -225,7 +225,7 @@
       "name": "Canyon Lake",
       "score": 84,
       "slug": "canyon-lake",
-      "wind_speed_max_mph": 15.0
+      "wind_speed_max_mph": 10.7
     },
     {
       "best_window": "Early morning",
@@ -241,7 +241,7 @@
       "name": "Table Rock Lake",
       "score": 86,
       "slug": "table-rock-lake",
-      "wind_speed_max_mph": 6.3
+      "wind_speed_max_mph": 7.5
     },
     {
       "best_window": "Early morning",
@@ -249,7 +249,7 @@
       "name": "Lake Cumberland",
       "score": 86,
       "slug": "lake-cumberland",
-      "wind_speed_max_mph": 8.2
+      "wind_speed_max_mph": 8.7
     },
     {
       "best_window": "Early morning",
@@ -257,7 +257,7 @@
       "name": "Lake Norris",
       "score": 86,
       "slug": "lake-norris",
-      "wind_speed_max_mph": 5.5
+      "wind_speed_max_mph": 6.7
     },
     {
       "best_window": "Early morning",
@@ -273,7 +273,7 @@
       "name": "Lake Keowee",
       "score": 86,
       "slug": "lake-keowee",
-      "wind_speed_max_mph": 5.7
+      "wind_speed_max_mph": 3.8
     },
     {
       "best_window": "Early morning",
@@ -281,7 +281,7 @@
       "name": "Lake Hartwell",
       "score": 86,
       "slug": "lake-hartwell",
-      "wind_speed_max_mph": 7.3
+      "wind_speed_max_mph": 7.1
     },
     {
       "best_window": "Early morning",
@@ -289,7 +289,7 @@
       "name": "Lake Murray",
       "score": 84,
       "slug": "lake-murray",
-      "wind_speed_max_mph": 11.9
+      "wind_speed_max_mph": 10.7
     },
     {
       "best_window": "Evening",
@@ -313,7 +313,7 @@
       "name": "Lake Geneva",
       "score": 86,
       "slug": "lake-geneva",
-      "wind_speed_max_mph": 5.7
+      "wind_speed_max_mph": 4.7
     },
     {
       "best_window": "Afternoon",
@@ -321,7 +321,7 @@
       "name": "Grand Lake O' the Cherokees",
       "score": 86,
       "slug": "grand-lake-o-the-cherokees",
-      "wind_speed_max_mph": 8.1
+      "wind_speed_max_mph": 8.6
     },
     {
       "best_window": "Afternoon",
@@ -329,7 +329,7 @@
       "name": "Lake Mead",
       "score": 71,
       "slug": "lake-mead",
-      "wind_speed_max_mph": 24.5
+      "wind_speed_max_mph": 23.0
     },
     {
       "best_window": "Afternoon",
@@ -337,7 +337,7 @@
       "name": "California Delta",
       "score": 84,
       "slug": "california-delta",
-      "wind_speed_max_mph": 11.3
+      "wind_speed_max_mph": 11.7
     },
     {
       "best_window": "Early morning",
@@ -345,7 +345,7 @@
       "name": "Lake Oconee",
       "score": 86,
       "slug": "lake-oconee",
-      "wind_speed_max_mph": 14.8
+      "wind_speed_max_mph": 6.7
     },
     {
       "best_window": "Late morning",
@@ -353,7 +353,7 @@
       "name": "Possum Kingdom Lake",
       "score": 84,
       "slug": "possum-kingdom-lake",
-      "wind_speed_max_mph": 11.8
+      "wind_speed_max_mph": 13.8
     },
     {
       "best_window": "Early morning",
@@ -361,7 +361,7 @@
       "name": "Donner Lake",
       "score": 81,
       "slug": "donner-lake",
-      "wind_speed_max_mph": 16.9
+      "wind_speed_max_mph": 15.7
     },
     {
       "best_window": "Early morning",
@@ -369,7 +369,7 @@
       "name": "Horsetooth Reservoir",
       "score": 84,
       "slug": "horsetooth-reservoir",
-      "wind_speed_max_mph": 16.2
+      "wind_speed_max_mph": 15.8
     },
     {
       "best_window": "Early morning",
@@ -377,7 +377,7 @@
       "name": "Cherry Creek Reservoir",
       "score": 84,
       "slug": "cherry-creek-reservoir",
-      "wind_speed_max_mph": 14.5
+      "wind_speed_max_mph": 16.5
     },
     {
       "best_window": "Early morning",
@@ -385,7 +385,7 @@
       "name": "Carter Lake",
       "score": 84,
       "slug": "carter-lake",
-      "wind_speed_max_mph": 14.1
+      "wind_speed_max_mph": 13.5
     },
     {
       "best_window": "Early morning",
@@ -393,7 +393,7 @@
       "name": "Pewaukee Lake",
       "score": 86,
       "slug": "pewaukee-lake",
-      "wind_speed_max_mph": 5.8
+      "wind_speed_max_mph": 6.1
     },
     {
       "best_window": "Early morning",
@@ -401,7 +401,7 @@
       "name": "Lake Wylie",
       "score": 86,
       "slug": "lake-wylie",
-      "wind_speed_max_mph": 9.0
+      "wind_speed_max_mph": 5.6
     },
     {
       "best_window": "Early morning",
@@ -409,15 +409,15 @@
       "name": "Lewis Smith Lake",
       "score": 86,
       "slug": "lewis-smith-lake",
-      "wind_speed_max_mph": 6.2
+      "wind_speed_max_mph": 7.2
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Afternoon",
       "grade": "B",
       "name": "Lake Martin",
       "score": 84,
       "slug": "lake-martin",
-      "wind_speed_max_mph": 14.6
+      "wind_speed_max_mph": 9.0
     },
     {
       "best_window": "Late morning",
@@ -441,7 +441,7 @@
       "name": "Lake Allatoona",
       "score": 86,
       "slug": "lake-allatoona",
-      "wind_speed_max_mph": 15.0
+      "wind_speed_max_mph": 5.4
     },
     {
       "best_window": "Early morning",
@@ -457,7 +457,7 @@
       "name": "Lake Hickory / Catawba chain",
       "score": 86,
       "slug": "lake-hickory-catawba-chain",
-      "wind_speed_max_mph": 8.2
+      "wind_speed_max_mph": 5.3
     },
     {
       "best_window": "Early morning",
@@ -465,7 +465,7 @@
       "name": "Claytor Lake",
       "score": 86,
       "slug": "claytor-lake",
-      "wind_speed_max_mph": 8.2
+      "wind_speed_max_mph": 8.0
     },
     {
       "best_window": "Evening",
@@ -481,7 +481,7 @@
       "name": "Dale Hollow Lake",
       "score": 86,
       "slug": "dale-hollow-lake",
-      "wind_speed_max_mph": 5.2
+      "wind_speed_max_mph": 6.0
     },
     {
       "best_window": "Early morning",
@@ -489,7 +489,7 @@
       "name": "Tellico Lake",
       "score": 85,
       "slug": "tellico-lake",
-      "wind_speed_max_mph": 13.3
+      "wind_speed_max_mph": 7.2
     },
     {
       "best_window": "Late morning",
@@ -497,15 +497,15 @@
       "name": "Watts Bar / TN River chain",
       "score": 86,
       "slug": "watts-bar-tn-river-chain",
-      "wind_speed_max_mph": 7.5
+      "wind_speed_max_mph": 5.0
     },
     {
       "best_window": "Afternoon",
       "grade": "A",
       "name": "Green River Lake",
-      "score": 85,
+      "score": 86,
       "slug": "green-river-lake",
-      "wind_speed_max_mph": 7.3
+      "wind_speed_max_mph": 7.0
     },
     {
       "best_window": "Late morning",
@@ -513,13 +513,13 @@
       "name": "Lake Texoma",
       "score": 86,
       "slug": "lake-texoma",
-      "wind_speed_max_mph": 13.5
+      "wind_speed_max_mph": 12.1
     },
     {
       "best_window": "Evening",
       "grade": "B",
       "name": "Lake Amistad",
-      "score": 80,
+      "score": 74,
       "slug": "lake-amistad",
       "wind_speed_max_mph": 11.2
     },
@@ -529,7 +529,7 @@
       "name": "Eagle Mountain Lake",
       "score": 84,
       "slug": "eagle-mountain-lake",
-      "wind_speed_max_mph": 15.9
+      "wind_speed_max_mph": 23.7
     },
     {
       "best_window": "Early morning",
@@ -537,7 +537,7 @@
       "name": "Lake Buchanan / Inks Lake",
       "score": 84,
       "slug": "lake-buchanan-inks-lake",
-      "wind_speed_max_mph": 13.9
+      "wind_speed_max_mph": 17.2
     },
     {
       "best_window": "Early morning",
@@ -545,7 +545,7 @@
       "name": "Lake Marble Falls",
       "score": 84,
       "slug": "lake-marble-falls",
-      "wind_speed_max_mph": 12.3
+      "wind_speed_max_mph": 20.1
     },
     {
       "best_window": "Early morning",
@@ -553,7 +553,7 @@
       "name": "Stillhouse Hollow / Belton",
       "score": 84,
       "slug": "stillhouse-hollow-belton",
-      "wind_speed_max_mph": 10.3
+      "wind_speed_max_mph": 15.0
     },
     {
       "best_window": "Late morning",
@@ -561,7 +561,7 @@
       "name": "Lake Somerville",
       "score": 84,
       "slug": "lake-somerville",
-      "wind_speed_max_mph": 13.5
+      "wind_speed_max_mph": 15.1
     },
     {
       "best_window": "Early morning",
@@ -577,7 +577,7 @@
       "name": "Sam Rayburn",
       "score": 86,
       "slug": "sam-rayburn",
-      "wind_speed_max_mph": 12.1
+      "wind_speed_max_mph": 10.7
     },
     {
       "best_window": "Early morning",
@@ -593,7 +593,7 @@
       "name": "Pyramid Lake",
       "score": 83,
       "slug": "pyramid-lake",
-      "wind_speed_max_mph": 14.4
+      "wind_speed_max_mph": 14.7
     },
     {
       "best_window": "Late morning",
@@ -604,7 +604,7 @@
       "wind_speed_max_mph": 10.1
     },
     {
-      "best_window": "Evening",
+      "best_window": "Late morning",
       "grade": "B",
       "name": "Folsom Lake",
       "score": 84,
@@ -625,7 +625,7 @@
       "name": "Sand Hollow / Quail Creek",
       "score": 84,
       "slug": "sand-hollow-quail-creek",
-      "wind_speed_max_mph": 21.8
+      "wind_speed_max_mph": 17.7
     },
     {
       "best_window": "Early morning",
@@ -637,9 +637,9 @@
     },
     {
       "best_window": "Afternoon",
-      "grade": "C",
+      "grade": "B",
       "name": "Strawberry Reservoir",
-      "score": 71,
+      "score": 84,
       "slug": "strawberry-reservoir",
       "wind_speed_max_mph": 18.6
     },
@@ -649,7 +649,7 @@
       "name": "Utah Lake",
       "score": 86,
       "slug": "utah-lake",
-      "wind_speed_max_mph": 14.5
+      "wind_speed_max_mph": 12.6
     },
     {
       "best_window": "Early morning",
@@ -657,7 +657,7 @@
       "name": "Lake Pueblo",
       "score": 84,
       "slug": "lake-pueblo",
-      "wind_speed_max_mph": 15.7
+      "wind_speed_max_mph": 17.5
     },
     {
       "best_window": "Early morning",
@@ -673,7 +673,7 @@
       "name": "Lake Granby",
       "score": 86,
       "slug": "lake-granby",
-      "wind_speed_max_mph": 16.8
+      "wind_speed_max_mph": 17.3
     },
     {
       "best_window": "Early morning",
@@ -681,7 +681,7 @@
       "name": "Blue Mesa Reservoir",
       "score": 84,
       "slug": "blue-mesa-reservoir",
-      "wind_speed_max_mph": 19.9
+      "wind_speed_max_mph": 19.3
     },
     {
       "best_window": "Early morning",
@@ -689,7 +689,7 @@
       "name": "Boyd Lake",
       "score": 78,
       "slug": "boyd-lake",
-      "wind_speed_max_mph": 14.8
+      "wind_speed_max_mph": 14.6
     },
     {
       "best_window": "Early morning",
@@ -705,7 +705,7 @@
       "name": "Lake Billy Chinook",
       "score": 86,
       "slug": "lake-billy-chinook",
-      "wind_speed_max_mph": 11.2
+      "wind_speed_max_mph": 10.1
     },
     {
       "best_window": "Late morning",
@@ -725,9 +725,9 @@
     },
     {
       "best_window": "Afternoon",
-      "grade": "B",
+      "grade": "A",
       "name": "Lake Chelan",
-      "score": 84,
+      "score": 85,
       "slug": "lake-chelan",
       "wind_speed_max_mph": 15.7
     },
@@ -740,20 +740,20 @@
       "wind_speed_max_mph": 9.1
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Evening",
       "grade": "C",
       "name": "Prior Lake / Cross Lake",
-      "score": 62,
+      "score": 66,
       "slug": "prior-lake-cross-lake",
       "wind_speed_max_mph": 10.9
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Afternoon",
       "grade": "A",
       "name": "Lake Wallenpaupack",
       "score": 86,
       "slug": "lake-wallenpaupack",
-      "wind_speed_max_mph": 7.7
+      "wind_speed_max_mph": 5.4
     },
     {
       "best_window": "Late morning",
@@ -761,7 +761,7 @@
       "name": "Deep Creek Lake",
       "score": 76,
       "slug": "deep-creek-lake",
-      "wind_speed_max_mph": 10.2
+      "wind_speed_max_mph": 11.7
     },
     {
       "best_window": "Early morning",
@@ -785,7 +785,7 @@
       "name": "Candlewood Lake",
       "score": 86,
       "slug": "candlewood-lake",
-      "wind_speed_max_mph": 5.5
+      "wind_speed_max_mph": 5.3
     },
     {
       "best_window": "Early morning",
@@ -825,13 +825,13 @@
       "name": "Lake Greenwood",
       "score": 86,
       "slug": "lake-greenwood",
-      "wind_speed_max_mph": 11.6
+      "wind_speed_max_mph": 5.6
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Evening",
       "grade": "C",
       "name": "Okanagan Lake",
-      "score": 65,
+      "score": 71,
       "slug": "okanagan-lake",
       "wind_speed_max_mph": 10.1
     },
@@ -839,7 +839,7 @@
       "best_window": "Evening",
       "grade": "B",
       "name": "Shuswap Lake",
-      "score": 72,
+      "score": 75,
       "slug": "shuswap-lake",
       "wind_speed_max_mph": 11.2
     },
@@ -865,7 +865,7 @@
       "name": "Lake Koocanusa",
       "score": 86,
       "slug": "lake-koocanusa",
-      "wind_speed_max_mph": 8.1
+      "wind_speed_max_mph": 8.3
     },
     {
       "best_window": "Late morning",
@@ -900,12 +900,12 @@
       "wind_speed_max_mph": 4.0
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Early morning",
       "grade": "C",
       "name": "Lake Macquarie / Hume",
-      "score": 70,
+      "score": 68,
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 11.6
+      "wind_speed_max_mph": 11.5
     },
     {
       "best_window": "Evening",
@@ -913,15 +913,15 @@
       "name": "Lake Wanaka",
       "score": 51,
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 9.7
+      "wind_speed_max_mph": 8.8
     },
     {
       "best_window": "Evening",
       "grade": "B",
       "name": "Dubai Marina / Creek",
-      "score": 74,
+      "score": 79,
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 11.0
+      "wind_speed_max_mph": 11.1
     }
   ]
 }
