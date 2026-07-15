@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-07-15T16:04:44.296Z
+Generated: 2026-07-15T17:51:16.047Z
 
-- Captured: 24
-- Suspect: 1
+- Captured: 25
+- Suspect: 0
 - Failed: 0
 - No catalog webcam source yet: 87
 
@@ -17,6 +17,7 @@ Generated: 2026-07-15T16:04:44.296Z
 - Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
+- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
@@ -34,7 +35,6 @@ Generated: 2026-07-15T16:04:44.296Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
