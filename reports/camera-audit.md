@@ -1,10 +1,10 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-07-16T00:26:16.425Z
+Generated: 2026-07-16T03:52:39.777Z
 
-- Captured: 24
+- Captured: 25
 - Suspect: 0
-- Failed: 1
+- Failed: 0
 - No catalog webcam source yet: 87
 
 ## Captured
@@ -26,6 +26,7 @@ Generated: 2026-07-16T00:26:16.425Z
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
+- Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
 - Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
 - Lake Mead (NV/AZ) — NPS — Lake Mead Webcams: https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm
 - Lake Amistad (TX/Mexico) — National Park Service — Amistad webcams: https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm
@@ -34,10 +35,6 @@ Generated: 2026-07-16T00:26:16.425Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/ — page.goto: Timeout 45000ms exceeded.
-Call log:
-  - navigating to "https://winnisquammarine.com/webcams/winni-marine-live-feed/", waiting until "domcontentloaded"
-
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
