@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T22:17:44.685523+00:00",
+  "generated_at": "2026-07-16T23:12:54.619371+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -39,8 +39,6 @@
       0.0,
       0.0,
       0.0,
-      0.0,
-      0.0,
       1.0,
       1.0,
       1.0,
@@ -143,6 +141,8 @@
       2.0,
       2.0,
       2.0,
+      15.0,
+      15.0,
       15.0,
       15.0,
       15.0,
@@ -162,8 +162,6 @@
     "short_forecast": [
       "Sunny",
       "Sunny",
-      "Sunny",
-      "Sunny",
       "Clear",
       "Clear",
       "Clear",
@@ -307,6 +305,8 @@
       "Slight Chance Showers And Thunderstorms",
       "Slight Chance Showers And Thunderstorms",
       "Slight Chance Showers And Thunderstorms",
+      "Slight Chance Rain Showers",
+      "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
@@ -318,8 +318,6 @@
       "Slight Chance Rain Showers"
     ],
     "temperature_2m": [
-      71,
-      72,
       73,
       74,
       72,
@@ -473,11 +471,11 @@
       66,
       64,
       62,
-      60
+      60,
+      58,
+      57
     ],
     "time": [
-      "2026-07-16T14:00:00-07:00",
-      "2026-07-16T15:00:00-07:00",
       "2026-07-16T16:00:00-07:00",
       "2026-07-16T17:00:00-07:00",
       "2026-07-16T18:00:00-07:00",
@@ -631,13 +629,13 @@
       "2026-07-22T22:00:00-07:00",
       "2026-07-22T23:00:00-07:00",
       "2026-07-23T00:00:00-07:00",
-      "2026-07-23T01:00:00-07:00"
+      "2026-07-23T01:00:00-07:00",
+      "2026-07-23T02:00:00-07:00",
+      "2026-07-23T03:00:00-07:00"
     ],
     "weather_code": [
       0,
       0,
-      0,
-      0,
       1,
       1,
       1,
@@ -781,6 +779,8 @@
       95,
       95,
       95,
+      80,
+      80,
       80,
       80,
       80,
@@ -802,8 +802,6 @@
       270,
       270,
       270,
-      270,
-      270,
       null,
       null,
       null,
@@ -945,6 +943,8 @@
       270,
       270,
       270,
+      null,
+      null,
       null,
       null,
       null
@@ -954,8 +954,6 @@
       10.0,
       10.0,
       10.0,
-      10.0,
-      10.0,
       5.0,
       5.0,
       5.0,
@@ -1103,6 +1101,8 @@
       5.0,
       5.0,
       5.0,
+      0,
+      0,
       0,
       0,
       0
@@ -1112,8 +1112,6 @@
       10.0,
       10.0,
       10.0,
-      10.0,
-      10.0,
       5.0,
       5.0,
       5.0,
@@ -1261,6 +1259,8 @@
       5.0,
       5.0,
       5.0,
+      0,
+      0,
       0,
       0,
       0
@@ -1498,7 +1498,7 @@
       "score_before_wind_cap": 71,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 62,
-      "temperature_2m_min": 60,
+      "temperature_2m_min": 57,
       "weather_code": 80,
       "wind_direction_deg": null,
       "wind_direction_label": "",
