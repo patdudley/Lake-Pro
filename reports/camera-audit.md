@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-07-16T23:24:58.224Z
+Generated: 2026-07-17T00:27:37.471Z
 
-- Captured: 24
-- Suspect: 1
+- Captured: 25
+- Suspect: 0
 - Failed: 0
 - No catalog webcam source yet: 87
 
@@ -20,6 +20,7 @@ Generated: 2026-07-16T23:24:58.224Z
 - Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
+- Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
@@ -34,7 +35,6 @@ Generated: 2026-07-16T23:24:58.224Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
