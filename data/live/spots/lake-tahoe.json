@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T00:14:51.026165+00:00",
+  "generated_at": "2026-07-17T03:41:29.255416+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -35,9 +35,6 @@
       0.0,
       0.0,
       0.0,
-      0.0,
-      0.0,
-      0.0,
       1.0,
       1.0,
       1.0,
@@ -157,12 +154,12 @@
       15.0,
       15.0,
       15.0,
-      15.0
+      15.0,
+      2.0,
+      2.0,
+      2.0
     ],
     "short_forecast": [
-      "Sunny",
-      "Clear",
-      "Clear",
       "Clear",
       "Clear",
       "Clear",
@@ -315,12 +312,12 @@
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
-      "Slight Chance Rain Showers"
+      "Slight Chance Rain Showers",
+      "Mostly Clear",
+      "Sunny",
+      "Sunny"
     ],
     "temperature_2m": [
-      74,
-      72,
-      71,
       70,
       66,
       64,
@@ -473,12 +470,12 @@
       60,
       58,
       57,
-      57
+      57,
+      57,
+      57,
+      58
     ],
     "time": [
-      "2026-07-16T17:00:00-07:00",
-      "2026-07-16T18:00:00-07:00",
-      "2026-07-16T19:00:00-07:00",
       "2026-07-16T20:00:00-07:00",
       "2026-07-16T21:00:00-07:00",
       "2026-07-16T22:00:00-07:00",
@@ -631,12 +628,12 @@
       "2026-07-23T01:00:00-07:00",
       "2026-07-23T02:00:00-07:00",
       "2026-07-23T03:00:00-07:00",
-      "2026-07-23T04:00:00-07:00"
+      "2026-07-23T04:00:00-07:00",
+      "2026-07-23T05:00:00-07:00",
+      "2026-07-23T06:00:00-07:00",
+      "2026-07-23T07:00:00-07:00"
     ],
     "weather_code": [
-      0,
-      1,
-      1,
       1,
       1,
       1,
@@ -789,7 +786,10 @@
       80,
       80,
       80,
-      80
+      80,
+      1,
+      0,
+      0
     ],
     "wind_direction_10m": [
       270,
@@ -798,9 +798,6 @@
       270,
       270,
       270,
-      270,
-      270,
-      270,
       null,
       null,
       null,
@@ -942,6 +939,9 @@
       270,
       270,
       270,
+      null,
+      null,
+      null,
       null,
       null,
       null,
@@ -950,9 +950,6 @@
       null
     ],
     "wind_gusts_10m": [
-      10.0,
-      10.0,
-      10.0,
       5.0,
       5.0,
       5.0,
@@ -1100,6 +1097,9 @@
       5.0,
       5.0,
       5.0,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1108,9 +1108,6 @@
       0
     ],
     "wind_speed_10m": [
-      10.0,
-      10.0,
-      10.0,
       5.0,
       5.0,
       5.0,
@@ -1258,6 +1255,9 @@
       5.0,
       5.0,
       5.0,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1267,30 +1267,30 @@
     ]
   },
   "latest": {
-    "best_window": "Evening",
-    "best_window_gust_mph": 10.0,
-    "best_window_precipitation_probability_max": 0.0,
-    "best_window_wind_mph": 10.0,
-    "chop_proxy_ft": 0.3,
+    "best_window": "Pending",
+    "best_window_gust_mph": null,
+    "best_window_precipitation_probability_max": null,
+    "best_window_wind_mph": null,
+    "chop_proxy_ft": 0.1,
     "crowding_penalty": 0,
     "date": "2026-07-16",
-    "grade": "C",
-    "grade_before_wind_cap": "C",
+    "grade": "B",
+    "grade_before_wind_cap": "A",
     "grade_caps": [
       "wind_best_case_b"
     ],
     "precipitation_probability_max": 0.0,
     "report": "Live wind forecast is connected. Wind-shadow, depth scoring, danger restrictions, and final chop model are pending.",
-    "score": 68,
-    "score_before_wind_cap": 68,
+    "score": 84,
+    "score_before_wind_cap": 92,
     "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
-    "temperature_2m_max": 74,
+    "temperature_2m_max": 70,
     "temperature_2m_min": 61,
-    "weather_code": 0,
+    "weather_code": 1,
     "wind_direction_deg": 270,
     "wind_direction_label": "W",
-    "wind_gust_max_mph": 10.0,
-    "wind_speed_max_mph": 10.0
+    "wind_gust_max_mph": 5.0,
+    "wind_speed_max_mph": 5.0
   },
   "model_status": {
     "chop_height": "proxy_only_not_measured",
@@ -1315,29 +1315,29 @@
   },
   "ten_day": [
     {
-      "best_window": "Evening",
-      "best_window_gust_mph": 10.0,
-      "best_window_precipitation_probability_max": 0.0,
-      "best_window_wind_mph": 10.0,
-      "chop_proxy_ft": 0.3,
+      "best_window": "Pending",
+      "best_window_gust_mph": null,
+      "best_window_precipitation_probability_max": null,
+      "best_window_wind_mph": null,
+      "chop_proxy_ft": 0.1,
       "crowding_penalty": 0,
       "date": "2026-07-16",
-      "grade": "C",
-      "grade_before_wind_cap": "C",
+      "grade": "B",
+      "grade_before_wind_cap": "A",
       "grade_caps": [
         "wind_best_case_b"
       ],
       "precipitation_probability_max": 0.0,
-      "score": 68,
-      "score_before_wind_cap": 68,
+      "score": 84,
+      "score_before_wind_cap": 92,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
-      "temperature_2m_max": 74,
+      "temperature_2m_max": 70,
       "temperature_2m_min": 61,
-      "weather_code": 0,
+      "weather_code": 1,
       "wind_direction_deg": 270,
       "wind_direction_label": "W",
-      "wind_gust_max_mph": 10.0,
-      "wind_speed_max_mph": 10.0
+      "wind_gust_max_mph": 5.0,
+      "wind_speed_max_mph": 5.0
     },
     {
       "best_window": "Early morning",
@@ -1480,22 +1480,21 @@
       "wind_speed_max_mph": 5.0
     },
     {
-      "best_window": "Pending",
-      "best_window_gust_mph": null,
-      "best_window_precipitation_probability_max": null,
-      "best_window_wind_mph": null,
+      "best_window": "Early morning",
+      "best_window_gust_mph": 0.0,
+      "best_window_precipitation_probability_max": 2.0,
+      "best_window_wind_mph": 0.0,
       "chop_proxy_ft": 0.0,
       "crowding_penalty": 0,
       "date": "2026-07-23",
-      "grade": "C",
-      "grade_before_wind_cap": "C",
+      "grade": "A",
+      "grade_before_wind_cap": "A",
       "grade_caps": [
-        "temperature_high_below_70",
-        "rainy_cold_day_best_case_c"
+        "calm_sunny_a_window"
       ],
       "precipitation_probability_max": 15.0,
-      "score": 71,
-      "score_before_wind_cap": 71,
+      "score": 94,
+      "score_before_wind_cap": 94,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 62,
       "temperature_2m_min": 57,
@@ -1518,7 +1517,7 @@
       "grade_caps": [
         "wind_best_case_b"
       ],
-      "precipitation_probability_max": 9.0,
+      "precipitation_probability_max": 3.0,
       "score": 68,
       "score_before_wind_cap": 68,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
