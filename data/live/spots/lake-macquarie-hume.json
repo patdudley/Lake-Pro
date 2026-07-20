@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T00:23:25.577797+00:00",
+  "generated_at": "2026-07-20T04:15:21.598327+00:00",
   "hourly": {
     "precipitation_probability": [
       0,
@@ -88,11 +88,11 @@
       0,
       0,
       0,
-      1,
-      2,
-      2,
-      2,
-      1,
+      0,
+      0,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1820,7 +1820,7 @@
     {
       "best_window": "Late morning",
       "best_window_gust_mph": 10.4,
-      "best_window_precipitation_probability_max": 2.0,
+      "best_window_precipitation_probability_max": 0.0,
       "best_window_wind_mph": 2.9,
       "chop_proxy_ft": 0.6,
       "crowding_penalty": 0,
@@ -1830,7 +1830,7 @@
       "grade_caps": [
         "temperature_high_below_70"
       ],
-      "precipitation_probability_max": 2.0,
+      "precipitation_probability_max": 0.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
