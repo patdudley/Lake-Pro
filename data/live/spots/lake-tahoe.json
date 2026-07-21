@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T23:17:34.060590+00:00",
+  "generated_at": "2026-07-21T00:12:55.477769+00:00",
   "hourly": {
     "precipitation_probability": [
       2.0,
@@ -1513,8 +1513,8 @@
       "best_window": "Early morning",
       "best_window_gust_mph": 2.8,
       "best_window_precipitation_probability_max": 0.0,
-      "best_window_wind_mph": 1.0,
-      "chop_proxy_ft": 0.7,
+      "best_window_wind_mph": 1.8,
+      "chop_proxy_ft": 0.8,
       "crowding_penalty": 0,
       "date": "2026-07-28",
       "grade": "A",
@@ -1525,35 +1525,37 @@
       "score_before_wind_cap": 94,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
       "temperature_2m_max": 84,
-      "temperature_2m_min": 58,
+      "temperature_2m_min": 61,
       "weather_code": 0,
-      "wind_direction_deg": 252,
+      "wind_direction_deg": 240,
       "wind_direction_label": "WSW",
       "wind_gust_max_mph": 19.2,
-      "wind_speed_max_mph": 14.9
+      "wind_speed_max_mph": 16.7
     },
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 4.3,
       "best_window_precipitation_probability_max": 0.0,
-      "best_window_wind_mph": 3.5,
+      "best_window_wind_mph": 7.0,
       "chop_proxy_ft": 0.9,
       "crowding_penalty": 0,
       "date": "2026-07-29",
-      "grade": "A",
-      "grade_before_wind_cap": "A",
-      "grade_caps": [],
+      "grade": "B",
+      "grade_before_wind_cap": "B",
+      "grade_caps": [
+        "wind_best_case_b"
+      ],
       "precipitation_probability_max": 1.0,
-      "score": 94,
-      "score_before_wind_cap": 94,
+      "score": 82,
+      "score_before_wind_cap": 82,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
-      "temperature_2m_max": 82,
-      "temperature_2m_min": 60,
-      "weather_code": 2,
-      "wind_direction_deg": 239,
-      "wind_direction_label": "WSW",
+      "temperature_2m_max": 81,
+      "temperature_2m_min": 61,
+      "weather_code": 3,
+      "wind_direction_deg": 234,
+      "wind_direction_label": "SW",
       "wind_gust_max_mph": 23.3,
-      "wind_speed_max_mph": 17.2
+      "wind_speed_max_mph": 17.6
     }
   ]
 }
