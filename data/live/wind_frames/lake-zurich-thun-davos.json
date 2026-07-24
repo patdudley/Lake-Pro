@@ -796,57 +796,57 @@
     },
     {
       "time": "2026-07-29T12:00",
-      "wind_direction_deg": 118,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 1.6
-    },
-    {
-      "time": "2026-07-29T13:00",
-      "wind_direction_deg": 191,
-      "wind_direction_label": "S",
+      "wind_direction_deg": 137,
+      "wind_direction_label": "SE",
       "wind_speed_mph": 2.0
     },
     {
-      "time": "2026-07-29T14:00",
-      "wind_direction_deg": 217,
+      "time": "2026-07-29T13:00",
+      "wind_direction_deg": 219,
       "wind_direction_label": "SW",
-      "wind_speed_mph": 3.5
+      "wind_speed_mph": 3.9
+    },
+    {
+      "time": "2026-07-29T14:00",
+      "wind_direction_deg": 249,
+      "wind_direction_label": "WSW",
+      "wind_speed_mph": 7.0
     },
     {
       "time": "2026-07-29T15:00",
-      "wind_direction_deg": 230,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 5.6
+      "wind_direction_deg": 257,
+      "wind_direction_label": "WSW",
+      "wind_speed_mph": 9.7
     },
     {
       "time": "2026-07-29T16:00",
-      "wind_direction_deg": 237,
+      "wind_direction_deg": 249,
       "wind_direction_label": "WSW",
-      "wind_speed_mph": 7.4
+      "wind_speed_mph": 10.1
     },
     {
       "time": "2026-07-29T17:00",
-      "wind_direction_deg": 239,
+      "wind_direction_deg": 246,
       "wind_direction_label": "WSW",
-      "wind_speed_mph": 8.6
+      "wind_speed_mph": 9.8
     },
     {
       "time": "2026-07-29T18:00",
-      "wind_direction_deg": 236,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 8.9
+      "wind_direction_deg": 250,
+      "wind_direction_label": "WSW",
+      "wind_speed_mph": 8.4
     },
     {
       "time": "2026-07-29T19:00",
-      "wind_direction_deg": 233,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 8.6
+      "wind_direction_deg": 262,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 6.1
     },
     {
       "time": "2026-07-29T20:00",
-      "wind_direction_deg": 227,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 7.9
+      "wind_direction_deg": 275,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 4.9
     },
     {
       "time": "2026-07-29T21:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 5.5
     }
   ],
-  "generated_at": "2026-07-24T19:57:00.349382+00:00",
+  "generated_at": "2026-07-24T21:38:41.265782+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-zurich-thun-davos",
   "status": "live_weather_stub_grid"
