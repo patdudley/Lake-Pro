@@ -1,14 +1,15 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-07-29T22:26:10.025Z
+Generated: 2026-07-29T23:29:32.493Z
 
-- Captured: 23
-- Suspect: 1
-- Failed: 1
+- Captured: 25
+- Suspect: 0
+- Failed: 0
 - No catalog webcam source yet: 87
 
 ## Captured
 - Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
+- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
 - Jordanelle Reservoir (UT) — Park City Sailing — PWC Ramp Cam: https://sailpc.org/webcam
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
 - Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
@@ -19,6 +20,7 @@ Generated: 2026-07-29T22:26:10.025Z
 - Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
+- Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
@@ -33,11 +35,6 @@ Generated: 2026-07-29T22:26:10.025Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
-- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/ — page.goto: Timeout 45000ms exceeded.
-Call log:
-  - navigating to "https://milehighmarina.com/webcams/", waiting until "domcontentloaded"
-
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
