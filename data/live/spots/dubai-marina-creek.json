@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T14:43:39.781552+00:00",
+  "generated_at": "2026-07-30T16:57:23.625682+00:00",
   "hourly": {
     "precipitation_probability": [
       0,
@@ -137,13 +137,13 @@
       0,
       0,
       0,
-      0,
-      0,
       1,
       2,
+      4,
+      5,
+      6,
+      5,
       2,
-      2,
-      1,
       0,
       0,
       0,
@@ -1882,7 +1882,7 @@
       "grade_caps": [
         "temperature_high_over_105_best_case_c"
       ],
-      "precipitation_probability_max": 2.0,
+      "precipitation_probability_max": 6.0,
       "score": 71,
       "score_before_wind_cap": 71,
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
