@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T18:49:34.281938+00:00",
+  "generated_at": "2026-07-30T20:36:39.977663+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -166,7 +166,6 @@
       "Sunny",
       "Sunny",
       "Sunny",
-      "Sunny",
       "Clear",
       "Clear",
       "Clear",
@@ -311,6 +310,7 @@
       "Sunny",
       "Sunny",
       "Sunny",
+      "Clear",
       "Clear",
       "Clear",
       "Clear",
@@ -318,7 +318,6 @@
       "Clear"
     ],
     "temperature_2m": [
-      65,
       67,
       70,
       73,
@@ -473,10 +472,10 @@
       75,
       72,
       70,
-      67
+      67,
+      65
     ],
     "time": [
-      "2026-07-30T11:00:00-07:00",
       "2026-07-30T12:00:00-07:00",
       "2026-07-30T13:00:00-07:00",
       "2026-07-30T14:00:00-07:00",
@@ -631,7 +630,8 @@
       "2026-08-05T19:00:00-07:00",
       "2026-08-05T20:00:00-07:00",
       "2026-08-05T21:00:00-07:00",
-      "2026-08-05T22:00:00-07:00"
+      "2026-08-05T22:00:00-07:00",
+      "2026-08-05T23:00:00-07:00"
     ],
     "weather_code": [
       0,
@@ -640,7 +640,6 @@
       0,
       0,
       0,
-      0,
       1,
       1,
       1,
@@ -785,6 +784,7 @@
       0,
       0,
       0,
+      1,
       1,
       1,
       1,
@@ -794,7 +794,6 @@
     "wind_direction_10m": [
       null,
       null,
-      null,
       270,
       270,
       270,
@@ -939,6 +938,7 @@
       null,
       null,
       null,
+      270,
       270,
       270,
       270,
@@ -952,7 +952,6 @@
     "wind_gusts_10m": [
       0,
       0,
-      0,
       10.0,
       10.0,
       10.0,
@@ -1103,6 +1102,7 @@
       10.0,
       10.0,
       10.0,
+      5.0,
       5.0,
       5.0,
       5.0
@@ -1110,7 +1110,6 @@
     "wind_speed_10m": [
       0,
       0,
-      0,
       10.0,
       10.0,
       10.0,
@@ -1261,6 +1260,7 @@
       10.0,
       10.0,
       10.0,
+      5.0,
       5.0,
       5.0,
       5.0
@@ -1268,17 +1268,15 @@
   },
   "latest": {
     "best_window": "Late morning",
-    "best_window_gust_mph": 0.0,
+    "best_window_gust_mph": 3.3,
     "best_window_precipitation_probability_max": 0.0,
-    "best_window_wind_mph": 0.0,
+    "best_window_wind_mph": 3.3,
     "chop_proxy_ft": 0.3,
     "crowding_penalty": 0,
     "date": "2026-07-30",
     "grade": "A",
     "grade_before_wind_cap": "A",
-    "grade_caps": [
-      "calm_sunny_a_window"
-    ],
+    "grade_caps": [],
     "precipitation_probability_max": 0.0,
     "report": "Live wind forecast is connected. Wind-shadow, depth scoring, danger restrictions, and final chop model are pending.",
     "score": 94,
@@ -1316,17 +1314,15 @@
   "ten_day": [
     {
       "best_window": "Late morning",
-      "best_window_gust_mph": 0.0,
+      "best_window_gust_mph": 3.3,
       "best_window_precipitation_probability_max": 0.0,
-      "best_window_wind_mph": 0.0,
+      "best_window_wind_mph": 3.3,
       "chop_proxy_ft": 0.3,
       "crowding_penalty": 0,
       "date": "2026-07-30",
       "grade": "A",
       "grade_before_wind_cap": "A",
-      "grade_caps": [
-        "calm_sunny_a_window"
-      ],
+      "grade_caps": [],
       "precipitation_probability_max": 0.0,
       "score": 94,
       "score_before_wind_cap": 94,
@@ -1487,7 +1483,7 @@
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 8.4,
+      "best_window_gust_mph": 6.7,
       "best_window_precipitation_probability_max": 0.0,
       "best_window_wind_mph": 4.5,
       "chop_proxy_ft": 0.9,
@@ -1505,15 +1501,15 @@
       "weather_code": 0,
       "wind_direction_deg": 240,
       "wind_direction_label": "WSW",
-      "wind_gust_max_mph": 25.7,
+      "wind_gust_max_mph": 24.8,
       "wind_speed_max_mph": 16.7
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 8.3,
+      "best_window_gust_mph": 10.9,
       "best_window_precipitation_probability_max": 0.0,
       "best_window_wind_mph": 7.4,
-      "chop_proxy_ft": 1.0,
+      "chop_proxy_ft": 1.1,
       "crowding_penalty": 0,
       "date": "2026-08-07",
       "grade": "B",
@@ -1522,23 +1518,23 @@
         "wind_best_case_b"
       ],
       "precipitation_probability_max": 0.0,
-      "score": 81,
-      "score_before_wind_cap": 81,
+      "score": 79,
+      "score_before_wind_cap": 79,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
       "temperature_2m_max": 79,
       "temperature_2m_min": 58,
       "weather_code": 0,
       "wind_direction_deg": 238,
       "wind_direction_label": "WSW",
-      "wind_gust_max_mph": 24.8,
+      "wind_gust_max_mph": 29.5,
       "wind_speed_max_mph": 18.7
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 9.0,
+      "best_window_gust_mph": 6.0,
       "best_window_precipitation_probability_max": 1.0,
       "best_window_wind_mph": 4.5,
-      "chop_proxy_ft": 0.8,
+      "chop_proxy_ft": 0.7,
       "crowding_penalty": 8,
       "date": "2026-08-08",
       "grade": "A",
@@ -1553,7 +1549,7 @@
       "weather_code": 0,
       "wind_direction_deg": 238,
       "wind_direction_label": "WSW",
-      "wind_gust_max_mph": 23.5,
+      "wind_gust_max_mph": 17.2,
       "wind_speed_max_mph": 14.7
     }
   ]

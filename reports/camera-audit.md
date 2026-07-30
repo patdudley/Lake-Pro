@@ -1,23 +1,19 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-07-30T18:58:43.236Z
+Generated: 2026-07-30T20:50:38.802Z
 
-- Captured: 25
-- Suspect: 0
-- Failed: 0
+- Captured: 21
+- Suspect: 1
+- Failed: 3
 - No catalog webcam source yet: 87
 
 ## Captured
-- Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
 - Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
 - Jordanelle Reservoir (UT) — Park City Sailing — PWC Ramp Cam: https://sailpc.org/webcam
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
-- Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
-- Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/
 - Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
-- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
@@ -35,6 +31,19 @@ Generated: 2026-07-30T18:58:43.236Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
+- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
+- Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/ — page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/", waiting until "domcontentloaded"
+
+- Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/ — page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/", waiting until "domcontentloaded"
+
+- Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/ — page.goto: Timeout 45000ms exceeded.
+Call log:
+  - navigating to "https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/", waiting until "domcontentloaded"
+
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
