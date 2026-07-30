@@ -112,303 +112,303 @@
     },
     {
       "time": "2026-07-29T18:00",
-      "wind_direction_deg": 15,
+      "wind_direction_deg": 32,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 5.1
+      "wind_speed_mph": 4.2
     },
     {
       "time": "2026-07-29T19:00",
-      "wind_direction_deg": 23,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 3.4
+      "wind_direction_deg": 349,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 1.1
     },
     {
       "time": "2026-07-29T20:00",
-      "wind_direction_deg": 360,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 3.6
+      "wind_direction_deg": 34,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.2
     },
     {
       "time": "2026-07-29T21:00",
-      "wind_direction_deg": 30,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 4.4
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 2.2
     },
     {
       "time": "2026-07-29T22:00",
+      "wind_direction_deg": 54,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.0
+    },
+    {
+      "time": "2026-07-29T23:00",
+      "wind_direction_deg": 52,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.7
+    },
+    {
+      "time": "2026-07-30T00:00",
+      "wind_direction_deg": 68,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 3.6
+    },
+    {
+      "time": "2026-07-30T01:00",
+      "wind_direction_deg": 50,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.5
+    },
+    {
+      "time": "2026-07-30T02:00",
+      "wind_direction_deg": 52,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 4.0
+    },
+    {
+      "time": "2026-07-30T03:00",
       "wind_direction_deg": 37,
       "wind_direction_label": "NE",
       "wind_speed_mph": 4.5
     },
     {
-      "time": "2026-07-29T23:00",
-      "wind_direction_deg": 30,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 3.6
+      "time": "2026-07-30T04:00",
+      "wind_direction_deg": 53,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 4.5
     },
     {
-      "time": "2026-07-30T00:00",
-      "wind_direction_deg": 55,
+      "time": "2026-07-30T05:00",
+      "wind_direction_deg": 51,
       "wind_direction_label": "NE",
       "wind_speed_mph": 4.3
     },
     {
-      "time": "2026-07-30T01:00",
-      "wind_direction_deg": 54,
-      "wind_direction_label": "NE",
-      "wind_speed_mph": 4.2
-    },
-    {
-      "time": "2026-07-30T02:00",
-      "wind_direction_deg": 77,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 4.1
-    },
-    {
-      "time": "2026-07-30T03:00",
+      "time": "2026-07-30T06:00",
       "wind_direction_deg": 66,
       "wind_direction_label": "ENE",
       "wind_speed_mph": 3.9
     },
     {
-      "time": "2026-07-30T04:00",
-      "wind_direction_deg": 65,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 3.7
-    },
-    {
-      "time": "2026-07-30T05:00",
-      "wind_direction_deg": 47,
-      "wind_direction_label": "NE",
-      "wind_speed_mph": 4.0
-    },
-    {
-      "time": "2026-07-30T06:00",
-      "wind_direction_deg": 59,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 3.9
-    },
-    {
       "time": "2026-07-30T07:00",
-      "wind_direction_deg": 84,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 2.0
+      "wind_direction_deg": 75,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 3.5
     },
     {
       "time": "2026-07-30T08:00",
+      "wind_direction_deg": 76,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 6.5
+    },
+    {
+      "time": "2026-07-30T09:00",
+      "wind_direction_deg": 86,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 5.8
+    },
+    {
+      "time": "2026-07-30T10:00",
       "wind_direction_deg": 72,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 5.2
+    },
+    {
+      "time": "2026-07-30T11:00",
+      "wind_direction_deg": 63,
       "wind_direction_label": "ENE",
       "wind_speed_mph": 4.5
     },
     {
-      "time": "2026-07-30T09:00",
-      "wind_direction_deg": 80,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 3.9
-    },
-    {
-      "time": "2026-07-30T10:00",
-      "wind_direction_deg": 62,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 4.8
-    },
-    {
-      "time": "2026-07-30T11:00",
-      "wind_direction_deg": 54,
-      "wind_direction_label": "NE",
-      "wind_speed_mph": 5.0
-    },
-    {
       "time": "2026-07-30T12:00",
-      "wind_direction_deg": 41,
+      "wind_direction_deg": 51,
       "wind_direction_label": "NE",
-      "wind_speed_mph": 5.1
+      "wind_speed_mph": 4.6
     },
     {
       "time": "2026-07-30T13:00",
-      "wind_direction_deg": 32,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 4.2
+      "wind_direction_deg": 47,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 4.3
     },
     {
       "time": "2026-07-30T14:00",
-      "wind_direction_deg": 14,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 4.6
+      "wind_direction_deg": 36,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.8
     },
     {
       "time": "2026-07-30T15:00",
-      "wind_direction_deg": 29,
+      "wind_direction_deg": 12,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 4.6
+      "wind_speed_mph": 3.2
     },
     {
       "time": "2026-07-30T16:00",
-      "wind_direction_deg": 32,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 4.2
+      "wind_direction_deg": 9,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 2.9
     },
     {
       "time": "2026-07-30T17:00",
-      "wind_direction_deg": 22,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 3.6
+      "wind_direction_deg": 10,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 2.5
     },
     {
       "time": "2026-07-30T18:00",
-      "wind_direction_deg": 24,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 2.7
-    },
-    {
-      "time": "2026-07-30T19:00",
-      "wind_direction_deg": 114,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 2.2
-    },
-    {
-      "time": "2026-07-30T20:00",
-      "wind_direction_deg": 101,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 3.6
-    },
-    {
-      "time": "2026-07-30T21:00",
-      "wind_direction_deg": 127,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 2.2
-    },
-    {
-      "time": "2026-07-30T22:00",
-      "wind_direction_deg": 27,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 0.5
-    },
-    {
-      "time": "2026-07-30T23:00",
-      "wind_direction_deg": 18,
+      "wind_direction_deg": 32,
       "wind_direction_label": "NNE",
       "wind_speed_mph": 2.1
     },
     {
+      "time": "2026-07-30T19:00",
+      "wind_direction_deg": 99,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 1.4
+    },
+    {
+      "time": "2026-07-30T20:00",
+      "wind_direction_deg": 129,
+      "wind_direction_label": "SE",
+      "wind_speed_mph": 2.9
+    },
+    {
+      "time": "2026-07-30T21:00",
+      "wind_direction_deg": 117,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 1.5
+    },
+    {
+      "time": "2026-07-30T22:00",
+      "wind_direction_deg": 94,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 3.6
+    },
+    {
+      "time": "2026-07-30T23:00",
+      "wind_direction_deg": 48,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 2.7
+    },
+    {
       "time": "2026-07-31T00:00",
-      "wind_direction_deg": 61,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 2.8
+      "wind_direction_deg": 24,
+      "wind_direction_label": "NNE",
+      "wind_speed_mph": 3.9
     },
     {
       "time": "2026-07-31T01:00",
-      "wind_direction_deg": 61,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 4.6
+      "wind_direction_deg": 42,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.0
     },
     {
       "time": "2026-07-31T02:00",
-      "wind_direction_deg": 73,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 3.7
+      "wind_direction_deg": 30,
+      "wind_direction_label": "NNE",
+      "wind_speed_mph": 3.1
     },
     {
       "time": "2026-07-31T03:00",
-      "wind_direction_deg": 103,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 4.8
-    },
-    {
-      "time": "2026-07-31T04:00",
-      "wind_direction_deg": 90,
+      "wind_direction_deg": 84,
       "wind_direction_label": "E",
       "wind_speed_mph": 4.5
     },
     {
+      "time": "2026-07-31T04:00",
+      "wind_direction_deg": 75,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 4.4
+    },
+    {
       "time": "2026-07-31T05:00",
-      "wind_direction_deg": 101,
+      "wind_direction_deg": 82,
       "wind_direction_label": "E",
-      "wind_speed_mph": 4.8
+      "wind_speed_mph": 4.7
     },
     {
       "time": "2026-07-31T06:00",
-      "wind_direction_deg": 106,
+      "wind_direction_deg": 84,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 4.3
+    },
+    {
+      "time": "2026-07-31T07:00",
+      "wind_direction_deg": 98,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 3.2
+    },
+    {
+      "time": "2026-07-31T08:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 2.7
+    },
+    {
+      "time": "2026-07-31T09:00",
+      "wind_direction_deg": 117,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-07-31T10:00",
+      "wind_direction_deg": 137,
+      "wind_direction_label": "SE",
+      "wind_speed_mph": 4.3
+    },
+    {
+      "time": "2026-07-31T11:00",
+      "wind_direction_deg": 120,
       "wind_direction_label": "ESE",
       "wind_speed_mph": 4.9
     },
     {
-      "time": "2026-07-31T07:00",
-      "wind_direction_deg": 104,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 2.8
-    },
-    {
-      "time": "2026-07-31T08:00",
+      "time": "2026-07-31T12:00",
       "wind_direction_deg": 125,
       "wind_direction_label": "SE",
       "wind_speed_mph": 4.3
     },
     {
-      "time": "2026-07-31T09:00",
-      "wind_direction_deg": 148,
-      "wind_direction_label": "SSE",
-      "wind_speed_mph": 3.4
-    },
-    {
-      "time": "2026-07-31T10:00",
-      "wind_direction_deg": 144,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 3.8
-    },
-    {
-      "time": "2026-07-31T11:00",
-      "wind_direction_deg": 128,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 3.7
-    },
-    {
-      "time": "2026-07-31T12:00",
-      "wind_direction_deg": 112,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 5.5
-    },
-    {
       "time": "2026-07-31T13:00",
-      "wind_direction_deg": 109,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 5.7
+      "wind_direction_deg": 125,
+      "wind_direction_label": "SE",
+      "wind_speed_mph": 4.7
     },
     {
       "time": "2026-07-31T14:00",
-      "wind_direction_deg": 111,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": 138,
+      "wind_direction_label": "SE",
+      "wind_speed_mph": 3.0
     },
     {
       "time": "2026-07-31T15:00",
-      "wind_direction_deg": 90,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 3.8
+      "wind_direction_deg": 122,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 4.2
     },
     {
       "time": "2026-07-31T16:00",
-      "wind_direction_deg": 74,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 3.3
+      "wind_direction_deg": 114,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 4.4
     },
     {
       "time": "2026-07-31T17:00",
-      "wind_direction_deg": 58,
-      "wind_direction_label": "ENE",
-      "wind_speed_mph": 3.4
+      "wind_direction_deg": 95,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 4.9
     },
     {
       "time": "2026-07-31T18:00",
-      "wind_direction_deg": 33,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 5.3
+      "wind_direction_deg": 71,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 5.0
     },
     {
       "time": "2026-07-31T19:00",
-      "wind_direction_deg": 27,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": 46,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 4.8
     },
     {
       "time": "2026-07-31T20:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 4.7
     }
   ],
-  "generated_at": "2026-07-30T00:16:59.887289+00:00",
+  "generated_at": "2026-07-30T03:36:32.961701+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "green-river-lake",
   "status": "live_weather_stub_grid"
