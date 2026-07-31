@@ -88,27 +88,27 @@
     },
     {
       "time": "2026-07-31T14:00",
-      "wind_direction_deg": 250,
+      "wind_direction_deg": 242,
       "wind_direction_label": "WSW",
-      "wind_speed_mph": 10.7
+      "wind_speed_mph": 10.6
     },
     {
       "time": "2026-07-31T15:00",
-      "wind_direction_deg": 255,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 11.3
-    },
-    {
-      "time": "2026-07-31T16:00",
       "wind_direction_deg": 254,
       "wind_direction_label": "WSW",
       "wind_speed_mph": 11.2
     },
     {
-      "time": "2026-07-31T17:00",
-      "wind_direction_deg": 254,
+      "time": "2026-07-31T16:00",
+      "wind_direction_deg": 253,
       "wind_direction_label": "WSW",
-      "wind_speed_mph": 10.7
+      "wind_speed_mph": 11.7
+    },
+    {
+      "time": "2026-07-31T17:00",
+      "wind_direction_deg": 253,
+      "wind_direction_label": "WSW",
+      "wind_speed_mph": 11.0
     },
     {
       "time": "2026-07-31T18:00",
@@ -120,79 +120,79 @@
       "time": "2026-07-31T19:00",
       "wind_direction_deg": 262,
       "wind_direction_label": "W",
-      "wind_speed_mph": 7.9
+      "wind_speed_mph": 7.7
     },
     {
       "time": "2026-07-31T20:00",
-      "wind_direction_deg": 307,
+      "wind_direction_deg": 313,
       "wind_direction_label": "NW",
-      "wind_speed_mph": 4.8
+      "wind_speed_mph": 4.9
     },
     {
       "time": "2026-07-31T21:00",
-      "wind_direction_deg": 340,
+      "wind_direction_deg": 347,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 5.2
+      "wind_speed_mph": 4.8
     },
     {
       "time": "2026-07-31T22:00",
-      "wind_direction_deg": 335,
+      "wind_direction_deg": 333,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 5.9
+      "wind_speed_mph": 5.5
     },
     {
       "time": "2026-07-31T23:00",
-      "wind_direction_deg": 328,
-      "wind_direction_label": "NNW",
-      "wind_speed_mph": 6.3
+      "wind_direction_deg": 325,
+      "wind_direction_label": "NW",
+      "wind_speed_mph": 6.6
     },
     {
       "time": "2026-08-01T00:00",
-      "wind_direction_deg": 331,
+      "wind_direction_deg": 334,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 6.9
+      "wind_speed_mph": 6.7
     },
     {
       "time": "2026-08-01T01:00",
-      "wind_direction_deg": 327,
+      "wind_direction_deg": 328,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 7.8
+      "wind_speed_mph": 7.6
     },
     {
       "time": "2026-08-01T02:00",
-      "wind_direction_deg": 330,
+      "wind_direction_deg": 331,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 7.2
+      "wind_speed_mph": 7.9
     },
     {
       "time": "2026-08-01T03:00",
-      "wind_direction_deg": 332,
+      "wind_direction_deg": 329,
       "wind_direction_label": "NNW",
       "wind_speed_mph": 8.6
     },
     {
       "time": "2026-08-01T04:00",
-      "wind_direction_deg": 335,
+      "wind_direction_deg": 336,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 8.4
+      "wind_speed_mph": 8.3
     },
     {
       "time": "2026-08-01T05:00",
-      "wind_direction_deg": 335,
+      "wind_direction_deg": 336,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 7.9
+      "wind_speed_mph": 8.1
     },
     {
       "time": "2026-08-01T06:00",
-      "wind_direction_deg": 326,
-      "wind_direction_label": "NW",
-      "wind_speed_mph": 6.0
+      "wind_direction_deg": 330,
+      "wind_direction_label": "NNW",
+      "wind_speed_mph": 7.2
     },
     {
       "time": "2026-08-01T07:00",
-      "wind_direction_deg": 328,
+      "wind_direction_deg": 337,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 5.5
+      "wind_speed_mph": 6.3
     },
     {
       "time": "2026-08-01T08:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.3
     }
   ],
-  "generated_at": "2026-07-31T22:19:07.309043+00:00",
+  "generated_at": "2026-07-31T23:19:30.209953+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "donner-lake",
   "status": "live_weather_stub_grid"
