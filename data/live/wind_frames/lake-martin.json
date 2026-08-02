@@ -76,117 +76,117 @@
     },
     {
       "time": "2026-08-02T12:00",
-      "wind_direction_deg": 238,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 7.9
+      "wind_direction_deg": 231,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 7.8
     },
     {
       "time": "2026-08-02T13:00",
-      "wind_direction_deg": 257,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 11.5
+      "wind_direction_deg": 262,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 10.9
     },
     {
       "time": "2026-08-02T14:00",
-      "wind_direction_deg": 263,
+      "wind_direction_deg": 270,
       "wind_direction_label": "W",
-      "wind_speed_mph": 12.4
+      "wind_speed_mph": 13.9
     },
     {
       "time": "2026-08-02T15:00",
-      "wind_direction_deg": 266,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 12.3
-    },
-    {
-      "time": "2026-08-02T16:00",
-      "wind_direction_deg": 264,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 12.2
-    },
-    {
-      "time": "2026-08-02T17:00",
-      "wind_direction_deg": 273,
+      "wind_direction_deg": 267,
       "wind_direction_label": "W",
       "wind_speed_mph": 11.2
     },
     {
-      "time": "2026-08-02T18:00",
-      "wind_direction_deg": 272,
+      "time": "2026-08-02T16:00",
+      "wind_direction_deg": 271,
       "wind_direction_label": "W",
-      "wind_speed_mph": 10.5
+      "wind_speed_mph": 11.4
+    },
+    {
+      "time": "2026-08-02T17:00",
+      "wind_direction_deg": 271,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 11.0
+    },
+    {
+      "time": "2026-08-02T18:00",
+      "wind_direction_deg": 271,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 9.6
     },
     {
       "time": "2026-08-02T19:00",
       "wind_direction_deg": 277,
       "wind_direction_label": "W",
-      "wind_speed_mph": 7.9
+      "wind_speed_mph": 7.0
     },
     {
       "time": "2026-08-02T20:00",
-      "wind_direction_deg": 265,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 5.6
-    },
-    {
-      "time": "2026-08-02T21:00",
-      "wind_direction_deg": 265,
+      "wind_direction_deg": 270,
       "wind_direction_label": "W",
       "wind_speed_mph": 5.4
     },
     {
+      "time": "2026-08-02T21:00",
+      "wind_direction_deg": 290,
+      "wind_direction_label": "WNW",
+      "wind_speed_mph": 3.3
+    },
+    {
       "time": "2026-08-02T22:00",
-      "wind_direction_deg": 317,
+      "wind_direction_deg": 320,
+      "wind_direction_label": "NW",
+      "wind_speed_mph": 3.5
+    },
+    {
+      "time": "2026-08-02T23:00",
+      "wind_direction_deg": 311,
+      "wind_direction_label": "NW",
+      "wind_speed_mph": 4.1
+    },
+    {
+      "time": "2026-08-03T00:00",
+      "wind_direction_deg": 313,
+      "wind_direction_label": "NW",
+      "wind_speed_mph": 4.0
+    },
+    {
+      "time": "2026-08-03T01:00",
+      "wind_direction_deg": 313,
       "wind_direction_label": "NW",
       "wind_speed_mph": 3.6
     },
     {
-      "time": "2026-08-02T23:00",
-      "wind_direction_deg": 315,
-      "wind_direction_label": "NW",
-      "wind_speed_mph": 2.8
-    },
-    {
-      "time": "2026-08-03T00:00",
-      "wind_direction_deg": 298,
-      "wind_direction_label": "WNW",
-      "wind_speed_mph": 3.8
-    },
-    {
-      "time": "2026-08-03T01:00",
-      "wind_direction_deg": 297,
-      "wind_direction_label": "WNW",
-      "wind_speed_mph": 3.0
-    },
-    {
       "time": "2026-08-03T02:00",
-      "wind_direction_deg": 297,
+      "wind_direction_deg": 303,
       "wind_direction_label": "WNW",
-      "wind_speed_mph": 3.5
+      "wind_speed_mph": 3.7
     },
     {
       "time": "2026-08-03T03:00",
-      "wind_direction_deg": 297,
-      "wind_direction_label": "WNW",
-      "wind_speed_mph": 3.5
+      "wind_direction_deg": 279,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 2.9
     },
     {
       "time": "2026-08-03T04:00",
-      "wind_direction_deg": 265,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 2.5
+      "wind_direction_deg": 252,
+      "wind_direction_label": "WSW",
+      "wind_speed_mph": 2.8
     },
     {
       "time": "2026-08-03T05:00",
-      "wind_direction_deg": 305,
-      "wind_direction_label": "NW",
-      "wind_speed_mph": 3.5
+      "wind_direction_deg": 282,
+      "wind_direction_label": "WNW",
+      "wind_speed_mph": 3.2
     },
     {
       "time": "2026-08-03T06:00",
-      "wind_direction_deg": 275,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 2.5
+      "wind_direction_deg": 292,
+      "wind_direction_label": "WNW",
+      "wind_speed_mph": 3.6
     },
     {
       "time": "2026-08-03T07:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 4.8
     }
   ],
-  "generated_at": "2026-08-02T18:17:13.474185+00:00",
+  "generated_at": "2026-08-02T19:39:28.835123+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-martin",
   "status": "live_weather_stub_grid"
