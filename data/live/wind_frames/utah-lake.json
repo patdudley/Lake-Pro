@@ -94,31 +94,31 @@
     },
     {
       "time": "2026-08-03T15:00",
-      "wind_direction_deg": 3,
+      "wind_direction_deg": 4,
       "wind_direction_label": "N",
-      "wind_speed_mph": 14.8
+      "wind_speed_mph": 10.1
     },
     {
       "time": "2026-08-03T16:00",
-      "wind_direction_deg": 6,
+      "wind_direction_deg": 360,
       "wind_direction_label": "N",
-      "wind_speed_mph": 12.8
+      "wind_speed_mph": 11.6
     },
     {
       "time": "2026-08-03T17:00",
       "wind_direction_deg": 357,
       "wind_direction_label": "N",
-      "wind_speed_mph": 15.2
+      "wind_speed_mph": 14.6
     },
     {
       "time": "2026-08-03T18:00",
-      "wind_direction_deg": 351,
+      "wind_direction_deg": 352,
       "wind_direction_label": "N",
       "wind_speed_mph": 18.8
     },
     {
       "time": "2026-08-03T19:00",
-      "wind_direction_deg": 346,
+      "wind_direction_deg": 347,
       "wind_direction_label": "NNW",
       "wind_speed_mph": 20.7
     },
@@ -126,13 +126,13 @@
       "time": "2026-08-03T20:00",
       "wind_direction_deg": 344,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 22.2
+      "wind_speed_mph": 21.4
     },
     {
       "time": "2026-08-03T21:00",
       "wind_direction_deg": 340,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 22.6
+      "wind_speed_mph": 21.7
     },
     {
       "time": "2026-08-03T22:00",
@@ -144,41 +144,41 @@
       "time": "2026-08-03T23:00",
       "wind_direction_deg": 344,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 19.8
+      "wind_speed_mph": 19.1
     },
     {
       "time": "2026-08-04T00:00",
-      "wind_direction_deg": 356,
+      "wind_direction_deg": 352,
       "wind_direction_label": "N",
-      "wind_speed_mph": 15.7
+      "wind_speed_mph": 14.7
     },
     {
       "time": "2026-08-04T01:00",
       "wind_direction_deg": 345,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 10.9
+      "wind_speed_mph": 9.7
     },
     {
       "time": "2026-08-04T02:00",
       "wind_direction_deg": 352,
       "wind_direction_label": "N",
-      "wind_speed_mph": 7.9
+      "wind_speed_mph": 6.8
     },
     {
       "time": "2026-08-04T03:00",
       "wind_direction_deg": 333,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 9.5
+      "wind_speed_mph": 8.8
     },
     {
       "time": "2026-08-04T04:00",
       "wind_direction_deg": 348,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 12.6
+      "wind_speed_mph": 13.7
     },
     {
       "time": "2026-08-04T05:00",
-      "wind_direction_deg": 339,
+      "wind_direction_deg": 341,
       "wind_direction_label": "NNW",
       "wind_speed_mph": 11.8
     },
@@ -186,25 +186,25 @@
       "time": "2026-08-04T06:00",
       "wind_direction_deg": 345,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 13.7
+      "wind_speed_mph": 14.1
     },
     {
       "time": "2026-08-04T07:00",
-      "wind_direction_deg": 347,
-      "wind_direction_label": "NNW",
-      "wind_speed_mph": 14.4
+      "wind_direction_deg": 351,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 13.6
     },
     {
       "time": "2026-08-04T08:00",
-      "wind_direction_deg": 344,
+      "wind_direction_deg": 343,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 10.7
+      "wind_speed_mph": 9.1
     },
     {
       "time": "2026-08-04T09:00",
-      "wind_direction_deg": 343,
+      "wind_direction_deg": 341,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 7.7
+      "wind_speed_mph": 6.2
     },
     {
       "time": "2026-08-04T10:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 5.4
     }
   ],
-  "generated_at": "2026-08-03T22:25:10.121526+00:00",
+  "generated_at": "2026-08-03T23:34:38.115988+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "utah-lake",
   "status": "live_weather_stub_grid"
