@@ -3,12 +3,6 @@
   "frame_hours": 1,
   "frames": [
     {
-      "time": "2026-08-03T10:00:00-07:00",
-      "wind_direction_deg": 45,
-      "wind_direction_label": "NE",
-      "wind_speed_mph": 5.0
-    },
-    {
       "time": "2026-08-03T11:00:00-07:00",
       "wind_direction_deg": 0,
       "wind_direction_label": "N",
@@ -604,21 +598,21 @@
     },
     {
       "time": "2026-08-07T14:00:00-07:00",
-      "wind_direction_deg": 270,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": null,
+      "wind_direction_label": "",
+      "wind_speed_mph": 0
     },
     {
       "time": "2026-08-07T15:00:00-07:00",
-      "wind_direction_deg": 270,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": null,
+      "wind_direction_label": "",
+      "wind_speed_mph": 0
     },
     {
       "time": "2026-08-07T16:00:00-07:00",
-      "wind_direction_deg": 270,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": null,
+      "wind_direction_label": "",
+      "wind_speed_mph": 0
     },
     {
       "time": "2026-08-07T17:00:00-07:00",
@@ -694,21 +688,21 @@
     },
     {
       "time": "2026-08-08T05:00:00-07:00",
-      "wind_direction_deg": 225,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": null,
+      "wind_direction_label": "",
+      "wind_speed_mph": 0
     },
     {
       "time": "2026-08-08T06:00:00-07:00",
-      "wind_direction_deg": 225,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": null,
+      "wind_direction_label": "",
+      "wind_speed_mph": 0
     },
     {
       "time": "2026-08-08T07:00:00-07:00",
-      "wind_direction_deg": 225,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 5.0
+      "wind_direction_deg": null,
+      "wind_direction_label": "",
+      "wind_speed_mph": 0
     },
     {
       "time": "2026-08-08T08:00:00-07:00",
@@ -937,9 +931,15 @@
       "wind_direction_deg": 270,
       "wind_direction_label": "W",
       "wind_speed_mph": 10.0
+    },
+    {
+      "time": "2026-08-09T22:00:00-07:00",
+      "wind_direction_deg": 270,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 10.0
     }
   ],
-  "generated_at": "2026-08-03T17:21:16.466370+00:00",
+  "generated_at": "2026-08-03T18:59:18.480596+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-tahoe",
   "status": "live_weather_stub_grid"
