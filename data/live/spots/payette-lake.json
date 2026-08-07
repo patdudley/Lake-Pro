@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T22:57:08.072026+00:00",
+  "generated_at": "2026-08-07T23:49:59.628764+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -153,7 +153,7 @@
       0.0,
       0.0,
       0.0,
-      0.0,
+      1.0,
       1.0,
       1.0,
       1.0,
@@ -168,7 +168,6 @@
       "Areas Of Smoke",
       "Areas Of Smoke",
       "Areas Of Smoke",
-      "Areas Of Smoke",
       "Patchy Smoke",
       "Patchy Smoke",
       "Patchy Smoke",
@@ -312,13 +311,13 @@
       "Mostly Clear",
       "Mostly Clear",
       "Mostly Clear",
+      "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy"
     ],
     "temperature_2m": [
-      86,
       86,
       86,
       83,
@@ -473,10 +472,10 @@
       61,
       59,
       56,
-      55
+      55,
+      53
     ],
     "time": [
-      "2026-08-07T16:00:00-06:00",
       "2026-08-07T17:00:00-06:00",
       "2026-08-07T18:00:00-06:00",
       "2026-08-07T19:00:00-06:00",
@@ -631,7 +630,8 @@
       "2026-08-14T00:00:00-06:00",
       "2026-08-14T01:00:00-06:00",
       "2026-08-14T02:00:00-06:00",
-      "2026-08-14T03:00:00-06:00"
+      "2026-08-14T03:00:00-06:00",
+      "2026-08-14T04:00:00-06:00"
     ],
     "weather_code": [
       1,
@@ -682,7 +682,6 @@
       1,
       1,
       1,
-      1,
       0,
       1,
       1,
@@ -786,13 +785,13 @@
       1,
       1,
       1,
+      2,
       2,
       2,
       2,
       2
     ],
     "wind_direction_10m": [
-      270,
       270,
       270,
       270,
@@ -947,10 +946,10 @@
       45,
       45,
       45,
+      68,
       68
     ],
     "wind_gusts_10m": [
-      6.0,
       7.0,
       7.0,
       5.0,
@@ -1105,10 +1104,10 @@
       6.0,
       6.0,
       6.0,
+      3.0,
       3.0
     ],
     "wind_speed_10m": [
-      6.0,
       7.0,
       7.0,
       5.0,
@@ -1263,6 +1262,7 @@
       6.0,
       6.0,
       6.0,
+      3.0,
       3.0
     ]
   },
@@ -1504,7 +1504,7 @@
       "score_before_wind_cap": 84,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 61,
-      "temperature_2m_min": 55,
+      "temperature_2m_min": 53,
       "weather_code": 2,
       "wind_direction_deg": 45,
       "wind_direction_label": "NE",
@@ -1515,8 +1515,8 @@
       "best_window": "Early morning",
       "best_window_gust_mph": 1.7,
       "best_window_precipitation_probability_max": 4.0,
-      "best_window_wind_mph": 1.5,
-      "chop_proxy_ft": 0.8,
+      "best_window_wind_mph": 2.6,
+      "chop_proxy_ft": 0.7,
       "crowding_penalty": 8,
       "date": "2026-08-15",
       "grade": "A",
@@ -1526,19 +1526,19 @@
       "score": 86,
       "score_before_wind_cap": 86,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
-      "temperature_2m_max": 87,
+      "temperature_2m_max": 85,
       "temperature_2m_min": 54,
       "weather_code": 51,
-      "wind_direction_deg": 155,
-      "wind_direction_label": "SSE",
+      "wind_direction_deg": 172,
+      "wind_direction_label": "S",
       "wind_gust_max_mph": 25.1,
-      "wind_speed_max_mph": 13.8
+      "wind_speed_max_mph": 8.9
     },
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 6.5,
       "best_window_precipitation_probability_max": 8.0,
-      "best_window_wind_mph": 2.6,
+      "best_window_wind_mph": 2.5,
       "chop_proxy_ft": 0.5,
       "crowding_penalty": 8,
       "date": "2026-08-16",
@@ -1549,13 +1549,13 @@
       "score": 86,
       "score_before_wind_cap": 86,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
-      "temperature_2m_max": 82,
+      "temperature_2m_max": 84,
       "temperature_2m_min": 52,
       "weather_code": 51,
-      "wind_direction_deg": 182,
+      "wind_direction_deg": 181,
       "wind_direction_label": "S",
       "wind_gust_max_mph": 16.8,
-      "wind_speed_max_mph": 10.5
+      "wind_speed_max_mph": 9.5
     }
   ]
 }
