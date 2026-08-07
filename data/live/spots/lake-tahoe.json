@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T20:01:26.907331+00:00",
+  "generated_at": "2026-08-07T21:02:34.458284+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -1503,16 +1503,16 @@
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 4.3,
-      "best_window_precipitation_probability_max": 10.0,
+      "best_window_gust_mph": 4.0,
+      "best_window_precipitation_probability_max": 9.0,
       "best_window_wind_mph": 0.8,
-      "chop_proxy_ft": 0.6,
+      "chop_proxy_ft": 0.7,
       "crowding_penalty": 8,
       "date": "2026-08-15",
       "grade": "A",
       "grade_before_wind_cap": "A",
       "grade_caps": [],
-      "precipitation_probability_max": 25.0,
+      "precipitation_probability_max": 27.0,
       "score": 86,
       "score_before_wind_cap": 86,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
@@ -1521,21 +1521,21 @@
       "weather_code": 51,
       "wind_direction_deg": 245,
       "wind_direction_label": "WSW",
-      "wind_gust_max_mph": 11.2,
+      "wind_gust_max_mph": 16.6,
       "wind_speed_max_mph": 15.2
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 2.7,
-      "best_window_precipitation_probability_max": 6.0,
+      "best_window_gust_mph": 3.4,
+      "best_window_precipitation_probability_max": 7.0,
       "best_window_wind_mph": 2.7,
-      "chop_proxy_ft": 0.7,
+      "chop_proxy_ft": 0.8,
       "crowding_penalty": 8,
       "date": "2026-08-16",
       "grade": "A",
       "grade_before_wind_cap": "A",
       "grade_caps": [],
-      "precipitation_probability_max": 19.0,
+      "precipitation_probability_max": 18.0,
       "score": 86,
       "score_before_wind_cap": 86,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
@@ -1544,7 +1544,7 @@
       "weather_code": 3,
       "wind_direction_deg": 232,
       "wind_direction_label": "SW",
-      "wind_gust_max_mph": 18.1,
+      "wind_gust_max_mph": 20.8,
       "wind_speed_max_mph": 15.4
     }
   ]
