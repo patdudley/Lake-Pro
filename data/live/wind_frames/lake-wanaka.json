@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 4.8
     }
   ],
-  "generated_at": "2026-08-08T17:03:06.274488+00:00",
+  "generated_at": "2026-08-08T17:56:16.944964+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-wanaka",
   "status": "live_weather_stub_grid"
