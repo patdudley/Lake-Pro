@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 4.0
     }
   ],
-  "generated_at": "2026-08-08T19:03:27.773565+00:00",
+  "generated_at": "2026-08-08T19:49:23.741178+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-george",
   "status": "live_weather_stub_grid"
