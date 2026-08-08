@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.4
     }
   ],
-  "generated_at": "2026-08-08T22:56:31.693621+00:00",
+  "generated_at": "2026-08-08T23:53:00.140004+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-geneva-leman",
   "status": "live_weather_stub_grid"
