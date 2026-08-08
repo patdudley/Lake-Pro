@@ -196,9 +196,9 @@
     },
     {
       "time": "2026-08-09T08:00",
-      "wind_direction_deg": 104,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 0.9
+      "wind_direction_deg": 24,
+      "wind_direction_label": "NNE",
+      "wind_speed_mph": 2.2
     },
     {
       "time": "2026-08-09T09:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 1.7
     }
   ],
-  "generated_at": "2026-08-08T20:51:06.200846+00:00",
+  "generated_at": "2026-08-08T21:48:37.924487+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "deer-creek-reservoir",
   "status": "live_weather_stub_grid"
