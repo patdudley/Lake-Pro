@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.1
     }
   ],
-  "generated_at": "2026-08-09T19:09:39.918422+00:00",
+  "generated_at": "2026-08-09T19:57:54.212278+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "okanagan-lake",
   "status": "live_weather_stub_grid"

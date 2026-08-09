@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T19:10:42.820715+00:00",
+  "generated_at": "2026-08-09T19:58:54.943698+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.3,
@@ -641,7 +641,7 @@
       "chop_proxy_ft": 0.4,
       "grade": "B",
       "slug": "lake-como",
-      "wind_speed_max_mph": 9.1
+      "wind_speed_max_mph": 9.6
     },
     {
       "chop_proxy_ft": 1.4,
@@ -653,25 +653,25 @@
       "chop_proxy_ft": 0.1,
       "grade": "A",
       "slug": "austrian-lakes-area-47",
-      "wind_speed_max_mph": 3.5
+      "wind_speed_max_mph": 3.7
     },
     {
-      "chop_proxy_ft": 1.7,
+      "chop_proxy_ft": 1.8,
       "grade": "D",
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 22.1
+      "wind_speed_max_mph": 23.4
     },
     {
       "chop_proxy_ft": 0.1,
       "grade": "B",
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 2.2
+      "wind_speed_max_mph": 2.3
     },
     {
       "chop_proxy_ft": 0.9,
       "grade": "C",
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 16.2
+      "wind_speed_max_mph": 13.5
     }
   ]
 }

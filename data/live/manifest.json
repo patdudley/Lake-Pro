@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-09T19:10:45.202935+00:00",
+  "generated_at": "2026-08-09T19:58:56.710957+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -881,7 +881,7 @@
       "name": "Lake Como",
       "score": 84,
       "slug": "lake-como",
-      "wind_speed_max_mph": 9.1
+      "wind_speed_max_mph": 9.6
     },
     {
       "best_window": "Early morning",
@@ -897,7 +897,7 @@
       "name": "Austrian Lakes / AREA 47",
       "score": 86,
       "slug": "austrian-lakes-area-47",
-      "wind_speed_max_mph": 3.5
+      "wind_speed_max_mph": 3.7
     },
     {
       "best_window": "Early morning",
@@ -905,7 +905,7 @@
       "name": "Lake Macquarie / Hume",
       "score": 48,
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 22.1
+      "wind_speed_max_mph": 23.4
     },
     {
       "best_window": "Early morning",
@@ -913,7 +913,7 @@
       "name": "Lake Wanaka",
       "score": 84,
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 2.2
+      "wind_speed_max_mph": 2.3
     },
     {
       "best_window": "Late morning",
@@ -921,7 +921,7 @@
       "name": "Dubai Marina / Creek",
       "score": 71,
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 16.2
+      "wind_speed_max_mph": 13.5
     }
   ]
 }

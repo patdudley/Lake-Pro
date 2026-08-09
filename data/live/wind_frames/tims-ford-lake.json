@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 4.7
     }
   ],
-  "generated_at": "2026-08-09T19:06:57.479689+00:00",
+  "generated_at": "2026-08-09T19:54:20.185745+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "tims-ford-lake",
   "status": "live_weather_stub_grid"
