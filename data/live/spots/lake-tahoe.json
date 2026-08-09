@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T14:01:21.538872+00:00",
+  "generated_at": "2026-08-09T14:55:20.586333+00:00",
   "hourly": {
     "precipitation_probability": [
       1.0,
@@ -1485,7 +1485,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 6.0,
-      "best_window_precipitation_probability_max": 8.0,
+      "best_window_precipitation_probability_max": 3.0,
       "best_window_wind_mph": 0.9,
       "chop_proxy_ft": 0.2,
       "crowding_penalty": 8,
@@ -1495,7 +1495,7 @@
       "grade_caps": [
         "temperature_high_below_70"
       ],
-      "precipitation_probability_max": 11.0,
+      "precipitation_probability_max": 8.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
@@ -1510,7 +1510,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 5.8,
-      "best_window_precipitation_probability_max": 4.0,
+      "best_window_precipitation_probability_max": 3.0,
       "best_window_wind_mph": 1.2,
       "chop_proxy_ft": 0.6,
       "crowding_penalty": 0,
@@ -1518,7 +1518,7 @@
       "grade": "A",
       "grade_before_wind_cap": "A",
       "grade_caps": [],
-      "precipitation_probability_max": 9.0,
+      "precipitation_probability_max": 6.0,
       "score": 94,
       "score_before_wind_cap": 94,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
@@ -1533,7 +1533,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 2.2,
-      "best_window_precipitation_probability_max": 9.0,
+      "best_window_precipitation_probability_max": 6.0,
       "best_window_wind_mph": 1.2,
       "chop_proxy_ft": 0.4,
       "crowding_penalty": 0,
@@ -1541,7 +1541,7 @@
       "grade": "A",
       "grade_before_wind_cap": "A",
       "grade_caps": [],
-      "precipitation_probability_max": 11.0,
+      "precipitation_probability_max": 8.0,
       "score": 94,
       "score_before_wind_cap": 94,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
