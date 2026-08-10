@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-10T19:25:49.078570+00:00",
+  "generated_at": "2026-08-10T20:10:45.579802+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -36,7 +36,7 @@
       "wind_speed_max_mph": 10.0
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Evening",
       "grade": "B",
       "name": "Payette Lake",
       "score": 84,
@@ -873,7 +873,7 @@
       "name": "Lake Geneva (L\u00e9man)",
       "score": 94,
       "slug": "lake-geneva-leman",
-      "wind_speed_max_mph": 14.0
+      "wind_speed_max_mph": 13.3
     },
     {
       "best_window": "Late morning",
@@ -897,15 +897,15 @@
       "name": "Austrian Lakes / AREA 47",
       "score": 94,
       "slug": "austrian-lakes-area-47",
-      "wind_speed_max_mph": 2.9
+      "wind_speed_max_mph": 3.8
     },
     {
       "best_window": "Evening",
       "grade": "B",
       "name": "Lake Macquarie / Hume",
-      "score": 76,
+      "score": 73,
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 17.9
+      "wind_speed_max_mph": 19.6
     },
     {
       "best_window": "Evening",
@@ -913,7 +913,7 @@
       "name": "Lake Wanaka",
       "score": 84,
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 3.6
+      "wind_speed_max_mph": 2.9
     },
     {
       "best_window": "Early morning",
@@ -921,7 +921,7 @@
       "name": "Dubai Marina / Creek",
       "score": 71,
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 14.0
+      "wind_speed_max_mph": 12.0
     }
   ]
 }

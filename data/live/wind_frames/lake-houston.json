@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 7.2
     }
   ],
-  "generated_at": "2026-08-10T19:23:02.002377+00:00",
+  "generated_at": "2026-08-10T20:07:57.860969+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-houston",
   "status": "live_weather_stub_grid"
