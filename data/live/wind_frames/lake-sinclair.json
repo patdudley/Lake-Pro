@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 0.7
     }
   ],
-  "generated_at": "2026-08-10T23:02:38.018044+00:00",
+  "generated_at": "2026-08-10T23:55:20.156802+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-sinclair",
   "status": "live_weather_stub_grid"

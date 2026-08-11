@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T23:07:16.574818+00:00",
+  "generated_at": "2026-08-11T00:01:24.729006+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.3,
@@ -602,10 +602,10 @@
       "wind_speed_max_mph": 10.7
     },
     {
-      "chop_proxy_ft": 0.5,
+      "chop_proxy_ft": 0.6,
       "grade": "A",
       "slug": "okanagan-lake",
-      "wind_speed_max_mph": 9.0
+      "wind_speed_max_mph": 10.2
     },
     {
       "chop_proxy_ft": 0.4,
@@ -617,19 +617,19 @@
       "chop_proxy_ft": 0.6,
       "grade": "A",
       "slug": "lake-muskoka-joseph-rosseau",
-      "wind_speed_max_mph": 10.9
+      "wind_speed_max_mph": 10.3
     },
     {
       "chop_proxy_ft": 0.8,
       "grade": "B",
       "slug": "lake-simcoe",
-      "wind_speed_max_mph": 16.6
+      "wind_speed_max_mph": 15.3
     },
     {
       "chop_proxy_ft": 0.5,
       "grade": "A",
       "slug": "lake-koocanusa",
-      "wind_speed_max_mph": 10.4
+      "wind_speed_max_mph": 10.3
     },
     {
       "chop_proxy_ft": 0.8,
