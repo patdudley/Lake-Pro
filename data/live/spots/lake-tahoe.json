@@ -1,9 +1,8 @@
 {
-  "generated_at": "2026-08-11T16:12:18.971177+00:00",
+  "generated_at": "2026-08-11T17:14:41.151691+00:00",
   "hourly": {
     "precipitation_probability": [
       1.0,
-      1.0,
       2.0,
       2.0,
       2.0,
@@ -154,13 +153,13 @@
       3.0,
       3.0,
       3.0,
+      1.0,
       1.0,
       1.0,
       1.0,
       1.0
     ],
     "short_forecast": [
-      "Sunny",
       "Sunny",
       "Sunny",
       "Sunny",
@@ -315,10 +314,10 @@
       "Mostly Sunny",
       "Partly Cloudy",
       "Partly Cloudy",
+      "Partly Cloudy",
       "Partly Cloudy"
     ],
     "temperature_2m": [
-      64,
       67,
       68,
       70,
@@ -473,10 +472,10 @@
       66,
       65,
       64,
-      62
+      62,
+      60
     ],
     "time": [
-      "2026-08-11T09:00:00-07:00",
       "2026-08-11T10:00:00-07:00",
       "2026-08-11T11:00:00-07:00",
       "2026-08-11T12:00:00-07:00",
@@ -631,10 +630,10 @@
       "2026-08-17T17:00:00-07:00",
       "2026-08-17T18:00:00-07:00",
       "2026-08-17T19:00:00-07:00",
-      "2026-08-17T20:00:00-07:00"
+      "2026-08-17T20:00:00-07:00",
+      "2026-08-17T21:00:00-07:00"
     ],
     "weather_code": [
-      0,
       0,
       0,
       0,
@@ -789,11 +788,11 @@
       2,
       2,
       2,
+      2,
       2
     ],
     "wind_direction_10m": [
       null,
-      null,
       270,
       270,
       270,
@@ -941,6 +940,7 @@
       null,
       null,
       null,
+      270,
       270,
       270,
       270,
@@ -951,7 +951,6 @@
     ],
     "wind_gusts_10m": [
       0,
-      0,
       5.0,
       5.0,
       5.0,
@@ -1105,11 +1104,11 @@
       10.0,
       10.0,
       10.0,
+      5.0,
       5.0
     ],
     "wind_speed_10m": [
       0,
-      0,
       5.0,
       5.0,
       5.0,
@@ -1263,14 +1262,15 @@
       10.0,
       10.0,
       10.0,
+      5.0,
       5.0
     ]
   },
   "latest": {
-    "best_window": "Early morning",
-    "best_window_gust_mph": 1.7,
+    "best_window": "Late morning",
+    "best_window_gust_mph": 3.3,
     "best_window_precipitation_probability_max": 2.0,
-    "best_window_wind_mph": 1.7,
+    "best_window_wind_mph": 3.3,
     "chop_proxy_ft": 0.3,
     "crowding_penalty": 0,
     "date": "2026-08-11",
@@ -1313,10 +1313,10 @@
   },
   "ten_day": [
     {
-      "best_window": "Early morning",
-      "best_window_gust_mph": 1.7,
+      "best_window": "Late morning",
+      "best_window_gust_mph": 3.3,
       "best_window_precipitation_probability_max": 2.0,
-      "best_window_wind_mph": 1.7,
+      "best_window_wind_mph": 3.3,
       "chop_proxy_ft": 0.3,
       "crowding_penalty": 0,
       "date": "2026-08-11",
