@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 9.6
     }
   ],
-  "generated_at": "2026-08-12T18:11:01.474057+00:00",
+  "generated_at": "2026-08-12T19:31:35.609696+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-havasu",
   "status": "live_weather_stub_grid"

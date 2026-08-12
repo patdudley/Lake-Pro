@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T18:16:20.836665+00:00",
+  "generated_at": "2026-08-12T19:35:20.717887+00:00",
   "hourly": {
     "precipitation_probability": [
       0,
@@ -750,7 +750,7 @@
       0,
       0,
       0,
-      2,
+      1,
       0,
       0,
       0,
@@ -1717,7 +1717,7 @@
     "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
     "temperature_2m_max": 99,
     "temperature_2m_min": 78,
-    "weather_code": 2,
+    "weather_code": 1,
     "wind_direction_deg": 174,
     "wind_direction_label": "S",
     "wind_gust_max_mph": 34.0,
@@ -1765,7 +1765,7 @@
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
       "temperature_2m_max": 99,
       "temperature_2m_min": 78,
-      "weather_code": 2,
+      "weather_code": 1,
       "wind_direction_deg": 174,
       "wind_direction_label": "S",
       "wind_gust_max_mph": 34.0,

@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-12T18:20:06.245868+00:00",
+  "generated_at": "2026-08-12T19:39:04.927341+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -33,13 +33,13 @@
       "name": "Lake Tahoe",
       "score": 84,
       "slug": "lake-tahoe",
-      "wind_speed_max_mph": 10.0
+      "wind_speed_max_mph": 5.0
     },
     {
       "best_window": "Late morning",
       "grade": "B",
       "name": "Payette Lake",
-      "score": 84,
+      "score": 78,
       "slug": "payette-lake",
       "wind_speed_max_mph": 9.0
     },
@@ -853,9 +853,9 @@
     },
     {
       "best_window": "Late morning",
-      "grade": "A",
+      "grade": "B",
       "name": "Lake Simcoe",
-      "score": 92,
+      "score": 84,
       "slug": "lake-simcoe",
       "wind_speed_max_mph": 14.9
     },
@@ -905,15 +905,15 @@
       "name": "Lake Macquarie / Hume",
       "score": 84,
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 11.4
+      "wind_speed_max_mph": 11.7
     },
     {
-      "best_window": "Late morning",
+      "best_window": "Early morning",
       "grade": "B",
       "name": "Lake Wanaka",
       "score": 84,
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 5.5
+      "wind_speed_max_mph": 4.9
     },
     {
       "best_window": "Early morning",
@@ -921,7 +921,7 @@
       "name": "Dubai Marina / Creek",
       "score": 84,
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 12.3
+      "wind_speed_max_mph": 14.0
     }
   ]
 }

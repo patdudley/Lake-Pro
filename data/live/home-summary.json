@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-12T18:20:04.407528+00:00",
+  "generated_at": "2026-08-12T19:39:03.099178+00:00",
   "spots": [
     {
-      "chop_proxy_ft": 0.3,
+      "chop_proxy_ft": 0.1,
       "grade": "B",
       "slug": "lake-tahoe",
-      "wind_speed_max_mph": 10.0
+      "wind_speed_max_mph": 5.0
     },
     {
       "chop_proxy_ft": 0.3,
@@ -621,7 +621,7 @@
     },
     {
       "chop_proxy_ft": 0.6,
-      "grade": "A",
+      "grade": "B",
       "slug": "lake-simcoe",
       "wind_speed_max_mph": 14.9
     },
@@ -659,19 +659,19 @@
       "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 11.4
+      "wind_speed_max_mph": 11.7
     },
     {
       "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 5.5
+      "wind_speed_max_mph": 4.9
     },
     {
-      "chop_proxy_ft": 0.7,
+      "chop_proxy_ft": 0.8,
       "grade": "B",
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 12.3
+      "wind_speed_max_mph": 14.0
     }
   ]
 }

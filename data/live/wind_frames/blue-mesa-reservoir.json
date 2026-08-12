@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 2.0
     }
   ],
-  "generated_at": "2026-08-12T18:17:17.619545+00:00",
+  "generated_at": "2026-08-12T19:37:04.752612+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "blue-mesa-reservoir",
   "status": "live_weather_stub_grid"
