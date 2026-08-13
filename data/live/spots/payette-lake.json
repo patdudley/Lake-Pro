@@ -1,9 +1,8 @@
 {
-  "generated_at": "2026-08-13T22:05:26.489797+00:00",
+  "generated_at": "2026-08-13T23:05:38.998492+00:00",
   "hourly": {
     "precipitation_probability": [
       6.0,
-      6.0,
       24.0,
       24.0,
       24.0,
@@ -154,13 +153,13 @@
       21.0,
       21.0,
       21.0,
+      10.0,
       10.0,
       10.0,
       10.0,
       10.0
     ],
     "short_forecast": [
-      "Partly Sunny",
       "Patchy Smoke",
       "Patchy Smoke",
       "Patchy Smoke",
@@ -312,6 +311,7 @@
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
+      "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
@@ -319,7 +319,6 @@
     ],
     "temperature_2m": [
       72,
-      72,
       71,
       69,
       68,
@@ -473,10 +472,10 @@
       58,
       56,
       54,
-      53
+      53,
+      52
     ],
     "time": [
-      "2026-08-13T16:00:00-06:00",
       "2026-08-13T17:00:00-06:00",
       "2026-08-13T18:00:00-06:00",
       "2026-08-13T19:00:00-06:00",
@@ -631,10 +630,10 @@
       "2026-08-20T00:00:00-06:00",
       "2026-08-20T01:00:00-06:00",
       "2026-08-20T02:00:00-06:00",
-      "2026-08-20T03:00:00-06:00"
+      "2026-08-20T03:00:00-06:00",
+      "2026-08-20T04:00:00-06:00"
     ],
     "weather_code": [
-      2,
       1,
       1,
       1,
@@ -786,13 +785,13 @@
       80,
       80,
       80,
+      2,
       2,
       2,
       2,
       2
     ],
     "wind_direction_10m": [
-      270,
       270,
       270,
       292,
@@ -947,10 +946,10 @@
       68,
       68,
       68,
+      68,
       68
     ],
     "wind_gusts_10m": [
-      7.0,
       6.0,
       5.0,
       3.0,
@@ -1099,6 +1098,7 @@
       5.0,
       5.0,
       5.0,
+      2.0,
       2.0,
       2.0,
       2.0,
@@ -1108,7 +1108,6 @@
       2.0
     ],
     "wind_speed_10m": [
-      7.0,
       6.0,
       5.0,
       3.0,
@@ -1257,6 +1256,7 @@
       5.0,
       5.0,
       5.0,
+      2.0,
       2.0,
       2.0,
       2.0,
@@ -1271,7 +1271,7 @@
     "best_window_gust_mph": 4.7,
     "best_window_precipitation_probability_max": 24.0,
     "best_window_wind_mph": 4.7,
-    "chop_proxy_ft": 0.2,
+    "chop_proxy_ft": 0.1,
     "crowding_penalty": 0,
     "date": "2026-08-13",
     "grade": "A",
@@ -1284,11 +1284,11 @@
     "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
     "temperature_2m_max": 72,
     "temperature_2m_min": 61,
-    "weather_code": 2,
+    "weather_code": 1,
     "wind_direction_deg": 270,
     "wind_direction_label": "W",
-    "wind_gust_max_mph": 7.0,
-    "wind_speed_max_mph": 7.0
+    "wind_gust_max_mph": 6.0,
+    "wind_speed_max_mph": 6.0
   },
   "model_status": {
     "chop_height": "proxy_only_not_measured",
@@ -1317,7 +1317,7 @@
       "best_window_gust_mph": 4.7,
       "best_window_precipitation_probability_max": 24.0,
       "best_window_wind_mph": 4.7,
-      "chop_proxy_ft": 0.2,
+      "chop_proxy_ft": 0.1,
       "crowding_penalty": 0,
       "date": "2026-08-13",
       "grade": "A",
@@ -1329,11 +1329,11 @@
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 72,
       "temperature_2m_min": 61,
-      "weather_code": 2,
+      "weather_code": 1,
       "wind_direction_deg": 270,
       "wind_direction_label": "W",
-      "wind_gust_max_mph": 7.0,
-      "wind_speed_max_mph": 7.0
+      "wind_gust_max_mph": 6.0,
+      "wind_speed_max_mph": 6.0
     },
     {
       "best_window": "Early morning",
@@ -1496,7 +1496,7 @@
       "score_before_wind_cap": 84,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
       "temperature_2m_max": 58,
-      "temperature_2m_min": 53,
+      "temperature_2m_min": 52,
       "weather_code": 2,
       "wind_direction_deg": 68,
       "wind_direction_label": "ENE",
