@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-13T03:13:06.727Z
+Generated: 2026-08-13T05:22:50.570Z
 
-- Captured: 22
-- Suspect: 0
+- Captured: 21
+- Suspect: 1
 - Failed: 3
 - No catalog webcam source yet: 87
 
@@ -16,7 +16,6 @@ Generated: 2026-08-13T03:13:06.727Z
 - Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
-- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
@@ -32,6 +31,7 @@ Generated: 2026-08-13T03:13:06.727Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
+- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/ — page.goto: Timeout 45000ms exceeded.
 Call log:
   - navigating to "https://www.cdaresort.com/live-feed/", waiting until "domcontentloaded"
