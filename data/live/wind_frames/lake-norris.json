@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 2.9
     }
   ],
-  "generated_at": "2026-08-14T19:18:51.434749+00:00",
+  "generated_at": "2026-08-14T19:59:44.380107+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-norris",
   "status": "live_weather_stub_grid"

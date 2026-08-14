@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-14T19:19:46.967559+00:00",
+  "generated_at": "2026-08-14T20:01:30.719647+00:00",
   "hourly": {
     "precipitation_probability": [
       1,
@@ -18,12 +18,12 @@
       2,
       6,
       9,
-      6,
-      4,
-      3,
-      3,
       7,
       6,
+      5,
+      4,
+      6,
+      7,
       3,
       2,
       1,
@@ -48,11 +48,11 @@
       10,
       10,
       10,
-      9,
-      7,
+      10,
+      11,
+      8,
       5,
       5,
-      20,
       4,
       4,
       4,
@@ -1782,7 +1782,7 @@
       "grade_caps": [
         "temperature_high_over_90_best_case_b"
       ],
-      "precipitation_probability_max": 10.0,
+      "precipitation_probability_max": 11.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
@@ -1807,7 +1807,7 @@
       "grade_caps": [
         "temperature_high_over_90_best_case_b"
       ],
-      "precipitation_probability_max": 20.0,
+      "precipitation_probability_max": 11.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
