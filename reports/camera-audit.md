@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-14T22:52:02.296Z
+Generated: 2026-08-14T23:53:25.257Z
 
-- Captured: 24
-- Suspect: 1
+- Captured: 25
+- Suspect: 0
 - Failed: 0
 - No catalog webcam source yet: 87
 
@@ -31,10 +31,10 @@ Generated: 2026-08-14T22:52:02.296Z
 - Lake Mead (NV/AZ) — NPS — Lake Mead Webcams: https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm
 - Lake Amistad (TX/Mexico) — National Park Service — Amistad webcams: https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm
 - Utah Lake (UT) — Utah State Parks — Live Webcam: https://stateparks.utah.gov/parks/utah-lake/current-conditions/
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
