@@ -1,10 +1,9 @@
 {
-  "generated_at": "2026-08-15T18:49:24.799164+00:00",
+  "generated_at": "2026-08-15T19:37:54.216986+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
       0.0,
-      0.0,
       1.0,
       1.0,
       1.0,
@@ -152,6 +151,7 @@
       2.0,
       2.0,
       2.0,
+      3.0,
       3.0,
       3.0,
       3.0,
@@ -166,7 +166,6 @@
       "Sunny",
       "Sunny",
       "Sunny",
-      "Sunny",
       "Mostly Clear",
       "Mostly Clear",
       "Partly Cloudy",
@@ -311,6 +310,7 @@
       "Sunny",
       "Sunny",
       "Sunny",
+      "Mostly Clear",
       "Mostly Clear",
       "Mostly Clear",
       "Mostly Clear",
@@ -318,7 +318,6 @@
       "Mostly Clear"
     ],
     "temperature_2m": [
-      63,
       64,
       66,
       69,
@@ -473,10 +472,10 @@
       69,
       67,
       65,
-      63
+      63,
+      61
     ],
     "time": [
-      "2026-08-15T11:00:00-07:00",
       "2026-08-15T12:00:00-07:00",
       "2026-08-15T13:00:00-07:00",
       "2026-08-15T14:00:00-07:00",
@@ -631,7 +630,8 @@
       "2026-08-21T19:00:00-07:00",
       "2026-08-21T20:00:00-07:00",
       "2026-08-21T21:00:00-07:00",
-      "2026-08-21T22:00:00-07:00"
+      "2026-08-21T22:00:00-07:00",
+      "2026-08-21T23:00:00-07:00"
     ],
     "weather_code": [
       0,
@@ -640,7 +640,6 @@
       0,
       0,
       0,
-      0,
       1,
       1,
       2,
@@ -785,6 +784,7 @@
       0,
       0,
       0,
+      1,
       1,
       1,
       1,
@@ -794,7 +794,6 @@
     "wind_direction_10m": [
       315,
       315,
-      315,
       270,
       270,
       270,
@@ -939,6 +938,7 @@
       225,
       225,
       225,
+      270,
       270,
       270,
       270,
@@ -961,7 +961,6 @@
       5.0,
       5.0,
       5.0,
-      5.0,
       0,
       0,
       0,
@@ -1103,6 +1102,7 @@
       10.0,
       10.0,
       10.0,
+      5.0,
       5.0,
       5.0,
       5.0
@@ -1119,7 +1119,6 @@
       5.0,
       5.0,
       5.0,
-      5.0,
       0,
       0,
       0,
@@ -1261,6 +1260,7 @@
       10.0,
       10.0,
       10.0,
+      5.0,
       5.0,
       5.0,
       5.0
@@ -1269,7 +1269,7 @@
   "latest": {
     "best_window": "Late morning",
     "best_window_gust_mph": 5.0,
-    "best_window_precipitation_probability_max": 0.0,
+    "best_window_precipitation_probability_max": 1.0,
     "best_window_wind_mph": 5.0,
     "chop_proxy_ft": 0.1,
     "crowding_penalty": 8,
@@ -1317,7 +1317,7 @@
     {
       "best_window": "Late morning",
       "best_window_gust_mph": 5.0,
-      "best_window_precipitation_probability_max": 0.0,
+      "best_window_precipitation_probability_max": 1.0,
       "best_window_wind_mph": 5.0,
       "chop_proxy_ft": 0.1,
       "crowding_penalty": 8,

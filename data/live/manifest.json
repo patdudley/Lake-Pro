@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-15T18:55:47.061472+00:00",
+  "generated_at": "2026-08-15T19:48:40.371417+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -37,9 +37,9 @@
     },
     {
       "best_window": "Late morning",
-      "grade": "B",
+      "grade": "C",
       "name": "Payette Lake",
-      "score": 72,
+      "score": 69,
       "slug": "payette-lake",
       "wind_speed_max_mph": 12.0
     },
@@ -905,15 +905,15 @@
       "name": "Lake Macquarie / Hume",
       "score": 66,
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 10.6
+      "wind_speed_max_mph": 10.9
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Evening",
       "grade": "B",
       "name": "Lake Wanaka",
       "score": 74,
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 7.1
+      "wind_speed_max_mph": 6.4
     },
     {
       "best_window": "Early morning",
@@ -921,7 +921,7 @@
       "name": "Dubai Marina / Creek",
       "score": 84,
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 11.7
+      "wind_speed_max_mph": 11.4
     }
   ]
 }

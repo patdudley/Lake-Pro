@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T18:55:44.608835+00:00",
+  "generated_at": "2026-08-15T19:48:38.322475+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.1,
@@ -9,7 +9,7 @@
     },
     {
       "chop_proxy_ft": 0.4,
-      "grade": "B",
+      "grade": "C",
       "slug": "payette-lake",
       "wind_speed_max_mph": 12.0
     },
@@ -659,19 +659,19 @@
       "chop_proxy_ft": 0.7,
       "grade": "C",
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 10.6
+      "wind_speed_max_mph": 10.9
     },
     {
-      "chop_proxy_ft": 0.6,
+      "chop_proxy_ft": 0.5,
       "grade": "B",
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 7.1
+      "wind_speed_max_mph": 6.4
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 11.7
+      "wind_speed_max_mph": 11.4
     }
   ]
 }

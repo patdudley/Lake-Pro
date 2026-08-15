@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T18:53:57.651546+00:00",
+  "generated_at": "2026-08-15T19:45:10.961744+00:00",
   "hourly": {
     "precipitation_probability": [
       0,
@@ -791,7 +791,7 @@
       3,
       3,
       3,
-      95,
+      53,
       53,
       53,
       51,
@@ -1811,7 +1811,7 @@
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
       "temperature_2m_max": 72,
       "temperature_2m_min": 63,
-      "weather_code": 95,
+      "weather_code": 53,
       "wind_direction_deg": 278,
       "wind_direction_label": "W",
       "wind_gust_max_mph": 32.4,
