@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.6
     }
   ],
-  "generated_at": "2026-08-16T02:46:53.680944+00:00",
+  "generated_at": "2026-08-16T03:20:38.048589+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-washington-sammamish",
   "status": "live_weather_stub_grid"

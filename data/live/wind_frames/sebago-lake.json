@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.6
     }
   ],
-  "generated_at": "2026-08-16T02:47:45.065517+00:00",
+  "generated_at": "2026-08-16T03:20:42.170986+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "sebago-lake",
   "status": "live_weather_stub_grid"

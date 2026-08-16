@@ -1,8 +1,7 @@
 {
-  "generated_at": "2026-08-16T02:42:15.938891+00:00",
+  "generated_at": "2026-08-16T03:15:07.313249+00:00",
   "hourly": {
     "precipitation_probability": [
-      40.0,
       40.0,
       40.0,
       40.0,
@@ -157,13 +156,13 @@
       16.0,
       16.0,
       18.0,
+      18.0,
       18.0
     ],
     "short_forecast": [
       "Scattered Showers And Thunderstorms",
       "Scattered Showers And Thunderstorms",
       "Scattered Showers And Thunderstorms",
-      "Scattered Showers And Thunderstorms",
       "Mostly Clear",
       "Partly Cloudy",
       "Partly Cloudy",
@@ -308,6 +307,7 @@
       "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
+      "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
@@ -318,7 +318,6 @@
       "Slight Chance Rain Showers"
     ],
     "temperature_2m": [
-      67,
       63,
       60,
       59,
@@ -473,10 +472,10 @@
       57,
       55,
       54,
-      54
+      54,
+      55
     ],
     "time": [
-      "2026-08-15T20:00:00-06:00",
       "2026-08-15T21:00:00-06:00",
       "2026-08-15T22:00:00-06:00",
       "2026-08-15T23:00:00-06:00",
@@ -631,13 +630,13 @@
       "2026-08-22T04:00:00-06:00",
       "2026-08-22T05:00:00-06:00",
       "2026-08-22T06:00:00-06:00",
-      "2026-08-22T07:00:00-06:00"
+      "2026-08-22T07:00:00-06:00",
+      "2026-08-22T08:00:00-06:00"
     ],
     "weather_code": [
       95,
       95,
       95,
-      95,
       1,
       2,
       2,
@@ -782,6 +781,7 @@
       2,
       2,
       2,
+      80,
       80,
       80,
       80,
@@ -792,7 +792,6 @@
       80
     ],
     "wind_direction_10m": [
-      270,
       45,
       45,
       45,
@@ -947,10 +946,10 @@
       68,
       68,
       68,
+      68,
       68
     ],
     "wind_gusts_10m": [
-      6.0,
       6.0,
       6.0,
       12.0,
@@ -1095,6 +1094,7 @@
       5.0,
       5.0,
       5.0,
+      2.0,
       2.0,
       2.0,
       2.0,
@@ -1110,7 +1110,6 @@
     "wind_speed_10m": [
       6.0,
       6.0,
-      6.0,
       12.0,
       6.0,
       8.0,
@@ -1253,6 +1252,7 @@
       5.0,
       5.0,
       5.0,
+      2.0,
       2.0,
       2.0,
       2.0,
@@ -1278,7 +1278,7 @@
     "grade_before_wind_cap": "C",
     "grade_caps": [
       "temperature_high_below_70",
-      "rainy_day_best_case_b",
+      "rainy_cold_day_best_case_c",
       "wind_best_case_c"
     ],
     "precipitation_probability_max": 40.0,
@@ -1286,7 +1286,7 @@
     "score": 68,
     "score_before_wind_cap": 68,
     "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
-    "temperature_2m_max": 67,
+    "temperature_2m_max": 63,
     "temperature_2m_min": 59,
     "weather_code": 95,
     "wind_direction_deg": 45,
@@ -1328,14 +1328,14 @@
       "grade_before_wind_cap": "C",
       "grade_caps": [
         "temperature_high_below_70",
-        "rainy_day_best_case_b",
+        "rainy_cold_day_best_case_c",
         "wind_best_case_c"
       ],
       "precipitation_probability_max": 40.0,
       "score": 68,
       "score_before_wind_cap": 68,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
-      "temperature_2m_max": 67,
+      "temperature_2m_max": 63,
       "temperature_2m_min": 59,
       "weather_code": 95,
       "wind_direction_deg": 45,
@@ -1510,7 +1510,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 3.7,
-      "best_window_precipitation_probability_max": 8.0,
+      "best_window_precipitation_probability_max": 5.0,
       "best_window_wind_mph": 1.2,
       "chop_proxy_ft": 0.4,
       "crowding_penalty": 8,
@@ -1533,7 +1533,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 7.2,
-      "best_window_precipitation_probability_max": 4.0,
+      "best_window_precipitation_probability_max": 3.0,
       "best_window_wind_mph": 2.7,
       "chop_proxy_ft": 0.6,
       "crowding_penalty": 0,
