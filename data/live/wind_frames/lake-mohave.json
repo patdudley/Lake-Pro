@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.2
     }
   ],
-  "generated_at": "2026-08-16T14:48:08.371670+00:00",
+  "generated_at": "2026-08-16T15:45:02.186859+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-mohave",
   "status": "live_weather_stub_grid"
