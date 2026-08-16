@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.8
     }
   ],
-  "generated_at": "2026-08-16T19:37:15.017950+00:00",
+  "generated_at": "2026-08-16T20:42:06.089403+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-minnetonka",
   "status": "live_weather_stub_grid"

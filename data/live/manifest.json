@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-16T19:45:31.856230+00:00",
+  "generated_at": "2026-08-16T20:49:23.427828+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -36,10 +36,10 @@
       "wind_speed_max_mph": 10.0
     },
     {
-      "best_window": "Late morning",
-      "grade": "B",
+      "best_window": "Evening",
+      "grade": "C",
       "name": "Payette Lake",
-      "score": 76,
+      "score": 70,
       "slug": "payette-lake",
       "wind_speed_max_mph": 10.0
     },
@@ -665,7 +665,7 @@
       "name": "Grand Lake",
       "score": 86,
       "slug": "grand-lake",
-      "wind_speed_max_mph": 11.1
+      "wind_speed_max_mph": 11.3
     },
     {
       "best_window": "Early morning",
@@ -673,7 +673,7 @@
       "name": "Lake Granby",
       "score": 86,
       "slug": "lake-granby",
-      "wind_speed_max_mph": 12.7
+      "wind_speed_max_mph": 11.4
     },
     {
       "best_window": "Late morning",
@@ -681,7 +681,7 @@
       "name": "Blue Mesa Reservoir",
       "score": 86,
       "slug": "blue-mesa-reservoir",
-      "wind_speed_max_mph": 13.6
+      "wind_speed_max_mph": 11.6
     },
     {
       "best_window": "Early morning",
@@ -689,15 +689,15 @@
       "name": "Boyd Lake",
       "score": 86,
       "slug": "boyd-lake",
-      "wind_speed_max_mph": 15.3
+      "wind_speed_max_mph": 13.1
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Afternoon",
       "grade": "A",
       "name": "Hayden Lake",
       "score": 86,
       "slug": "hayden-lake",
-      "wind_speed_max_mph": 7.3
+      "wind_speed_max_mph": 7.2
     },
     {
       "best_window": "Early morning",
@@ -705,7 +705,7 @@
       "name": "Lake Billy Chinook",
       "score": 86,
       "slug": "lake-billy-chinook",
-      "wind_speed_max_mph": 14.4
+      "wind_speed_max_mph": 14.1
     },
     {
       "best_window": "Late morning",
@@ -713,7 +713,7 @@
       "name": "Cultus Lake",
       "score": 86,
       "slug": "cultus-lake",
-      "wind_speed_max_mph": 11.7
+      "wind_speed_max_mph": 11.8
     },
     {
       "best_window": "Late morning",
@@ -721,7 +721,7 @@
       "name": "Lake Washington / Sammamish",
       "score": 86,
       "slug": "lake-washington-sammamish",
-      "wind_speed_max_mph": 7.2
+      "wind_speed_max_mph": 7.3
     },
     {
       "best_window": "Late morning",
@@ -729,7 +729,7 @@
       "name": "Lake Chelan",
       "score": 86,
       "slug": "lake-chelan",
-      "wind_speed_max_mph": 13.3
+      "wind_speed_max_mph": 13.4
     },
     {
       "best_window": "Early morning",
@@ -737,7 +737,7 @@
       "name": "Okoboji (Iowa Great Lakes)",
       "score": 66,
       "slug": "okoboji-iowa-great-lakes",
-      "wind_speed_max_mph": 12.9
+      "wind_speed_max_mph": 13.0
     },
     {
       "best_window": "Early morning",
@@ -745,7 +745,7 @@
       "name": "Prior Lake / Cross Lake",
       "score": 64,
       "slug": "prior-lake-cross-lake",
-      "wind_speed_max_mph": 11.9
+      "wind_speed_max_mph": 11.4
     },
     {
       "best_window": "Early morning",
@@ -753,7 +753,7 @@
       "name": "Lake Wallenpaupack",
       "score": 86,
       "slug": "lake-wallenpaupack",
-      "wind_speed_max_mph": 10.3
+      "wind_speed_max_mph": 10.4
     },
     {
       "best_window": "Late morning",
@@ -761,7 +761,7 @@
       "name": "Deep Creek Lake",
       "score": 44,
       "slug": "deep-creek-lake",
-      "wind_speed_max_mph": 16.6
+      "wind_speed_max_mph": 15.2
     },
     {
       "best_window": "Early morning",
@@ -769,7 +769,7 @@
       "name": "Lake Winnisquam",
       "score": 86,
       "slug": "lake-winnisquam",
-      "wind_speed_max_mph": 8.5
+      "wind_speed_max_mph": 8.6
     },
     {
       "best_window": "Late morning",
@@ -777,7 +777,7 @@
       "name": "Sebago Lake",
       "score": 86,
       "slug": "sebago-lake",
-      "wind_speed_max_mph": 12.2
+      "wind_speed_max_mph": 11.5
     },
     {
       "best_window": "Early morning",
@@ -785,7 +785,7 @@
       "name": "Candlewood Lake",
       "score": 86,
       "slug": "candlewood-lake",
-      "wind_speed_max_mph": 9.8
+      "wind_speed_max_mph": 9.2
     },
     {
       "best_window": "Late morning",
@@ -793,7 +793,7 @@
       "name": "Lake Conway / Clermont chain",
       "score": 84,
       "slug": "lake-conway-clermont-chain",
-      "wind_speed_max_mph": 8.1
+      "wind_speed_max_mph": 5.5
     },
     {
       "best_window": "Early morning",
@@ -801,15 +801,15 @@
       "name": "Lake Tarpon / Tampa Bay area",
       "score": 84,
       "slug": "lake-tarpon-tampa-bay-area",
-      "wind_speed_max_mph": 9.4
+      "wind_speed_max_mph": 9.8
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Afternoon",
       "grade": "B",
       "name": "Lake Lure",
       "score": 84,
       "slug": "lake-lure",
-      "wind_speed_max_mph": 5.6
+      "wind_speed_max_mph": 6.2
     },
     {
       "best_window": "Early morning",
@@ -817,7 +817,7 @@
       "name": "Lake Wateree",
       "score": 84,
       "slug": "lake-wateree",
-      "wind_speed_max_mph": 6.9
+      "wind_speed_max_mph": 7.3
     },
     {
       "best_window": "Early morning",
@@ -825,7 +825,7 @@
       "name": "Lake Greenwood",
       "score": 84,
       "slug": "lake-greenwood",
-      "wind_speed_max_mph": 8.0
+      "wind_speed_max_mph": 7.7
     },
     {
       "best_window": "Early morning",
@@ -841,7 +841,7 @@
       "name": "Shuswap Lake",
       "score": 86,
       "slug": "shuswap-lake",
-      "wind_speed_max_mph": 5.2
+      "wind_speed_max_mph": 5.3
     },
     {
       "best_window": "Evening",
@@ -865,7 +865,7 @@
       "name": "Lake Koocanusa",
       "score": 86,
       "slug": "lake-koocanusa",
-      "wind_speed_max_mph": 8.2
+      "wind_speed_max_mph": 8.9
     },
     {
       "best_window": "Late morning",
@@ -917,11 +917,11 @@
     },
     {
       "best_window": "Early morning",
-      "grade": "B",
+      "grade": "C",
       "name": "Dubai Marina / Creek",
-      "score": 84,
+      "score": 71,
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 9.8
+      "wind_speed_max_mph": 14.6
     }
   ]
 }
