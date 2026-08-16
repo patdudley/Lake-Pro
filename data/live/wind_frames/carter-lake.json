@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 4.0
     }
   ],
-  "generated_at": "2026-08-16T18:52:31.810681+00:00",
+  "generated_at": "2026-08-16T19:39:57.306232+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "carter-lake",
   "status": "live_weather_stub_grid"

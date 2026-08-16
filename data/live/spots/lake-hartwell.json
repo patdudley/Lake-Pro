@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T18:50:50.073041+00:00",
+  "generated_at": "2026-08-16T19:39:02.119533+00:00",
   "hourly": {
     "precipitation_probability": [
       1,
@@ -17,8 +17,8 @@
       1,
       1,
       2,
-      3,
-      3,
+      5,
+      5,
       4,
       2,
       3,
@@ -46,13 +46,13 @@
       5,
       5,
       8,
-      9,
+      10,
       7,
-      6,
-      11,
-      3,
-      3,
+      8,
+      12,
       4,
+      3,
+      2,
       0,
       0,
       0,
@@ -1709,7 +1709,7 @@
     "grade_caps": [
       "temperature_high_over_90_best_case_b"
     ],
-    "precipitation_probability_max": 4.0,
+    "precipitation_probability_max": 5.0,
     "report": "Live forecast is connected. Lake shape, wind-shadow, depth scoring, danger restrictions, and final chop model are pending for this lake.",
     "score": 84,
     "score_before_wind_cap": 84,
@@ -1757,7 +1757,7 @@
       "grade_caps": [
         "temperature_high_over_90_best_case_b"
       ],
-      "precipitation_probability_max": 4.0,
+      "precipitation_probability_max": 5.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
@@ -1782,7 +1782,7 @@
       "grade_caps": [
         "temperature_high_over_90_best_case_b"
       ],
-      "precipitation_probability_max": 11.0,
+      "precipitation_probability_max": 12.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Catalog forecast from Open-Meteo until lake-specific model assets are added.",
