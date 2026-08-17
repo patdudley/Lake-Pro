@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-17T20:55:21.523091+00:00",
+  "generated_at": "2026-08-17T21:51:00.706642+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -28,10 +28,10 @@
   },
   "spots": [
     {
-      "best_window": "Late morning",
-      "grade": "B",
+      "best_window": "Afternoon",
+      "grade": "C",
       "name": "Lake Tahoe",
-      "score": 76,
+      "score": 68,
       "slug": "lake-tahoe",
       "wind_speed_max_mph": 10.0
     },
