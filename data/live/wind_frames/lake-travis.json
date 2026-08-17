@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 6.1
     }
   ],
-  "generated_at": "2026-08-17T19:44:57.723854+00:00",
+  "generated_at": "2026-08-17T20:49:03.117349+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-travis",
   "status": "live_weather_stub_grid"

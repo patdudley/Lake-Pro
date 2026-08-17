@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-17T19:50:30.088245+00:00",
+  "generated_at": "2026-08-17T20:55:21.523091+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -31,7 +31,7 @@
       "best_window": "Late morning",
       "grade": "B",
       "name": "Lake Tahoe",
-      "score": 84,
+      "score": 76,
       "slug": "lake-tahoe",
       "wind_speed_max_mph": 10.0
     },
@@ -916,12 +916,12 @@
       "wind_speed_max_mph": 5.8
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Late morning",
       "grade": "C",
       "name": "Dubai Marina / Creek",
       "score": 71,
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 14.4
+      "wind_speed_max_mph": 18.0
     }
   ]
 }

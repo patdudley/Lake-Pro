@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T19:50:27.708564+00:00",
+  "generated_at": "2026-08-17T20:55:19.073661+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.3,
@@ -668,10 +668,10 @@
       "wind_speed_max_mph": 5.8
     },
     {
-      "chop_proxy_ft": 0.9,
+      "chop_proxy_ft": 1.0,
       "grade": "C",
       "slug": "dubai-marina-creek",
-      "wind_speed_max_mph": 14.4
+      "wind_speed_max_mph": 18.0
     }
   ]
 }
