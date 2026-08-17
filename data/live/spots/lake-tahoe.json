@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T03:14:37.946420+00:00",
+  "generated_at": "2026-08-17T04:05:49.179764+00:00",
   "hourly": {
     "precipitation_probability": [
       1.0,
@@ -1542,7 +1542,7 @@
       "grade": "A",
       "grade_before_wind_cap": "A",
       "grade_caps": [],
-      "precipitation_probability_max": 2.0,
+      "precipitation_probability_max": 3.0,
       "score": 94,
       "score_before_wind_cap": 94,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
