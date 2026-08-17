@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 2.9
     }
   ],
-  "generated_at": "2026-08-17T17:51:49.398461+00:00",
+  "generated_at": "2026-08-17T19:07:21.924110+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-granby",
   "status": "live_weather_stub_grid"
