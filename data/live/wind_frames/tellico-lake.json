@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 0.8
     }
   ],
-  "generated_at": "2026-08-17T14:52:34.896509+00:00",
+  "generated_at": "2026-08-17T15:46:13.621591+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "tellico-lake",
   "status": "live_weather_stub_grid"
