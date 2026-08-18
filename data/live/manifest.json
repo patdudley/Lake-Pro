@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-17T23:50:06.624809+00:00",
+  "generated_at": "2026-08-18T02:01:35.702967+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -28,20 +28,20 @@
   },
   "spots": [
     {
-      "best_window": "Afternoon",
-      "grade": "C",
+      "best_window": "Pending",
+      "grade": "B",
       "name": "Lake Tahoe",
-      "score": 68,
+      "score": 84,
       "slug": "lake-tahoe",
       "wind_speed_max_mph": 10.0
     },
     {
-      "best_window": "Evening",
-      "grade": "A",
+      "best_window": "Pending",
+      "grade": "B",
       "name": "Payette Lake",
-      "score": 93,
+      "score": 84,
       "slug": "payette-lake",
-      "wind_speed_max_mph": 6.0
+      "wind_speed_max_mph": 3.0
     },
     {
       "best_window": "Early morning",
@@ -759,7 +759,7 @@
       "best_window": "Evening",
       "grade": "B",
       "name": "Deep Creek Lake",
-      "score": 76,
+      "score": 75,
       "slug": "deep-creek-lake",
       "wind_speed_max_mph": 13.1
     },

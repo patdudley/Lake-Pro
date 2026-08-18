@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-08-17T23:50:04.237633+00:00",
+  "generated_at": "2026-08-18T02:01:33.302644+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.3,
-      "grade": "C",
+      "grade": "B",
       "slug": "lake-tahoe",
       "wind_speed_max_mph": 10.0
     },
     {
-      "chop_proxy_ft": 0.1,
-      "grade": "A",
+      "chop_proxy_ft": 0.0,
+      "grade": "B",
       "slug": "payette-lake",
-      "wind_speed_max_mph": 6.0
+      "wind_speed_max_mph": 3.0
     },
     {
       "chop_proxy_ft": 0.6,
