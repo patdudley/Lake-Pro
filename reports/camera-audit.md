@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-18T22:00:40.621Z
+Generated: 2026-08-18T22:56:59.792Z
 
-- Captured: 25
-- Suspect: 0
+- Captured: 24
+- Suspect: 1
 - Failed: 0
 - No catalog webcam source yet: 87
 
@@ -24,7 +24,6 @@ Generated: 2026-08-18T22:00:40.621Z
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
-- Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
 - Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
 - Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
@@ -35,6 +34,7 @@ Generated: 2026-08-18T22:00:40.621Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
+- Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
