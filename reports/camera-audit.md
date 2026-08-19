@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-18T23:53:38.991Z
+Generated: 2026-08-19T02:14:29.894Z
 
-- Captured: 25
-- Suspect: 0
+- Captured: 24
+- Suspect: 1
 - Failed: 0
 - No catalog webcam source yet: 87
 
@@ -22,7 +22,6 @@ Generated: 2026-08-18T23:53:38.991Z
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
-- Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
@@ -35,6 +34,7 @@ Generated: 2026-08-18T23:53:38.991Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
+- Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
