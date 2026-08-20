@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T19:11:24.943503+00:00",
+  "generated_at": "2026-08-20T19:56:26.260395+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.3,
@@ -17,19 +17,19 @@
       "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "jordanelle-reservoir",
-      "wind_speed_max_mph": 13.5
+      "wind_speed_max_mph": 13.2
     },
     {
       "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "deer-creek-reservoir",
-      "wind_speed_max_mph": 14.9
+      "wind_speed_max_mph": 15.3
     },
     {
       "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "pineview-reservoir",
-      "wind_speed_max_mph": 14.1
+      "wind_speed_max_mph": 14.0
     },
     {
       "chop_proxy_ft": 1.0,
@@ -47,13 +47,13 @@
       "chop_proxy_ft": 0.3,
       "grade": "B",
       "slug": "lake-coeur-d-alene",
-      "wind_speed_max_mph": 8.3
+      "wind_speed_max_mph": 8.2
     },
     {
       "chop_proxy_ft": 0.8,
       "grade": "B",
       "slug": "lake-travis",
-      "wind_speed_max_mph": 13.5
+      "wind_speed_max_mph": 11.3
     },
     {
       "chop_proxy_ft": 0.8,
@@ -65,7 +65,7 @@
       "chop_proxy_ft": 0.8,
       "grade": "A",
       "slug": "lake-minnetonka",
-      "wind_speed_max_mph": 14.5
+      "wind_speed_max_mph": 13.6
     },
     {
       "chop_proxy_ft": 0.3,
@@ -95,7 +95,7 @@
       "chop_proxy_ft": 0.7,
       "grade": "B",
       "slug": "smith-mountain-lake",
-      "wind_speed_max_mph": 11.1
+      "wind_speed_max_mph": 11.0
     },
     {
       "chop_proxy_ft": 0.7,
@@ -104,10 +104,10 @@
       "wind_speed_max_mph": 14.5
     },
     {
-      "chop_proxy_ft": 0.7,
+      "chop_proxy_ft": 0.6,
       "grade": "B",
       "slug": "lake-conroe",
-      "wind_speed_max_mph": 9.7
+      "wind_speed_max_mph": 8.8
     },
     {
       "chop_proxy_ft": 0.7,

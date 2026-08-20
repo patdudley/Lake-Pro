@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 2.7
     }
   ],
-  "generated_at": "2026-08-20T19:11:16.580293+00:00",
+  "generated_at": "2026-08-20T19:55:30.931096+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-koocanusa",
   "status": "live_weather_stub_grid"

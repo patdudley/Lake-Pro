@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-20T19:11:27.352847+00:00",
+  "generated_at": "2026-08-20T19:56:28.649902+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -49,7 +49,7 @@
       "name": "Jordanelle Reservoir",
       "score": 82,
       "slug": "jordanelle-reservoir",
-      "wind_speed_max_mph": 13.5
+      "wind_speed_max_mph": 13.2
     },
     {
       "best_window": "Early morning",
@@ -57,18 +57,18 @@
       "name": "Deer Creek Reservoir",
       "score": 84,
       "slug": "deer-creek-reservoir",
-      "wind_speed_max_mph": 14.9
+      "wind_speed_max_mph": 15.3
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Late morning",
       "grade": "B",
       "name": "Pineview Reservoir",
       "score": 84,
       "slug": "pineview-reservoir",
-      "wind_speed_max_mph": 14.1
+      "wind_speed_max_mph": 14.0
     },
     {
-      "best_window": "Afternoon",
+      "best_window": "Late morning",
       "grade": "C",
       "name": "Lake Havasu",
       "score": 71,
@@ -89,15 +89,15 @@
       "name": "Lake Coeur d'Alene",
       "score": 84,
       "slug": "lake-coeur-d-alene",
-      "wind_speed_max_mph": 8.3
+      "wind_speed_max_mph": 8.2
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Late morning",
       "grade": "B",
       "name": "Lake Travis",
       "score": 84,
       "slug": "lake-travis",
-      "wind_speed_max_mph": 13.5
+      "wind_speed_max_mph": 11.3
     },
     {
       "best_window": "Early morning",
@@ -113,7 +113,7 @@
       "name": "Lake Minnetonka",
       "score": 94,
       "slug": "lake-minnetonka",
-      "wind_speed_max_mph": 14.5
+      "wind_speed_max_mph": 13.6
     },
     {
       "best_window": "Early morning",
@@ -124,7 +124,7 @@
       "wind_speed_max_mph": 7.4
     },
     {
-      "best_window": "Early morning",
+      "best_window": "Afternoon",
       "grade": "B",
       "name": "Lake Lanier",
       "score": 84,
@@ -153,7 +153,7 @@
       "name": "Smith Mountain Lake",
       "score": 84,
       "slug": "smith-mountain-lake",
-      "wind_speed_max_mph": 11.1
+      "wind_speed_max_mph": 11.0
     },
     {
       "best_window": "Late morning",
@@ -169,7 +169,7 @@
       "name": "Lake Conroe",
       "score": 84,
       "slug": "lake-conroe",
-      "wind_speed_max_mph": 9.7
+      "wind_speed_max_mph": 8.8
     },
     {
       "best_window": "Late morning",

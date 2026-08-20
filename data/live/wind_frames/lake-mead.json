@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 8.7
     }
   ],
-  "generated_at": "2026-08-20T19:05:57.157041+00:00",
+  "generated_at": "2026-08-20T19:51:00.380020+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-mead",
   "status": "live_weather_stub_grid"
