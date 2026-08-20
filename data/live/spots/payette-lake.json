@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T14:02:02.536464+00:00",
+  "generated_at": "2026-08-20T14:58:54.268526+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -1478,7 +1478,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 4.0,
-      "best_window_precipitation_probability_max": 6.0,
+      "best_window_precipitation_probability_max": 3.0,
       "best_window_wind_mph": 1.6,
       "chop_proxy_ft": 0.6,
       "crowding_penalty": 0,
@@ -1486,7 +1486,7 @@
       "grade": "A",
       "grade_before_wind_cap": "A",
       "grade_caps": [],
-      "precipitation_probability_max": 6.0,
+      "precipitation_probability_max": 5.0,
       "score": 94,
       "score_before_wind_cap": 94,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
@@ -1501,7 +1501,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 7.3,
-      "best_window_precipitation_probability_max": 3.0,
+      "best_window_precipitation_probability_max": 2.0,
       "best_window_wind_mph": 2.0,
       "chop_proxy_ft": 0.7,
       "crowding_penalty": 0,
@@ -1524,7 +1524,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 7.0,
-      "best_window_precipitation_probability_max": 2.0,
+      "best_window_precipitation_probability_max": 1.0,
       "best_window_wind_mph": 2.0,
       "chop_proxy_ft": 0.5,
       "crowding_penalty": 8,
@@ -1532,7 +1532,7 @@
       "grade": "A",
       "grade_before_wind_cap": "A",
       "grade_caps": [],
-      "precipitation_probability_max": 5.0,
+      "precipitation_probability_max": 2.0,
       "score": 86,
       "score_before_wind_cap": 86,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
