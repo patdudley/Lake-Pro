@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T03:18:03.421961+00:00",
+  "generated_at": "2026-08-21T04:04:08.473011+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -7,7 +7,6 @@
       0.0,
       0.0,
       0.0,
-      0.0,
       1.0,
       1.0,
       1.0,
@@ -155,6 +154,7 @@
       0.0,
       0.0,
       0.0,
+      15.0,
       15.0,
       15.0,
       15.0
@@ -165,7 +165,6 @@
       "Partly Cloudy",
       "Partly Cloudy",
       "Partly Cloudy",
-      "Partly Cloudy",
       "Mostly Cloudy",
       "Mostly Cloudy",
       "Mostly Cloudy",
@@ -313,12 +312,12 @@
       "Mostly Clear",
       "Mostly Clear",
       "Mostly Clear",
+      "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers",
       "Slight Chance Rain Showers"
     ],
     "temperature_2m": [
-      72,
       69,
       67,
       65,
@@ -473,10 +472,10 @@
       54,
       54,
       55,
-      57
+      57,
+      59
     ],
     "time": [
-      "2026-08-20T20:00:00-07:00",
       "2026-08-20T21:00:00-07:00",
       "2026-08-20T22:00:00-07:00",
       "2026-08-20T23:00:00-07:00",
@@ -631,7 +630,8 @@
       "2026-08-27T04:00:00-07:00",
       "2026-08-27T05:00:00-07:00",
       "2026-08-27T06:00:00-07:00",
-      "2026-08-27T07:00:00-07:00"
+      "2026-08-27T07:00:00-07:00",
+      "2026-08-27T08:00:00-07:00"
     ],
     "weather_code": [
       2,
@@ -639,7 +639,6 @@
       2,
       2,
       2,
-      2,
       3,
       3,
       3,
@@ -787,6 +786,7 @@
       1,
       1,
       1,
+      80,
       80,
       80,
       80
@@ -794,7 +794,6 @@
     "wind_direction_10m": [
       270,
       270,
-      270,
       315,
       315,
       315,
@@ -947,7 +946,8 @@
       270,
       null,
       null,
-      null
+      null,
+      225
     ],
     "wind_gusts_10m": [
       5.0,
@@ -955,7 +955,6 @@
       5.0,
       5.0,
       5.0,
-      5.0,
       0,
       0,
       0,
@@ -1105,7 +1104,8 @@
       5.0,
       0,
       0,
-      0
+      0,
+      5.0
     ],
     "wind_speed_10m": [
       5.0,
@@ -1113,7 +1113,6 @@
       5.0,
       5.0,
       5.0,
-      5.0,
       0,
       0,
       0,
@@ -1263,7 +1262,8 @@
       5.0,
       0,
       0,
-      0
+      0,
+      5.0
     ]
   },
   "latest": {
@@ -1275,16 +1275,17 @@
     "crowding_penalty": 0,
     "date": "2026-08-20",
     "grade": "B",
-    "grade_before_wind_cap": "A",
+    "grade_before_wind_cap": "B",
     "grade_caps": [
+      "temperature_high_below_70",
       "wind_best_case_b"
     ],
     "precipitation_probability_max": 0.0,
     "report": "Live wind forecast is connected. Wind-shadow, depth scoring, danger restrictions, and final chop model are pending.",
     "score": 84,
-    "score_before_wind_cap": 92,
+    "score_before_wind_cap": 84,
     "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
-    "temperature_2m_max": 72,
+    "temperature_2m_max": 69,
     "temperature_2m_min": 65,
     "weather_code": 2,
     "wind_direction_deg": 270,
@@ -1323,15 +1324,16 @@
       "crowding_penalty": 0,
       "date": "2026-08-20",
       "grade": "B",
-      "grade_before_wind_cap": "A",
+      "grade_before_wind_cap": "B",
       "grade_caps": [
+        "temperature_high_below_70",
         "wind_best_case_b"
       ],
       "precipitation_probability_max": 0.0,
       "score": 84,
-      "score_before_wind_cap": 92,
+      "score_before_wind_cap": 84,
       "summary": "Window-based placeholder rating from live wind + crowding until Lake Pro model is approved.",
-      "temperature_2m_max": 72,
+      "temperature_2m_max": 69,
       "temperature_2m_min": 65,
       "weather_code": 2,
       "wind_direction_deg": 270,
@@ -1483,9 +1485,9 @@
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 0.0,
+      "best_window_gust_mph": 2.5,
       "best_window_precipitation_probability_max": 15.0,
-      "best_window_wind_mph": 0.0,
+      "best_window_wind_mph": 2.5,
       "chop_proxy_ft": 0.1,
       "crowding_penalty": 0,
       "date": "2026-08-27",
