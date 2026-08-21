@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 7.6
     }
   ],
-  "generated_at": "2026-08-21T19:02:09.164467+00:00",
+  "generated_at": "2026-08-21T19:41:14.186367+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "gull-lake",
   "status": "live_weather_stub_grid"

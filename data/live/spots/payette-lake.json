@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T19:00:22.306174+00:00",
+  "generated_at": "2026-08-21T19:40:18.761508+00:00",
   "hourly": {
     "precipitation_probability": [
       0.0,
@@ -1502,7 +1502,7 @@
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 3.6,
+      "best_window_gust_mph": 3.9,
       "best_window_precipitation_probability_max": 3.0,
       "best_window_wind_mph": 1.5,
       "chop_proxy_ft": 0.7,
@@ -1525,7 +1525,7 @@
     },
     {
       "best_window": "Early morning",
-      "best_window_gust_mph": 4.6,
+      "best_window_gust_mph": 3.0,
       "best_window_precipitation_probability_max": 5.0,
       "best_window_wind_mph": 1.4,
       "chop_proxy_ft": 0.4,
@@ -1543,7 +1543,7 @@
       "weather_code": 0,
       "wind_direction_deg": 318,
       "wind_direction_label": "NW",
-      "wind_gust_max_mph": 13.2,
+      "wind_gust_max_mph": 13.9,
       "wind_speed_max_mph": 9.2
     }
   ]

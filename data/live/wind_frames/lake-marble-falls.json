@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 6.6
     }
   ],
-  "generated_at": "2026-08-21T19:05:47.414906+00:00",
+  "generated_at": "2026-08-21T19:43:55.445884+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-marble-falls",
   "status": "live_weather_stub_grid"

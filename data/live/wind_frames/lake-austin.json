@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 13.2
     }
   ],
-  "generated_at": "2026-08-21T19:01:14.644557+00:00",
+  "generated_at": "2026-08-21T19:40:22.153905+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-austin",
   "status": "live_weather_stub_grid"

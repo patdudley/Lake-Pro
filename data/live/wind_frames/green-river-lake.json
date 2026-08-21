@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 1.8
     }
   ],
-  "generated_at": "2026-08-21T19:05:44.100232+00:00",
+  "generated_at": "2026-08-21T19:43:05.926174+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "green-river-lake",
   "status": "live_weather_stub_grid"
