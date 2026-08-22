@@ -76,9 +76,9 @@
     },
     {
       "time": "2026-08-22T12:00",
-      "wind_direction_deg": 341,
+      "wind_direction_deg": 342,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 13.9
+      "wind_speed_mph": 14.1
     },
     {
       "time": "2026-08-22T13:00",
@@ -88,27 +88,27 @@
     },
     {
       "time": "2026-08-22T14:00",
-      "wind_direction_deg": 337,
+      "wind_direction_deg": 335,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 13.1
+      "wind_speed_mph": 12.1
     },
     {
       "time": "2026-08-22T15:00",
       "wind_direction_deg": 341,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 12.5
+      "wind_speed_mph": 12.1
     },
     {
       "time": "2026-08-22T16:00",
-      "wind_direction_deg": 339,
+      "wind_direction_deg": 341,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 11.5
+      "wind_speed_mph": 12.1
     },
     {
       "time": "2026-08-22T17:00",
-      "wind_direction_deg": 344,
+      "wind_direction_deg": 345,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 10.5
+      "wind_speed_mph": 10.9
     },
     {
       "time": "2026-08-22T18:00",
@@ -120,7 +120,7 @@
       "time": "2026-08-22T19:00",
       "wind_direction_deg": 348,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 8.5
+      "wind_speed_mph": 8.7
     },
     {
       "time": "2026-08-22T20:00",
@@ -136,57 +136,57 @@
     },
     {
       "time": "2026-08-22T22:00",
-      "wind_direction_deg": 342,
+      "wind_direction_deg": 344,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 4.2
+      "wind_speed_mph": 4.9
     },
     {
       "time": "2026-08-22T23:00",
-      "wind_direction_deg": 322,
+      "wind_direction_deg": 317,
       "wind_direction_label": "NW",
-      "wind_speed_mph": 5.1
+      "wind_speed_mph": 4.6
     },
     {
       "time": "2026-08-23T00:00",
-      "wind_direction_deg": 330,
+      "wind_direction_deg": 331,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 4.4
+      "wind_speed_mph": 4.6
     },
     {
       "time": "2026-08-23T01:00",
-      "wind_direction_deg": 335,
+      "wind_direction_deg": 337,
       "wind_direction_label": "NNW",
-      "wind_speed_mph": 4.2
+      "wind_speed_mph": 4.6
     },
     {
       "time": "2026-08-23T02:00",
-      "wind_direction_deg": 346,
-      "wind_direction_label": "NNW",
-      "wind_speed_mph": 0.9
+      "wind_direction_deg": 356,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 3.1
     },
     {
       "time": "2026-08-23T03:00",
-      "wind_direction_deg": 288,
-      "wind_direction_label": "WNW",
-      "wind_speed_mph": 2.8
+      "wind_direction_deg": 275,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 2.7
     },
     {
       "time": "2026-08-23T04:00",
-      "wind_direction_deg": 281,
+      "wind_direction_deg": 273,
       "wind_direction_label": "W",
-      "wind_speed_mph": 4.8
+      "wind_speed_mph": 4.7
     },
     {
       "time": "2026-08-23T05:00",
-      "wind_direction_deg": 280,
+      "wind_direction_deg": 277,
       "wind_direction_label": "W",
       "wind_speed_mph": 5.2
     },
     {
       "time": "2026-08-23T06:00",
-      "wind_direction_deg": 266,
-      "wind_direction_label": "W",
-      "wind_speed_mph": 3.1
+      "wind_direction_deg": 317,
+      "wind_direction_label": "NW",
+      "wind_speed_mph": 4.6
     },
     {
       "time": "2026-08-23T07:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 6.4
     }
   ],
-  "generated_at": "2026-08-22T18:52:14.031680+00:00",
+  "generated_at": "2026-08-22T19:40:00.423077+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "gull-lake",
   "status": "live_weather_stub_grid"
