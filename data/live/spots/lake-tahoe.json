@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T03:09:45.797227+00:00",
+  "generated_at": "2026-08-22T03:58:54.764355+00:00",
   "hourly": {
     "precipitation_probability": [
       2.0,
@@ -1510,7 +1510,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 7.3,
-      "best_window_precipitation_probability_max": 4.0,
+      "best_window_precipitation_probability_max": 3.0,
       "best_window_wind_mph": 5.2,
       "chop_proxy_ft": 1.0,
       "crowding_penalty": 8,
