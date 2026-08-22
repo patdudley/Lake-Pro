@@ -3,12 +3,6 @@
   "frame_hours": 1,
   "frames": [
     {
-      "time": "2026-08-22T07:00:00-07:00",
-      "wind_direction_deg": 135,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 5.0
-    },
-    {
       "time": "2026-08-22T08:00:00-07:00",
       "wind_direction_deg": 180,
       "wind_direction_label": "S",
@@ -937,9 +931,15 @@
       "wind_direction_deg": 270,
       "wind_direction_label": "W",
       "wind_speed_mph": 10.0
+    },
+    {
+      "time": "2026-08-28T19:00:00-07:00",
+      "wind_direction_deg": 270,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 10.0
     }
   ],
-  "generated_at": "2026-08-22T14:41:40.455814+00:00",
+  "generated_at": "2026-08-22T15:38:36.349056+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-tahoe",
   "status": "live_weather_stub_grid"
