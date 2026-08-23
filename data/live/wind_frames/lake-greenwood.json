@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 5.2
     }
   ],
-  "generated_at": "2026-08-23T18:55:57.106774+00:00",
+  "generated_at": "2026-08-23T19:47:26.140959+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-greenwood",
   "status": "live_weather_stub_grid"
