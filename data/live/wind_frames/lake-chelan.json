@@ -124,7 +124,7 @@
     },
     {
       "time": "2026-08-22T20:00",
-      "wind_direction_deg": 348,
+      "wind_direction_deg": 337,
       "wind_direction_label": "NNW",
       "wind_speed_mph": 11.9
     },
@@ -132,37 +132,37 @@
       "time": "2026-08-22T21:00",
       "wind_direction_deg": 359,
       "wind_direction_label": "N",
-      "wind_speed_mph": 12.8
+      "wind_speed_mph": 11.6
     },
     {
       "time": "2026-08-22T22:00",
-      "wind_direction_deg": 13,
+      "wind_direction_deg": 16,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 15.4
+      "wind_speed_mph": 16.8
     },
     {
       "time": "2026-08-22T23:00",
-      "wind_direction_deg": 17,
+      "wind_direction_deg": 15,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 19.0
+      "wind_speed_mph": 18.8
     },
     {
       "time": "2026-08-23T00:00",
-      "wind_direction_deg": 13,
-      "wind_direction_label": "NNE",
-      "wind_speed_mph": 16.1
+      "wind_direction_deg": 11,
+      "wind_direction_label": "N",
+      "wind_speed_mph": 16.6
     },
     {
       "time": "2026-08-23T01:00",
       "wind_direction_deg": 16,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 15.1
+      "wind_speed_mph": 15.6
     },
     {
       "time": "2026-08-23T02:00",
       "wind_direction_deg": 18,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 13.9
+      "wind_speed_mph": 14.1
     },
     {
       "time": "2026-08-23T03:00",
@@ -172,69 +172,69 @@
     },
     {
       "time": "2026-08-23T04:00",
-      "wind_direction_deg": 15,
+      "wind_direction_deg": 14,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 14.1
+      "wind_speed_mph": 13.8
     },
     {
       "time": "2026-08-23T05:00",
-      "wind_direction_deg": 9,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 14.7
+      "wind_direction_deg": 12,
+      "wind_direction_label": "NNE",
+      "wind_speed_mph": 14.9
     },
     {
       "time": "2026-08-23T06:00",
-      "wind_direction_deg": 6,
+      "wind_direction_deg": 7,
       "wind_direction_label": "N",
-      "wind_speed_mph": 15.3
+      "wind_speed_mph": 15.5
     },
     {
       "time": "2026-08-23T07:00",
       "wind_direction_deg": 9,
       "wind_direction_label": "N",
-      "wind_speed_mph": 14.5
+      "wind_speed_mph": 15.2
     },
     {
       "time": "2026-08-23T08:00",
       "wind_direction_deg": 12,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 14.4
+      "wind_speed_mph": 15.1
     },
     {
       "time": "2026-08-23T09:00",
-      "wind_direction_deg": 12,
+      "wind_direction_deg": 15,
       "wind_direction_label": "NNE",
-      "wind_speed_mph": 15.6
+      "wind_speed_mph": 15.0
     },
     {
       "time": "2026-08-23T10:00",
-      "wind_direction_deg": 5,
+      "wind_direction_deg": 3,
       "wind_direction_label": "N",
-      "wind_speed_mph": 14.6
+      "wind_speed_mph": 14.8
     },
     {
       "time": "2026-08-23T11:00",
-      "wind_direction_deg": 354,
+      "wind_direction_deg": 358,
       "wind_direction_label": "N",
-      "wind_speed_mph": 14.8
+      "wind_speed_mph": 13.9
     },
     {
       "time": "2026-08-23T12:00",
       "wind_direction_deg": 355,
       "wind_direction_label": "N",
-      "wind_speed_mph": 15.0
+      "wind_speed_mph": 14.1
     },
     {
       "time": "2026-08-23T13:00",
       "wind_direction_deg": 349,
       "wind_direction_label": "N",
-      "wind_speed_mph": 15.0
+      "wind_speed_mph": 18.3
     },
     {
       "time": "2026-08-23T14:00",
-      "wind_direction_deg": 352,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 16.3
+      "wind_direction_deg": 348,
+      "wind_direction_label": "NNW",
+      "wind_speed_mph": 17.2
     },
     {
       "time": "2026-08-23T15:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 7.0
     }
   ],
-  "generated_at": "2026-08-23T02:06:18.489279+00:00",
+  "generated_at": "2026-08-23T03:23:04.958136+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-chelan",
   "status": "live_weather_stub_grid"
