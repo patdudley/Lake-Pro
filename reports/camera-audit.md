@@ -1,10 +1,10 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-23T04:15:59.002Z
+Generated: 2026-08-23T05:06:07.737Z
 
-- Captured: 22
+- Captured: 24
 - Suspect: 0
-- Failed: 3
+- Failed: 1
 - No catalog webcam source yet: 87
 
 ## Captured
@@ -14,6 +14,7 @@ Generated: 2026-08-23T04:15:59.002Z
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
 - Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
 - Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/
+- Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
 - Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
@@ -22,6 +23,7 @@ Generated: 2026-08-23T04:15:59.002Z
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
+- Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
 - Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
 - Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
@@ -32,17 +34,9 @@ Generated: 2026-08-23T04:15:59.002Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/ — page.goto: Timeout 45000ms exceeded.
+- Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/ — locator.screenshot: Timeout 9000ms exceeded.
 Call log:
-  - navigating to "https://www.cdaresort.com/live-feed/", waiting until "domcontentloaded"
-
-- Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/ — page.goto: Timeout 45000ms exceeded.
-Call log:
-  - navigating to "https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/", waiting until "domcontentloaded"
-
-- Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/ — page.goto: Timeout 45000ms exceeded.
-Call log:
-  - navigating to "https://lcyc.net/info/weather-links-web-cam/", waiting until "domcontentloaded"
+  - waiting for locator('body')
 
 
 ## No Verified Webcam Source Yet
