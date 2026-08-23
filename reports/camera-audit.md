@@ -1,10 +1,10 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-23T05:06:07.737Z
+Generated: 2026-08-23T05:57:47.783Z
 
-- Captured: 24
+- Captured: 25
 - Suspect: 0
-- Failed: 1
+- Failed: 0
 - No catalog webcam source yet: 87
 
 ## Captured
@@ -21,6 +21,7 @@ Generated: 2026-08-23T05:06:07.737Z
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
+- Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
@@ -34,10 +35,6 @@ Generated: 2026-08-23T05:06:07.737Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/ — locator.screenshot: Timeout 9000ms exceeded.
-Call log:
-  - waiting for locator('body')
-
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
