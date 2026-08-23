@@ -1,10 +1,10 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-23T14:52:25.658Z
+Generated: 2026-08-23T15:51:39.968Z
 
-- Captured: 24
+- Captured: 25
 - Suspect: 0
-- Failed: 1
+- Failed: 0
 - No catalog webcam source yet: 87
 
 ## Captured
@@ -14,6 +14,7 @@ Generated: 2026-08-23T14:52:25.658Z
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
 - Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
 - Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/
+- Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
 - Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
@@ -34,16 +35,6 @@ Generated: 2026-08-23T14:52:25.658Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/ — locator.screenshot: Element is not attached to the DOM
-Call log:
-  - taking element screenshot
-  - waiting for fonts to load...
-  - fonts loaded
-  - attempting scroll into view action
-    - waiting for "https://www.cdaresort.com/.well-known/sgcaptcha/?r=%2Flive-feed%2F&sol=MjE6MTc4NzQ5NjU4OTo3NjgyZDAxMzowZTQ1YzJiY2RkYTk1MDZmMTlhMzkwMjE3OGYxZThkNmRiNTJlY2I1MzY4ZDIzNTg1YWE1MzM3OThjMmYxNTJjOgEPPo4%3D&s…" navigation to finish...
-    - navigated to "https://www.cdaresort.com/.well-known/sgcaptcha/?r=%2Flive-feed%2F&sol=MjE6MTc4NzQ5NjU4OTo3NjgyZDAxMzowZTQ1YzJiY2RkYTk1MDZmMTlhMzkwMjE3OGYxZThkNmRiNTJlY2I1MzY4ZDIzNTg1YWE1MzM3OThjMmYxNTJjOgEPPo4%3D&s…"
-    - waiting for element to be stable
-
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
