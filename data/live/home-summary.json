@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T19:12:21.764216+00:00",
+  "generated_at": "2026-08-24T19:57:20.542745+00:00",
   "spots": [
     {
       "chop_proxy_ft": 0.3,
@@ -632,16 +632,16 @@
       "wind_speed_max_mph": 5.0
     },
     {
-      "chop_proxy_ft": 0.7,
+      "chop_proxy_ft": 0.8,
       "grade": "A",
       "slug": "lake-geneva-leman",
-      "wind_speed_max_mph": 13.1
+      "wind_speed_max_mph": 17.1
     },
     {
-      "chop_proxy_ft": 0.3,
+      "chop_proxy_ft": 0.9,
       "grade": "A",
       "slug": "lake-como",
-      "wind_speed_max_mph": 6.5
+      "wind_speed_max_mph": 17.2
     },
     {
       "chop_proxy_ft": 0.6,
@@ -657,15 +657,15 @@
     },
     {
       "chop_proxy_ft": 0.7,
-      "grade": "D",
+      "grade": "B",
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 11.9
+      "wind_speed_max_mph": 11.7
     },
     {
-      "chop_proxy_ft": 1.1,
+      "chop_proxy_ft": 1.0,
       "grade": "D",
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 9.1
+      "wind_speed_max_mph": 9.2
     },
     {
       "chop_proxy_ft": 0.7,

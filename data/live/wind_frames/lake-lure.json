@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 4.0
     }
   ],
-  "generated_at": "2026-08-24T19:11:22.264021+00:00",
+  "generated_at": "2026-08-24T19:55:31.170257+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-lure",
   "status": "live_weather_stub_grid"

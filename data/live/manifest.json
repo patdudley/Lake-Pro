@@ -1,6 +1,6 @@
 {
   "failures": [],
-  "generated_at": "2026-08-24T19:12:23.622655+00:00",
+  "generated_at": "2026-08-24T19:57:22.998999+00:00",
   "home_summary": {
     "spots": 112
   },
@@ -873,7 +873,7 @@
       "name": "Lake Geneva (L\u00e9man)",
       "score": 94,
       "slug": "lake-geneva-leman",
-      "wind_speed_max_mph": 13.1
+      "wind_speed_max_mph": 17.1
     },
     {
       "best_window": "Late morning",
@@ -881,7 +881,7 @@
       "name": "Lake Como",
       "score": 94,
       "slug": "lake-como",
-      "wind_speed_max_mph": 6.5
+      "wind_speed_max_mph": 17.2
     },
     {
       "best_window": "Late morning",
@@ -901,19 +901,19 @@
     },
     {
       "best_window": "Early morning",
-      "grade": "D",
+      "grade": "B",
       "name": "Lake Macquarie / Hume",
-      "score": 58,
+      "score": 73,
       "slug": "lake-macquarie-hume",
-      "wind_speed_max_mph": 11.9
+      "wind_speed_max_mph": 11.7
     },
     {
       "best_window": "Early morning",
       "grade": "D",
       "name": "Lake Wanaka",
-      "score": 59,
+      "score": 56,
       "slug": "lake-wanaka",
-      "wind_speed_max_mph": 9.1
+      "wind_speed_max_mph": 9.2
     },
     {
       "best_window": "Early morning",
