@@ -939,7 +939,7 @@
       "wind_speed_mph": 2.0
     }
   ],
-  "generated_at": "2026-08-25T16:58:03.377670+00:00",
+  "generated_at": "2026-08-25T17:50:38.991531+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "payette-lake",
   "status": "live_weather_stub_grid"
