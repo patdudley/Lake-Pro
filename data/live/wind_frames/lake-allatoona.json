@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 1.7
     }
   ],
-  "generated_at": "2026-08-25T19:04:37.052489+00:00",
+  "generated_at": "2026-08-25T19:51:39.550961+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-allatoona",
   "status": "live_weather_stub_grid"

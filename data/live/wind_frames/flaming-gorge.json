@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 8.9
     }
   ],
-  "generated_at": "2026-08-25T19:06:26.294588+00:00",
+  "generated_at": "2026-08-25T19:53:28.179294+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "flaming-gorge",
   "status": "live_weather_stub_grid"
