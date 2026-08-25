@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T20:49:00.312183+00:00",
+  "generated_at": "2026-08-25T21:46:47.698597+00:00",
   "hourly": {
     "precipitation_probability": [
       2.0,
@@ -1505,7 +1505,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 7.7,
-      "best_window_precipitation_probability_max": 5.0,
+      "best_window_precipitation_probability_max": 10.0,
       "best_window_wind_mph": 4.1,
       "chop_proxy_ft": 1.0,
       "crowding_penalty": 0,
@@ -1515,7 +1515,7 @@
       "grade_caps": [
         "temperature_high_below_70"
       ],
-      "precipitation_probability_max": 18.0,
+      "precipitation_probability_max": 14.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
@@ -1530,7 +1530,7 @@
     {
       "best_window": "Early morning",
       "best_window_gust_mph": 1.8,
-      "best_window_precipitation_probability_max": 13.0,
+      "best_window_precipitation_probability_max": 17.0,
       "best_window_wind_mph": 0.8,
       "chop_proxy_ft": 0.5,
       "crowding_penalty": 0,
@@ -1540,7 +1540,7 @@
       "grade_caps": [
         "temperature_high_below_70"
       ],
-      "precipitation_probability_max": 18.0,
+      "precipitation_probability_max": 17.0,
       "score": 84,
       "score_before_wind_cap": 84,
       "summary": "Daily forecast fill from Open-Meteo after the live NWS hourly range ends.",
