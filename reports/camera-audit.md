@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-08-27T14:34:13.738Z
+Generated: 2026-08-28T00:01:57.107Z
 
-- Captured: 23
-- Suspect: 1
+- Captured: 24
+- Suspect: 0
 - Failed: 1
 - No catalog webcam source yet: 87
 
@@ -16,6 +16,7 @@ Generated: 2026-08-27T14:34:13.738Z
 - Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
+- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
@@ -33,7 +34,6 @@ Generated: 2026-08-27T14:34:13.738Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/ — page.goto: Timeout 45000ms exceeded.
 Call log:
   - navigating to "https://milehighmarina.com/webcams/", waiting until "domcontentloaded"
