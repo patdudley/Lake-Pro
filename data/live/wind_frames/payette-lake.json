@@ -3,42 +3,6 @@
   "frame_hours": 1,
   "frames": [
     {
-      "time": "2026-08-30T17:00:00-06:00",
-      "wind_direction_deg": 248,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 5.0
-    },
-    {
-      "time": "2026-08-30T18:00:00-06:00",
-      "wind_direction_deg": 248,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 5.0
-    },
-    {
-      "time": "2026-08-30T19:00:00-06:00",
-      "wind_direction_deg": 248,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 5.0
-    },
-    {
-      "time": "2026-08-30T20:00:00-06:00",
-      "wind_direction_deg": 248,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 2.0
-    },
-    {
-      "time": "2026-08-30T21:00:00-06:00",
-      "wind_direction_deg": 225,
-      "wind_direction_label": "SW",
-      "wind_speed_mph": 1.0
-    },
-    {
-      "time": "2026-08-30T22:00:00-06:00",
-      "wind_direction_deg": 202,
-      "wind_direction_label": "SSW",
-      "wind_speed_mph": 1.0
-    },
-    {
       "time": "2026-08-30T23:00:00-06:00",
       "wind_direction_deg": 158,
       "wind_direction_label": "SSE",
@@ -937,9 +901,45 @@
       "wind_direction_deg": 68,
       "wind_direction_label": "ENE",
       "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-09-06T05:00:00-06:00",
+      "wind_direction_deg": 68,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-09-06T06:00:00-06:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-09-06T07:00:00-06:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-09-06T08:00:00-06:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-09-06T09:00:00-06:00",
+      "wind_direction_deg": 112,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-09-06T10:00:00-06:00",
+      "wind_direction_deg": 112,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 2.0
     }
   ],
-  "generated_at": "2026-08-30T23:33:27.648432+00:00",
+  "generated_at": "2026-08-31T05:42:33.518317+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "payette-lake",
   "status": "live_weather_stub_grid"
