@@ -1,17 +1,19 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-02T14:43:40.868Z
+Generated: 2026-09-02T18:59:25.611Z
 
-- Captured: 22
-- Suspect: 3
+- Captured: 25
+- Suspect: 0
 - Failed: 0
 - No catalog webcam source yet: 87
 
 ## Captured
+- Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
 - Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
 - Jordanelle Reservoir (UT) — Park City Sailing — PWC Ramp Cam: https://sailpc.org/webcam
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
 - Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
+- Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/
 - Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
@@ -22,6 +24,7 @@ Generated: 2026-09-02T14:43:40.868Z
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
+- Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
 - Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
 - Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
@@ -32,9 +35,6 @@ Generated: 2026-09-02T14:43:40.868Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
-- Lake Powell (UT/AZ) — HDOnTap — Antelope Point Marina: https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/
-- Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
