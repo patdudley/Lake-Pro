@@ -88,129 +88,129 @@
     },
     {
       "time": "2026-09-05T14:00",
-      "wind_direction_deg": 188,
-      "wind_direction_label": "S",
-      "wind_speed_mph": 4.7
-    },
-    {
-      "time": "2026-09-05T15:00",
-      "wind_direction_deg": 165,
-      "wind_direction_label": "SSE",
-      "wind_speed_mph": 3.5
-    },
-    {
-      "time": "2026-09-05T16:00",
-      "wind_direction_deg": 140,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 5.6
-    },
-    {
-      "time": "2026-09-05T17:00",
-      "wind_direction_deg": 132,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 6.0
-    },
-    {
-      "time": "2026-09-05T18:00",
-      "wind_direction_deg": 128,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 8.3
-    },
-    {
-      "time": "2026-09-05T19:00",
-      "wind_direction_deg": 106,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 7.9
-    },
-    {
-      "time": "2026-09-05T20:00",
-      "wind_direction_deg": 84,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 11.9
-    },
-    {
-      "time": "2026-09-05T21:00",
-      "wind_direction_deg": 102,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 8.9
-    },
-    {
-      "time": "2026-09-05T22:00",
-      "wind_direction_deg": 125,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 7.4
-    },
-    {
-      "time": "2026-09-05T23:00",
-      "wind_direction_deg": 117,
-      "wind_direction_label": "ESE",
-      "wind_speed_mph": 6.0
-    },
-    {
-      "time": "2026-09-06T00:00",
-      "wind_direction_deg": 124,
-      "wind_direction_label": "SE",
-      "wind_speed_mph": 4.0
-    },
-    {
-      "time": "2026-09-06T01:00",
-      "wind_direction_deg": 199,
-      "wind_direction_label": "SSW",
-      "wind_speed_mph": 4.0
-    },
-    {
-      "time": "2026-09-06T02:00",
-      "wind_direction_deg": 207,
-      "wind_direction_label": "SSW",
+      "wind_direction_deg": 306,
+      "wind_direction_label": "NW",
       "wind_speed_mph": 5.0
     },
     {
+      "time": "2026-09-05T15:00",
+      "wind_direction_deg": 270,
+      "wind_direction_label": "W",
+      "wind_speed_mph": 2.2
+    },
+    {
+      "time": "2026-09-05T16:00",
+      "wind_direction_deg": 69,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 1.9
+    },
+    {
+      "time": "2026-09-05T17:00",
+      "wind_direction_deg": 119,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 6.4
+    },
+    {
+      "time": "2026-09-05T18:00",
+      "wind_direction_deg": 116,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 6.2
+    },
+    {
+      "time": "2026-09-05T19:00",
+      "wind_direction_deg": 108,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 8.0
+    },
+    {
+      "time": "2026-09-05T20:00",
+      "wind_direction_deg": 110,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 7.4
+    },
+    {
+      "time": "2026-09-05T21:00",
+      "wind_direction_deg": 88,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 11.4
+    },
+    {
+      "time": "2026-09-05T22:00",
+      "wind_direction_deg": 117,
+      "wind_direction_label": "ESE",
+      "wind_speed_mph": 10.8
+    },
+    {
+      "time": "2026-09-05T23:00",
+      "wind_direction_deg": 133,
+      "wind_direction_label": "SE",
+      "wind_speed_mph": 7.3
+    },
+    {
+      "time": "2026-09-06T00:00",
+      "wind_direction_deg": 144,
+      "wind_direction_label": "SE",
+      "wind_speed_mph": 5.8
+    },
+    {
+      "time": "2026-09-06T01:00",
+      "wind_direction_deg": 164,
+      "wind_direction_label": "SSE",
+      "wind_speed_mph": 5.6
+    },
+    {
+      "time": "2026-09-06T02:00",
+      "wind_direction_deg": 194,
+      "wind_direction_label": "SSW",
+      "wind_speed_mph": 4.6
+    },
+    {
       "time": "2026-09-06T03:00",
-      "wind_direction_deg": 220,
+      "wind_direction_deg": 217,
       "wind_direction_label": "SW",
-      "wind_speed_mph": 5.9
+      "wind_speed_mph": 7.5
     },
     {
       "time": "2026-09-06T04:00",
-      "wind_direction_deg": 219,
+      "wind_direction_deg": 215,
       "wind_direction_label": "SW",
-      "wind_speed_mph": 6.0
+      "wind_speed_mph": 5.5
     },
     {
       "time": "2026-09-06T05:00",
-      "wind_direction_deg": 193,
-      "wind_direction_label": "SSW",
-      "wind_speed_mph": 2.1
+      "wind_direction_deg": 223,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 4.6
     },
     {
       "time": "2026-09-06T06:00",
-      "wind_direction_deg": 172,
-      "wind_direction_label": "S",
-      "wind_speed_mph": 3.2
+      "wind_direction_deg": 223,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 4.6
     },
     {
       "time": "2026-09-06T07:00",
-      "wind_direction_deg": 190,
-      "wind_direction_label": "S",
-      "wind_speed_mph": 3.9
+      "wind_direction_deg": 220,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 3.5
     },
     {
       "time": "2026-09-06T08:00",
-      "wind_direction_deg": 212,
-      "wind_direction_label": "SSW",
+      "wind_direction_deg": 189,
+      "wind_direction_label": "S",
       "wind_speed_mph": 2.9
     },
     {
       "time": "2026-09-06T09:00",
-      "wind_direction_deg": 246,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 5.4
+      "wind_direction_deg": 100,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 2.5
     },
     {
       "time": "2026-09-06T10:00",
-      "wind_direction_deg": 257,
-      "wind_direction_label": "WSW",
-      "wind_speed_mph": 6.2
+      "wind_direction_deg": 231,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 2.9
     },
     {
       "time": "2026-09-06T11:00",
@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 6.7
     }
   ],
-  "generated_at": "2026-09-05T20:34:17.213067+00:00",
+  "generated_at": "2026-09-05T23:02:17.985395+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-somerville",
   "status": "live_weather_stub_grid"
