@@ -1011,7 +1011,7 @@
       "wind_speed_mph": 3.7
     }
   ],
-  "generated_at": "2026-09-06T17:12:20.605885+00:00",
+  "generated_at": "2026-09-06T19:15:46.524286+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-zurich-thun-davos",
   "status": "live_weather_stub_grid"
