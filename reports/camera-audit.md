@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-09T18:55:27.351Z
+Generated: 2026-09-09T21:57:36.130Z
 
-- Captured: 24
-- Suspect: 0
+- Captured: 23
+- Suspect: 1
 - Failed: 1
 - No catalog webcam source yet: 87
 
@@ -17,7 +17,6 @@ Generated: 2026-09-09T18:55:27.351Z
 - Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
-- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
@@ -34,10 +33,8 @@ Generated: 2026-09-09T18:55:27.351Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Target crashed 
-Call log:
-  - waiting for locator('body')
-
+- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
