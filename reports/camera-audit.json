@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T04:55:48.724Z",
+  "generatedAt": "2026-09-12T17:26:43.487Z",
   "captured": [
     {
       "slug": "lake-tahoe",
@@ -9,8 +9,8 @@
       "sourceUrl": "https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/",
       "label": "HDOnTap — Tahoe Vista PTZ",
       "imageUrl": "assets/cameras/lake-tahoe.png",
-      "bytes": 207059,
-      "checkedAt": "2026-09-12T04:50:25.338Z"
+      "bytes": 412720,
+      "checkedAt": "2026-09-12T17:19:57.582Z"
     },
     {
       "slug": "payette-lake",
@@ -20,8 +20,8 @@
       "sourceUrl": "https://milehighmarina.com/webcams/",
       "label": "Mile High Marina RampCam",
       "imageUrl": "assets/cameras/payette-lake.png",
-      "bytes": 494298,
-      "checkedAt": "2026-09-12T04:50:34.615Z"
+      "bytes": 1210258,
+      "checkedAt": "2026-09-12T17:20:06.446Z"
     },
     {
       "slug": "jordanelle-reservoir",
@@ -32,7 +32,7 @@
       "label": "Park City Sailing — PWC Ramp Cam",
       "imageUrl": "assets/cameras/jordanelle-reservoir.png",
       "bytes": 664234,
-      "checkedAt": "2026-09-12T04:50:43.005Z"
+      "checkedAt": "2026-09-12T17:20:14.795Z"
     },
     {
       "slug": "deer-creek-reservoir",
@@ -42,8 +42,8 @@
       "sourceUrl": "https://stateparks.utah.gov/parks/deer-creek/current-conditions/",
       "label": "Utah State Parks — Current Conditions",
       "imageUrl": "assets/cameras/deer-creek-reservoir.png",
-      "bytes": 1083330,
-      "checkedAt": "2026-09-12T04:50:52.053Z"
+      "bytes": 1106405,
+      "checkedAt": "2026-09-12T17:20:23.306Z"
     },
     {
       "slug": "lake-havasu",
@@ -53,8 +53,8 @@
       "sourceUrl": "https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/",
       "label": "HDOnTap — London Bridge PTZ",
       "imageUrl": "assets/cameras/lake-havasu.png",
-      "bytes": 281709,
-      "checkedAt": "2026-09-12T04:51:00.512Z"
+      "bytes": 313791,
+      "checkedAt": "2026-09-12T17:20:32.046Z"
     },
     {
       "slug": "lake-powell",
@@ -64,8 +64,8 @@
       "sourceUrl": "https://hdontap.com/stream/749208/lake-powell-antelope-point-marina-live-webcam/",
       "label": "HDOnTap — Antelope Point Marina",
       "imageUrl": "assets/cameras/lake-powell.png",
-      "bytes": 368241,
-      "checkedAt": "2026-09-12T04:51:09.253Z"
+      "bytes": 414130,
+      "checkedAt": "2026-09-12T17:20:41.115Z"
     },
     {
       "slug": "lake-coeur-d-alene",
@@ -75,8 +75,8 @@
       "sourceUrl": "https://www.cdaresort.com/live-feed/",
       "label": "CDA Resort — Live Lake Cam",
       "imageUrl": "assets/cameras/lake-coeur-d-alene.png",
-      "bytes": 281972,
-      "checkedAt": "2026-09-12T04:51:17.937Z"
+      "bytes": 556347,
+      "checkedAt": "2026-09-12T17:20:50.368Z"
     },
     {
       "slug": "lake-travis",
@@ -86,8 +86,8 @@
       "sourceUrl": "https://ltlakecam.com/",
       "label": "LT Lake Cam — AI-tracked PTZ",
       "imageUrl": "assets/cameras/lake-travis.png",
-      "bytes": 341810,
-      "checkedAt": "2026-09-12T04:51:26.527Z"
+      "bytes": 205649,
+      "checkedAt": "2026-09-12T17:21:00.243Z"
     },
     {
       "slug": "lake-minnetonka",
@@ -97,19 +97,8 @@
       "sourceUrl": "https://www.wyc.org/webcam",
       "label": "Wayzata Yacht Club — Marina PTZ",
       "imageUrl": "assets/cameras/lake-minnetonka.png",
-      "bytes": 582783,
-      "checkedAt": "2026-09-12T04:51:35.328Z"
-    },
-    {
-      "slug": "lake-of-the-ozarks",
-      "name": "Lake of the Ozarks",
-      "location": "MO",
-      "status": "captured",
-      "sourceUrl": "https://www.lakeexpo.com/webcams/",
-      "label": "LakeExpo — Multi-cam Hub",
-      "imageUrl": "assets/cameras/lake-of-the-ozarks.png",
-      "bytes": 354872,
-      "checkedAt": "2026-09-12T04:51:46.131Z"
+      "bytes": 964100,
+      "checkedAt": "2026-09-12T17:21:09.498Z"
     },
     {
       "slug": "lake-lanier",
@@ -120,7 +109,7 @@
       "label": "Lake Lanier Sailing Club",
       "imageUrl": "assets/cameras/lake-lanier.png",
       "bytes": 108377,
-      "checkedAt": "2026-09-12T04:51:53.764Z"
+      "checkedAt": "2026-09-12T17:21:25.223Z"
     },
     {
       "slug": "lake-norman",
@@ -130,8 +119,8 @@
       "sourceUrl": "https://www.visitlakenorman.org/things-to-do/stream-lake-norman/",
       "label": "Visit Lake Norman — Live Stream",
       "imageUrl": "assets/cameras/lake-norman.png",
-      "bytes": 24112,
-      "checkedAt": "2026-09-12T04:52:02.216Z"
+      "bytes": 24025,
+      "checkedAt": "2026-09-12T17:21:33.875Z"
     },
     {
       "slug": "smith-mountain-lake",
@@ -141,8 +130,8 @@
       "sourceUrl": "https://wset.com/weather/cameras/smith-mountain-lake",
       "label": "WSET SkyCam — Vista Pointe",
       "imageUrl": "assets/cameras/smith-mountain-lake.png",
-      "bytes": 88428,
-      "checkedAt": "2026-09-12T04:52:09.628Z"
+      "bytes": 85812,
+      "checkedAt": "2026-09-12T17:21:41.345Z"
     },
     {
       "slug": "lake-shasta",
@@ -153,7 +142,7 @@
       "label": "Bridge Bay Houseboats — Live Cam",
       "imageUrl": "assets/cameras/lake-shasta.png",
       "bytes": 15164,
-      "checkedAt": "2026-09-12T04:52:17.628Z"
+      "checkedAt": "2026-09-12T17:21:49.063Z"
     },
     {
       "slug": "lake-conroe",
@@ -163,8 +152,8 @@
       "sourceUrl": "https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/",
       "label": "Palms Marina — Lake Conroe live view",
       "imageUrl": "assets/cameras/lake-conroe.png",
-      "bytes": 245636,
-      "checkedAt": "2026-09-12T04:52:26.172Z"
+      "bytes": 530365,
+      "checkedAt": "2026-09-12T17:21:57.642Z"
     },
     {
       "slug": "flathead-lake",
@@ -175,7 +164,7 @@
       "label": "FLBS-UMT — Yellow Bay & West Shore Cams",
       "imageUrl": "assets/cameras/flathead-lake.png",
       "bytes": 1061966,
-      "checkedAt": "2026-09-12T04:52:33.609Z"
+      "checkedAt": "2026-09-12T17:22:05.220Z"
     },
     {
       "slug": "canyon-lake",
@@ -185,8 +174,8 @@
       "sourceUrl": "https://lcyc.net/info/weather-links-web-cam/",
       "label": "Lake Canyon Yacht Club — webcam",
       "imageUrl": "assets/cameras/canyon-lake.png",
-      "bytes": 235008,
-      "checkedAt": "2026-09-12T04:52:41.915Z"
+      "bytes": 289526,
+      "checkedAt": "2026-09-12T17:22:13.834Z"
     },
     {
       "slug": "lake-george",
@@ -196,8 +185,8 @@
       "sourceUrl": "https://www.earthcam.com/usa/newyork/lakegeorge/",
       "label": "EarthCam — Lake Motel PTZ",
       "imageUrl": "assets/cameras/lake-george.png",
-      "bytes": 640147,
-      "checkedAt": "2026-09-12T04:52:50.349Z"
+      "bytes": 761345,
+      "checkedAt": "2026-09-12T17:22:22.278Z"
     },
     {
       "slug": "lake-winnipesaukee",
@@ -207,8 +196,8 @@
       "sourceUrl": "https://winnisquammarine.com/webcams/winni-marine-live-feed/",
       "label": "Winni Marine — Paugus Bay",
       "imageUrl": "assets/cameras/lake-winnipesaukee.png",
-      "bytes": 307854,
-      "checkedAt": "2026-09-12T04:52:58.352Z"
+      "bytes": 366311,
+      "checkedAt": "2026-09-12T17:22:30.289Z"
     },
     {
       "slug": "lake-geneva",
@@ -218,8 +207,8 @@
       "sourceUrl": "https://lgyc.com/geneva-lake-web-camera/",
       "label": "Lake Geneva Yacht Club",
       "imageUrl": "assets/cameras/lake-geneva.png",
-      "bytes": 193345,
-      "checkedAt": "2026-09-12T04:53:06.073Z"
+      "bytes": 363822,
+      "checkedAt": "2026-09-12T17:22:37.736Z"
     },
     {
       "slug": "lake-mead",
@@ -230,7 +219,7 @@
       "label": "NPS — Lake Mead Webcams",
       "imageUrl": "assets/cameras/lake-mead.png",
       "bytes": 839374,
-      "checkedAt": "2026-09-12T04:53:13.651Z"
+      "checkedAt": "2026-09-12T17:22:45.263Z"
     },
     {
       "slug": "lake-amistad",
@@ -240,8 +229,8 @@
       "sourceUrl": "https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm",
       "label": "National Park Service — Amistad webcams",
       "imageUrl": "assets/cameras/lake-amistad.png",
-      "bytes": 328193,
-      "checkedAt": "2026-09-12T04:53:22.014Z"
+      "bytes": 337436,
+      "checkedAt": "2026-09-12T17:22:53.667Z"
     },
     {
       "slug": "utah-lake",
@@ -251,8 +240,8 @@
       "sourceUrl": "https://stateparks.utah.gov/parks/utah-lake/current-conditions/",
       "label": "Utah State Parks — Live Webcam",
       "imageUrl": "assets/cameras/utah-lake.png",
-      "bytes": 1361599,
-      "checkedAt": "2026-09-12T04:53:30.143Z"
+      "bytes": 1263041,
+      "checkedAt": "2026-09-12T17:23:01.809Z"
     },
     {
       "slug": "okanagan-lake",
@@ -262,11 +251,23 @@
       "sourceUrl": "https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html",
       "label": "SkylineWebcams — Kelowna/Okanagan",
       "imageUrl": "assets/cameras/okanagan-lake.png",
-      "bytes": 1609490,
-      "checkedAt": "2026-09-12T04:55:40.628Z"
+      "bytes": 1500305,
+      "checkedAt": "2026-09-12T17:26:35.540Z"
     }
   ],
-  "suspect": [],
+  "suspect": [
+    {
+      "slug": "lake-of-the-ozarks",
+      "name": "Lake of the Ozarks",
+      "location": "MO",
+      "status": "suspect",
+      "sourceUrl": "https://www.lakeexpo.com/webcams/",
+      "label": "LakeExpo — Multi-cam Hub",
+      "imageUrl": "assets/cameras/lake-of-the-ozarks.png",
+      "bytes": 5494,
+      "checkedAt": "2026-09-12T17:21:17.744Z"
+    }
+  ],
   "failed": [
     {
       "slug": "lake-winnisquam",
@@ -275,8 +276,8 @@
       "status": "failed",
       "sourceUrl": "https://newhampshirewebcams.com/winnisquam-lake-webcam/",
       "label": "NH Webcams — Winnisquam",
-      "error": "page.waitForTimeout: Page crashed",
-      "checkedAt": "2026-09-12T04:53:38.824Z"
+      "error": "locator.screenshot: Timeout 9000ms exceeded.\nCall log:\n  - waiting for locator('body')\n",
+      "checkedAt": "2026-09-12T17:23:10.617Z"
     }
   ],
   "noSource": [
