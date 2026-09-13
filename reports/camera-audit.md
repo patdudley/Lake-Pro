@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-12T22:37:22.854Z
+Generated: 2026-09-13T00:15:21.800Z
 
 - Captured: 23
 - Suspect: 1
@@ -34,14 +34,7 @@ Generated: 2026-09-12T22:37:22.854Z
 
 ## Failed Or Needs Manual Work
 - Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 8793.982000000018ms exceeded.
-Call log:
-  - taking element screenshot
-  - waiting for fonts to load...
-  - fonts loaded
-  - attempting scroll into view action
-    - waiting for element to be stable
-
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
