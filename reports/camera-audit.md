@@ -1,15 +1,14 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-13T14:39:50.552Z
+Generated: 2026-09-13T18:31:55.916Z
 
-- Captured: 24
-- Suspect: 0
+- Captured: 22
+- Suspect: 2
 - Failed: 1
 - No catalog webcam source yet: 87
 
 ## Captured
 - Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
-- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
 - Jordanelle Reservoir (UT) — Park City Sailing — PWC Ramp Cam: https://sailpc.org/webcam
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
 - Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
@@ -22,7 +21,6 @@ Generated: 2026-09-13T14:39:50.552Z
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
 - Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
-- Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
@@ -34,9 +32,11 @@ Generated: 2026-09-13T14:39:50.552Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 9000ms exceeded.
+- Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/
+- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/ — page.goto: Timeout 45000ms exceeded.
 Call log:
-  - waiting for locator('body')
+  - navigating to "https://milehighmarina.com/webcams/", waiting until "domcontentloaded"
 
 
 ## No Verified Webcam Source Yet
