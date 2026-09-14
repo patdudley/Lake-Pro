@@ -1,15 +1,14 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-14T01:25:07.638Z
+Generated: 2026-09-14T18:51:01.639Z
 
-- Captured: 24
-- Suspect: 0
+- Captured: 23
+- Suspect: 1
 - Failed: 1
 - No catalog webcam source yet: 87
 
 ## Captured
 - Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
-- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
 - Jordanelle Reservoir (UT) — Park City Sailing — PWC Ramp Cam: https://sailpc.org/webcam
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
 - Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
@@ -34,13 +33,10 @@ Generated: 2026-09-14T01:25:07.638Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 8696.314000000013ms exceeded.
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/
+- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/ — page.goto: net::ERR_CONNECTION_REFUSED at https://milehighmarina.com/webcams/
 Call log:
-  - taking element screenshot
-  - waiting for fonts to load...
-  - fonts loaded
-  - attempting scroll into view action
-    - waiting for element to be stable
+  - navigating to "https://milehighmarina.com/webcams/", waiting until "domcontentloaded"
 
 
 ## No Verified Webcam Source Yet
