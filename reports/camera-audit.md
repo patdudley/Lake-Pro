@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-14T22:45:08.194Z
+Generated: 2026-09-15T01:42:41.459Z
 
 - Captured: 24
 - Suspect: 0
@@ -34,10 +34,7 @@ Generated: 2026-09-14T22:45:08.194Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 9000ms exceeded.
-Call log:
-  - waiting for locator('body')
-
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
