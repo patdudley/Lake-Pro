@@ -1,10 +1,10 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-17T18:30:52.319Z
+Generated: 2026-09-17T21:34:22.601Z
 
 - Captured: 23
-- Suspect: 0
-- Failed: 2
+- Suspect: 1
+- Failed: 1
 - No catalog webcam source yet: 87
 
 ## Captured
@@ -33,10 +33,7 @@ Generated: 2026-09-17T18:30:52.319Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/ — page.goto: Timeout 45000ms exceeded.
-Call log:
-  - navigating to "https://milehighmarina.com/webcams/", waiting until "domcontentloaded"
-
+- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
 - Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
 
 ## No Verified Webcam Source Yet
