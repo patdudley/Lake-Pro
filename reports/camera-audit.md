@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-17T21:34:22.601Z
+Generated: 2026-09-18T00:38:02.444Z
 
 - Captured: 23
 - Suspect: 1
@@ -9,6 +9,7 @@ Generated: 2026-09-17T21:34:22.601Z
 
 ## Captured
 - Lake Tahoe (CA/NV) — HDOnTap — Tahoe Vista PTZ: https://hdontap.com/stream/133754/tahoe-vista-lake-tahoe-live-webcam/
+- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
 - Jordanelle Reservoir (UT) — Park City Sailing — PWC Ramp Cam: https://sailpc.org/webcam
 - Deer Creek Reservoir (UT) — Utah State Parks — Current Conditions: https://stateparks.utah.gov/parks/deer-creek/current-conditions/
 - Lake Havasu (AZ/CA) — HDOnTap — London Bridge PTZ: https://hdontap.com/stream/101044/lake-havasu-london-bridge-live-webcam/
@@ -16,7 +17,6 @@ Generated: 2026-09-17T21:34:22.601Z
 - Lake Coeur d'Alene (ID) — CDA Resort — Live Lake Cam: https://www.cdaresort.com/live-feed/
 - Lake Travis (TX) — LT Lake Cam — AI-tracked PTZ: https://ltlakecam.com/
 - Lake Minnetonka (MN) — Wayzata Yacht Club — Marina PTZ: https://www.wyc.org/webcam
-- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
@@ -33,8 +33,11 @@ Generated: 2026-09-17T21:34:22.601Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Payette Lake (ID (McCall)) — Mile High Marina RampCam: https://milehighmarina.com/webcams/
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
+- Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Target crashed 
+Call log:
+  - waiting for locator('body')
+
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
