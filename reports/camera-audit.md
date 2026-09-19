@@ -1,9 +1,9 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-18T21:59:47.729Z
+Generated: 2026-09-19T00:36:40.704Z
 
-- Captured: 23
-- Suspect: 1
+- Captured: 22
+- Suspect: 2
 - Failed: 1
 - No catalog webcam source yet: 87
 
@@ -26,7 +26,6 @@ Generated: 2026-09-18T21:59:47.729Z
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
 - Lake George (NY) — EarthCam — Lake Motel PTZ: https://www.earthcam.com/usa/newyork/lakegeorge/
 - Lake Winnipesaukee (NH) — Winni Marine — Paugus Bay: https://winnisquammarine.com/webcams/winni-marine-live-feed/
-- Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
 - Lake Mead (NV/AZ) — NPS — Lake Mead Webcams: https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm
 - Lake Amistad (TX/Mexico) — National Park Service — Amistad webcams: https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm
 - Utah Lake (UT) — Utah State Parks — Live Webcam: https://stateparks.utah.gov/parks/utah-lake/current-conditions/
@@ -34,6 +33,7 @@ Generated: 2026-09-18T21:59:47.729Z
 
 ## Failed Or Needs Manual Work
 - Lake of the Ozarks (MO) — LakeExpo — Multi-cam Hub: https://www.lakeexpo.com/webcams/
+- Lake Geneva (WI) — Lake Geneva Yacht Club: https://lgyc.com/geneva-lake-web-camera/
 - Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 9000ms exceeded.
 Call log:
   - waiting for locator('body')
