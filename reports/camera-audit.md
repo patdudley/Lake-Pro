@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-24T00:00:37.131Z
+Generated: 2026-09-24T05:14:21.727Z
 
 - Captured: 23
 - Suspect: 1
@@ -34,7 +34,10 @@ Generated: 2026-09-24T00:00:37.131Z
 
 ## Failed Or Needs Manual Work
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 9000ms exceeded.
+Call log:
+  - waiting for locator('body')
+
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
