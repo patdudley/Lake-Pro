@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-09-27T18:37:10.435Z
+Generated: 2026-09-27T22:29:31.545Z
 
 - Captured: 24
 - Suspect: 0
@@ -34,9 +34,13 @@ Generated: 2026-09-27T18:37:10.435Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 9000ms exceeded.
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 8992.784000000043ms exceeded.
 Call log:
-  - waiting for locator('body')
+  - taking element screenshot
+  - waiting for fonts to load...
+  - fonts loaded
+  - attempting scroll into view action
+    - waiting for element to be stable
 
 
 ## No Verified Webcam Source Yet
