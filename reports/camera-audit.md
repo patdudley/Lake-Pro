@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-10-05T01:13:50.124Z
+Generated: 2026-10-05T16:22:15.507Z
 
 - Captured: 24
 - Suspect: 0
@@ -37,6 +37,7 @@ Generated: 2026-10-05T01:13:50.124Z
 - Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 9000ms exceeded.
 Call log:
   - waiting for locator('body')
+    - locator resolved to visible <body class="wp-singular page-template-default page page-id-16 wp-custom-logo wp-embed-responsive wp-theme-kadence wp-child-theme-kadence-child-theme non-logged-in footer-on-bottom hide-focus-outline link-style-standard has-sidebar has-sticky-sidebar-widget content-title-style-above content-width-normal content-style-boxed content-vertical-padding-bottom non-transparent-header mobile-non-transparent-header">…</body>
 
 
 ## No Verified Webcam Source Yet
