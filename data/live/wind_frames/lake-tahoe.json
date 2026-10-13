@@ -3,24 +3,6 @@
   "frame_hours": 1,
   "frames": [
     {
-      "time": "2026-10-13T12:00:00-07:00",
-      "wind_direction_deg": 90,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 5.0
-    },
-    {
-      "time": "2026-10-13T13:00:00-07:00",
-      "wind_direction_deg": 90,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 5.0
-    },
-    {
-      "time": "2026-10-13T14:00:00-07:00",
-      "wind_direction_deg": 90,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 5.0
-    },
-    {
       "time": "2026-10-13T15:00:00-07:00",
       "wind_direction_deg": 90,
       "wind_direction_label": "E",
@@ -937,9 +919,27 @@
       "wind_direction_deg": 225,
       "wind_direction_label": "SW",
       "wind_speed_mph": 20.0
+    },
+    {
+      "time": "2026-10-20T00:00:00-07:00",
+      "wind_direction_deg": 225,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 20.0
+    },
+    {
+      "time": "2026-10-20T01:00:00-07:00",
+      "wind_direction_deg": 225,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 20.0
+    },
+    {
+      "time": "2026-10-20T02:00:00-07:00",
+      "wind_direction_deg": 225,
+      "wind_direction_label": "SW",
+      "wind_speed_mph": 15.0
     }
   ],
-  "generated_at": "2026-10-13T19:19:44.363873+00:00",
+  "generated_at": "2026-10-13T23:18:39.522386+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-tahoe",
   "status": "live_weather_stub_grid"
