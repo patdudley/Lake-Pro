@@ -3,36 +3,6 @@
   "frame_hours": 1,
   "frames": [
     {
-      "time": "2026-10-14T18:00:00-06:00",
-      "wind_direction_deg": 0,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 8.0
-    },
-    {
-      "time": "2026-10-14T19:00:00-06:00",
-      "wind_direction_deg": 0,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 7.0
-    },
-    {
-      "time": "2026-10-14T20:00:00-06:00",
-      "wind_direction_deg": 0,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 9.0
-    },
-    {
-      "time": "2026-10-14T21:00:00-06:00",
-      "wind_direction_deg": 0,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 9.0
-    },
-    {
-      "time": "2026-10-14T22:00:00-06:00",
-      "wind_direction_deg": 0,
-      "wind_direction_label": "N",
-      "wind_speed_mph": 8.0
-    },
-    {
       "time": "2026-10-14T23:00:00-06:00",
       "wind_direction_deg": 0,
       "wind_direction_label": "N",
@@ -937,9 +907,39 @@
       "wind_direction_deg": 45,
       "wind_direction_label": "NE",
       "wind_speed_mph": 6.0
+    },
+    {
+      "time": "2026-10-21T06:00:00-06:00",
+      "wind_direction_deg": 45,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.0
+    },
+    {
+      "time": "2026-10-21T07:00:00-06:00",
+      "wind_direction_deg": 45,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.0
+    },
+    {
+      "time": "2026-10-21T08:00:00-06:00",
+      "wind_direction_deg": 45,
+      "wind_direction_label": "NE",
+      "wind_speed_mph": 3.0
+    },
+    {
+      "time": "2026-10-21T09:00:00-06:00",
+      "wind_direction_deg": 68,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 2.0
+    },
+    {
+      "time": "2026-10-21T10:00:00-06:00",
+      "wind_direction_deg": 68,
+      "wind_direction_label": "ENE",
+      "wind_speed_mph": 2.0
     }
   ],
-  "generated_at": "2026-10-15T00:34:28.997535+00:00",
+  "generated_at": "2026-10-15T05:56:06.518000+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "payette-lake",
   "status": "live_weather_stub_grid"

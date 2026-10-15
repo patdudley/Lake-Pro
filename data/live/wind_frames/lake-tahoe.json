@@ -3,36 +3,6 @@
   "frame_hours": 1,
   "frames": [
     {
-      "time": "2026-10-14T17:00:00-07:00",
-      "wind_direction_deg": null,
-      "wind_direction_label": "",
-      "wind_speed_mph": 0
-    },
-    {
-      "time": "2026-10-14T18:00:00-07:00",
-      "wind_direction_deg": null,
-      "wind_direction_label": "",
-      "wind_speed_mph": 0
-    },
-    {
-      "time": "2026-10-14T19:00:00-07:00",
-      "wind_direction_deg": null,
-      "wind_direction_label": "",
-      "wind_speed_mph": 0
-    },
-    {
-      "time": "2026-10-14T20:00:00-07:00",
-      "wind_direction_deg": 90,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 5.0
-    },
-    {
-      "time": "2026-10-14T21:00:00-07:00",
-      "wind_direction_deg": 90,
-      "wind_direction_label": "E",
-      "wind_speed_mph": 5.0
-    },
-    {
       "time": "2026-10-14T22:00:00-07:00",
       "wind_direction_deg": 90,
       "wind_direction_label": "E",
@@ -937,9 +907,39 @@
       "wind_direction_deg": 45,
       "wind_direction_label": "NE",
       "wind_speed_mph": 5.0
+    },
+    {
+      "time": "2026-10-21T05:00:00-07:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 5.0
+    },
+    {
+      "time": "2026-10-21T06:00:00-07:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 5.0
+    },
+    {
+      "time": "2026-10-21T07:00:00-07:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 5.0
+    },
+    {
+      "time": "2026-10-21T08:00:00-07:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 5.0
+    },
+    {
+      "time": "2026-10-21T09:00:00-07:00",
+      "wind_direction_deg": 90,
+      "wind_direction_label": "E",
+      "wind_speed_mph": 5.0
     }
   ],
-  "generated_at": "2026-10-15T00:34:27.784760+00:00",
+  "generated_at": "2026-10-15T05:56:04.939653+00:00",
   "note": "7-day hourly regional wind-frame scaffold uses live National Weather Service point forecast. Spatial cropped grid still pending.",
   "spot_slug": "lake-tahoe",
   "status": "live_weather_stub_grid"
