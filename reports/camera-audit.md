@@ -1,10 +1,10 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-10-21T00:56:25.014Z
+Generated: 2026-10-21T17:29:57.285Z
 
-- Captured: 24
+- Captured: 23
 - Suspect: 0
-- Failed: 1
+- Failed: 2
 - No catalog webcam source yet: 87
 
 ## Captured
@@ -21,7 +21,6 @@ Generated: 2026-10-21T00:56:25.014Z
 - Lake Lanier (GA) — Lake Lanier Sailing Club: https://www.llsc.com/web-cam
 - Lake Norman (NC) — Visit Lake Norman — Live Stream: https://www.visitlakenorman.org/things-to-do/stream-lake-norman/
 - Smith Mountain Lake (VA) — WSET SkyCam — Vista Pointe: https://wset.com/weather/cameras/smith-mountain-lake
-- Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/
 - Lake Conroe (TX) — Palms Marina — Lake Conroe live view: https://www.palmsmarina.com/live-view-of-palms-marina-lake-conroe/
 - Flathead Lake (MT) — FLBS-UMT — Yellow Bay & West Shore Cams: https://flbs.umt.edu/newflbs/flathead-lake/webcams/
 - Canyon Lake (TX) — Lake Canyon Yacht Club — webcam: https://lcyc.net/info/weather-links-web-cam/
@@ -34,6 +33,14 @@ Generated: 2026-10-21T00:56:25.014Z
 - Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
+- Lake Shasta (CA) — Bridge Bay Houseboats — Live Cam: https://bridgebayhouseboats.com/live-bridge-bay-at-shasta-lake-camera/ — locator.screenshot: Protocol error (DOM.scrollIntoViewIfNeeded): Cannot find context with specified id
+Call log:
+  - taking element screenshot
+  - waiting for fonts to load...
+  - fonts loaded
+  - attempting scroll into view action
+    - waiting for element to be stable
+
 - Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
 
 ## No Verified Webcam Source Yet
