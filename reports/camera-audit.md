@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-10-25T22:48:55.094Z
+Generated: 2026-10-26T01:27:02.490Z
 
 - Captured: 24
 - Suspect: 0
@@ -31,16 +31,12 @@ Generated: 2026-10-25T22:48:55.094Z
 - Lake Mead (NV/AZ) — NPS — Lake Mead Webcams: https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm
 - Lake Amistad (TX/Mexico) — National Park Service — Amistad webcams: https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm
 - Utah Lake (UT) — Utah State Parks — Live Webcam: https://stateparks.utah.gov/parks/utah-lake/current-conditions/
-- Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/
 
 ## Failed Or Needs Manual Work
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — locator.screenshot: Timeout 8973.25800000003ms exceeded.
+- Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html — page.goto: net::ERR_CERT_DATE_INVALID at https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 Call log:
-  - taking element screenshot
-  - waiting for fonts to load...
-  - fonts loaded
-  - attempting scroll into view action
-    - waiting for element to be stable
+  - navigating to "https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html", waiting until "domcontentloaded"
 
 
 ## No Verified Webcam Source Yet
