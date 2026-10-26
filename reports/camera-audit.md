@@ -1,6 +1,6 @@
 # Lake Pro Camera Audit
 
-Generated: 2026-10-26T01:27:02.490Z
+Generated: 2026-10-26T19:40:14.801Z
 
 - Captured: 24
 - Suspect: 0
@@ -31,13 +31,10 @@ Generated: 2026-10-26T01:27:02.490Z
 - Lake Mead (NV/AZ) — NPS — Lake Mead Webcams: https://www.nps.gov/lake/learn/photosmultimedia/webcams.htm
 - Lake Amistad (TX/Mexico) — National Park Service — Amistad webcams: https://www.nps.gov/amis/learn/photosmultimedia/webcams.htm
 - Utah Lake (UT) — Utah State Parks — Live Webcam: https://stateparks.utah.gov/parks/utah-lake/current-conditions/
-- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/
+- Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
 
 ## Failed Or Needs Manual Work
-- Okanagan Lake (BC, Canada) — SkylineWebcams — Kelowna/Okanagan: https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html — page.goto: net::ERR_CERT_DATE_INVALID at https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html
-Call log:
-  - navigating to "https://www.skylinewebcams.com/en/webcam/canada/british-columbia/kelowna/kelowna.html", waiting until "domcontentloaded"
-
+- Lake Winnisquam (NH) — NH Webcams — Winnisquam: https://newhampshirewebcams.com/winnisquam-lake-webcam/ — page.waitForTimeout: Page crashed
 
 ## No Verified Webcam Source Yet
 - Pineview Reservoir (UT)
